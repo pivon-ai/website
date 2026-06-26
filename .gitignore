@@ -1,0 +1,10 @@
+# Visual brainstorming companion (mockups, server state)
+.superpowers/
+
+# OS / editor
+.DS_Store
+*.log
+
+# Node (if tooling is added later)
+node_modules/
+dist/

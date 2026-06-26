@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pivon — AI & Generative-AI Consulting</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── BRAND TOKENS ───────────────────────────────────────── */
+    :root {
+      --paper: #FFFFFF;
+      --paper-2: #F6F8FB;
+      --ink: #16202E;
+      --slate: #5A6B7E;
+      --mist: #8A98A8;
+      --line: #E6EAF0;
+      --cyan: #22C7F2;
+      --blue: #2F6BEC;
+      --violet: #7A3CEE;
+      --magenta: #E5258E;
+      --pink: #F62C7B;
+      --grad: linear-gradient(100deg, #22C7F2, #2F6BEC, #7A3CEE, #E5258E);
+    }
+
+    /* ── FOCUS ──────────────────────────────────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ── GRADIENT UTILITY ───────────────────────────────────── */
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* ── NAV ────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    /* Inline brain glyph */
+    .nav-glyph {
+      flex-shrink: 0;
+      width: 26px;
+      height: 22px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2vw, 1.75rem);
+      list-style: none;
+      margin-left: auto;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      padding: 0.5rem 1.1rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: auto;
+      color: var(--ink);
+    }
+    @media (max-width: 700px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-mobile-toggle { display: flex; align-items: center; }
+    }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 4vw, 3rem);
+    }
+    .hero-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ── HERO COPY ──────────────────────────────────────────── */
+    .hero-copy { position: relative; z-index: 2; }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--slate);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--grad);
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 6.2vw, 5.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .subhead {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      color: var(--slate);
+      max-width: 56ch;
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.875rem;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--ink);
+      border: none;
+      border-radius: 10px;
+      padding: 0.8rem 1.6rem;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:hover { box-shadow: 0 4px 24px rgba(122, 60, 238, 0.35); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--slate);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.8rem 1.6rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--slate);
+      color: var(--ink);
+    }
+
+    /* ── TELEMETRY STRIP ────────────────────────────────────── */
+    .hero-telemetry {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .telemetry-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+    }
+    .telemetry-item span {
+      color: var(--slate);
+    }
+    .telemetry-sep {
+      width: 1px;
+      height: 14px;
+      background: var(--line);
+    }
+
+    /* ── SIGNAL SVG PANEL ───────────────────────────────────── */
+    .hero-signal {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 0.95;
+      z-index: 1;
+    }
+    @media (max-width: 860px) {
+      .hero-signal {
+        max-width: 480px;
+        margin: 0 auto;
+        aspect-ratio: 1 / 0.8;
+      }
+    }
+    .signal-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* ── SVG ANIMATION ──────────────────────────────────────── */
+    /* Gradient def lives inside SVG */
+    .path-spine {
+      fill: none;
+      stroke: url(#signalGrad);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      /* The draw-on animation uses dasharray/dashoffset */
+    }
+    .path-draw {
+      stroke-dasharray: 1400;
+      stroke-dashoffset: 1400;
+      animation: drawSpine 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+    }
+    @keyframes drawSpine {
+      to { stroke-dashoffset: 0; }
+    }
+    .node-dot {
+      fill: var(--paper);
+      stroke: url(#signalGrad);
+      stroke-width: 1.5;
+    }
+    .node-dot-inner {
+      animation: pulseNode 2s ease-in-out 2.8s infinite alternate;
+    }
+    @keyframes pulseNode {
+      from { opacity: 0.4; r: 3; }
+      to   { opacity: 1;   r: 4; }
+    }
+    .pulse-dot {
+      animation: travelPulse 3.2s linear 2.8s infinite;
+    }
+    @keyframes travelPulse {
+      0%   { offset-distance: 0%;   opacity: 0; }
+      5%   { opacity: 1; }
+      95%  { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    /* Grid lines (static, very faint) */
+    .grid-line {
+      stroke: var(--line);
+      stroke-width: 0.5;
+      fill: none;
+    }
+    /* Labels on SVG */
+    .svg-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      fill: var(--mist);
+      letter-spacing: 0.06em;
+    }
+    .svg-label-accent {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      fill: url(#signalGrad);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── REDUCED MOTION ─────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .path-draw {
+        animation: none;
+        stroke-dashoffset: 0;
+      }
+      .node-dot-inner { animation: none; }
+      .pulse-dot { display: none; }
+    }
+
+    /* ── WHAT WE DO ─────────────────────────────────────────── */
+    .services {
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+      padding: clamp(3.5rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+    }
+    .services-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    }
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--slate);
+    }
+    .section-index {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--mist);
+      margin-left: auto;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .service-card:hover {
+      border-color: transparent;
+      box-shadow: 0 4px 32px rgba(47, 107, 236, 0.1);
+      transform: translateY(-2px);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--mist);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* Connector line from hero into services */
+    .section-connector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      height: 0;
+      position: relative;
+      z-index: 5;
+    }
+    .connector-svg {
+      display: block;
+      width: 2px;
+      height: 48px;
+      overflow: visible;
+    }
+    .connector-line {
+      stroke: url(#connGrad);
+      stroke-width: 1.5;
+      fill: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand" aria-label="Pivon home">
+        <!-- Inline brain glyph -->
+        <svg class="nav-glyph" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="brainGradL" x1="0" y1="0" x2="13" y2="22" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#22C7F2"/>
+              <stop offset="100%" stop-color="#2F6BEC"/>
+            </linearGradient>
+            <linearGradient id="brainGradR" x1="13" y1="0" x2="26" y2="22" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7A3CEE"/>
+              <stop offset="100%" stop-color="#E5258E"/>
+            </linearGradient>
+          </defs>
+          <!-- Left hemisphere: circuit style -->
+          <path d="M13 3 C13 3 9 2 7 4 C5 6 4.5 9 5 11 C5.5 13 5 15 6 17 C7 19 9 20 11 20 C11 20 12 20 13 20"
+                stroke="url(#brainGradL)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <line x1="7.5" y1="9" x2="10.5" y2="9"  stroke="url(#brainGradL)" stroke-width="1" stroke-linecap="round"/>
+          <line x1="6"   y1="13" x2="9.5" y2="13" stroke="url(#brainGradL)" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="10.5" cy="9"  r="1.2" fill="#2F6BEC" opacity="0.8"/>
+          <circle cx="9.5"  cy="13" r="1.2" fill="#22C7F2" opacity="0.8"/>
+          <!-- Right hemisphere: organic folds -->
+          <path d="M13 3 C13 3 17 2 19 4 C21 6 21.5 9 21 11 C20.5 13 21 15 20 17 C19 19 17 20 15 20 C15 20 14 20 13 20"
+                stroke="url(#brainGradR)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M15 7 C16.5 6.5 18 7.5 18 9" stroke="url(#brainGradR)" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <path d="M14 12 C15.5 11.5 17.5 12.5 18 14" stroke="url(#brainGradR)" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <!-- Centre dividing line -->
+          <line x1="13" y1="2.5" x2="13" y2="20" stroke="#E6EAF0" stroke-width="0.75" stroke-dasharray="2 2"/>
+        </svg>
+        pivon
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#">Work</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Approach</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Book a call</a>
+
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+          <rect y="0"  width="22" height="1.5" rx="1" fill="#16202E"/>
+          <rect y="7"  width="22" height="1.5" rx="1" fill="#16202E"/>
+          <rect y="14" width="22" height="1.5" rx="1" fill="#16202E"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-inner">
+
+      <!-- LEFT: Copy -->
+      <div class="hero-copy">
+        <p class="eyebrow">AI &amp; Generative-AI Consulting</p>
+
+        <h1 id="hero-heading">
+          Take your company<br>
+          from <span class="grad-text">0 to 100</span><br>
+          on AI.
+        </h1>
+
+        <p class="subhead">
+          Pivon finds the use cases worth chasing, builds the solutions that ship,
+          and leaves your team running AI like they always did it —
+          whether you're just starting or already scaling.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">
+            <span>Book a discovery call →</span>
+          </a>
+          <a href="#services" class="btn-secondary">See how we work ↓</a>
+        </div>
+
+        <div class="hero-telemetry">
+          <span class="telemetry-item">0 <span>——→</span> 100</span>
+          <span class="telemetry-sep" aria-hidden="true"></span>
+          <span class="telemetry-item">01 / HERO</span>
+          <span class="telemetry-sep" aria-hidden="true"></span>
+          <span class="telemetry-item">SIG.PATH <span>ACTIVE</span></span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Signal Path SVG -->
+      <div class="hero-signal" aria-hidden="true">
+        <svg class="signal-svg" viewBox="0 0 480 456" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Neural gradient along the path -->
+            <linearGradient id="signalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#22C7F2"/>
+              <stop offset="33%"  stop-color="#2F6BEC"/>
+              <stop offset="66%"  stop-color="#7A3CEE"/>
+              <stop offset="100%" stop-color="#E5258E"/>
+            </linearGradient>
+
+            <!-- Glow filter for the pulse dot -->
+            <filter id="pulseGlow" x="-200%" y="-200%" width="500%" height="500%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+
+            <!-- Radial gradient for node fills -->
+            <radialGradient id="nodeGlow0" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#22C7F2" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#22C7F2" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="nodeGlow1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#2F6BEC" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#2F6BEC" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="nodeGlow2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7A3CEE" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#7A3CEE" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="nodeGlow3" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#E5258E" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#E5258E" stop-opacity="0"/>
+            </radialGradient>
+
+            <!-- Path motion definition for the travelling pulse -->
+            <!--
+              The spine path: starts at node "0" (40, 80)
+              — right angle traces threading across the canvas —
+              ends at the first service node (240, 440)
+            -->
+            <path id="spinePath"
+              d="
+                M 40 80
+                L 40 120
+                L 120 120
+                L 120 80
+                L 200 80
+                L 200 160
+                L 280 160
+                L 280 100
+                L 360 100
+                L 360 200
+                L 420 200
+                L 420 280
+                L 360 280
+                L 360 360
+                L 280 360
+                L 280 310
+                L 200 310
+                L 200 380
+                L 120 380
+                L 120 440
+                L 240 440
+              "
+            />
+          </defs>
+
+          <!-- ── Faint background grid ── -->
+          <!-- Vertical grid lines -->
+          <line class="grid-line" x1="80"  y1="0"  x2="80"  y2="456"/>
+          <line class="grid-line" x1="160" y1="0"  x2="160" y2="456"/>
+          <line class="grid-line" x1="240" y1="0"  x2="240" y2="456"/>
+          <line class="grid-line" x1="320" y1="0"  x2="320" y2="456"/>
+          <line class="grid-line" x1="400" y1="0"  x2="400" y2="456"/>
+          <!-- Horizontal grid lines -->
+          <line class="grid-line" x1="0" y1="80"  x2="480" y2="80"/>
+          <line class="grid-line" x1="0" y1="160" x2="480" y2="160"/>
+          <line class="grid-line" x1="0" y1="240" x2="480" y2="240"/>
+          <line class="grid-line" x1="0" y1="320" x2="480" y2="320"/>
+          <line class="grid-line" x1="0" y1="400" x2="480" y2="400"/>
+
+          <!-- ── Signal spine ── -->
+          <use href="#spinePath" class="path-spine path-draw"/>
+
+          <!-- ── Node 0 (START) — "0" label ── -->
+          <!-- Glow halo -->
+          <circle cx="40" cy="80" r="28" fill="url(#nodeGlow0)"/>
+          <!-- Ring -->
+          <circle cx="40" cy="80" r="12" class="node-dot"/>
+          <!-- Inner core (animated) -->
+          <circle cx="40" cy="80" r="3.5" fill="#22C7F2" class="node-dot-inner"/>
+          <!-- Label -->
+          <text x="40" y="54" class="svg-label" text-anchor="middle">START</text>
+          <text x="40" y="66" class="svg-label-accent" text-anchor="middle" font-size="12" font-weight="500">0</text>
+
+          <!-- ── Waypoint node 1 ── -->
+          <circle cx="280" cy="160" r="22" fill="url(#nodeGlow1)"/>
+          <circle cx="280" cy="160" r="8" class="node-dot"/>
+          <circle cx="280" cy="160" r="2.5" fill="#2F6BEC"/>
+          <text x="296" y="154" class="svg-label">SCOPE</text>
+          <text x="296" y="165" class="svg-label" font-size="8.5">DEFINE</text>
+
+          <!-- ── Waypoint node 2 ── -->
+          <circle cx="420" cy="280" r="22" fill="url(#nodeGlow2)"/>
+          <circle cx="420" cy="280" r="8" class="node-dot"/>
+          <circle cx="420" cy="280" r="2.5" fill="#7A3CEE"/>
+          <text x="436" y="274" class="svg-label">BUILD</text>
+          <text x="436" y="285" class="svg-label" font-size="8.5">DEPLOY</text>
+
+          <!-- ── Node END — "100" label ── -->
+          <circle cx="240" cy="440" r="30" fill="url(#nodeGlow3)"/>
+          <circle cx="240" cy="440" r="14" class="node-dot"/>
+          <circle cx="240" cy="440" r="4" fill="#E5258E" class="node-dot-inner"/>
+          <text x="240" y="421" class="svg-label" text-anchor="middle">SCALE</text>
+          <text x="240" y="408" class="svg-label-accent" text-anchor="middle" font-size="12" font-weight="500">100</text>
+
+          <!-- ── Micro coordinate labels ── -->
+          <text x="8"   y="84"  class="svg-label" font-size="7.5" fill="#D0D8E4">x:040</text>
+          <text x="8"   y="94"  class="svg-label" font-size="7.5" fill="#D0D8E4">y:080</text>
+          <text x="284" y="394" class="svg-label" font-size="7.5" fill="#D0D8E4">y:380</text>
+          <text x="130" y="448" class="svg-label" font-size="7.5" fill="#D0D8E4">x:120</text>
+
+          <!-- ── Section index label ── -->
+          <text x="472" y="16" class="svg-label" text-anchor="end" fill="#C8D0DC">02 / SIGNAL</text>
+
+          <!-- ── Travelling pulse dot ── -->
+          <!--
+            Uses offset-path CSS motion path (IE11 doesn't matter).
+            A small circle that travels from 0 to 100 along the spine.
+          -->
+          <circle r="5" fill="url(#signalGrad)" filter="url(#pulseGlow)" class="pulse-dot"
+            style="offset-path:path('M 40 80 L 40 120 L 120 120 L 120 80 L 200 80 L 200 160 L 280 160 L 280 100 L 360 100 L 360 200 L 420 200 L 420 280 L 360 280 L 360 360 L 280 360 L 280 310 L 200 310 L 200 380 L 120 380 L 120 440 L 240 440'); motion-offset:0%"/>
+
+        </svg>
+      </div>
+      <!-- end .hero-signal -->
+
+    </div>
+    <!-- end .hero-inner -->
+  </section>
+
+  <!-- ═══════════════ CONNECTOR ═══════════════ -->
+  <div class="section-connector" aria-hidden="true">
+    <svg class="connector-svg" viewBox="0 0 2 48" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="connGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E5258E"/>
+          <stop offset="100%" stop-color="#7A3CEE"/>
+        </linearGradient>
+      </defs>
+      <line class="connector-line" x1="1" y1="0" x2="1" y2="48"/>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ WHAT WE DO ═══════════════ -->
+  <section class="services" id="services" aria-labelledby="services-heading">
+    <div class="services-inner">
+      <div class="section-header">
+        <p id="services-heading" class="section-eyebrow">What We Do</p>
+        <span class="section-index">02 / SERVICES</span>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="card-num">01 ——</div>
+          <h3 class="card-title">AI Consulting</h3>
+          <p class="card-desc">Strategy, roadmaps, and honest answers about where AI pays off.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-num">02 ——</div>
+          <h3 class="card-title">Use-Case Evaluation</h3>
+          <p class="card-desc">We rank opportunities by impact and effort, and hand you a costed shortlist.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-num">03 ——</div>
+          <h3 class="card-title">Solution Building</h3>
+          <p class="card-desc">Design, build, and ship the AI solution, wired into your stack.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="card-num">04 ——</div>
+          <h3 class="card-title">0→100 AI Boost</h3>
+          <p class="card-desc">Not using AI yet? We stand it up, train your team, and hand over the keys.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ── Reduced-motion guard ──────────────────────────────────
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Keyboard-nav focus guard ──────────────────────────────
+    // Only show focus rings for keyboard users
+    document.addEventListener('mousedown', () => {
+      document.documentElement.setAttribute('data-whatintent', 'mouse');
+    });
+    document.addEventListener('keydown', () => {
+      document.documentElement.removeAttribute('data-whatintent');
+    });
+
+    // ── SVG draw-on: ensure headline not blocked by JS ───────
+    // The path-draw animation is pure CSS; this script block is
+    // purely for enhancement and never gates the initial paint.
+
+    // ── Intersection-based animation trigger ─────────────────
+    // Re-plays the draw animation when the user scrolls back up
+    // and the hero re-enters view (optional, but premium feel).
+    if (!prefersReducedMotion) {
+      const spinePath = document.querySelector('.path-draw');
+      if (spinePath && 'IntersectionObserver' in window) {
+        let hasPlayed = false;
+        const io = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting && !hasPlayed) {
+              hasPlayed = true;
+              // Animation already started via CSS; no need to retrigger on first view.
+              // On a return visit (tab switch, scroll back) you could reset here.
+            }
+          }
+        }, { threshold: 0.2 });
+        const heroSvg = document.querySelector('.hero-signal');
+        if (heroSvg) io.observe(heroSvg);
+      }
+    }
+  </script>
+</body>
+</html>
