@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — design evolution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── SHOWCASE — the whole design history on one wall.
+     Time runs left→right; the variants of each round stack vertically.
+     Tiles are live pages scaled down; click opens the full page in a new tab. ── */
+:root{
+  --paper:#F1F3F7; --card:#FFFFFF; --ink:#0B0C0F; --slate:#565D68; --mist:#9AA1AB; --line:#DFE3EA;
+  --g1:#22C7F2; --gm:#7A3CEE; --g2:#E5258E;
+  --grad:linear-gradient(90deg,var(--g1),var(--gm),var(--g2));
+  --disp:'Archivo',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --tile:320px; --thumb-h:200px; /* 1280×800 scaled ×0.25 */
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--body);background:var(--paper);color:var(--ink);overflow:hidden;
+  -webkit-font-smoothing:antialiased}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:baseline;gap:1.4rem;
+  padding:1.1rem 1.6rem;background:linear-gradient(180deg,var(--paper) 55%,transparent);pointer-events:none}
+header h1{font-family:var(--disp);font-weight:900;font-size:1.35rem;letter-spacing:-.03em;margin:0}
+header .sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+header .hint{margin-left:auto;font-family:var(--mono);font-size:.66rem;color:var(--mist)}
+
+.board{height:100%;overflow-x:auto;overflow-y:auto;display:flex;gap:56px;
+  padding:110px 60px 60px;align-items:flex-start;scroll-behavior:smooth}
+.col{min-width:var(--tile);max-width:var(--tile);position:relative;padding-top:34px;flex-shrink:0}
+/* timeline rail: each column draws its own segment + node, so the line is continuous */
+.col::before{content:"";position:absolute;top:0;left:-56px;right:-56px;height:3px;background:var(--line)}
+.col:first-child::before{left:0}
+.col:last-child::before{right:0}
+.col::after{content:"";position:absolute;top:-5px;left:0;width:13px;height:13px;border-radius:50%;
+  background:var(--grad);border:2px solid var(--paper)}
+.chead{margin-bottom:1.1rem}
+.chead .date{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.chead h2{font-family:var(--disp);font-weight:900;font-size:1.15rem;letter-spacing:-.02em;margin:.25rem 0 .2rem}
+.chead .note{font-size:.8rem;color:var(--slate);line-height:1.45}
+
+.tile{margin-bottom:1.3rem}
+.thumb{position:relative;width:var(--tile);height:var(--thumb-h);overflow:hidden;border-radius:10px;
+  border:1px solid var(--line);background:var(--card);
+  box-shadow:0 10px 28px -18px rgba(11,12,15,.35);transition:transform .22s,box-shadow .22s}
+.tile:hover .thumb{transform:translateY(-3px);box-shadow:0 18px 38px -18px rgba(11,12,15,.45)}
+.thumb iframe{width:1280px;height:800px;border:0;transform:scale(.25);transform-origin:0 0;pointer-events:none;background:#fff}
+.thumb .go{position:absolute;inset:0;z-index:2}
+.thumb .open{position:absolute;right:.55rem;bottom:.55rem;z-index:3;font-family:var(--mono);font-size:.62rem;
+  background:rgba(11,12,15,.82);color:#fff;padding:.35em .7em;border-radius:999px;opacity:0;transition:opacity .2s}
+.tile:hover .open{opacity:1}
+.cap{display:flex;align-items:baseline;gap:.6rem;margin-top:.55rem;padding:0 .15rem}
+.cap b{font-family:var(--disp);font-weight:700;font-size:.9rem;letter-spacing:-.01em}
+.cap .st{margin-left:auto;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.3em .65em;border-radius:999px;white-space:nowrap}
+.st.chosen{background:rgba(34,199,242,.14);color:#0B7DA6;border:1px solid rgba(34,199,242,.4)}
+.st.current{background:var(--ink);color:#fff}
+.st.passed{background:transparent;color:var(--mist);border:1px solid var(--line)}
+.st.shipped{background:var(--grad);color:#fff}
+
+.legend{position:fixed;left:1.6rem;bottom:1.1rem;z-index:20;display:flex;gap:.9rem;align-items:center;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.55rem 1rem;
+  box-shadow:0 10px 26px -16px rgba(11,12,15,.4)}
+.legend .st{position:static}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>pivon — design evolution</h1>
+  <span class="sub">time →&nbsp; · &nbsp;editions ↓</span>
+  <span class="hint">scroll to explore · ←/→ jump rounds · click a tile to open it full-page</span>
+</header>
+
+<div class="board" id="board"></div>
+
+<div class="legend">
+  <span class="st shipped">shipped</span>
+  <span class="st chosen">chosen</span>
+  <span class="st passed">explored</span>
+  <span class="st current">current round</span>
+</div>
+
+<script>
+const ROUNDS=[
+  {date:'Jun 26 · 2026', title:'Hero directions', note:'Three takes on the opening moment. C won, carrying A’s neural field as its backdrop.',
+   items:[
+     ['../heroA.html','Hero A · neural field','passed'],
+     ['../heroB.html','Hero B','passed'],
+     ['../heroC.html','Hero C · console','chosen'],
+   ]},
+  {date:'Jun 26 · 2026', title:'Section winners', note:'The section-by-section interview — each of these won its round and was folded into v1.',
+   items:[
+     ['er2-broadsheet.html','Services · broadsheet','chosen'],
+     ['ap3-scale.html','Approach · 0→100 scale','chosen'],
+     ['wk4-eyebrow.html','Work · context eyebrow','chosen'],
+     ['tm2-mirror.html','Team · mirrored halves','chosen'],
+     ['bk2-wizard.html','Booking · stepped wizard','chosen'],
+   ]},
+  {date:'Jun 26 · 2026', title:'v1 — assembled', note:'The winners composed into one coherent site. Live at the repo root.',
+   items:[
+     ['v1-site.html','Pivon v1','shipped'],
+   ]},
+  {date:'Jul 6 · 2026', title:'Bleeding-edge pass', note:'Three page-level identities on top of v1. Superseded by the pivot to a full redesign.',
+   items:[
+     ['d1-journey.html','0→100 Journey','passed'],
+     ['d2-kinetic.html','Kinetic editorial','passed'],
+     ['d3-console.html','Console OS','passed'],
+   ]},
+  {date:'Jul 6 · 2026', title:'v2 art directions', note:'Full redesign, new copy, hero concept as the only survivor. A and C resonated.',
+   items:[
+     ['dir-a-type.html','A · Type-dominant','chosen'],
+     ['dir-b-scene.html','B · Scene-dominant','passed'],
+     ['dir-c-technical.html','C · Technical','chosen'],
+   ]},
+  {date:'Jul 6 · 2026', title:'A × C merges', note:'Three rethought fusions of type-sculpture and engineering apparatus.',
+   items:[
+     ['ac1-redline.html','AC1 · Redline','passed'],
+     ['ac2-ledger.html','AC2 · Ledger','passed'],
+     ['ac3-command.html','AC3 · Command/Output','passed'],
+   ]},
+  {date:'Jul 6 · 2026', title:'A & C, upgraded', note:'Same identities, every section given its own mechanic. A3 and C2 became the new parents.',
+   items:[
+     ['a2-playful.html','A2 · Playful editorial','passed'],
+     ['a3-sculpted.html','A3 · Sculptural poster','chosen'],
+     ['c2-blueprint.html','C2 · Blueprint','chosen'],
+     ['c3-matrix.html','C3 · Plotter','passed'],
+   ]},
+  {date:'Jul 6 · 2026', title:'Story fusions', note:'A3×C2 with reimagined narratives — machine, manual, exhibition. Rejected as too themed.',
+   items:[
+     ['m1-machine.html','M1 · The Machine','passed'],
+     ['m2-manual.html','M2 · Operator’s Manual','passed'],
+     ['m3-gallery.html','M3 · The Exhibition','passed'],
+   ]},
+  {date:'Jul 6–7 · 2026', title:'50% rebuilds', note:'Half-tethered to the parents: color as system, poster collage, structural split. Awaiting the pick.',
+   items:[
+     ['n1-spectrum.html','N1 · The Spectrum','current'],
+     ['n2-pasteup.html','N2 · The Paste-up','current'],
+     ['n3-split.html','N3 · The Split','current'],
+   ]},
+];
+
+const board=document.getElementById('board');
+ROUNDS.forEach(r=>{
+  const col=document.createElement('div'); col.className='col';
+  col.innerHTML='<div class="chead"><span class="date">'+r.date+'</span><h2>'+r.title+'</h2><p class="note">'+r.note+'</p></div>';
+  r.items.forEach(([file,name,st])=>{
+    const t=document.createElement('div'); t.className='tile';
+    t.innerHTML=
+      '<div class="thumb">'+
+        '<iframe data-src="'+file+'" title="'+name+'" tabindex="-1"></iframe>'+
+        '<a class="go" href="'+file+'" target="_blank" rel="noopener" aria-label="Open '+name+' full-page"></a>'+
+        '<span class="open">open full ↗</span>'+
+      '</div>'+
+      '<div class="cap"><b>'+name+'</b><span class="st '+st+'">'+(st==='passed'?'explored':st==='current'?'current round':st)+'</span></div>';
+    col.appendChild(t);
+  });
+  board.appendChild(col);
+});
+
+/* lazy-load the live previews as their column nears the viewport */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const f=e.target; f.src=f.dataset.src; io.unobserve(f);
+}),{root:board,rootMargin:'900px'});
+document.querySelectorAll('iframe[data-src]').forEach(f=>io.observe(f));
+
+/* arrow keys jump between rounds */
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') board.scrollLeft+=376;
+  if(e.key==='ArrowLeft') board.scrollLeft-=376;
+});
+</script>
+</body>
+</html>

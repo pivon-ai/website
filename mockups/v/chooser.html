@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — choose a direction</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  html,body{height:100%}
+  body{margin:0;display:flex;flex-direction:column;background:var(--paper-3);overflow:hidden}
+  .bar{background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+    padding:10px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .bar h1{font-size:1rem;margin:0;white-space:nowrap}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:.45em .9em;border-radius:var(--r-pill);
+    border:1px solid var(--line-2);background:transparent;cursor:pointer;color:var(--slate)}
+  .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .blurb{color:var(--slate);font-size:.82rem;flex:1;min-width:260px;line-height:1.45}
+  .seg{display:inline-flex;border:1px solid var(--line-2);border-radius:var(--r-pill);overflow:hidden;flex-shrink:0}
+  .seg button{font-family:var(--f-mono);font-size:.72rem;padding:.45em .9em;border:0;background:transparent;
+    cursor:pointer;color:var(--slate)}
+  .seg button.on{background:var(--ink);color:#fff}
+  .open{font-family:var(--f-mono);font-size:.75rem;color:var(--slate);text-decoration:none;white-space:nowrap}
+  .open:hover{color:var(--ink)}
+  .stage{flex:1;display:flex;justify-content:center;background:#DEE5EF;min-height:0}
+  .stage iframe{border:0;width:100%;height:100%;background:#fff;display:block}
+  .stage.mob iframe{width:390px;border-inline:1px solid var(--line-2)}
+  .foot{background:rgba(255,255,255,.94);border-top:1px solid var(--line-2);padding:10px 18px;
+    display:flex;gap:12px;align-items:center}
+  .foot .hint{font-family:var(--f-mono);font-size:.68rem;color:var(--mist);max-width:230px;line-height:1.4}
+  .foot input{flex:1;font-family:var(--f-body);font-size:.92rem;padding:.65em .9em;
+    border:1px solid var(--line-2);border-radius:var(--r-pill)}
+  .done{position:fixed;inset:0;z-index:50;background:rgba(246,248,251,.97);display:none;
+    align-items:center;justify-content:center;flex-direction:column;gap:14px;text-align:center;padding:40px}
+  .done.on{display:flex}
+  .done h2{font-size:2rem;margin:0}
+  .done p{color:var(--slate);max-width:420px}
+  @media (max-width:820px){.blurb{order:10;min-width:100%}.foot .hint{display:none}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1 id="title">Loading…</h1>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Variants"></div>
+  <span class="blurb" id="blurb"></span>
+  <a class="open" id="openFull" href="#" target="_blank" rel="noopener">open in tab ↗</a>
+  <div class="seg" role="group" aria-label="Preview width">
+    <button id="wDesk" class="on" onclick="setW(false)">Desktop</button>
+    <button id="wMob" onclick="setW(true)">Mobile</button>
+  </div>
+</div>
+
+<div class="stage" id="stage"><iframe id="frame" title="Variant preview"></iframe></div>
+
+<div class="foot">
+  <span class="hint">Keys 1/2/3 switch variants. Mix &amp; match welcome — notes ride along with your choice.</span>
+  <input id="note" placeholder="Notes (optional) — e.g. 'Journey, but keep the decode headlines'">
+  <button class="btn btn-primary" id="chooseBtn" onclick="decide()"><span>Choose this →</span></button>
+</div>
+
+<div class="done" id="doneScreen">
+  <h2>Recorded ✓</h2>
+  <p id="doneMsg"></p>
+  <p>You can close this tab — back to the agent.</p>
+</div>
+
+<script>
+let SECTION = {}, cur = null;
+
+async function load(){
+  SECTION = await (await fetch('section.json?ts='+Date.now())).json();
+  document.getElementById('title').textContent = SECTION.title || SECTION.section;
+  const tabs = document.getElementById('tabs');
+  (SECTION.variants || []).forEach((v,i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab'; b.setAttribute('role','tab');
+    b.textContent = (i+1)+' · '+(v.name || v.id);
+    b.onclick = ()=>show(v,b);
+    tabs.appendChild(b);
+    if(i===0) show(v,b);
+  });
+}
+
+function show(v,btn){
+  cur = v;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t===btn));
+  document.getElementById('blurb').textContent = v.blurb || '';
+  document.getElementById('openFull').href = v.file;
+  document.getElementById('frame').src = v.file;
+  document.getElementById('chooseBtn').firstElementChild.textContent = 'Choose “'+(v.name||v.id)+'” →';
+}
+
+function setW(mob){
+  document.getElementById('stage').classList.toggle('mob', mob);
+  document.getElementById('wDesk').classList.toggle('on', !mob);
+  document.getElementById('wMob').classList.toggle('on', mob);
+}
+
+addEventListener('keydown', e=>{
+  if(e.target.tagName === 'INPUT') return;
+  const tabs = document.querySelectorAll('.tab'), i = +e.key - 1;
+  if(tabs[i]) tabs[i].click();
+});
+
+async function decide(){
+  if(!cur) return;
+  const note = document.getElementById('note').value;
+  try{
+    await fetch('/decide', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({section: SECTION.section, choice: cur.id, note})});
+  }catch(e){}
+  document.getElementById('doneMsg').textContent =
+    'Chose “'+(cur.name||cur.id)+'” for '+(SECTION.title||SECTION.section)+(note?' — with your notes.':'.');
+  document.getElementById('doneScreen').classList.add('on');
+}
+
+load();
+</script>
+</body>
+</html>

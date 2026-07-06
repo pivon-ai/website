@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — D1 · 0→100 Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base-style.css">
+<style>
+/* ── D1: the page enacts 0→100 — white at zero, ink by the time you're AI-native ── */
+
+/* light half steps */
+#services{background:#F6F8FB}
+#approach{background:#E3EBF5}
+#approach .stop::before{background:#E3EBF5}
+
+/* dark half — flip the token contract per section, everything derived follows */
+#work{background:#1E2A3C;--ink:#F2F6FB;--slate:#A9B6C6;--mist:#6F8095;--line:#2C3B52;--line-2:#3D4E68;color:var(--ink)}
+#team{background:#16202E;--ink:#F2F6FB;--slate:#A9B6C6;--mist:#6F8095;--line:#26344A;--line-2:#374863;color:var(--ink)}
+#team .right .hemi{color:#9D6BFF}
+#team .left .hemi{color:#5E8BFF}
+#booking{background:#0D1420;--ink:#F2F6FB;--slate:#A9B6C6;--mist:#6F8095;color:var(--ink)}
+/* the booking card stays a light instrument on the dark desk */
+#booking .bk-card{--ink:#16202E;--slate:#5A6B7E;--mist:#8A98A8;--line:#E6EAF0;--line-2:#D7DEE8;color:var(--ink)}
+.footer{background:#0A0F19}
+
+/* nav: 0→100 scroll counter + gradient progress hairline, flips theme in the dark half */
+.j-counter{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.14em;color:var(--slate);min-width:5.5ch;text-align:right}
+.j-counter b{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.j-bar{position:absolute;left:0;bottom:-1px;height:2px;background:var(--grad);width:0;z-index:101;pointer-events:none}
+body > nav{transition:background var(--t) var(--ease),border-color var(--t) var(--ease)}
+body > nav.dark{background:rgba(13,20,32,.86);border-color:rgba(255,255,255,.12)}
+body > nav.dark .brand-wordmark{color:#fff}
+body > nav.dark .nav-links a{color:#A9B6C6}
+body > nav.dark .nav-links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+body > nav.dark .nav-toggle{color:#fff}
+body > nav.dark .btn-primary{background:#fff;color:#16202E}
+</style>
+</head>
+<body>
+<script>
+fetch('d-body.html').then(r=>r.text()).then(h=>{
+  document.body.insertAdjacentHTML('afterbegin', h);
+  const s=document.createElement('script'); s.src='base-script.js';
+  s.onload=()=>{ directionInit(); requestAnimationFrame(()=>{try{parent.fitAll&&parent.fitAll()}catch(e){}}); };
+  document.body.appendChild(s);
+});
+
+function directionInit(){
+  const nav=document.querySelector('body > nav');
+  const c=document.createElement('span'); c.className='j-counter'; c.innerHTML='<b>000</b>';
+  nav.querySelector('.nav-inner').insertBefore(c, nav.querySelector('.nav-cta'));
+  const bar=document.createElement('div'); bar.className='j-bar'; nav.appendChild(bar);
+  const work=document.getElementById('work');
+  function upd(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    const p=max>0?Math.min(100,Math.round(scrollY/max*100)):0;
+    c.firstElementChild.textContent=String(p).padStart(3,'0');
+    bar.style.width=p+'%';
+    nav.classList.toggle('dark', !!work && scrollY+70>=work.offsetTop);
+  }
+  addEventListener('scroll',upd,{passive:true});
+  addEventListener('resize',upd,{passive:true});
+  upd();
+}
+</script>
+</body>
+</html>

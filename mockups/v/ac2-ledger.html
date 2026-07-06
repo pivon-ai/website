@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — AC2 · Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── AC2 · LEDGER — the whole page is one ruled operating document,
+     set at display scale. C's table structure IS the layout; A's type
+     fills the cells. The ledger sums to 100. ── */
+:root{
+  --paper:#FFFFFF; --paper2:#F7F8FA; --ink:#0B0C0F; --slate:#565D68; --mist:#9AA1AB; --line:#E7E9EC;
+  --g1:#2F6BEC; --g2:#E5258E;
+  --grad:linear-gradient(100deg,var(--g1),var(--g2));
+  --disp:'Archivo',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --pad:clamp(1.1rem,2.6vw,2rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper2);font-size:1.02rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.04em}
+a{color:inherit}
+::selection{background:rgba(47,107,236,.15)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--g1);outline-offset:3px}
+
+/* nav (outside the document) */
+nav{position:sticky;top:0;z-index:50;background:rgba(247,248,250,.92);backdrop-filter:blur(12px)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:58px;padding-inline:clamp(16px,3vw,40px)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.25rem;letter-spacing:-.03em;text-decoration:none}
+.nav-l{display:flex;gap:1.4rem;font-size:.86rem;font-weight:500}
+.nav-l a{text-decoration:none;color:var(--slate)}
+.nav-l a:hover{color:var(--ink)}
+.cta{font-weight:600;font-size:.86rem;text-decoration:none;color:#fff;background:var(--ink);padding:.6em 1.25em;border-radius:999px;position:relative;overflow:hidden}
+.cta span{position:relative;z-index:1}
+.cta::after{content:"";position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity .25s}
+.cta:hover::after{opacity:1}
+@media(max-width:720px){.nav-l{display:none}}
+
+/* the document frame */
+.doc{max-width:1360px;margin:0 auto clamp(24px,4vw,48px);border:2px solid var(--ink);background:var(--paper);
+  margin-inline:clamp(10px,2.5vw,40px)}
+@media(min-width:1440px){.doc{margin-inline:auto}}
+.dhead{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:.75rem var(--pad);border-bottom:2px solid var(--ink);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--slate)}
+.dhead b{color:var(--ink);font-weight:700}
+
+/* generic ledger rows */
+.lh{display:flex;justify-content:space-between;gap:1rem;padding:.6rem var(--pad);border-bottom:1px solid var(--ink);
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);background:var(--paper2)}
+.lh b{color:var(--ink);font-weight:700}
+.sect{border-bottom:2px solid var(--ink)}
+.sect:last-of-type{border-bottom:0}
+
+/* hero block */
+.hero{display:grid;grid-template-columns:1fr 250px}
+.hero .main{padding:clamp(2rem,5vh,3.6rem) var(--pad)}
+.hero h1{font-weight:900;font-size:clamp(2.7rem,8.6vw,7.6rem);line-height:.94;letter-spacing:-.045em;max-width:12ch}
+.hero .sub{max-width:46ch;color:var(--slate);font-size:1.08rem;margin:1.8rem 0 0}
+.hero-ctas{margin-top:2.2rem;display:flex;gap:.9rem;flex-wrap:wrap}
+.btn2{font-weight:600;font-size:.92rem;text-decoration:none;border:1px solid var(--ink);padding:.75em 1.4em;border-radius:999px}
+.btn2:hover{background:var(--ink);color:#fff}
+.hero .side{border-left:1px solid var(--ink);display:flex;flex-direction:column}
+.hero .side .kv{padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+.hero .side .kv:last-child{border-bottom:0;margin-top:auto}
+.hero .side .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+.hero .side .v{font-family:var(--disp);font-weight:700;font-size:1rem;margin-top:.25rem}
+.hero .side .v.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;font-size:1.6rem}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.hero .side{border-left:0;border-top:1px solid var(--ink);flex-direction:row;flex-wrap:wrap}.hero .side .kv{flex:1;min-width:140px;border-bottom:0;border-right:1px solid var(--line)}}
+
+/* console row */
+.crow{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.4rem;padding:1rem var(--pad);border-top:1px solid var(--ink);background:var(--paper2)}
+.crow .pfx{font-family:var(--mono);font-size:.82rem;font-weight:700}
+.crow .pfx b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.crow .typed{font-family:var(--mono);font-size:.82rem}
+.crow .cur{display:inline-block;width:8px;height:1em;background:var(--ink);vertical-align:-2px;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.crow .out{font-family:var(--mono);font-size:.82rem;color:var(--mist);margin-left:auto}
+.crow .out b{font-weight:500;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text}
+
+/* positioning row */
+.pos{padding:clamp(1.8rem,4vh,2.8rem) var(--pad)}
+.pos h2{font-weight:900;font-size:clamp(1.9rem,5vw,4rem);line-height:1;max-width:16ch}
+.pos p{max-width:56ch;color:var(--slate);margin:1.4rem 0 0}
+.pos .tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.6rem}
+.pos .tag{font-family:var(--mono);font-size:.7rem;border:1px solid var(--ink);padding:.4em .8em;color:var(--slate)}
+
+/* services ledger rows */
+.svc-r{display:grid;grid-template-columns:minmax(3rem,auto) 1fr minmax(220px,.6fr) auto;gap:1.4rem;align-items:center;
+  padding:1.6rem var(--pad);border-bottom:1px solid var(--ink);text-decoration:none;transition:background .2s}
+.svc-r:last-child{border-bottom:0}
+.svc-r:hover{background:var(--paper2)}
+.svc-r .ix{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--mist)}
+.svc-r h3{font-weight:900;font-size:clamp(1.7rem,4.6vw,3.8rem);letter-spacing:-.04em;line-height:1}
+.svc-r:hover h3{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.svc-r .io{font-family:var(--mono);font-size:.72rem;color:var(--mist);line-height:1.9}
+.svc-r .io b{color:var(--slate);font-weight:500}
+.svc-r .io .o{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.svc-r .go{font-family:var(--mono);font-size:.9rem;color:var(--mist)}
+.svc-r:hover .go{color:var(--ink)}
+@media(max-width:860px){.svc-r{grid-template-columns:auto 1fr;grid-auto-rows:auto;gap:.4rem 1rem}.svc-r .go{display:none}}
+
+/* approach — meter row + step cells */
+.apr .meter{padding:1.6rem var(--pad);border-bottom:1px solid var(--ink)}
+.apr .ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.62rem;color:var(--mist);margin-bottom:.4rem}
+.apr .bar{height:12px;border:1px solid var(--ink);position:relative;overflow:hidden}
+.apr .bar .fill{position:absolute;inset:0;background:var(--grad);transform-origin:left;transform:scaleX(0);transition:transform 1.5s cubic-bezier(.65,.05,.36,1) .15s}
+.apr .bar .fill.on{transform:scaleX(1)}
+.apr .steps{display:grid;grid-template-columns:repeat(4,1fr)}
+.apr .step{padding:1.3rem var(--pad);border-right:1px solid var(--ink)}
+.apr .step:last-child{border-right:0}
+.apr .step .n{font-family:var(--disp);font-weight:900;font-size:clamp(1.7rem,3.4vw,2.7rem);letter-spacing:-.04em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.apr .step h3{font-size:1.08rem;margin:.3rem 0 .25rem}
+.apr .step p{color:var(--slate);font-size:.88rem;margin:0}
+@media(max-width:820px){.apr .steps{grid-template-columns:1fr 1fr}.apr .step{border-bottom:1px solid var(--ink)}.apr .step:nth-child(3),.apr .step:nth-child(4){border-bottom:0}}
+
+/* work — ledger entries, metric as the "amount" column */
+.wk-r{display:grid;grid-template-columns:minmax(3rem,auto) 1fr auto;gap:1.4rem;align-items:center;
+  padding:1.5rem var(--pad);border-bottom:1px solid var(--ink);text-decoration:none;transition:background .2s}
+.wk-r:hover{background:var(--paper2)}
+.wk-r .ix{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--mist)}
+.wk-r h3{font-weight:700;font-size:clamp(1.15rem,2.4vw,1.7rem);letter-spacing:-.02em}
+.wk-r .ctx{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-top:.3rem;display:block}
+.wk-r .m{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,6vw,4.6rem);letter-spacing:-.05em;line-height:1;text-align:right;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wk-sub{display:flex;justify-content:space-between;gap:1rem;padding:.7rem var(--pad);font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);background:var(--paper2)}
+@media(max-width:640px){.wk-r{grid-template-columns:1fr;gap:.4rem}.wk-r .m{text-align:left}}
+
+/* engagement rows */
+.eng-r{display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:baseline;padding:1.4rem var(--pad);border-bottom:1px solid var(--ink)}
+.eng-r:last-child{border-bottom:0}
+.eng-r .ix{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--mist)}
+.eng-r h3{font-weight:900;font-size:clamp(1.3rem,2.8vw,2rem);letter-spacing:-.03em}
+.eng-r p{color:var(--slate);font-size:.92rem;margin:.3rem 0 0;max-width:54ch}
+.eng-r .dur{font-family:var(--mono);font-size:.76rem;font-weight:700;white-space:nowrap;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@media(max-width:640px){.eng-r{grid-template-columns:1fr;gap:.35rem}}
+
+/* pov rows */
+.pov-r{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;padding:1.5rem var(--pad);border-bottom:1px solid var(--ink)}
+.pov-r:last-child{border-bottom:0}
+.pov-r .ix{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--mist);padding-top:.45rem}
+.pov-r p{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,3vw,2.2rem);letter-spacing:-.03em;line-height:1.18;margin:0;max-width:30ch}
+.pov-r p b{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* team cells */
+.duo{display:grid;grid-template-columns:1fr 1fr}
+.tm{padding:1.7rem var(--pad);border-right:1px solid var(--ink)}
+.tm:last-child{border-right:0}
+.tm .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+.tm h3{font-weight:900;font-size:clamp(1.6rem,3.4vw,2.4rem);margin:.35rem 0 .15rem}
+.tm .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 .7rem}
+.tm p{color:var(--slate);font-size:.93rem;margin:0}
+@media(max-width:720px){.duo{grid-template-columns:1fr}.tm{border-right:0;border-bottom:1px solid var(--ink)}.tm:last-child{border-bottom:0}}
+
+/* TOTAL row — the ledger sums to 100 */
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;padding:1.6rem var(--pad);background:var(--ink);color:#fff}
+.total .lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.total .sum{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,6vw,4.4rem);letter-spacing:-.045em;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.total .eq{font-family:var(--mono);font-size:.78rem;color:rgba(255,255,255,.72)}
+
+/* CTA block */
+.book{padding:clamp(2.6rem,7vh,4.5rem) var(--pad);display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+.book h2{font-weight:900;font-size:clamp(2.4rem,7.5vw,6rem);letter-spacing:-.045em;line-height:.96}
+.book p{color:var(--slate);max-width:46ch;margin:1.2rem 0 0}
+.book .cta{font-size:1rem;padding:.95em 1.8em;justify-self:end}
+@media(max-width:820px){.book{grid-template-columns:1fr}.book .cta{justify-self:start}}
+
+footer{max-width:1360px;margin-inline:clamp(10px,2.5vw,40px);padding:1.4rem 0 2.2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.68rem;color:var(--mist)}
+@media(min-width:1440px){footer{margin-inline:auto}}
+footer a{text-decoration:none;color:var(--slate)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+  .apr .bar .fill{transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand">pivon</a>
+    <div class="nav-l"><a href="#services">Services</a><a href="#work">Work</a><a href="#approach">Approach</a><a href="#team">Team</a></div>
+    <a href="#book" class="cta"><span>Book the call</span></a>
+  </div>
+</nav>
+
+<div class="doc">
+  <div class="dhead"><span><b>PIVON</b> — OPERATING DOCUMENT</span><span>AI &amp; GENERATIVE-AI CONSULTING</span><span>REF: 0→100 · EST. 2026</span></div>
+
+  <!-- 00 · hero -->
+  <header class="sect hero-sect">
+    <div class="lh"><span><b>00</b> — THE PROMISE</span><span>LCP / PLAIN HTML</span></div>
+    <div class="hero">
+      <div class="main">
+        <h1>Your company, from <span class="grad">0&nbsp;to&nbsp;100</span> on&nbsp;AI.</h1>
+        <p class="sub">We find the use cases worth chasing, build the tools that ship, and leave your team running AI on their own. No slideware.</p>
+        <div class="hero-ctas">
+          <a href="#book" class="cta"><span>Book the honest call →</span></a>
+          <a href="#services" class="btn2">See the work ↓</a>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="kv"><span class="k">Position</span><div class="v">AI studio for SMBs</div></div>
+        <div class="kv"><span class="k">Mode</span><div class="v">Find · build · hand over</div></div>
+        <div class="kv"><span class="k">Lock-in</span><div class="v">None. It's yours.</div></div>
+        <div class="kv"><span class="k">Target</span><div class="v g">100</div></div>
+      </aside>
+    </div>
+    <div class="crow" role="region" aria-label="Interactive demo console">
+      <span class="pfx"><b>pivon</b>&gt;</span>
+      <span class="typed" id="typed"></span><span class="cur" aria-hidden="true"></span>
+      <span class="out">out&nbsp; <b id="outWord">a costed roadmap</b></span>
+    </div>
+  </header>
+
+  <!-- 01 · why us -->
+  <section class="sect">
+    <div class="lh"><span><b>01</b> — WHY US</span><span>STATUS: NEW STUDIO / OLD HANDS</span></div>
+    <div class="pos reveal">
+      <h2>New studio. Old hands. <span class="grad">Zero slideware.</span></h2>
+      <p>Pivon is two founders — one deep in production software, one deep in business. We're new as a company; we're not new at shipping. No logo wall yet, on purpose: we'd rather show you real work on a thirty-minute call than decorate a homepage.</p>
+      <div class="tags">
+        <span class="tag">Senior software &amp; solutions architecture</span>
+        <span class="tag">AI enablement &amp; innovation leadership</span>
+        <span class="tag">Build · train · hand over</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · services -->
+  <section class="sect" id="services">
+    <div class="lh"><span><b>02</b> — SERVICES</span><span>FOUR WAYS IN</span></div>
+    <a class="svc-r reveal" href="#book"><span class="ix">S/01</span><h3>AI Consulting</h3><span class="io">in&nbsp; <b>"where do we even start?"</b><br>out&nbsp; <span class="o">a costed roadmap</span></span><span class="go">→</span></a>
+    <a class="svc-r reveal" href="#book"><span class="ix">S/02</span><h3>Use-Case Evaluation</h3><span class="io">in&nbsp; <b>30 ideas</b><br>out&nbsp; <span class="o">the 5 worth doing</span></span><span class="go">→</span></a>
+    <a class="svc-r reveal" href="#book"><span class="ix">S/03</span><h3>Solution Building</h3><span class="io">in&nbsp; <b>a shortlisted use case</b><br>out&nbsp; <span class="o">a deployed tool</span></span><span class="go">→</span></a>
+    <a class="svc-r reveal" href="#book"><span class="ix">S/04</span><h3>0→100 AI Boost</h3><span class="io">in&nbsp; <b>zero AI</b><br>out&nbsp; <span class="o">an AI-native team</span></span><span class="go">→</span></a>
+  </section>
+
+  <!-- 03 · approach -->
+  <section class="sect apr" id="approach">
+    <div class="lh"><span><b>03</b> — APPROACH</span><span>0 → 100, MEASURED</span></div>
+    <div class="meter reveal">
+      <div class="ticks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+      <div class="bar"><div class="fill"></div></div>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="n">00</span><h3>Discover</h3><p>Your business, data, and constraints.</p></div>
+      <div class="step reveal"><span class="n">01</span><h3>Evaluate</h3><p>Use cases ranked and costed.</p></div>
+      <div class="step reveal"><span class="n">02</span><h3>Build</h3><p>Design, build, ship.</p></div>
+      <div class="step reveal"><span class="n">100</span><h3>Handover</h3><p>We leave. It stays. Your team runs it.</p></div>
+    </div>
+  </section>
+
+  <!-- 04 · work -->
+  <section class="sect" id="work">
+    <div class="lh"><span><b>04</b> — SELECTED WORK</span><span>ENTRY = CASE · AMOUNT = RESULT</span></div>
+    <a class="wk-r reveal" href="#"><span class="ix">CASE/A1</span><span><h3>Support that answers itself</h3><span class="ctx">Logistics SMB · tickets deflected in 6 weeks</span></span><span class="m">60%</span></a>
+    <a class="wk-r reveal" href="#"><span class="ix">CASE/B2</span><span><h3>From spreadsheets to forecasts</h3><span class="ctx">Regional retailer · stockouts cut</span></span><span class="m">−30%</span></a>
+    <a class="wk-r reveal" href="#"><span class="ix">CASE/C3</span><span><h3>A studio that never sleeps</h3><span class="ctx">Marketing agency · output, constant headcount</span></span><span class="m">5×</span></a>
+    <a class="wk-r reveal" href="#"><span class="ix">CASE/D4</span><span><h3>Zero to one hundred</h3><span class="ctx">Manufacturer · to AI-native, no lock-in</span></span><span class="m">90d</span></a>
+    <div class="wk-sub"><span>SUBTOTAL — 4 CASES</span><span>ILLUSTRATIVE ENGAGEMENTS: THE SHAPE OF WORK WE DELIVER</span></div>
+  </section>
+
+  <!-- 05 · engagement -->
+  <section class="sect">
+    <div class="lh"><span><b>05</b> — ENGAGEMENT MODELS</span><span>THREE WAYS TO START</span></div>
+    <div class="eng-r reveal"><span class="ix">E/01</span><div><h3>Discovery Sprint</h3><p>Your use cases, ranked and costed. A shortlist you could hand to any builder — including us.</p></div><span class="dur">2 WEEKS</span></div>
+    <div class="eng-r reveal"><span class="ix">E/02</span><div><h3>Build Engagement</h3><p>One shortlisted use case, shipped to production and wired into your stack.</p></div><span class="dur">6–10 WEEKS</span></div>
+    <div class="eng-r reveal"><span class="ix">E/03</span><div><h3>0→100 Program</h3><p>The full journey: infrastructure, tools, training, handover. You end AI-native.</p></div><span class="dur">ONE QUARTER</span></div>
+  </section>
+
+  <!-- 06 · pov -->
+  <section class="sect">
+    <div class="lh"><span><b>06</b> — POV</span><span>HOW WE SEE IT</span></div>
+    <div class="pov-r reveal"><span class="ix">POV/01</span><p>Most AI pilots die in the demo. <b>Ship into a workflow</b> or don't start.</p></div>
+    <div class="pov-r reveal"><span class="ix">POV/02</span><p>Your data is readier than you think. Waiting for perfect data is how you <b>lose two years</b>.</p></div>
+    <div class="pov-r reveal"><span class="ix">POV/03</span><p>Agents are processes, not magic. <b>Map the process first.</b></p></div>
+  </section>
+
+  <!-- 07 · team -->
+  <section class="sect" id="team">
+    <div class="lh"><span><b>07</b> — PERSONNEL</span><span>TWO FOUNDERS / TWO HEMISPHERES</span></div>
+    <div class="duo">
+      <div class="tm reveal"><span class="k">HEMISPHERE/L · BUILD</span><h3>Alex</h3><p class="role">Senior Software Engineer &amp; Solutions Architect</p><p>Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p></div>
+      <div class="tm reveal"><span class="k">HEMISPHERE/R · BUSINESS</span><h3>Andreas</h3><p class="role">Lead, Business Enablement &amp; Innovation (AI)</p><p>Finds where AI creates value and makes it land with real teams and customers.</p></div>
+    </div>
+  </section>
+
+  <!-- TOTAL -->
+  <div class="total reveal">
+    <span class="lbl">Total — where every engagement lands</span>
+    <span class="eq">zero + discover + evaluate + build + handover =</span>
+    <span class="sum">100 · AI-native · yours</span>
+  </div>
+
+  <!-- 08 · booking -->
+  <section class="sect" id="book">
+    <div class="lh"><span><b>08</b> — BOOKING</span><span>DURATION: 30 MIN · AGENDA: THE HONEST VERSION</span></div>
+    <div class="book reveal">
+      <div>
+        <h2>Start the <span class="grad">first run.</span></h2>
+        <p>A 30-minute discovery call — no slides. Pick a slot; we confirm by email.</p>
+      </div>
+      <a href="#" class="cta"><span>Book the honest call →</span></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <span>© 2026 PIVON</span>
+  <span><a href="mailto:hello@pivon.ai">hello@pivon.ai</a></span>
+  <span>CASES = ILLUSTRATIVE ENGAGEMENTS</span>
+</footer>
+
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const typed=document.getElementById('typed'), out=document.getElementById('outWord');
+  const pairs=[
+    ['we’re starting from zero','an AI-native team'],
+    ['find our best use cases','the 5 worth doing'],
+    ['build us a support agent','a deployed tool'],
+    ['where do we even start?','a costed roadmap']
+  ];
+  let i=0;
+  (function run(){
+    const [q,a]=pairs[i%pairs.length]; i++;
+    if(RM){typed.textContent=q;out.textContent=a;return;}
+    let c=0; typed.textContent='';
+    const t=setInterval(()=>{
+      typed.textContent=q.slice(0,++c);
+      if(c>=q.length){clearInterval(t);out.textContent=a;setTimeout(run,2600);}
+    },40);
+  })();
+  if(RM){
+    document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));
+    document.querySelector('.apr .fill').classList.add('on');
+    return;
+  }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    const f=e.target.querySelector('.fill'); if(f) f.classList.add('on');
+    io.unobserve(e.target);
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>

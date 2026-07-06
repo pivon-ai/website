@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — D2 · Kinetic editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base-style.css">
+<style>
+/* ── D2: all-light, motion carries the identity ── */
+
+/* approach strip becomes a looping marquee ticker */
+.approach-strip{overflow:hidden}
+.marq{display:flex;width:max-content;animation:marq 26s linear infinite}
+.marq .strip-inner{flex-wrap:nowrap;max-width:none;padding-inline:1.2rem}
+@keyframes marq{to{transform:translateX(-33.3333%)}}
+.approach-strip:hover .marq{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.marq{animation:none}}
+
+/* services rows flood with the gradient on hover */
+#services .svc-item{transition:background var(--t) var(--ease),padding-inline var(--t) var(--ease)}
+#services .svc-item:hover{background:var(--grad-soft);padding-inline:18px}
+
+/* approach rail draws itself on scroll-in */
+#approach .rail{transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease-emph) .1s}
+#approach .rail.drawn{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){#approach .rail{transform:none;transition:none}}
+</style>
+</head>
+<body>
+<script>
+fetch('d-body.html').then(r=>r.text()).then(h=>{
+  document.body.insertAdjacentHTML('afterbegin', h);
+  const s=document.createElement('script'); s.src='base-script.js';
+  s.onload=()=>{ directionInit(); requestAnimationFrame(()=>{try{parent.fitAll&&parent.fitAll()}catch(e){}}); };
+  document.body.appendChild(s);
+});
+
+function directionInit(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* marquee: triple the strip content so the loop is seamless */
+  const strip=document.querySelector('.approach-strip .strip-inner');
+  if(strip){
+    const row=document.createElement('div'); row.className='marq';
+    for(let i=0;i<3;i++) row.appendChild(strip.cloneNode(true));
+    strip.replaceWith(row);
+  }
+  if(RM) return;
+
+  /* section headlines decode in (generative reveal instead of fade-up) */
+  const CH='#/\\<>[]{}+*=—_';
+  document.querySelectorAll('.sec-head h2').forEach(h=>{
+    const orig=h.textContent;
+    const io=new IntersectionObserver(es=>{
+      if(!es[0].isIntersecting) return; io.disconnect();
+      let f=0; const total=26;
+      const t=setInterval(()=>{
+        f++;
+        h.textContent=orig.split('').map((ch,i)=> ch===' '?' ':(i/orig.length < f/total ? ch : CH[(Math.random()*CH.length)|0])).join('');
+        if(f>=total){h.textContent=orig;clearInterval(t);}
+      },34);
+    },{threshold:.4});
+    io.observe(h);
+  });
+
+  /* approach rail draw */
+  const rail=document.querySelector('#approach .rail');
+  if(rail){
+    const io=new IntersectionObserver(es=>{
+      if(es[0].isIntersecting){rail.classList.add('drawn');io.disconnect();}
+    },{threshold:.5});
+    io.observe(rail);
+  }
+
+  /* work metrics count up on scroll-in (first number in each result) */
+  document.querySelectorAll('#work .wk-result b').forEach(b=>{
+    const node=[...b.childNodes].find(n=>n.nodeType===3&&/\d/.test(n.data));
+    if(!node) return;
+    const tmpl=node.data, target=+(/(\d+)/.exec(tmpl)[1]);
+    const io=new IntersectionObserver(es=>{
+      if(!es[0].isIntersecting) return; io.disconnect();
+      const t0=performance.now(), dur=1100;
+      (function tick(now){
+        const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+        node.data=tmpl.replace(/\d+/, String(Math.round(target*e)));
+        if(k<1) requestAnimationFrame(tick);
+      })(t0);
+    },{threshold:.6});
+    io.observe(b);
+  });
+}
+</script>
+</body>
+</html>
