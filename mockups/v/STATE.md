@@ -85,6 +85,29 @@ engagement models, honest proof (nothing real yet — swap-ready slots), POV/ins
 Anchors: Lenis-site/Koto type courage × Superlist light scroll-cinema × Basement attitude
 (attitude only, not palette) × Attio finish. Chooser now = full-screen tabbed viewer (rewritten
 after thumbnail feedback-loop bug: 100svh hero × scrollHeight sizing = runaway height).
+- R1g (user LIKES the P-round direction — "more stunning variants like these", 5 requested; P stays
+  in the running): q1-draft (page renders itself: pinned hero crossfades wireframe→shipped w/
+  live fidelity %, offerings at 10/60/100% fidelity, work cards flip to first-scribble on hover),
+  q2-flashlight (dark room of AI claims, cursor = flashlight revealing scrawled truths via CSS
+  mask, results glow, CTA = lights-on white section; touch fallback shows truths faintly),
+  q3-assembly (pinned stage: support-copilot UI assembles from scattered rotated parts w/
+  assembly % readout, badge snaps in with back-ease), q4-line (one gradient line draws down the
+  whole page 0→100 via per-section SVG segments, pathLength=1 + dashoffset scrub,
+  vector-effect:non-scaling-stroke), q5-particles (canvas particle text morphs
+  CONSULT→DESIGN→BUILD→0→100 on pinned scrub, cursor repulsion, x-position gradient coloring,
+  document.fonts.ready before sampling). chooser = Q1-5 + P1-3 (8 tabs). Timeline: 'Spectacle
+  round II' appended, P kept current. QA'd all five via chooser (fixed q1 JS typo pre-QA).
+- R1f (user rejected ALL of R1e; wants fully independent + visually stunning, nothing plain/well-seen.
+  STANDING RULE from now on: every new round must also be added to showcase.html ROUNDS):
+  p1-clarity (fog→clarity: opens near-black w/ drifting blurred problem-words, GSAP scrubs the whole
+  background to white, beam refracts into 3 practice prisms, grain, nav theme-flips), p2-playground
+  (kinetic type: variable-font hero bulges under cursor, pinned horizontal word-train
+  CONSULT→DESIGN→BUILD, pinned odometer flips through metrics, founders set in their own weights,
+  'talk?' CTA), p3-aurora (living canvas organism on WHITE: 5 drifting color blobs LERP to
+  per-section palettes — cyan/violet/magenta per practice, glass panels, grain, live 'organism
+  state' readout). Bugfix: p3 layout wrapper class 'in' collided with .reveal state class 'in'
+  → renamed to 'inner' (NEVER use 'in' as a layout class). Timeline updated (N round → passed,
+  P round → current). QA'd all three via chooser.
 - SHOWCASE (2026-07-07): `make showcase` (Makefile at repo root) serves mockups/ on :7322 and opens
   v/showcase.html — the full design history as a horizontal timeline (rounds →, editions ↓),
   28 tiles as live 1280×800 iframes scaled ×0.25 (fixed size = no scrollHeight feedback loop),

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — P3 · Aurora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── P3 · AURORA — a living generative organism on WHITE: soft vivid color
+     fields drift behind everything and change mood per section — cyan while
+     you read consulting, violet for design, magenta for solutions. The site
+     generates itself. ── */
+:root{
+  --paper:#FFFFFF; --ink:#0B0C0F; --slate:#565D68; --mist:#9AA1AB; --line:#E7E9EC;
+  --g1:#22C7F2; --gm:#7A3CEE; --g2:#E5258E;
+  --grad:linear-gradient(100deg,var(--g1),var(--gm),var(--g2));
+  --disp:'Archivo',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --gut:clamp(20px,4.5vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);font-size:1.04rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.04em}
+a{color:inherit}
+::selection{background:rgba(122,60,238,.16)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+:focus-visible{outline:2px solid var(--gm);outline-offset:3px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* the organism */
+#aurora{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;filter:blur(52px) saturate(1.15)}
+.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,nav,footer{position:relative;z-index:2}
+
+/* state readout — the organism tells you its mood */
+.state{position:fixed;right:1.4rem;bottom:1.2rem;z-index:30;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--slate);background:rgba(255,255,255,.75);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:999px;padding:.5em 1em}
+.state b{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* nav */
+nav{position:sticky;top:0;background:rgba(255,255,255,.72);backdrop-filter:blur(16px);border-bottom:1px solid rgba(231,233,236,.8)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;padding-inline:var(--gut)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.3rem;letter-spacing:-.03em;text-decoration:none}
+.nav-l{display:flex;gap:1.5rem;font-size:.88rem;font-weight:500}
+.nav-l a{text-decoration:none;color:var(--slate)}
+.nav-l a:hover{color:var(--ink)}
+.cta{font-weight:600;font-size:.88rem;text-decoration:none;color:#fff;background:var(--ink);padding:.6em 1.3em;border-radius:999px}
+.cta:hover{background:var(--gm)}
+@media(max-width:720px){.nav-l{display:none}}
+
+/* hero */
+.hero{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding:80px var(--gut) 40px}
+.hero h1{font-weight:900;font-size:clamp(3.2rem,11.5vw,10.4rem);line-height:.92;letter-spacing:-.045em;max-width:10ch}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero .sub{max-width:46ch;color:var(--slate);font-size:clamp(1.05rem,1.5vw,1.25rem);margin:2.2rem 0 0}
+.hero-ctas{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn2{font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--ink);background:rgba(255,255,255,.6);padding:.8em 1.5em;border-radius:999px}
+.btn2:hover{background:var(--ink);color:#fff}
+.hero .hint{margin-top:2.6rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+
+/* moods — three tall sections; the organism recolors for each */
+.mood{min-height:96svh;display:flex;align-items:center;padding:10vh var(--gut)}
+.mood .inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center;width:100%;max-width:1280px;margin-inline:auto}
+.mood .big{font-family:var(--disp);font-weight:900;font-size:clamp(3rem,9.5vw,8.4rem);letter-spacing:-.05em;line-height:.92}
+.mood.m1 .big{color:#0891C4}
+.mood.m2 .big{color:var(--gm)}
+.mood.m3 .big{color:var(--g2)}
+.mood .glass{background:rgba(255,255,255,.68);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.9);border-radius:20px;padding:1.9rem;
+  box-shadow:0 30px 70px -34px rgba(11,12,15,.35)}
+.mood .glass .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.mood .glass h3{font-weight:900;font-size:clamp(1.4rem,2.7vw,2rem);letter-spacing:-.03em;margin:.6rem 0 .4rem}
+.mood .glass p{color:var(--slate);font-size:.98rem;margin:0}
+.mood .glass .out{display:block;font-family:var(--mono);font-size:.68rem;color:var(--mist);margin-top:1.1rem}
+.mood .glass .out b{color:var(--ink);font-weight:500}
+@media(max-width:860px){.mood .inner{grid-template-columns:1fr}.mood{min-height:auto;padding:14vh var(--gut)}}
+
+/* work — glass gallery */
+.wk{padding:12vh var(--gut)}
+.wk .head{max-width:1280px;margin-inline:auto}
+.wk h2{font-weight:900;font-size:clamp(2rem,5.4vw,4.4rem);letter-spacing:-.04em;line-height:1;margin-top:.8rem}
+.wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;max-width:1280px;margin:2.6rem auto 0}
+.wc{background:rgba(255,255,255,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.9);border-radius:18px;padding:1.7rem;text-decoration:none;
+  box-shadow:0 24px 54px -34px rgba(11,12,15,.35);transition:transform .25s}
+.wc:hover{transform:translateY(-5px)}
+.wc .m{font-family:var(--disp);font-weight:900;font-size:clamp(2.6rem,6.4vw,4.8rem);letter-spacing:-.05em;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wc h3{font-weight:700;font-size:1.2rem;letter-spacing:-.02em;margin:.5rem 0 .2rem}
+.wc .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.wk .disc{font-family:var(--mono);font-size:.7rem;color:var(--mist);margin-top:1.4rem;max-width:1280px;margin-inline:auto}
+@media(max-width:760px){.wk-grid{grid-template-columns:1fr}}
+
+/* founders */
+.team{padding:8vh var(--gut) 12vh}
+.team .inner{max-width:1280px;margin-inline:auto}
+.team h2{font-weight:900;font-size:clamp(2rem,5.4vw,4.4rem);letter-spacing:-.04em;line-height:1;margin-top:.8rem}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.4rem}
+.fc{background:rgba(255,255,255,.7);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.9);border-radius:18px;padding:1.8rem;
+  box-shadow:0 24px 54px -34px rgba(11,12,15,.35)}
+.fc .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.fc h3{font-weight:900;font-size:clamp(1.7rem,3.4vw,2.6rem);margin:.3rem 0 .1rem}
+.fc .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 .7rem}
+.fc p{color:var(--slate);font-size:.95rem;margin:0}
+@media(max-width:720px){.duo{grid-template-columns:1fr}}
+
+/* CTA — the organism peaks */
+.book{min-height:80svh;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:10vh var(--gut)}
+.book h2{font-weight:900;font-size:clamp(2.8rem,10vw,8.6rem);letter-spacing:-.045em;line-height:.94}
+.book h2 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.book p{color:var(--slate);max-width:44ch;margin:1.8rem auto 2.4rem;font-size:1.1rem}
+.book .cta{font-size:1.05rem;padding:.9em 1.8em}
+
+footer{border-top:1px solid var(--line);padding:2rem var(--gut);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.72rem;color:var(--mist);background:rgba(255,255,255,.8)}
+footer a{text-decoration:none;color:var(--slate)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="aurora" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="state" aria-hidden="true">organism state: <b id="stateWord">listening</b></div>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand">pivon</a>
+    <div class="nav-l"><a href="#m1">Consulting</a><a href="#m2">Design</a><a href="#m3">Solutions</a><a href="#work">Work</a></div>
+    <a href="#book" class="cta">Book 30 minutes</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" data-mood="mix" data-state="listening">
+  <span class="lbl">AI consulting · design · solutions</span>
+  <h1 style="margin-top:1.4rem">AI, <em>alive</em> and useful.</h1>
+  <p class="sub">Pivon is a two-founder studio. We find what's worth building, shape it for real people, and ship it into production — the page you're on is generating itself, just like your company could be.</p>
+  <div class="hero-ctas">
+    <a href="#book" class="cta">Book 30 minutes →</a>
+    <a href="#m1" class="btn2">Watch it change ↓</a>
+  </div>
+  <span class="hint">the colors respond to where you are — scroll</span>
+</header>
+
+<section class="mood m1" id="m1" data-mood="cyan" data-state="consulting">
+  <div class="inner">
+    <div class="big reveal">Consulting.</div>
+    <div class="glass reveal">
+      <span class="k">Mood 01 · clear water</span>
+      <h3>Know what's worth building.</h3>
+      <p>Straight answers about where AI pays off in your business — and where it's a money fire. Ranked, costed, honest.</p>
+      <span class="out">leaves with you&nbsp; <b>a plan you could hand to anyone</b></span>
+    </div>
+  </div>
+</section>
+
+<section class="mood m2" id="m2" data-mood="violet" data-state="designing">
+  <div class="inner">
+    <div class="glass reveal">
+      <span class="k">Mood 02 · deep focus</span>
+      <h3>Make it something people use.</h3>
+      <p>Interfaces, workflows, prompts, and guardrails — shaped for the human who opens it on a Tuesday. Adoption is the medium.</p>
+      <span class="out">leaves with you&nbsp; <b>a blueprint people get</b></span>
+    </div>
+    <div class="big reveal" style="text-align:right">Design.</div>
+  </div>
+</section>
+
+<section class="mood m3" id="m3" data-mood="magenta" data-state="shipping">
+  <div class="inner">
+    <div class="big reveal">Solutions.</div>
+    <div class="glass reveal">
+      <span class="k">Mood 03 · heat</span>
+      <h3>Ship it into your stack.</h3>
+      <p>Agents, automations, and copilots — built, evaluated, wired in, and handed over to your trained team. No lock-in.</p>
+      <span class="out">leaves with you&nbsp; <b>a system that runs without us</b></span>
+    </div>
+  </div>
+</section>
+
+<section class="wk" id="work" data-mood="mix" data-state="proving">
+  <div class="head"><span class="lbl">Grown here</span><h2>What the organism has produced.</h2></div>
+  <div class="wk-grid">
+    <a class="wc reveal" href="#"><span class="m">60%</span><h3>Support that answers itself</h3><span class="k">agent + ticket history · 6 weeks</span></a>
+    <a class="wc reveal" href="#"><span class="m">×4</span><h3>The copilot people actually open</h3><span class="k">designed for adoption, not demos</span></a>
+    <a class="wc reveal" href="#"><span class="m">30→5</span><h3>The honest shortlist</h3><span class="k">a quarter of budget saved</span></a>
+    <a class="wc reveal" href="#"><span class="m">90d</span><h3>Running without us</h3><span class="k">full journey, keys handed over</span></a>
+  </div>
+  <p class="disc">Illustrative engagements — the shape of work we deliver.</p>
+</section>
+
+<section class="team" data-mood="mix" data-state="introducing">
+  <div class="inner">
+    <span class="lbl">The gardeners</span>
+    <h2>Two founders keep it alive.</h2>
+    <div class="duo">
+      <div class="fc reveal">
+        <span class="k">Business · value</span>
+        <h3>Andreas</h3>
+        <p class="role">Lead, Business Enablement &amp; Innovation (AI)</p>
+        <p>Finds where AI creates value and makes it land with real teams and customers.</p>
+      </div>
+      <div class="fc reveal">
+        <span class="k">Engineering · production</span>
+        <h3>Alex</h3>
+        <p class="role">Senior Software Engineer &amp; Solutions Architect</p>
+        <p>Designs and ships the architecture, models, and integrations that make AI run in your stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="book" data-mood="peak" data-state="ready">
+  <span class="lbl">The organism is ready</span>
+  <h2 style="margin-top:1rem">Grow one <em>inside yours.</em></h2>
+  <p>30 minutes, no slides. Bring the messy version — we'll tell you honestly whether AI fixes it.</p>
+  <div><a href="#" class="cta">Book 30 minutes →</a></div>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 Pivon</span>
+  <span><a href="mailto:hello@pivon.ai">hello@pivon.ai</a></span>
+  <span>Cases are illustrative engagements.</span>
+</footer>
+
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── the organism: drifting radial blobs, palette follows the section in view ── */
+  const cv=document.getElementById('aurora'), ctx=cv.getContext('2d');
+  const DPR=.5; /* render at half res — the blur hides it, the fans thank us */
+  function size(){cv.width=innerWidth*DPR;cv.height=innerHeight*DPR;}
+  size(); addEventListener('resize',size,{passive:true});
+
+  const PAL={
+    mix:    ['#22C7F2','#7A3CEE','#E5258E','#22C7F2','#7A3CEE'],
+    cyan:   ['#22C7F2','#3ED6F5','#2F6BEC','#7FE3FA','#22C7F2'],
+    violet: ['#7A3CEE','#9D6BFF','#5B2BD1','#B18CFF','#7A3CEE'],
+    magenta:['#E5258E','#F55CAE','#C11374','#FF8AC4','#E5258E'],
+    peak:   ['#22C7F2','#E5258E','#7A3CEE','#F55CAE','#3ED6F5']
+  };
+  function hex(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
+  const blobs=Array.from({length:5},(_,i)=>({
+    seed:i*937+123, r:.34+(i%3)*.1,
+    cur:hex(PAL.mix[i]), tgt:hex(PAL.mix[i])
+  }));
+  let speed=1, tgtSpeed=1;
+
+  function setMood(m){
+    (PAL[m]||PAL.mix).forEach((c,i)=>blobs[i].tgt=hex(c));
+    tgtSpeed = m==='peak'?2.1:1;
+    document.getElementById('stateWord').textContent=curState;
+  }
+  let curState='listening';
+
+  let t=0;
+  function frame(){
+    t+=0.0016*speed;
+    speed+=(tgtSpeed-speed)*.02;
+    const w=cv.width,h=cv.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.globalCompositeOperation='lighter';
+    blobs.forEach((b,i)=>{
+      for(let k=0;k<3;k++) b.cur[k]+=(b.tgt[k]-b.cur[k])*.03;
+      const x=w*(.5+.42*Math.sin(t*(0.7+i*.13)+b.seed));
+      const y=h*(.5+.42*Math.cos(t*(0.55+i*.17)+b.seed*1.7));
+      const r=Math.min(w,h)*b.r;
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      const [cr,cg,cb]=b.cur.map(Math.round);
+      g.addColorStop(0,`rgba(${cr},${cg},${cb},0.55)`);
+      g.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle=g;
+      ctx.fillRect(x-r,y-r,r*2,r*2);
+    });
+    if(!RM) requestAnimationFrame(frame);
+  }
+  frame();
+  if(RM){t=8;frame();}
+
+  /* section → mood */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    curState=e.target.dataset.state||'listening';
+    setMood(e.target.dataset.mood||'mix');
+  }),{threshold:.45});
+  document.querySelectorAll('[data-mood]').forEach(s=>io.observe(s));
+
+  /* reveals */
+  if(RM){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));return;}
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target);}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io2.observe(el));
+})();
+</script>
+</body>
+</html>

@@ -1,38 +1,56 @@
 {
   "section": "v2-art-direction",
   "title": "Redesign v2 — art direction",
-  "blurb": "Round 1e: three rebuilt directions, only ~50% tethered to A3/C2 — type scale + annotation instinct survive, the rest is new territory (color as surface, collage, structural split). Founders real; offerings = consulting · design · solutions.",
-  "round": 5,
+  "blurb": "Round 1g: five more spectacle builds (tabs 1–5), the previous three still in the running (tabs 6–8). Every variant has one signature mechanic — scroll each fully, move your cursor, hover things.",
+  "round": 7,
   "variants": [
     {
-      "id": "n1-spectrum",
-      "file": "n1-spectrum.html",
-      "name": "N1 · The Spectrum",
-      "blurb": "Color becomes the system: everything lives on a line between thinking (cyan) and shipping (magenta). Hero thesis in tinted lines, an interactive spectrum instrument, offerings as three tinted fields with positions (0.15 / 0.50 / 0.85), cases with spectrum locator dots, founders as the two ends of the line, full-gradient CTA."
+      "id": "q1-draft",
+      "file": "q1-draft.html",
+      "name": "Q1 · Draft→Ship",
+      "blurb": "The page renders itself: the hero starts as a grayscale wireframe (dashed boxes, annotation tags) and crossfades into the finished design as you scroll, with a live fidelity % readout. Offerings shown at 10/60/100% fidelity; work cards flip back to their first scribble on hover."
     },
     {
-      "id": "n2-pasteup",
-      "file": "n2-pasteup.html",
-      "name": "N2 · The Paste-up",
-      "blurb": "Studio-poster collage: 'AI that ships.' overlapping a giant gradient disc, rotated sticker labels, a manifesto with pasted highlight blocks, offerings as a fanned hand of cards, work as tilted 'receipts' with illustrative stamps, founders as two halves of one disc, CTA inside the 100-sun with an orbiting dashed ring. Violet→magenta."
+      "id": "q2-flashlight",
+      "file": "q2-flashlight.html",
+      "name": "Q2 · Flashlight",
+      "blurb": "A dark room full of AI marketing claims — your cursor is a flashlight. Shine it on any claim and the honest truth appears scribbled behind it. Results glow in the dark; the CTA section turns the lights on (full white). Touch devices see the truths faintly by default."
     },
     {
-      "id": "n3-split",
-      "file": "n3-split.html",
-      "name": "N3 · The Split",
-      "blurb": "The two real founders made structural: a THINK column and a SHIP column divided by one gradient seam running the entire page. 'Half strategy. Half software. One studio.' Consulting files left, solutions right, design sits ON the seam in a gradient-border card; cases alternate sides by who led; CTA = the seam widening into a full surface. Blue→magenta."
+      "id": "q3-assembly",
+      "file": "q3-assembly.html",
+      "name": "Q3 · Assembly",
+      "blurb": "A support-copilot UI assembles itself from scattered, rotated parts as you scroll a pinned stage — chrome, sidebar, chat bubbles, input bar, and finally the '60% resolved without a human' badge snapping in. Assembly % readout top-left. 'We don't pitch. We assemble.'"
     },
     {
-      "id": "a3-sculpted",
-      "file": "a3-sculpted.html",
-      "name": "A3 · parent",
-      "blurb": "Parent A3 for comparison."
+      "id": "q4-line",
+      "file": "q4-line.html",
+      "name": "Q4 · One Line",
+      "blurb": "A single gradient line draws its way down the whole page — starting at a giant outlined 0 in the hero, zigzagging through Consult / Design / Build, past the results, ending in an arrow that lands on a massive gradient 100. One engagement, one continuous line."
     },
     {
-      "id": "c2-blueprint",
-      "file": "c2-blueprint.html",
-      "name": "C2 · parent",
-      "blurb": "Parent C2 for comparison."
+      "id": "q5-particles",
+      "file": "q5-particles.html",
+      "name": "Q5 · Particles",
+      "blurb": "Thousands of canvas dots form the words CONSULT → DESIGN → BUILD → 0→100 and morph between them as you scroll the pinned hero. Your cursor scatters them; they always find their way home. 'Big AI outcomes are thousands of small parts put exactly where they belong.'"
+    },
+    {
+      "id": "p1-clarity",
+      "file": "p1-clarity.html",
+      "name": "P1 · Clarity",
+      "blurb": "Still in the running: fog→clarity background scrub, drifting problem-words, the lens."
+    },
+    {
+      "id": "p2-playground",
+      "file": "p2-playground.html",
+      "name": "P2 · Playground",
+      "blurb": "Still in the running: variable-font hero, word-train, odometer."
+    },
+    {
+      "id": "p3-aurora",
+      "file": "p3-aurora.html",
+      "name": "P3 · Aurora",
+      "blurb": "Still in the running: the living color organism on white."
     }
   ]
 }
