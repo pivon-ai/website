@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — Console cards</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body{background:var(--paper)}
+  .svc{padding:var(--section-y) 0}
+  .svc-head{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);margin-bottom:48px}
+  .svc-head h2{font-size:clamp(2rem,4.5vw,3.1rem);margin-top:14px;max-width:14ch}
+  .grid{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);
+    display:grid;gap:22px;grid-template-columns:repeat(2,1fr)}
+  .tcard{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--paper);
+    box-shadow:var(--shadow-card);overflow:hidden;transition:transform var(--t) var(--ease),box-shadow var(--t)}
+  .tcard:hover{transform:translateY(-4px)}
+  .term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:var(--paper-2);
+    border-bottom:1px solid var(--line)}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--line-2)}
+  .tname{margin-left:8px;font-family:var(--f-mono);font-size:.72rem;color:var(--mist);letter-spacing:.04em}
+  .term-body{padding:22px 24px 26px}
+  .prompt{font-family:var(--f-mono);font-size:.9rem;color:var(--slate);margin:0 0 18px}
+  .prompt .caret{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500;margin-right:.5em}
+  .result{font-size:1.4rem;margin:0 0 8px}
+  .desc{color:var(--slate);font-size:.98rem;margin:0 0 20px}
+  .out{font-family:var(--f-mono);font-size:.82rem;color:var(--ink);margin:0;
+    display:inline-flex;align-items:center;gap:.55em;padding:.5em .9em;border-radius:var(--r-pill);
+    background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--grad) border-box;border:1px solid transparent}
+  .out .ok{color:var(--mist)}
+  @media (max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<section class="svc">
+  <header class="svc-head">
+    <span class="eyebrow">What we do</span>
+    <h2>Four ways we move you forward.</h2>
+  </header>
+  <div class="grid">
+    <article class="tcard">
+      <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="tname">ai-consulting</span></div>
+      <div class="term-body">
+        <p class="prompt"><span class="caret">pivon&gt;</span>where do we even start?</p>
+        <h3 class="result">AI Consulting</h3>
+        <p class="desc">Strategy, roadmaps, and honest answers about where AI pays off.</p>
+        <p class="out"><span class="ok">ships</span> a costed roadmap</p>
+      </div>
+    </article>
+    <article class="tcard">
+      <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="tname">use-case-evaluation</span></div>
+      <div class="term-body">
+        <p class="prompt"><span class="caret">pivon&gt;</span>find our best use cases</p>
+        <h3 class="result">Use-Case Evaluation</h3>
+        <p class="desc">We rank opportunities by impact and effort, and hand you a costed shortlist.</p>
+        <p class="out"><span class="ok">ships</span> the 5 worth doing</p>
+      </div>
+    </article>
+    <article class="tcard">
+      <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="tname">solution-building</span></div>
+      <div class="term-body">
+        <p class="prompt"><span class="caret">pivon&gt;</span>build us a support agent</p>
+        <h3 class="result">Solution Building</h3>
+        <p class="desc">Design, build, and ship the AI solution, wired into your stack.</p>
+        <p class="out"><span class="ok">ships</span> a deployed tool</p>
+      </div>
+    </article>
+    <article class="tcard">
+      <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="tname">0-to-100-ai-boost</span></div>
+      <div class="term-body">
+        <p class="prompt"><span class="caret">pivon&gt;</span>we're starting from zero</p>
+        <h3 class="result">0→100 AI Boost</h3>
+        <p class="desc">Not using AI yet? We stand it up, train your team, and hand over the keys.</p>
+        <p class="out"><span class="ok">ships</span> an AI-native team</p>
+      </div>
+    </article>
+  </div>
+</section>
+</body>
+</html>

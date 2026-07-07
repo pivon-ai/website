@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — N3 · The Split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── N3 · THE SPLIT — the two real founders made structural: a THINK column
+     and a SHIP column divided by one gradient seam that runs the whole page.
+     Design sits on the seam. Half strategy, half software, one studio. ── */
+:root{
+  --paper:#FFFFFF; --paper2:#F6F8FA; --ink:#0B0C0F; --slate:#565D68; --mist:#9AA1AB; --line:#E7E9EC;
+  --g1:#2F6BEC; --g2:#E5258E;
+  --grad:linear-gradient(180deg,var(--g1),var(--g2));
+  --gradh:linear-gradient(90deg,var(--g1),var(--g2));
+  --disp:'Inter Tight',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --gut:clamp(20px,4.5vw,64px); --seam:4px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);font-size:1.04rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.045em}
+a{color:inherit}
+::selection{background:rgba(47,107,236,.16)}
+.grad{background:var(--gradh);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+:focus-visible{outline:2px solid var(--g1);outline-offset:3px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* the seam — one line through the whole page */
+main{position:relative}
+main::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:var(--seam);transform:translateX(-50%);
+  background:var(--grad);z-index:0}
+@media(max-width:760px){main::before{left:10px;transform:none}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;padding-inline:var(--gut)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.3rem;letter-spacing:-.04em;text-decoration:none}
+.nav-l{display:flex;gap:1.5rem;font-size:.88rem;font-weight:500}
+.nav-l a{text-decoration:none;color:var(--slate)}
+.nav-l a:hover{color:var(--ink)}
+.cta{font-weight:600;font-size:.88rem;text-decoration:none;color:#fff;background:var(--ink);padding:.6em 1.3em;border-radius:999px;position:relative;overflow:hidden}
+.cta span{position:relative;z-index:1}
+.cta::after{content:"";position:absolute;inset:0;background:var(--gradh);opacity:0;transition:opacity .25s}
+.cta:hover::after{opacity:1}
+@media(max-width:720px){.nav-l{display:none}}
+
+/* column headers, pinned under nav */
+.colheads{position:sticky;top:62px;z-index:40;display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.26em;text-transform:uppercase}
+.colheads span{padding:.55rem var(--gut)}
+.colheads .think{color:var(--g1)}
+.colheads .ship{color:var(--g2);text-align:right}
+@media(max-width:760px){.colheads span{padding:.55rem 24px}}
+
+/* hero — half / half / one */
+.hero{position:relative;z-index:1;padding:clamp(3rem,9vh,6rem) 0 clamp(3rem,7vh,5rem)}
+.hero .row{display:grid;grid-template-columns:1fr 1fr;align-items:baseline}
+.hero .h{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,6.4vw,5.8rem);letter-spacing:-.05em;line-height:1}
+.hero .h.think{text-align:right;padding-right:clamp(1.2rem,3vw,2.6rem);color:var(--g1)}
+.hero .h.ship{padding-left:clamp(1.2rem,3vw,2.6rem);color:var(--g2)}
+.hero .one{text-align:center;font-weight:900;font-size:clamp(3.4rem,13vw,12rem);letter-spacing:-.05em;line-height:.95;margin-top:1.4rem;position:relative;background:var(--paper)}
+.hero .sub{max-width:52ch;color:var(--slate);text-align:center;margin:2rem auto 0;padding:0 var(--gut);font-size:clamp(1.02rem,1.5vw,1.22rem)}
+.hero .ctas{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+.btn2{font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--ink);background:var(--paper);padding:.8em 1.5em;border-radius:999px}
+.btn2:hover{background:var(--ink);color:#fff}
+@media(max-width:760px){
+  .hero .row{grid-template-columns:1fr}
+  .hero .h.think,.hero .h.ship{text-align:left;padding:0 24px 0 34px}
+  .hero .sub{text-align:left;padding-left:34px}
+  .hero .one{text-align:left;padding-left:34px}
+  .hero .ctas{justify-content:flex-start;padding-left:34px}
+}
+
+/* zig sections — cards alternating across the seam */
+.zig{position:relative;z-index:1;padding:clamp(2rem,5vh,3.5rem) 0}
+.zig .shead{text-align:center;padding:0 var(--gut);margin-bottom:2.2rem;position:relative}
+.zig .shead .lbl{background:var(--paper);padding:.4em 1em;border:1px solid var(--line);border-radius:999px;color:var(--slate)}
+.zrow{display:grid;grid-template-columns:1fr 1fr;margin-bottom:clamp(1.6rem,4vh,2.8rem)}
+.zcell{position:relative;padding:0 clamp(1.4rem,3.5vw,3rem)}
+.zrow.l .zcell{grid-column:1;text-align:right;justify-self:end;max-width:640px}
+.zrow.r .zcell{grid-column:2;text-align:left;justify-self:start;max-width:640px}
+.zrow.c .zcell{grid-column:1/-1;justify-self:center;text-align:center;max-width:680px;padding:0 var(--gut)}
+.zcell .dot{position:absolute;top:1.1rem;width:16px;height:16px;border-radius:50%;background:var(--paper);border:4px solid var(--ink)}
+.zrow.l .dot{right:calc(-8px - var(--seam)/2)}
+.zrow.r .dot{left:calc(-8px - var(--seam)/2)}
+.zcell .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);display:block;margin-bottom:.5rem}
+.zcell h3{font-weight:900;font-size:clamp(1.7rem,3.8vw,3.1rem);letter-spacing:-.045em;line-height:1}
+.zcell h3 .tb{color:var(--g1)} .zcell h3 .sb{color:var(--g2)}
+.zcell p{color:var(--slate);font-size:.98rem;margin:.8rem 0 0}
+.zcell .out{font-family:var(--mono);font-size:.7rem;color:var(--mist);display:block;margin-top:.9rem}
+.zcell .out b{color:var(--ink);font-weight:500}
+/* design card — ON the seam */
+.zrow.c .zcell .card{background:var(--paper);border:2px solid transparent;border-radius:16px;padding:1.8rem;
+  background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--gradh) border-box;
+  box-shadow:0 26px 60px -38px rgba(11,12,15,.5)}
+@media(max-width:760px){
+  .zrow,.zrow.l,.zrow.r{grid-template-columns:1fr}
+  .zrow.l .zcell,.zrow.r .zcell{grid-column:1;text-align:left;justify-self:start;padding-left:34px}
+  .zrow.l .dot,.zrow.r .dot{left:2px;right:auto}
+  .zrow.c .zcell{padding-left:34px;text-align:left}
+}
+
+/* metrics inside work cells */
+.zcell .m{font-family:var(--disp);font-weight:900;font-size:clamp(2.6rem,7vw,5.4rem);letter-spacing:-.055em;line-height:1;
+  background:var(--gradh);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:block}
+.zdisc{text-align:center;font-family:var(--mono);font-size:.7rem;color:var(--mist);padding:0 var(--gut)}
+
+/* founders — facing each other across the seam */
+.founders{position:relative;z-index:1;padding:clamp(3rem,7vh,5rem) 0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr}
+.fcell{padding:0 clamp(1.4rem,3.5vw,3rem)}
+.fcell.l{text-align:right;justify-self:end;max-width:620px}
+.fcell.r{text-align:left;justify-self:start;max-width:620px}
+.fcell .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.fcell h3{font-weight:900;font-size:clamp(2rem,4.8vw,3.8rem);letter-spacing:-.05em;margin:.3rem 0 .1rem}
+.fcell.l h3{color:var(--g2)} .fcell.r h3{color:var(--g1)}
+.fcell .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 .7rem}
+.fcell p{color:var(--slate);font-size:.95rem;margin:0}
+.fcell.l p{margin-left:auto;max-width:34ch}
+.fcell.r p{max-width:34ch}
+.fmid{text-align:center;margin-top:2.6rem;position:relative}
+.fmid span{background:var(--ink);color:#fff;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;padding:.7em 1.2em;border-radius:999px}
+@media(max-width:760px){.fgrid{grid-template-columns:1fr}.fcell.l{text-align:left;justify-self:start;padding-left:34px}.fcell.l p{margin-left:0}.fcell.r{padding-left:34px}}
+
+/* CTA — the seam widens into a surface */
+.book{position:relative;z-index:1;margin-top:clamp(3rem,7vh,5rem);background:var(--gradh);color:#fff;
+  padding:clamp(5rem,12vh,8.5rem) var(--gut);text-align:center}
+.book .lbl{color:rgba(255,255,255,.8)}
+.book h2{font-weight:900;font-size:clamp(2.6rem,8.6vw,7.2rem);letter-spacing:-.05em;line-height:.96;margin-top:1rem;text-shadow:0 2px 30px rgba(11,12,15,.2)}
+.book p{color:rgba(255,255,255,.92);max-width:44ch;margin:1.6rem auto 2.4rem;font-size:1.1rem}
+.book .cta{background:#fff;color:var(--ink);font-size:1.05rem;padding:.9em 1.8em}
+.book .cta::after{display:none}
+
+footer{border-top:1px solid var(--line);padding:2rem var(--gut);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--mist)}
+footer a{text-decoration:none;color:var(--slate)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand">pivon</a>
+    <div class="nav-l"><a href="#offer">What we do</a><a href="#work">Work</a><a href="#founders">Founders</a></div>
+    <a href="#book" class="cta"><span>Meet in the middle</span></a>
+  </div>
+</nav>
+
+<div class="colheads" aria-hidden="true"><span class="think">Think</span><span class="ship">Ship</span></div>
+
+<main>
+<header class="hero">
+  <div class="row">
+    <span class="h think">Half strategy.</span>
+    <span class="h ship">Half software.</span>
+  </div>
+  <div class="one">One studio<span class="grad">.</span></div>
+  <p class="sub">Pivon is two founders — one from the business side, one from the engineering side — doing AI consulting, design, and solutions for companies that want it running, not demoed.</p>
+  <div class="ctas">
+    <a href="#book" class="cta"><span>Book 30 minutes →</span></a>
+    <a href="#offer" class="btn2">How the halves work ↓</a>
+  </div>
+</header>
+
+<section class="zig" id="offer">
+  <div class="shead"><span class="lbl">What we do — placed where it belongs</span></div>
+  <div class="zrow l reveal"><div class="zcell"><span class="dot" aria-hidden="true"></span>
+    <span class="k">Think side · consulting</span>
+    <h3><span class="tb">Honest consulting.</span></h3>
+    <p>Where AI pays off in your business, where it doesn't, and what it costs. Ranked and priced — a plan you could hand to any builder.</p>
+    <span class="out">leaves with you&nbsp; <b>a plan worth stealing</b></span>
+  </div></div>
+  <div class="zrow c reveal"><div class="zcell"><div class="card">
+    <span class="k">On the seam · design</span>
+    <h3>Design lives <span class="grad">exactly here.</span></h3>
+    <p>Where thinking becomes something people touch: interfaces, workflows, prompts, guardrails — shaped for the human who opens it on a Tuesday.</p>
+    <span class="out">leaves with you&nbsp; <b>a blueprint people get</b></span>
+  </div></div></div>
+  <div class="zrow r reveal"><div class="zcell"><span class="dot" aria-hidden="true"></span>
+    <span class="k">Ship side · solutions</span>
+    <h3><span class="sb">Systems in production.</span></h3>
+    <p>Agents, automations, and copilots — built, evaluated, wired into your stack, and handed over to your trained team. No lock-in.</p>
+    <span class="out">leaves with you&nbsp; <b>a system that runs without us</b></span>
+  </div></div>
+</section>
+
+<section class="zig" id="work">
+  <div class="shead"><span class="lbl">Work — filed by the side that led</span></div>
+  <div class="zrow l reveal"><div class="zcell"><span class="dot" aria-hidden="true"></span>
+    <span class="k">led from think</span>
+    <span class="m">30→5</span>
+    <h3>The shortlist that saved a quarter</h3>
+    <p>Thirty AI ideas ranked honestly — five survived, one shipped first.</p>
+  </div></div>
+  <div class="zrow r reveal"><div class="zcell"><span class="dot" aria-hidden="true"></span>
+    <span class="k">led from ship</span>
+    <span class="m">60%</span>
+    <h3>Support that answers itself</h3>
+    <p>An agent on your ticket history, wired into the help desk. Six weeks.</p>
+  </div></div>
+  <div class="zrow l reveal"><div class="zcell"><span class="dot" aria-hidden="true"></span>
+    <span class="k">led from think</span>
+    <span class="m">×4</span>
+    <h3>The copilot people actually open</h3>
+    <p>Adoption up fourfold after we redesigned it around the Tuesday user.</p>
+  </div></div>
+  <div class="zrow r reveal"><div class="zcell"><span class="dot" aria-hidden="true"></span>
+    <span class="k">led from ship — ended everywhere</span>
+    <span class="m">90d</span>
+    <h3>Zero to running-without-us</h3>
+    <p>Infrastructure, tools, training, handover. The keys are theirs.</p>
+  </div></div>
+  <p class="zdisc">Illustrative engagements — the shape of work we deliver.</p>
+</section>
+
+<section class="founders" id="founders">
+  <div class="shead" style="text-align:center;margin-bottom:2.2rem"><span class="lbl" style="background:var(--paper);padding:.4em 1em;border:1px solid var(--line);border-radius:999px">The two halves are two people</span></div>
+  <div class="fgrid reveal">
+    <div class="fcell l">
+      <span class="k">Ship side</span>
+      <h3>Alex</h3>
+      <p class="role">Senior Software Engineer &amp; Solutions Architect</p>
+      <p>Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p>
+    </div>
+    <div class="fcell r">
+      <span class="k">Think side</span>
+      <h3>Andreas</h3>
+      <p class="role">Lead, Business Enablement &amp; Innovation (AI)</p>
+      <p>Finds where AI creates value and makes it land with real teams and customers.</p>
+    </div>
+  </div>
+  <div class="fmid reveal"><span>two hemispheres · one brain · zero slideware</span></div>
+</section>
+
+<section class="book" id="book">
+  <span class="lbl">The seam is where the work happens</span>
+  <h2>Meet us in the middle.</h2>
+  <p>30 minutes, no slides. Bring the business problem and the technical mess — we speak both.</p>
+  <a href="#" class="cta"><span>Book 30 minutes →</span></a>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 Pivon</span>
+  <span><a href="mailto:hello@pivon.ai">hello@pivon.ai</a></span>
+  <span>Cases are illustrative engagements.</span>
+</footer>
+
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(RM){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));return;}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>

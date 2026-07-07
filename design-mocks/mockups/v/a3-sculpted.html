@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — A3 · Sculptural poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── A3 · SCULPTURAL POSTER — type as sculpture: poster-fitted hero lines,
+     giant section words bleeding off-canvas, accordion services, zigzag rail,
+     alternating ink bands, sticker cards. ── */
+:root{
+  --paper:#FFFFFF; --paper2:#F6F7F9; --ink:#0A0A0C; --slate:#565D68; --mist:#9AA1AB; --line:#E8E9EC;
+  --g1:#7A3CEE; --g2:#E5258E;
+  --grad:linear-gradient(100deg,var(--g1),var(--g2));
+  --disp:'Archivo',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --gut:clamp(20px,4.5vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);font-size:1.04rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.04em}
+a{color:inherit}
+::selection{background:rgba(229,37,142,.18)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+:focus-visible{outline:2px solid var(--g1);outline-offset:3px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* giant section word, bleeding off the left edge */
+.bleed{display:block;font-family:var(--disp);font-weight:900;white-space:nowrap;line-height:.85;letter-spacing:-.05em;
+  font-size:clamp(4.5rem,15vw,13rem);color:transparent;-webkit-text-stroke:1.5px var(--line);
+  margin-left:calc(var(--gut) * -1);transform:translateX(-.12em);user-select:none;pointer-events:none}
+section{overflow:hidden}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;padding-inline:var(--gut)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.3rem;letter-spacing:-.03em;text-decoration:none}
+.nav-l{display:flex;gap:1.6rem;font-size:.88rem;font-weight:500}
+.nav-l a{text-decoration:none;color:var(--slate)}
+.nav-l a:hover{color:var(--ink)}
+.cta{font-weight:600;font-size:.88rem;text-decoration:none;color:#fff;background:var(--ink);padding:.6em 1.3em;border-radius:999px;position:relative;overflow:hidden}
+.cta span{position:relative;z-index:1}
+.cta::after{content:"";position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity .25s}
+.cta:hover::after{opacity:1}
+@media(max-width:720px){.nav-l{display:none}}
+
+/* hero — poster-fitted lines */
+.hero{padding:clamp(2.6rem,7vh,5rem) var(--gut) clamp(2.6rem,6vh,4.5rem)}
+.hero .lbl{display:block;margin-bottom:1.8rem}
+.hero h1{font-weight:900;line-height:.92;letter-spacing:-.045em}
+.hero .p1{display:block;font-size:clamp(2.4rem,7.6vw,7rem)}
+.hero .p2{display:block;font-size:clamp(2.6rem,9.4vw,8.8rem)}
+.hero .p3{display:block;font-size:clamp(3.4rem,14.5vw,13.2rem)}
+.hero .p3 .dot{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero-sub{max-width:44ch;font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--slate);margin:2.2rem 0 0}
+.console-line{margin-top:2.6rem;border-block:1px solid var(--ink);padding:1rem 0;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:baseline}
+.console-line .pfx{font-family:var(--mono);font-size:.85rem;font-weight:500}
+.console-line .pfx b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.console-line .typed{font-family:var(--mono);font-size:.85rem}
+.console-line .cur{display:inline-block;width:2px;height:1em;background:var(--grad);vertical-align:-2px;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.console-line .out{font-family:var(--mono);font-size:.85rem;color:var(--mist);margin-left:auto}
+.console-line .out b{font-weight:500;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text}
+.hero-ctas{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn2{font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--ink);padding:.8em 1.5em;border-radius:999px}
+.btn2:hover{background:var(--ink);color:#fff}
+
+/* why us */
+.pos{padding:clamp(3rem,7vh,5rem) var(--gut) clamp(4rem,9vh,6rem)}
+.pos h2{font-weight:900;font-size:clamp(2.1rem,5.8vw,5rem);line-height:1;max-width:15ch;margin-top:.6rem}
+.pos p{max-width:52ch;color:var(--slate);font-size:1.1rem;margin:1.8rem 0 0}
+.pos .facts{display:flex;gap:2.6rem;flex-wrap:wrap;margin-top:2.4rem}
+.pos .fact .lbl{display:block;margin-bottom:.35rem;letter-spacing:.16em}
+.pos .fact div{font-family:var(--disp);font-weight:700;font-size:1.1rem}
+
+/* services — accordion rows */
+.svc{padding-bottom:clamp(4rem,9vh,6rem)}
+.svc-row{border-top:1px solid var(--ink)}
+.svc-row:last-of-type{border-bottom:1px solid var(--ink)}
+.svc-row button{all:unset;display:flex;align-items:baseline;justify-content:space-between;gap:1.4rem;width:100%;
+  cursor:pointer;padding:1.9rem var(--gut);box-sizing:border-box}
+.svc-row button:focus-visible{outline:2px solid var(--g1);outline-offset:-2px}
+.svc-row h3{font-weight:900;font-size:clamp(1.9rem,5.8vw,4.8rem);letter-spacing:-.045em;line-height:1;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+.svc-row .plus{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--mist);transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.svc-row.open .plus{transform:rotate(45deg);color:var(--g2)}
+.svc-row.open h3{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.svc-row .body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.22,.61,.36,1)}
+.svc-row.open .body{max-height:300px}
+.svc-row .body-in{padding:0 var(--gut) 2rem;display:flex;gap:3rem;flex-wrap:wrap;align-items:baseline}
+.svc-row .body-in p{margin:0;max-width:44ch;color:var(--slate)}
+.svc-row .io{font-family:var(--mono);font-size:.76rem;color:var(--mist);line-height:2}
+.svc-row .io b{color:var(--slate);font-weight:500}
+.svc-row .io .o{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* approach — zigzag center rail */
+.apr{padding-bottom:clamp(4.5rem,10vh,7rem)}
+.apr .tl{position:relative;max-width:1000px;margin:1.5rem auto 0;padding:2rem var(--gut)}
+.apr .tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--g1),var(--g2));border-radius:4px}
+.apr .step{position:relative;width:calc(50% - 3rem);padding:1.2rem 0 2.2rem}
+.apr .step:nth-child(odd){margin-left:auto;padding-left:1rem}
+.apr .step:nth-child(even){text-align:right;padding-right:1rem}
+.apr .step::before{content:"";position:absolute;top:1.7rem;width:16px;height:16px;border-radius:50%;background:var(--paper);border:4px solid var(--ink)}
+.apr .step:nth-child(odd)::before{left:-3rem;transform:translateX(-50%)}
+.apr .step:nth-child(even)::before{right:-3rem;transform:translateX(50%)}
+.apr .step:nth-child(4)::before{border-image:none;border-color:var(--g2)}
+.apr .n{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,4.6vw,3.6rem);letter-spacing:-.05em;line-height:1}
+.apr .step:nth-child(4) .n{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.apr .step h3{font-size:1.15rem;margin:.4rem 0 .3rem}
+.apr .step p{color:var(--slate);font-size:.92rem;margin:0}
+@media(max-width:680px){
+  .apr .tl::before{left:8px;transform:none}
+  .apr .step{width:auto;margin-left:2.4rem!important;text-align:left!important;padding:0 0 2rem!important}
+  .apr .step::before{left:-2.4rem!important;right:auto!important;transform:translateX(-50%)!important;top:.4rem}
+}
+
+/* work — alternating ink bands */
+.wk{padding-bottom:clamp(4rem,9vh,6rem)}
+.wk-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(1.4rem,4vw,3rem);flex-wrap:wrap;
+  text-decoration:none;padding:2.6rem var(--gut)}
+.wk-row:nth-child(even){background:var(--ink);color:#fff}
+.wk-row:nth-child(even) .k{color:rgba(255,255,255,.55)}
+.wk-row .t h3{font-weight:900;font-size:clamp(1.5rem,3.6vw,2.8rem);letter-spacing:-.035em;max-width:16ch}
+.wk-row .t .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);display:block;margin-top:.5rem}
+.wk-row .m{font-family:var(--disp);font-weight:900;font-size:clamp(3rem,10vw,7.8rem);letter-spacing:-.055em;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wk .disc{padding:1.2rem var(--gut) 0;font-family:var(--mono);font-size:.7rem;color:var(--mist)}
+
+/* engagement — sticker cards */
+.eng{padding:clamp(1.5rem,4vh,3rem) var(--gut) clamp(4.5rem,10vh,7rem)}
+.eng .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+.eng .cell{border:2px solid var(--ink);padding:1.8rem;background:var(--paper);box-shadow:9px 9px 0 var(--ink);
+  transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s}
+.eng .cell:nth-child(1){transform:rotate(-1.6deg)}
+.eng .cell:nth-child(2){transform:rotate(1.2deg) translateY(1.2rem)}
+.eng .cell:nth-child(3){transform:rotate(-.8deg)}
+.eng .cell:hover{transform:rotate(0) translateY(-4px);box-shadow:12px 12px 0 var(--ink)}
+.eng .cell .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+.eng .cell h3{font-weight:900;font-size:clamp(1.5rem,2.9vw,2.2rem);letter-spacing:-.03em;margin:.6rem 0 .15rem}
+.eng .cell .dur{font-family:var(--mono);font-size:.78rem;font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.eng .cell p{color:var(--slate);font-size:.95rem;margin:1rem 0 0}
+.eng .note{font-family:var(--mono);font-size:.74rem;color:var(--mist);margin-top:2rem}
+@media(max-width:820px){.eng .grid{grid-template-columns:1fr}.eng .cell:nth-child(n){transform:none}}
+
+/* POV — alternating alignment, huge */
+.pov{padding-bottom:clamp(4.5rem,10vh,7rem)}
+.pov .take{padding:2.2rem var(--gut)}
+.pov .take p{font-family:var(--disp);font-weight:900;font-size:clamp(1.7rem,4.6vw,3.6rem);letter-spacing:-.035em;line-height:1.1;margin:.5rem 0 0;max-width:24ch}
+.pov .take:nth-child(3){text-align:center}
+.pov .take:nth-child(3) p{margin-inline:auto}
+.pov .take:nth-child(4){text-align:right}
+.pov .take:nth-child(4) p{margin-left:auto}
+.pov .take p b{font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* team — mirrored, ghost letters */
+.team{padding-bottom:clamp(4rem,9vh,6rem)}
+.team .duo{display:grid;grid-template-columns:1fr 1fr;margin-top:1.5rem}
+.team .half{position:relative;padding:2.2rem var(--gut);overflow:hidden}
+.team .half.l{text-align:right;border-right:2px solid var(--ink)}
+.team .half::before{content:attr(data-g);position:absolute;top:-.24em;font-family:var(--disp);font-weight:900;font-size:12rem;
+  line-height:1;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px var(--line);pointer-events:none}
+.team .half.l::before{left:var(--gut)}
+.team .half.r::before{right:var(--gut)}
+.team h3{position:relative;font-weight:900;font-size:clamp(1.9rem,4.2vw,3.2rem)}
+.team .role{position:relative;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin:.4rem 0 .8rem}
+.team p{position:relative;color:var(--slate);margin:0;max-width:34ch}
+.team .half.l p{margin-left:auto}
+@media(max-width:720px){.team .duo{grid-template-columns:1fr}.team .half.l{text-align:left;border-right:0;border-bottom:2px solid var(--ink)}.team .half.l p{margin-left:0}}
+
+/* CTA — ink block with gradient type + marquee */
+.book{background:var(--ink);color:#fff;padding:clamp(5rem,13vh,9rem) 0 0;overflow:hidden}
+.book .in{padding:0 var(--gut)}
+.book .lbl{color:rgba(255,255,255,.55)}
+.book h2{font-weight:900;font-size:clamp(3rem,10vw,8.4rem);letter-spacing:-.045em;line-height:.95;margin-top:1rem;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.book p{color:rgba(255,255,255,.72);max-width:44ch;font-size:1.1rem;margin:1.8rem 0 2.4rem}
+.book .cta{background:#fff;color:var(--ink);font-size:1.05rem;padding:.9em 1.8em}
+.book .cta::after{display:none}
+.bmarq{overflow:hidden;border-top:1px solid rgba(255,255,255,.16);margin-top:clamp(3rem,8vh,5.5rem);padding:1rem 0}
+.bmarq .row{display:flex;width:max-content;animation:marq 20s linear infinite;font-family:var(--disp);font-weight:900;
+  font-size:clamp(1.4rem,3.4vw,2.6rem);letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.4)}
+.bmarq .row span{padding-inline:1.6rem;white-space:nowrap}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+footer{border-top:1px solid var(--line);padding:2rem var(--gut);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--mist)}
+footer a{text-decoration:none;color:var(--slate)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+  .bmarq .row{animation:none}
+  .svc-row .body{max-height:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand">pivon</a>
+    <div class="nav-l"><a href="#services">Services</a><a href="#work">Work</a><a href="#approach">Approach</a><a href="#team">Team</a></div>
+    <a href="#book" class="cta"><span>Book the call</span></a>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="lbl">AI &amp; Generative-AI Consulting</span>
+  <h1>
+    <span class="p1">Your company,</span>
+    <span class="p2">from <span class="grad">0&nbsp;to&nbsp;100</span></span>
+    <span class="p3">on AI<span class="dot">.</span></span>
+  </h1>
+  <p class="hero-sub">We find the use cases worth chasing, build the tools that ship, and leave your team running AI on their own. No slideware.</p>
+  <div class="console-line" role="region" aria-label="Interactive demo console">
+    <span class="pfx"><b>pivon</b>&gt;</span>
+    <span class="typed" id="typed"></span><span class="cur" aria-hidden="true"></span>
+    <span class="out">out&nbsp; <b id="outWord">a costed roadmap</b></span>
+  </div>
+  <div class="hero-ctas">
+    <a href="#book" class="cta"><span>Book the honest call →</span></a>
+    <a href="#services" class="btn2">See the work ↓</a>
+  </div>
+</header>
+
+<section class="pos reveal">
+  <span class="bleed" aria-hidden="true">WHY US</span>
+  <h2>New studio. Old hands. <span class="grad">Zero</span> slideware.</h2>
+  <p>Pivon is two founders — one deep in production software, one deep in business. We're new as a company; we're not new at shipping. No logo wall yet, on purpose: we'd rather show you real work on a thirty-minute call than decorate a homepage.</p>
+  <div class="facts">
+    <div class="fact"><span class="lbl">Engineering</span><div>Senior software &amp; solutions architecture</div></div>
+    <div class="fact"><span class="lbl">Business</span><div>AI enablement &amp; innovation leadership</div></div>
+    <div class="fact"><span class="lbl">Model</span><div>Build · train · hand over — no lock-in</div></div>
+  </div>
+</section>
+
+<section class="svc" id="services">
+  <span class="bleed" aria-hidden="true">SERVICES</span>
+  <div class="svc-row open">
+    <button type="button" aria-expanded="true"><h3>AI Consulting</h3><span class="plus" aria-hidden="true">+</span></button>
+    <div class="body"><div class="body-in">
+      <p>Strategy, roadmaps, and honest answers about where AI pays off.</p>
+      <span class="io">in&nbsp; <b>"where do we even start?"</b><br>out&nbsp; <span class="o">a costed roadmap</span></span>
+    </div></div>
+  </div>
+  <div class="svc-row">
+    <button type="button" aria-expanded="false"><h3>Use-Case Evaluation</h3><span class="plus" aria-hidden="true">+</span></button>
+    <div class="body"><div class="body-in">
+      <p>Thirty ideas in. The five worth doing out — ranked by impact and effort.</p>
+      <span class="io">in&nbsp; <b>30 ideas</b><br>out&nbsp; <span class="o">the 5 worth doing</span></span>
+    </div></div>
+  </div>
+  <div class="svc-row">
+    <button type="button" aria-expanded="false"><h3>Solution Building</h3><span class="plus" aria-hidden="true">+</span></button>
+    <div class="body"><div class="body-in">
+      <p>Design, build, ship — wired into your stack, not bolted on.</p>
+      <span class="io">in&nbsp; <b>a shortlisted use case</b><br>out&nbsp; <span class="o">a deployed tool</span></span>
+    </div></div>
+  </div>
+  <div class="svc-row">
+    <button type="button" aria-expanded="false"><h3>0→100 AI Boost</h3><span class="plus" aria-hidden="true">+</span></button>
+    <div class="body"><div class="body-in">
+      <p>Zero to AI-native. We stand it up, train your team, hand over the keys.</p>
+      <span class="io">in&nbsp; <b>zero AI</b><br>out&nbsp; <span class="o">an AI-native team</span></span>
+    </div></div>
+  </div>
+</section>
+
+<section class="apr" id="approach">
+  <span class="bleed" aria-hidden="true">0 → 100</span>
+  <div class="tl">
+    <div class="step reveal"><span class="n">00</span><h3>Discover</h3><p>Your business, data, and constraints.</p></div>
+    <div class="step reveal"><span class="n">01</span><h3>Evaluate</h3><p>Use cases ranked and costed.</p></div>
+    <div class="step reveal"><span class="n">02</span><h3>Build</h3><p>Design, build, ship.</p></div>
+    <div class="step reveal"><span class="n">100</span><h3>Handover</h3><p>We leave. It stays. Your team runs it.</p></div>
+  </div>
+</section>
+
+<section class="wk" id="work">
+  <span class="bleed" aria-hidden="true">WORK</span>
+  <a class="wk-row" href="#"><span class="t"><h3>Support that answers itself</h3><span class="k">Logistics SMB · 6 weeks · read the case →</span></span><span class="m">60%</span></a>
+  <a class="wk-row" href="#"><span class="t"><h3>From spreadsheets to forecasts</h3><span class="k">Regional retailer · read the case →</span></span><span class="m">−30%</span></a>
+  <a class="wk-row" href="#"><span class="t"><h3>A studio that never sleeps</h3><span class="k">Marketing agency · read the case →</span></span><span class="m">5×</span></a>
+  <a class="wk-row" href="#"><span class="t"><h3>Zero to one hundred</h3><span class="k">Manufacturer · read the case →</span></span><span class="m">90d</span></a>
+  <p class="disc">Illustrative engagements — the shape of work we deliver.</p>
+</section>
+
+<section class="eng">
+  <span class="bleed" aria-hidden="true">MODELS</span>
+  <div class="grid">
+    <div class="cell reveal"><span class="k">01 · sprint</span><h3>Discovery Sprint</h3><span class="dur">2 weeks</span><p>Your use cases, ranked and costed. A shortlist you could hand to any builder — including us.</p></div>
+    <div class="cell reveal"><span class="k">02 · build</span><h3>Build Engagement</h3><span class="dur">6–10 weeks</span><p>One shortlisted use case, shipped to production and wired into your stack.</p></div>
+    <div class="cell reveal"><span class="k">03 · program</span><h3>0→100 Program</h3><span class="dur">one quarter</span><p>The full journey: infrastructure, tools, training, handover. You end AI-native.</p></div>
+  </div>
+  <p class="note">Every engagement starts with the same 30-minute call.</p>
+</section>
+
+<section class="pov">
+  <span class="bleed" aria-hidden="true">POV</span>
+  <div class="take reveal"><span class="lbl">POV / 01</span><p>Most AI pilots die in the demo. <b>Ship into a workflow</b> or don't start.</p></div>
+  <div class="take reveal"><span class="lbl">POV / 02</span><p>Your data is readier than you think. Waiting costs you <b>two years</b>.</p></div>
+  <div class="take reveal"><span class="lbl">POV / 03</span><p>Agents are processes, not magic. <b>Map the process first.</b></p></div>
+</section>
+
+<section class="team" id="team">
+  <span class="bleed" aria-hidden="true">FOUNDERS</span>
+  <div class="duo">
+    <div class="half l reveal" data-g="L"><h3>Alex</h3><p class="role">Left hemisphere · circuits, data, build</p><p>Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p></div>
+    <div class="half r reveal" data-g="R"><h3>Andreas</h3><p class="role">Right hemisphere · creative, business</p><p>Finds where AI creates value and makes it land with real teams and customers.</p></div>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="in">
+    <span class="lbl">Let's talk</span>
+    <h2>Start the first run.</h2>
+    <p>A 30-minute discovery call — no slides, the honest version. Pick a slot; we confirm by email.</p>
+    <a href="#" class="cta"><span>Book the honest call →</span></a>
+  </div>
+  <div class="bmarq" aria-hidden="true"><div class="row" id="bmarq"><span>BOOK THE HONEST CALL →</span></div></div>
+</section>
+
+<footer>
+  <span>© 2026 Pivon</span>
+  <span><a href="mailto:hello@pivon.ai">hello@pivon.ai</a></span>
+  <span>Cases are illustrative engagements.</span>
+</footer>
+
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* accordion services */
+  document.querySelectorAll('.svc-row button').forEach(b=>{
+    b.onclick=()=>{
+      const row=b.parentElement, open=row.classList.contains('open');
+      document.querySelectorAll('.svc-row').forEach(r=>{r.classList.remove('open');r.querySelector('button').setAttribute('aria-expanded','false');});
+      if(!open){row.classList.add('open');b.setAttribute('aria-expanded','true');}
+    };
+  });
+  /* CTA marquee */
+  const bm=document.getElementById('bmarq');
+  bm.innerHTML=Array(10).fill(bm.innerHTML).join('');
+  /* hero console line */
+  const typed=document.getElementById('typed'), out=document.getElementById('outWord');
+  const pairs=[
+    ['we’re starting from zero','an AI-native team'],
+    ['find our best use cases','the 5 worth doing'],
+    ['build us a support agent','a deployed tool'],
+    ['where do we even start?','a costed roadmap']
+  ];
+  let i=0;
+  (function run(){
+    const [q,a]=pairs[i%pairs.length]; i++;
+    if(RM){typed.textContent=q;out.textContent=a;return;}
+    let c=0; typed.textContent='';
+    const t=setInterval(()=>{
+      typed.textContent=q.slice(0,++c);
+      if(c>=q.length){clearInterval(t);out.textContent=a;setTimeout(run,2600);}
+    },40);
+  })();
+  if(RM){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));return;}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Work — Context eyebrow</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body{background:var(--paper)}
+  .svc{padding:var(--section-y) 0}
+  .svc-head{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);margin-bottom:32px}
+  .svc-head h2{font-size:clamp(2rem,4.5vw,3.1rem);margin-top:14px;max-width:14ch}
+  .list{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+  .item{padding:36px 0;border-top:2px solid var(--ink)}
+  .item:last-child{border-bottom:2px solid var(--ink)}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+  .ctx{display:inline-flex;align-items:center;gap:.6em;font-family:var(--f-mono);font-size:.74rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+  .ctx::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--grad)}
+  .tag{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+  .item h3{font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.0;margin:0 0 14px;letter-spacing:-.035em;max-width:18ch}
+  .result{display:inline-flex;align-items:baseline;gap:.6em;font-family:var(--f-mono);font-size:.92rem;color:var(--slate)}
+  .result .ar{color:var(--violet);font-weight:500}
+  .result b{font-weight:500;font-size:1rem;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .disc{max-width:var(--container);margin:26px auto 0;padding-inline:var(--gutter);
+    font-family:var(--f-mono);font-size:.72rem;color:var(--mist)}
+</style>
+</head>
+<body>
+<section class="svc">
+  <header class="svc-head">
+    <span class="eyebrow">Selected work</span>
+    <h2>What good looks like.</h2>
+  </header>
+  <div class="list">
+    <div class="item">
+      <div class="top"><span class="ctx">Logistics SMB · Customer Ops</span><span class="tag">Illustrative engagement</span></div>
+      <h3>Support that answers itself</h3>
+      <p class="result">A gen-AI support agent <span class="ar">→</span> <b>deflected 60% of tickets in 6 weeks</b></p>
+    </div>
+    <div class="item">
+      <div class="top"><span class="ctx">Regional retailer · Operations</span><span class="tag">Illustrative engagement</span></div>
+      <h3>From spreadsheets to forecasts</h3>
+      <p class="result">Demand-forecasting models <span class="ar">→</span> <b>cut stockouts 30%</b></p>
+    </div>
+    <div class="item">
+      <div class="top"><span class="ctx">Marketing agency · Creative</span><span class="tag">Illustrative engagement</span></div>
+      <h3>A studio that never sleeps</h3>
+      <p class="result">A generative content pipeline <span class="ar">→</span> <b>5×'d output at constant headcount</b></p>
+    </div>
+    <div class="item">
+      <div class="top"><span class="ctx">Manufacturer · 0→100</span><span class="tag">Illustrative engagement</span></div>
+      <h3>Zero to AI-native in 90 days</h3>
+      <p class="result">4 tools shipped <span class="ar">→</span> <b>team self-sufficient, no vendor lock-in</b></p>
+    </div>
+  </div>
+  <p class="disc">Illustrative scenarios that reflect the kind of work and outcomes Pivon delivers.</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Team — Editorial hemispheres</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body{background:var(--paper)}
+  .svc{padding:var(--section-y) 0}
+  .svc-head{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);margin-bottom:44px}
+  .svc-head h2{font-size:clamp(2rem,4.5vw,3.1rem);margin-top:14px}
+  .duo{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);
+    display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .half{padding:40px 0;position:relative}
+  .half.left{padding-right:48px}
+  .half.right{padding-left:48px}
+  .half.right::before{content:"";position:absolute;left:0;top:24px;bottom:24px;width:2px;
+    background:linear-gradient(180deg,#22C7F2,#2F6BEC,#7A3CEE,#E5258E)}
+  .hemi{display:inline-flex;align-items:center;gap:.6em;font-family:var(--f-mono);font-size:.72rem;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 20px}
+  .hemi::before{content:"";width:22px;height:2px;border-radius:2px}
+  .left .hemi::before{background:linear-gradient(90deg,#22C7F2,#2F6BEC)}
+  .right .hemi::before{background:linear-gradient(90deg,#7A3CEE,#E5258E)}
+  .half h3{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:0 0 6px;letter-spacing:-.03em}
+  .role{font-family:var(--f-mono);font-size:.8rem;color:var(--slate);margin:0 0 18px}
+  .bio{color:var(--slate);font-size:1.02rem;margin:0;max-width:40ch}
+  @media (max-width:760px){
+    .duo{grid-template-columns:1fr}
+    .half.left{padding-right:0;border-bottom:1px solid var(--line)}
+    .half.right{padding-left:0}
+    .half.right::before{display:none}
+  }
+</style>
+</head>
+<body>
+<section class="svc">
+  <header class="svc-head">
+    <span class="eyebrow">The team</span>
+    <h2>Two founders. Two hemispheres.</h2>
+  </header>
+  <div class="duo">
+    <div class="half left">
+      <p class="hemi">Left hemisphere · circuits, data, build</p>
+      <h3>Alex</h3>
+      <p class="role">Senior Software Engineer &amp; Solutions Architect</p>
+      <p class="bio">Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p>
+    </div>
+    <div class="half right">
+      <p class="hemi">Right hemisphere · creative, business</p>
+      <h3>Andreas</h3>
+      <p class="role">Lead, Business Enablement &amp; Innovation (AI)</p>
+      <p class="bio">Deep business understanding — finds where AI creates value and makes it land with real teams and customers.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

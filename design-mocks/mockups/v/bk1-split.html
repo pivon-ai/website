@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Booking — Split, calendar open</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body{background:var(--paper-2)}
+  .svc{padding:var(--section-y) 0}
+  .wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);
+    display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:start}
+  .lede h2{font-size:clamp(2rem,4vw,2.8rem);margin:14px 0 20px}
+  .lede p{color:var(--slate);font-size:1.08rem;margin:0 0 28px;max-width:38ch}
+  .expect{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px}
+  .expect li{display:flex;align-items:center;gap:12px;font-size:.98rem}
+  .expect .k{font-family:var(--f-mono);font-size:.72rem;color:#fff;background:var(--ink);padding:.3em .6em;border-radius:6px}
+  .expect b{font-weight:600}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:28px}
+  .lab{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin:0 0 14px}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .cal-head b{font-family:var(--f-display);font-size:1.05rem}
+  .cal-head button{border:1px solid var(--line-2);background:var(--paper);border-radius:8px;width:30px;height:30px;cursor:pointer;color:var(--slate)}
+  .dow,.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .dow span{font-family:var(--f-mono);font-size:.66rem;color:var(--mist);text-align:center;padding-bottom:6px}
+  .grid button{aspect-ratio:1;border:0;background:var(--paper-2);border-radius:10px;font-family:var(--f-body);
+    font-size:.9rem;color:var(--ink);cursor:pointer}
+  .grid button:hover:not(:disabled){background:var(--paper-3)}
+  .grid button:disabled{color:var(--line-2);background:transparent;cursor:default}
+  .grid button.sel{color:#fff;background:var(--ink);position:relative}
+  .grid button.sel::after{content:"";position:absolute;inset:0;border-radius:10px;background:var(--grad);opacity:.9;z-index:-0}
+  .grid button.sel span{position:relative;z-index:1}
+  .slots{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  @media (max-width:880px){.wrap{grid-template-columns:1fr;gap:34px}}
+</style>
+</head>
+<body>
+<section class="svc">
+  <div class="wrap">
+    <div class="lede">
+      <span class="eyebrow">Let's talk</span>
+      <h2>Start the first run.</h2>
+      <p>A 30-minute discovery call. No slides, no obligation — we'll tell you the honest version of where AI pays off for you.</p>
+      <ul class="expect">
+        <li><span class="k">30 min</span> <b>No slides.</b> The honest version.</li>
+        <li><span class="k">→</span> Pick a time, we confirm by email, the first run begins.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="lab">Step 1 · Pick a date</p>
+      <div class="cal-head"><button aria-label="Previous month">‹</button><b>July 2026</b><button aria-label="Next month">›</button></div>
+      <div class="dow"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+      <div class="grid">
+        <button disabled></button><button disabled></button><button>1</button><button>2</button><button>3</button><button disabled>4</button><button disabled>5</button>
+        <button>6</button><button>7</button><button>8</button><button class="sel"><span>9</span></button><button>10</button><button disabled>11</button><button disabled>12</button>
+        <button>13</button><button>14</button><button>15</button><button>16</button><button>17</button><button disabled>18</button><button disabled>19</button>
+        <button>20</button><button>21</button><button>22</button><button>23</button><button>24</button><button disabled>25</button><button disabled>26</button>
+        <button>27</button><button>28</button><button>29</button><button>30</button><button>31</button><button disabled></button><button disabled></button>
+      </div>
+      <div class="slots">
+        <p class="lab" style="margin-bottom:0">Step 2 · Thu 9 July — pick a time</p>
+        <div class="chips">
+          <span class="chip">09:00</span><span class="chip" style="opacity:.4">09:30</span><span class="chip active-chip">10:00</span>
+          <span class="chip">11:30</span><span class="chip">13:30</span><span class="chip">14:00</span><span class="chip" style="opacity:.4">15:30</span><span class="chip">16:30</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
