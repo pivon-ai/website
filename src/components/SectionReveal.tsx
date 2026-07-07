@@ -26,7 +26,7 @@ export default function SectionReveal({
   return (
     <div
       ref={ref}
-      className={`transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,transform] ${
+      className={`transition-[opacity,transform] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,transform] ${
         active
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-6 scale-[0.98]"

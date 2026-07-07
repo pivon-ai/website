@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SectionHeading from "@/components/SectionHeading";
 import SectionReveal from "@/components/SectionReveal";
 
@@ -8,6 +8,12 @@ const iconBg: Record<string, string> = {
   "primary-blue": "bg-primary-blue/10",
   "primary-pink": "bg-primary-pink/10",
   "primary-navy": "bg-primary-navy/10",
+};
+
+const iconText: Record<string, string> = {
+  "primary-blue": "text-primary-blue",
+  "primary-pink": "text-primary-pink",
+  "primary-navy": "text-primary-navy",
 };
 
 const services = [
@@ -61,7 +67,7 @@ const services = [
     color: "primary-blue",
     icon: (
       <svg
-        className="w-7 h-7 text-primary-blue"
+        className="h-5 w-5"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -88,7 +94,7 @@ const services = [
     color: "primary-pink",
     icon: (
       <svg
-        className="w-7 h-7 text-primary-pink"
+        className="h-5 w-5"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -111,7 +117,7 @@ const services = [
     color: "primary-navy",
     icon: (
       <svg
-        className="w-7 h-7 text-primary-navy"
+        className="h-5 w-5"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -134,7 +140,7 @@ const services = [
     color: "primary-blue",
     icon: (
       <svg
-        className="w-7 h-7 text-primary-blue"
+        className="h-5 w-5"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -151,24 +157,32 @@ const services = [
 ];
 
 export default function Leistungen() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
   const [activeBullet, setActiveBullet] = useState<number | null>(null);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (openIndex === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenIndex(null);
+    const measure = () => {
+      const el = tabRefs.current[active];
+      const nav = navRef.current;
+      if (!el || !nav) return;
+      const elRect = el.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+      setIndicator({ left: elRect.left - navRect.left, width: elRect.width });
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [openIndex]);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [active]);
 
-  const openService = openIndex !== null ? services[openIndex] : null;
-
-  const closeModal = () => {
-    setOpenIndex(null);
+  const selectTab = (i: number) => {
+    setActive(i);
     setActiveBullet(null);
   };
+
+  const svc = services[active];
 
   return (
     <section
@@ -181,90 +195,63 @@ export default function Leistungen() {
           title="Ganzheitlich von der Idee bis zum Betrieb"
           description="Wir unterstützen Sie mit unseren Leistungen ganzheitlich. Von der Einführung bis zur Entwicklung und Umsetzung von KI-basierten Lösungen."
         >
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((svc, i) => {
-              const expandable = Boolean(svc.text) || svc.bullets.length > 0;
-              return (
-                <button
-                  type="button"
-                  key={svc.label}
-                  onClick={() => expandable && setOpenIndex(i)}
-                  className={`rounded-3xl border border-slate-200 bg-white px-6 py-7 text-center shadow-sm transition-all hover:-translate-y-1 hover:border-slate-300 hover:shadow-md hover:shadow-slate-900/5 ${
-                    expandable ? "cursor-pointer" : "cursor-default"
-                  }`}
-                >
-                  <span
-                    className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl ${iconBg[svc.color]}`}
-                  >
-                    {svc.icon}
-                  </span>
-                  <h3 className="mt-4 text-lg font-bold text-primary-navy">
-                    {svc.label}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-600">{svc.short}</p>
-                  {expandable && (
-                    <span className="mt-3 inline-block text-xs font-semibold text-primary-blue">
-                      Mehr erfahren →
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </SectionHeading>
-      </SectionReveal>
-
-      {openService && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-8"
-          role="dialog"
-          aria-modal="true"
-        >
           <div
-            className="absolute inset-0 bg-primary-navy/60 backdrop-blur-sm"
-            onClick={closeModal}
-          />
-          <div className="animate-fade-in-up relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl md:p-8">
-            <button
-              type="button"
-              onClick={closeModal}
-              aria-label="Schließen"
-              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-primary-navy"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
+            ref={navRef}
+            className="relative flex w-full gap-1 overflow-x-auto rounded-2xl bg-slate-100 p-1.5 md:inline-flex md:w-auto"
+          >
+            <div
+              className="absolute top-1.5 bottom-1.5 rounded-xl bg-white shadow-sm transition-all duration-300 ease-out"
+              style={{ left: indicator.left, width: indicator.width }}
+            />
+            {services.map((s, i) => (
+              <button
+                key={s.label}
+                type="button"
+                ref={(el) => {
+                  tabRefs.current[i] = el;
+                }}
+                onClick={() => selectTab(i)}
+                className={`relative z-10 flex flex-shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
+                  active === i
+                    ? iconText[s.color]
+                    : "text-slate-500 hover:text-primary-navy"
+                }`}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
+                {s.icon}
+                {s.label}
+              </button>
+            ))}
+          </div>
 
-            <span
-              className={`flex h-14 w-14 items-center justify-center rounded-2xl ${iconBg[openService.color]}`}
-            >
-              {openService.icon}
-            </span>
-            <h3 className="mt-4 text-2xl font-bold text-primary-navy">
-              {openService.label}
-            </h3>
-            <p className="mt-1 text-slate-500">{openService.short}</p>
+          <div
+            key={active}
+            className="animate-fade-in-up mt-6 rounded-3xl border border-slate-200 bg-white p-6 md:p-8"
+          >
+            <div className="flex items-center gap-4">
+              <span
+                className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl ${iconBg[svc.color]}`}
+              >
+                <span className={`${iconText[svc.color]} [&>svg]:h-7 [&>svg]:w-7`}>
+                  {svc.icon}
+                </span>
+              </span>
+              <div>
+                <h3 className="text-xl font-bold text-primary-navy md:text-2xl">
+                  {svc.label}
+                </h3>
+                <p className="text-sm text-slate-500">{svc.short}</p>
+              </div>
+            </div>
 
-            {openService.text && (
-              <p className="mt-6 text-justify text-base text-slate-700">
-                {openService.text}
+            {svc.text && (
+              <p className="mt-5 text-justify text-base text-slate-700">
+                {svc.text}
               </p>
             )}
 
-            {openService.bullets.length > 0 && (
-              <div className="mt-6 flex flex-wrap gap-2">
-                {openService.bullets.map((b, bi) => (
+            {svc.bullets.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {svc.bullets.map((b, bi) => (
                   <button
                     key={b.label}
                     type="button"
@@ -283,32 +270,28 @@ export default function Leistungen() {
               </div>
             )}
 
-            {activeBullet !== null &&
-              openService.bullets[activeBullet]?.text && (
-                <div className="animate-fade-in-up mt-5 rounded-xl border-l-4 border-primary-blue bg-slate-50 p-5">
-                  <p className="text-justify text-base leading-relaxed text-slate-700">
-                    {openService.bullets[activeBullet].text}
-                  </p>
-                  {openService.bullets[activeBullet].subBullets.length >
-                    0 && (
-                    <ul className="mt-4 flex flex-wrap gap-2">
-                      {openService.bullets[activeBullet].subBullets.map(
-                        (sb) => (
-                          <li
-                            key={sb}
-                            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm"
-                          >
-                            {sb}
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  )}
-                </div>
-              )}
+            {activeBullet !== null && svc.bullets[activeBullet]?.text && (
+              <div className="animate-fade-in-up mt-5 rounded-xl border-l-4 border-primary-blue bg-slate-50 p-5">
+                <p className="text-justify text-base leading-relaxed text-slate-700">
+                  {svc.bullets[activeBullet].text}
+                </p>
+                {svc.bullets[activeBullet].subBullets.length > 0 && (
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {svc.bullets[activeBullet].subBullets.map((sb) => (
+                      <li
+                        key={sb}
+                        className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm"
+                      >
+                        {sb}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
-        </div>
-      )}
+        </SectionHeading>
+      </SectionReveal>
     </section>
   );
 }

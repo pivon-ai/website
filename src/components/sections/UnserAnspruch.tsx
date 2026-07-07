@@ -21,7 +21,7 @@ export default function UnserAnspruch() {
           title="Mensch, Organisation und Technologie im Einklang"
         >
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
-            <div className="relative mx-auto aspect-[400/350] w-full max-w-xs md:max-w-sm">
+            <div className="relative mx-auto aspect-[400/350] w-full max-w-sm md:max-w-md">
               <svg viewBox="0 0 400 350" className="h-full w-full">
                 <circle
                   cx="135"
