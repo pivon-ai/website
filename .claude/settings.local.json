@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__visualize__read_me",
+      "Bash(npx -v)",
+      "Bash(npm -v)",
+      "Bash(npm install *)",
+      "Bash(node -e ' *)",
+      "Bash(python -c \"import PIL; print\\(PIL.__version__\\)\")",
+      "Bash(magick -version)",
+      "Bash(npm ls *)",
+      "Bash(node \"/c/Users/andre/AppData/Local/Temp/claude/C--DEV-pivon-ai-website/09dfe4f3-f7aa-46e4-bce4-f458063edc46/scratchpad/strip_bg.js\" \"public/images/logo.png\" \"public/images/logo-transparent.png\")",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npm run *)",
+      "Bash(sed -i 's/max-w-6xl/max-w-4xl/' Kontakt.tsx UeberUns.tsx UnserAnspruch.tsx Vorgehen.tsx)",
+      "Bash(sed -i 's/max-w-6xl/max-w-5xl/' Leistungen.tsx)",
+      "Bash(sed -i 's/max-w-4xl/max-w-7xl/' Kontakt.tsx UeberUns.tsx UnserAnspruch.tsx Vorgehen.tsx)",
+      "Bash(sed -i 's/max-w-5xl/max-w-7xl/' Leistungen.tsx)",
+      "Bash(rm -rf .next)",
+      "WebFetch(domain:webflow.com)",
+      "PowerShell(Start-Process \"http://localhost:3000\")"
+    ]
+  }
+}
