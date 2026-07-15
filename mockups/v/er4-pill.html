@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — Outcome pill</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body{background:var(--paper)}
+  .svc{padding:var(--section-y) 0}
+  .svc-head{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);margin-bottom:40px}
+  .svc-head h2{font-size:clamp(2rem,4.5vw,3.1rem);margin-top:14px;max-width:14ch}
+  .list{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+  .item{display:grid;grid-template-columns:0.4fr 1.3fr 1.3fr auto;gap:32px;align-items:center;
+    padding:32px 0;border-top:1px solid var(--line)}
+  .item:last-child{border-bottom:1px solid var(--line)}
+  .idx{font-family:var(--f-mono);font-size:.78rem;color:var(--mist)}
+  .name h3{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.06;margin:0 0 6px;letter-spacing:-.03em}
+  .name .in{font-family:var(--f-mono);font-size:.76rem;color:var(--mist)}
+  .name .in b{color:var(--slate);font-weight:500}
+  .desc{color:var(--slate);font-size:.98rem;margin:0}
+  .out-tag{justify-self:end;white-space:nowrap;font-family:var(--f-mono);font-size:.82rem;font-weight:500;color:var(--ink);
+    padding:.6em 1.1em;border-radius:var(--r-pill);
+    background:linear-gradient(var(--paper),var(--paper)) padding-box,var(--grad) border-box;border:1px solid transparent;
+    transition:box-shadow var(--t)}
+  .item:hover .out-tag{box-shadow:var(--shadow-pop)}
+  @media (max-width:880px){
+    .item{grid-template-columns:1fr;gap:12px;align-items:start;padding:28px 0}
+    .out-tag{justify-self:start}
+  }
+</style>
+</head>
+<body>
+<section class="svc">
+  <header class="svc-head">
+    <span class="eyebrow">What we do</span>
+    <h2>Four ways we move you forward.</h2>
+  </header>
+  <div class="list">
+    <div class="item">
+      <span class="idx">S/01</span>
+      <div class="name"><h3>AI Consulting</h3><span class="in">in: <b>"where do we even start?"</b></span></div>
+      <p class="desc">Strategy, roadmaps, and honest answers about where AI pays off.</p>
+      <span class="out-tag">a costed roadmap</span>
+    </div>
+    <div class="item">
+      <span class="idx">S/02</span>
+      <div class="name"><h3>Use-Case Evaluation</h3><span class="in">in: <b>30 ideas</b></span></div>
+      <p class="desc">We rank opportunities by impact and effort, and hand you a costed shortlist.</p>
+      <span class="out-tag">the 5 worth doing</span>
+    </div>
+    <div class="item">
+      <span class="idx">S/03</span>
+      <div class="name"><h3>Solution Building</h3><span class="in">in: <b>a shortlisted use case</b></span></div>
+      <p class="desc">Design, build, and ship the AI solution, wired into your stack.</p>
+      <span class="out-tag">a deployed tool</span>
+    </div>
+    <div class="item">
+      <span class="idx">S/04</span>
+      <div class="name"><h3>0→100 AI Boost</h3><span class="in">in: <b>zero AI</b></span></div>
+      <p class="desc">Not using AI yet? We stand it up, train your team, and hand over the keys.</p>
+      <span class="out-tag">an AI-native team</span>
+    </div>
+  </div>
+</section>
+</body>
+</html>

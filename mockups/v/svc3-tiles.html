@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — Numbered tiles</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body{background:var(--paper-2)}
+  .svc{padding:var(--section-y) 0}
+  .svc-head{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);margin-bottom:48px}
+  .svc-head h2{font-size:clamp(2rem,4.5vw,3.1rem);margin-top:14px;max-width:14ch}
+  .grid{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);
+    display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
+  .tile{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:34px 30px 28px;transition:border-color var(--t),box-shadow var(--t)}
+  .tile:hover{box-shadow:var(--shadow-card);border-color:var(--line-2)}
+  .num{font-family:var(--f-mono);font-size:.9rem;font-weight:500;letter-spacing:.04em;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;display:block}
+  .tile h3{font-size:1.45rem;margin:0 0 10px}
+  .desc{color:var(--slate);font-size:1rem;margin:0 0 24px;max-width:34ch}
+  .io{display:flex;align-items:center;gap:.7em;font-family:var(--f-mono);font-size:.78rem;
+    padding-top:18px;border-top:1px solid var(--line)}
+  .io .k{color:var(--mist)}
+  .io .v{color:var(--slate)}
+  .io .ar{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:500}
+  .io .out{color:var(--ink);font-weight:500}
+  @media (max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<section class="svc">
+  <header class="svc-head">
+    <span class="eyebrow">What we do</span>
+    <h2>Four ways we move you forward.</h2>
+  </header>
+  <div class="grid">
+    <article class="tile">
+      <span class="num">01</span>
+      <h3>AI Consulting</h3>
+      <p class="desc">Strategy, roadmaps, and honest answers about where AI pays off.</p>
+      <p class="io"><span class="v">"where do we even start?"</span><span class="ar">→</span><span class="out">a costed roadmap</span></p>
+    </article>
+    <article class="tile">
+      <span class="num">02</span>
+      <h3>Use-Case Evaluation</h3>
+      <p class="desc">We rank opportunities by impact and effort, and hand you a costed shortlist.</p>
+      <p class="io"><span class="v">30 ideas</span><span class="ar">→</span><span class="out">the 5 worth doing</span></p>
+    </article>
+    <article class="tile">
+      <span class="num">03</span>
+      <h3>Solution Building</h3>
+      <p class="desc">Design, build, and ship the AI solution, wired into your stack.</p>
+      <p class="io"><span class="v">a shortlisted use case</span><span class="ar">→</span><span class="out">a deployed tool</span></p>
+    </article>
+    <article class="tile">
+      <span class="num">04</span>
+      <h3>0→100 AI Boost</h3>
+      <p class="desc">Not using AI yet? We stand it up, train your team, and hand over the keys.</p>
+      <p class="io"><span class="v">zero AI</span><span class="ar">→</span><span class="out">an AI-native team</span></p>
+    </article>
+  </div>
+</section>
+</body>
+</html>

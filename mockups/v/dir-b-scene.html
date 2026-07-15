@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — B · Scene-dominant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── B · SCENE-DOMINANT — Superlist weighting: scroll directs, surfaces glow ── */
+:root{
+  --paper:#FFFFFF; --paper2:#F5F7FB; --ink:#0B0E14; --slate:#535B6A; --mist:#98A0AD; --line:#E7EAF0;
+  --g1:#22C7F2; --g2:#7A3CEE;
+  --grad:linear-gradient(100deg,var(--g1),var(--g2));
+  --disp:'Inter Tight',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --gut:clamp(20px,4.5vw,64px); --r:22px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);font-size:1.05rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.04em}
+a{color:inherit}
+::selection{background:rgba(34,199,242,.2)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--gut)}
+.lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+:focus-visible{outline:2px solid var(--g2);outline-offset:3px}
+
+/* nav */
+nav{position:fixed;inset-inline:0;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1240px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;height:64px;padding-inline:var(--gut)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.3rem;text-decoration:none;letter-spacing:-.04em}
+.nav-l{display:flex;gap:1.5rem;font-size:.88rem;font-weight:500}
+.nav-l a{text-decoration:none;color:var(--slate)}
+.nav-l a:hover{color:var(--ink)}
+.cta{font-weight:600;font-size:.88rem;text-decoration:none;color:#fff;background:var(--grad);padding:.62em 1.35em;border-radius:999px;box-shadow:0 8px 24px -10px rgba(122,60,238,.55)}
+.cta:hover{filter:brightness(1.06)}
+@media(max-width:720px){.nav-l{display:none}}
+
+/* hero scene: statement + console window on a glow field */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:110px var(--gut) 60px;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.glow.a{width:52vw;height:52vw;background:rgba(34,199,242,.16);top:-18vw;right:-14vw}
+.glow.b{width:44vw;height:44vw;background:rgba(122,60,238,.13);bottom:-16vw;left:-12vw}
+.hero-in{max-width:1240px;margin-inline:auto;width:100%;position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-weight:900;font-size:clamp(2.8rem,6.4vw,5.6rem);line-height:.98}
+.hero .sub{color:var(--slate);font-size:clamp(1.02rem,1.4vw,1.2rem);max-width:44ch;margin:1.6rem 0 2.2rem}
+.btn2{font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--line);background:#fff;padding:.8em 1.5em;border-radius:999px}
+.btn2:hover{border-color:var(--ink)}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap}
+.hero-ctas .cta{font-size:.98rem;padding:.85em 1.6em}
+
+/* the console — dressed up, center stage */
+.console{background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border-radius:var(--r);border:1px solid var(--line);
+  box-shadow:0 1px 2px rgba(11,14,20,.05),0 24px 70px -30px rgba(11,14,20,.35);overflow:hidden;position:relative}
+.console::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad);opacity:.5;
+  -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.c-bar{display:flex;align-items:center;gap:.7rem;background:var(--paper2);border-bottom:1px solid var(--line);padding:.6rem 1rem}
+.c-bar .d{width:10px;height:10px;border-radius:50%}
+.c-bar .d:nth-child(1){background:#FF5F57}.c-bar .d:nth-child(2){background:#FFBC2E}.c-bar .d:nth-child(3){background:#28C840}
+.c-bar span{font-family:var(--mono);font-size:.7rem;color:var(--mist);margin-left:auto}
+.c-body{padding:1.2rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
+.chip{font-family:var(--mono);font-size:.7rem;border:1px solid var(--line);background:#fff;border-radius:999px;padding:.35em .8em;color:var(--slate);cursor:pointer}
+.chip.on{border-color:transparent;background:linear-gradient(#fff,#fff) padding-box,var(--grad) border-box;border:1px solid transparent;color:var(--ink)}
+.p-row{display:flex;align-items:center;gap:.6rem;background:var(--paper2);border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem}
+.p-row .pfx{font-family:var(--mono);font-size:.8rem;font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.p-row .txt{font-family:var(--mono);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-row .cur{width:2px;height:15px;background:var(--grad);animation:blink 1s step-end infinite;flex-shrink:0}
+@keyframes blink{50%{opacity:0}}
+.c-out{border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem}
+.c-out .lbl{display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem}
+.c-out .lbl::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--grad)}
+.c-out .big{font-family:var(--disp);font-weight:800;font-size:clamp(1.1rem,2vw,1.5rem);letter-spacing:-.03em;line-height:1.2;min-height:2.4em}
+@media(max-width:900px){.hero-in{grid-template-columns:1fr}.hero{min-height:auto;padding-top:100px}}
+
+/* generic section head */
+.sec{padding:clamp(4.5rem,11vh,8rem) 0;position:relative}
+.sec .head{margin-bottom:2.6rem}
+.sec h2{font-weight:900;font-size:clamp(2.1rem,5vw,3.8rem);line-height:1;margin-top:.9rem}
+
+/* positioning */
+.pos-card{background:var(--paper2);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.8rem,4vw,3.4rem);position:relative;overflow:hidden}
+.pos-card .glow{width:40%;height:120%;background:rgba(34,199,242,.10);right:-10%;top:-10%}
+.pos-card h2{max-width:16ch}
+.pos-card p{color:var(--slate);max-width:52ch;margin:1.4rem 0 0}
+.badges{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem}
+.badge{font-family:var(--mono);font-size:.72rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.45em .9em;color:var(--slate)}
+
+/* services — assembling cards */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.svc-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.8rem;
+  box-shadow:0 14px 44px -30px rgba(11,14,20,.35);transition:transform .3s,box-shadow .3s}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 22px 54px -28px rgba(122,60,238,.35)}
+.svc-card .mono{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.svc-card h3{font-weight:800;font-size:clamp(1.4rem,2.6vw,2rem);margin:.7rem 0 .5rem}
+.svc-card p{color:var(--slate);font-size:.95rem;margin:0 0 1.1rem}
+.svc-card .io{font-family:var(--mono);font-size:.74rem;color:var(--mist);line-height:1.9}
+.svc-card .io b{color:var(--slate);font-weight:500}
+.svc-card .io .o{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@media(max-width:760px){.svc-grid{grid-template-columns:1fr}}
+
+/* approach — scrubbed progress */
+.apr{background:var(--paper2);border-block:1px solid var(--line)}
+.apr .railbox{position:relative;height:10px;border-radius:999px;background:#E4E9F2;margin:2.6rem 0 2rem;overflow:hidden}
+.apr .fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--grad);border-radius:999px}
+.apr .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.apr .step .n{font-family:var(--disp);font-weight:900;font-size:clamp(1.8rem,3.4vw,2.8rem);letter-spacing:-.04em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.apr .step h3{font-size:1.1rem;margin:.3rem 0 .3rem}
+.apr .step p{color:var(--slate);font-size:.9rem;margin:0}
+@media(max-width:760px){.apr .steps{grid-template-columns:1fr 1fr}}
+
+/* work — counters */
+.wk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.wk-card{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.8rem;
+  box-shadow:0 14px 44px -30px rgba(11,14,20,.35);transition:transform .3s,box-shadow .3s}
+.wk-card:hover{transform:translateY(-4px);box-shadow:0 22px 54px -28px rgba(34,199,242,.4)}
+.wk-card .m{font-family:var(--disp);font-weight:900;font-size:clamp(2.6rem,6vw,4.6rem);letter-spacing:-.05em;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.wk-card h3{font-weight:800;font-size:1.25rem;margin:.7rem 0 .25rem}
+.wk-card .ctx{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.wk-card .go{display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:.76rem;color:var(--slate)}
+.wk-card:hover .go{color:var(--ink)}
+.disc{font-family:var(--mono);font-size:.72rem;color:var(--mist);margin-top:1.3rem}
+@media(max-width:760px){.wk-grid{grid-template-columns:1fr}}
+
+/* engagement — panel row */
+.eng-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.eng-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.8rem;position:relative;overflow:hidden}
+.eng-card::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--grad)}
+.eng-card .mono{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.eng-card h3{font-weight:800;font-size:1.4rem;margin:.6rem 0 .1rem}
+.eng-card .dur{font-family:var(--mono);font-size:.76rem;font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.eng-card p{color:var(--slate);font-size:.93rem;margin:.9rem 0 0}
+.eng-note{font-family:var(--mono);font-size:.74rem;color:var(--mist);margin-top:1.3rem}
+@media(max-width:820px){.eng-row{grid-template-columns:1fr}}
+
+/* POV — takes */
+.pov .take{border-top:1px solid var(--line);padding:1.8rem 0}
+.pov .take:last-of-type{border-bottom:1px solid var(--line)}
+.pov .take p{font-family:var(--disp);font-weight:800;font-size:clamp(1.3rem,3vw,2.2rem);letter-spacing:-.03em;line-height:1.15;margin:.4rem 0 0;max-width:28ch}
+.pov .take p b{font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* team */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.tm-card{background:var(--paper2);border:1px solid var(--line);border-radius:var(--r);padding:1.8rem}
+.tm-card h3{font-weight:800;font-size:1.6rem}
+.tm-card .role{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin:.4rem 0 .8rem}
+.tm-card p{color:var(--slate);margin:0}
+@media(max-width:720px){.duo{grid-template-columns:1fr}}
+
+/* CTA scene */
+.book{position:relative;text-align:center;padding:clamp(6rem,16vh,10rem) var(--gut);overflow:hidden}
+.book .glow.a{top:auto;bottom:-30vw;right:auto;left:20%}
+.book h2{font-weight:900;font-size:clamp(2.8rem,8vw,6.4rem);line-height:.98}
+.book p{color:var(--slate);max-width:44ch;margin:1.6rem auto 2.2rem}
+.book .cta{font-size:1.05rem;padding:.95em 1.9em}
+
+footer{border-top:1px solid var(--line);padding:2rem var(--gut);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--mist)}
+footer a{text-decoration:none;color:var(--slate)}
+
+.gs{opacity:0;transform:translateY(34px)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .gs{opacity:1!important;transform:none!important}
+  .apr .fill{transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand">pivon</a>
+    <div class="nav-l">
+      <a href="#services">Services</a><a href="#work">Work</a><a href="#approach">Approach</a><a href="#team">Team</a>
+    </div>
+    <a href="#book" class="cta">Book the call</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="hero-in">
+    <div>
+      <span class="lbl">AI &amp; Generative-AI Consulting</span>
+      <h1 style="margin-top:1.1rem">Your company, from <span class="grad">0&nbsp;to&nbsp;100</span> on&nbsp;AI.</h1>
+      <p class="sub">We find the use cases worth chasing, build the tools that ship, and leave your team running AI on their own. No slideware.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="cta">Book the honest call →</a>
+        <a href="#services" class="btn2">See the work ↓</a>
+      </div>
+    </div>
+    <div class="console" id="console" role="region" aria-label="Interactive demo console">
+      <div class="c-bar" aria-hidden="true"><span class="d"></span><span class="d"></span><span class="d"></span><span>pivon — console</span></div>
+      <div class="c-body">
+        <div class="chips" role="group" aria-label="Sample prompts">
+          <button class="chip on" data-i="0" type="button">"we're starting from zero"</button>
+          <button class="chip" data-i="1" type="button">"find our best use cases"</button>
+          <button class="chip" data-i="2" type="button">"build us a support agent"</button>
+        </div>
+        <div class="p-row" aria-live="polite"><span class="pfx">pivon&gt;</span><span class="txt" id="typed"></span><span class="cur" aria-hidden="true"></span></div>
+        <div class="c-out">
+          <span class="lbl">generated output</span>
+          <div class="big" id="outBig">An AI-native team, running it without us.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec wrap">
+  <div class="pos-card gs">
+    <div class="glow"></div>
+    <span class="lbl">Why us</span>
+    <h2>New studio. Old hands. <span class="grad">Zero slideware.</span></h2>
+    <p>Pivon is two founders — one deep in production software, one deep in business. We're new as a company; we're not new at shipping. No logo wall yet, on purpose: we'd rather show you real work on a thirty-minute call than decorate a homepage.</p>
+    <div class="badges">
+      <span class="badge">Senior software &amp; solutions architecture</span>
+      <span class="badge">AI enablement &amp; innovation leadership</span>
+      <span class="badge">Build · train · hand over — no lock-in</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="services">
+  <div class="head"><span class="lbl">What we do</span><h2>Four ways in.</h2></div>
+  <div class="svc-grid">
+    <div class="svc-card gs"><span class="mono">01</span><h3>AI Consulting</h3><p>Strategy, roadmaps, honest answers about where AI pays off.</p><div class="io">in&nbsp; <b>"where do we even start?"</b><br>out&nbsp; <span class="o">a costed roadmap</span></div></div>
+    <div class="svc-card gs"><span class="mono">02</span><h3>Use-Case Evaluation</h3><p>Thirty ideas in. The five worth doing out — ranked by impact and effort.</p><div class="io">in&nbsp; <b>30 ideas</b><br>out&nbsp; <span class="o">the 5 worth doing</span></div></div>
+    <div class="svc-card gs"><span class="mono">03</span><h3>Solution Building</h3><p>Design, build, ship — wired into your stack, not bolted on.</p><div class="io">in&nbsp; <b>a shortlisted use case</b><br>out&nbsp; <span class="o">a deployed tool</span></div></div>
+    <div class="svc-card gs"><span class="mono">04</span><h3>0→100 AI Boost</h3><p>Zero to AI-native. We stand it up, train your team, hand over the keys.</p><div class="io">in&nbsp; <b>zero AI</b><br>out&nbsp; <span class="o">an AI-native team</span></div></div>
+  </div>
+</section>
+
+<section class="sec apr" id="approach">
+  <div class="wrap">
+    <div class="head"><span class="lbl">How we work</span><h2>From zero to <span class="grad">yours.</span></h2></div>
+    <div class="railbox"><div class="fill" id="railFill"></div></div>
+    <div class="steps">
+      <div class="step gs"><span class="n">00</span><h3>Discover</h3><p>Your business, data, and constraints.</p></div>
+      <div class="step gs"><span class="n">01</span><h3>Evaluate</h3><p>Use cases ranked and costed.</p></div>
+      <div class="step gs"><span class="n">02</span><h3>Build</h3><p>Design, build, ship.</p></div>
+      <div class="step gs"><span class="n">100</span><h3>Handover</h3><p>We leave. It stays. Your team runs it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="work">
+  <div class="head"><span class="lbl">Selected work</span><h2>What good looks like.</h2></div>
+  <div class="wk-grid">
+    <a class="wk-card gs" href="#"><span class="m"><span class="count" data-n="60">0</span>%</span><h3>Support that answers itself</h3><span class="ctx">Logistics SMB · tickets deflected in 6 weeks</span><span class="go">read the case →</span></a>
+    <a class="wk-card gs" href="#"><span class="m">−<span class="count" data-n="30">0</span>%</span><h3>From spreadsheets to forecasts</h3><span class="ctx">Regional retailer · stockouts cut</span><span class="go">read the case →</span></a>
+    <a class="wk-card gs" href="#"><span class="m"><span class="count" data-n="5">0</span>×</span><h3>A studio that never sleeps</h3><span class="ctx">Marketing agency · output, constant headcount</span><span class="go">read the case →</span></a>
+    <a class="wk-card gs" href="#"><span class="m"><span class="count" data-n="90">0</span>d</span><h3>Zero to one hundred</h3><span class="ctx">Manufacturer · to AI-native, no lock-in</span><span class="go">read the case →</span></a>
+  </div>
+  <p class="disc">Illustrative engagements — the shape of work we deliver.</p>
+</section>
+
+<section class="sec wrap">
+  <div class="head"><span class="lbl">Engagement models</span><h2>Three ways to start.</h2></div>
+  <div class="eng-row">
+    <div class="eng-card gs"><span class="mono">01 · Sprint</span><h3>Discovery Sprint</h3><span class="dur">2 weeks</span><p>Your use cases, ranked and costed. A shortlist you could hand to any builder — including us.</p></div>
+    <div class="eng-card gs"><span class="mono">02 · Build</span><h3>Build Engagement</h3><span class="dur">6–10 weeks</span><p>One shortlisted use case, shipped to production and wired into your stack.</p></div>
+    <div class="eng-card gs"><span class="mono">03 · Program</span><h3>0→100 Program</h3><span class="dur">one quarter</span><p>The full journey: infrastructure, tools, training, handover. You end AI-native.</p></div>
+  </div>
+  <p class="eng-note">Every engagement starts with the same 30-minute call.</p>
+</section>
+
+<section class="sec wrap pov">
+  <div class="head"><span class="lbl">How we see it</span><h2>Three takes.</h2></div>
+  <div class="take gs"><span class="lbl">POV / 01</span><p>Most AI pilots die in the demo. <b>Ship into a workflow</b> or don't start.</p></div>
+  <div class="take gs"><span class="lbl">POV / 02</span><p>Your data is readier than you think. Waiting for perfect data is how you <b>lose two years</b>.</p></div>
+  <div class="take gs"><span class="lbl">POV / 03</span><p>Agents are processes, not magic. <b>Map the process first.</b></p></div>
+</section>
+
+<section class="sec wrap" id="team">
+  <div class="head"><span class="lbl">The founders</span><h2>Two founders. Two hemispheres.</h2></div>
+  <div class="duo">
+    <div class="tm-card gs"><h3>Alex</h3><p class="role">Left hemisphere · circuits, data, build</p><p>Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p></div>
+    <div class="tm-card gs"><h3>Andreas</h3><p class="role">Right hemisphere · creative, business</p><p>Finds where AI creates value and makes it land with real teams and customers.</p></div>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="glow a"></div>
+  <h2>Start the <span class="grad">first run.</span></h2>
+  <p>A 30-minute discovery call — no slides, the honest version. Pick a slot; we confirm by email.</p>
+  <a href="#" class="cta">Book the honest call →</a>
+</section>
+
+<footer>
+  <span>© 2026 Pivon</span>
+  <span><a href="mailto:hello@pivon.ai">hello@pivon.ai</a></span>
+  <span>Cases are illustrative engagements.</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* console: chips swap prompt + output, prompt types */
+  const P=[
+    ['we’re starting from zero','An AI-native team, running it without us.'],
+    ['find our best use cases','The five worth doing — ranked and costed.'],
+    ['build us a support agent','A deployed agent, wired into your stack.']
+  ];
+  const typed=document.getElementById('typed'), outBig=document.getElementById('outBig');
+  let timer=null;
+  function play(i){
+    document.querySelectorAll('.chip').forEach((c,k)=>c.classList.toggle('on',k===i));
+    const [q,a]=P[i];
+    if(RM){typed.textContent=q;outBig.textContent=a;return;}
+    clearInterval(timer); let c=0; typed.textContent='';
+    timer=setInterval(()=>{
+      typed.textContent=q.slice(0,++c);
+      if(c>=q.length){clearInterval(timer);outBig.textContent=a;}
+    },38);
+  }
+  document.querySelectorAll('.chip').forEach((c,k)=>c.onclick=()=>play(k));
+  play(0);
+
+  if(RM || !window.gsap){document.querySelectorAll('.gs').forEach(e=>{e.style.opacity=1;e.style.transform='none'});return;}
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* hero console floats in, then gently parallaxes on scroll */
+  gsap.from('#console',{y:60,opacity:0,duration:1,ease:'power3.out',delay:.15});
+  gsap.to('#console',{y:-40,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.from('.hero h1, .hero .sub, .hero-ctas',{y:40,opacity:0,duration:.9,stagger:.09,ease:'power3.out'});
+
+  /* generic scene entrances */
+  document.querySelectorAll('.gs').forEach(el=>{
+    gsap.to(el,{y:0,opacity:1,duration:.85,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 82%'}});
+  });
+
+  /* approach rail scrubs with scroll */
+  gsap.to('#railFill',{scaleX:1,ease:'none',
+    scrollTrigger:{trigger:'#approach',start:'top 75%',end:'bottom 55%',scrub:true}});
+
+  /* work metrics count up */
+  document.querySelectorAll('.count').forEach(el=>{
+    const n=+el.dataset.n;
+    gsap.fromTo(el,{innerText:0},{innerText:n,duration:1.4,ease:'power2.out',snap:{innerText:1},
+      scrollTrigger:{trigger:el,start:'top 85%'}});
+  });
+})();
+</script>
+</body>
+</html>

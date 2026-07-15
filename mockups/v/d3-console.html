@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — D3 · Console OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base-style.css">
+<style>
+/* ── D3: the whole site is the Pivon workspace — sections are console panels ── */
+
+body{background:#E7EDF5;padding-bottom:34px}
+
+/* sections become app panels with chrome bars */
+.section{max-width:1240px;margin:26px auto;background:var(--paper);border:1px solid var(--line-2);
+  border-radius:16px;box-shadow:0 24px 60px -38px rgba(22,32,46,.45);overflow:hidden;
+  padding-block:0 72px}
+#approach,#booking{background:var(--paper)}
+.sec-chrome{display:flex;align-items:center;gap:.7rem;background:var(--paper-2);border-bottom:1px solid var(--line);
+  padding:.55rem 1rem;font-family:var(--f-mono);font-size:.72rem;color:var(--mist);letter-spacing:.05em}
+.sec-chrome .dots{display:flex;gap:.35rem}
+.sec-chrome .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.sec-head{margin-top:56px}
+#booking .bk-card{box-shadow:none;border:1px solid var(--line)}
+
+/* approach strip reads as a command on the desktop */
+.approach-strip{background:transparent;border:0}
+.strip-inner::before{content:"$";font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* footer = the dark dock panel */
+.footer{max-width:1240px;margin:26px auto 40px;border-radius:16px}
+
+/* persistent OS status bar */
+.os-status{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;gap:1.6rem;align-items:center;
+  background:rgba(22,32,46,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#B9C6D6;
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;padding:.5rem 1.4rem}
+.os-status .ok::before{content:"●";color:#28C840;margin-right:.45em;font-size:.8em}
+.os-status .right{margin-left:auto}
+@media (max-width:600px){.os-status .right{display:none}}
+</style>
+</head>
+<body>
+<script>
+fetch('d-body.html').then(r=>r.text()).then(h=>{
+  document.body.insertAdjacentHTML('afterbegin', h);
+  const s=document.createElement('script'); s.src='base-script.js';
+  s.onload=()=>{ directionInit(); requestAnimationFrame(()=>{try{parent.fitAll&&parent.fitAll()}catch(e){}}); };
+  document.body.appendChild(s);
+});
+
+function directionInit(){
+  /* chrome bar + path label on every section panel */
+  const paths={
+    services:'~/pivon/services',
+    approach:'~/pivon/approach — 0→100 track',
+    work:'~/pivon/work — run log',
+    team:'~/pivon/team',
+    booking:'~/pivon/booking — book a run'
+  };
+  document.querySelectorAll('.section').forEach(s=>{
+    const bar=document.createElement('div'); bar.className='sec-chrome';
+    bar.innerHTML='<span class="dots"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FFBC2E"></span><span class="dot" style="background:#28C840"></span></span><span>'+(paths[s.id]||'~/pivon')+'</span>';
+    s.prepend(bar);
+  });
+
+  /* OS status bar with live scroll progress */
+  const st=document.createElement('div'); st.className='os-status';
+  st.innerHTML='<span class="ok">pivon workspace</span><span>status: ready</span><span id="osProg">progress: 000/100</span><span class="right">hello@pivon.ai</span>';
+  document.body.appendChild(st);
+  const p=document.getElementById('osProg');
+  function upd(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    const v=max>0?Math.min(100,Math.round(scrollY/max*100)):0;
+    p.textContent='progress: '+String(v).padStart(3,'0')+'/100';
+  }
+  addEventListener('scroll',upd,{passive:true});
+  addEventListener('resize',upd,{passive:true});
+  upd();
+}
+</script>
+</body>
+</html>
