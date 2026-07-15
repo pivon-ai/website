@@ -13,6 +13,7 @@ import socketserver
 import os
 import json
 import threading
+import time
 import datetime
 
 PORT = 7321
@@ -60,8 +61,18 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 socketserver.ThreadingTCPServer.allow_reuse_address = True
 with socketserver.ThreadingTCPServer(("127.0.0.1", PORT), Handler) as httpd:
     print("PREVIEW_SERVER_READY http://localhost:%d/" % PORT, flush=True)
-    # ponytail: safety auto-exit after 2h so a forgotten server can't linger. A decision exit
-    # is distinguished by the PIVON_DECISION line printed above; a bare exit here = timeout.
-    threading.Timer(7200, httpd.shutdown).start()
+    # ponytail: safety auto-exit after 12h so a forgotten server can't linger, but an
+    # overnight round survives. A decision exit prints PIVON_DECISION above; a timeout
+    # exit prints PREVIEW_SERVER_TIMEOUT below.
+    deadline = time.monotonic() + 43200
+
+    def safety_check():
+        if time.monotonic() >= deadline:
+            print("PREVIEW_SERVER_TIMEOUT", flush=True)
+            httpd.shutdown()
+        else:
+            threading.Timer(60, safety_check).start()
+
+    threading.Timer(60, safety_check).start()
     httpd.serve_forever()
 print("PREVIEW_SERVER_EXITED", flush=True)

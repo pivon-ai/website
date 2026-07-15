@@ -1,403 +1,566 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pivon — AI &amp; Generative-AI Consulting</title>
-  <meta name="description" content="Pivon is an AI & generative-AI consulting agency. We find the use cases worth chasing, build the solutions that ship, and take your company from 0 to 100 on AI." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322C7F2'/%3E%3Cstop offset='1' stop-color='%23E5258E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='14' cy='14' r='13' fill='%23fff' stroke='%23E6EAF0'/%3E%3Cline x1='14' y1='6' x2='14' y2='22' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='9' cy='11' r='1.6' fill='%2322C7F2'/%3E%3Ccircle cx='8' cy='16' r='1.6' fill='%232F6BEC'/%3E%3Ccircle cx='19' cy='12' r='1.6' fill='%237A3CEE'/%3E%3Ccircle cx='19' cy='17' r='1.6' fill='%23E5258E'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pivon — AI &amp; Generative-AI Consulting</title>
+<meta name="description" content="Pivon is an AI & generative-AI consulting studio. We find the use cases worth chasing, build the solutions that ship, and take your company from 0 to 100 on AI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232F6BEC'/%3E%3Cstop offset='1' stop-color='%23E5258E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='14' cy='14' r='13' fill='%23fff' stroke='%23E6EAF0'/%3E%3Cline x1='14' y1='6' x2='14' y2='22' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='9' cy='11' r='1.6' fill='%232F6BEC'/%3E%3Ccircle cx='8' cy='16' r='1.6' fill='%235A4BEA'/%3E%3Ccircle cx='19' cy='12' r='1.6' fill='%23A836C4'/%3E%3Ccircle cx='19' cy='17' r='1.6' fill='%23E5258E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── F1 · FLAGSHIP — the synthesis of C + C2 + N2 + Q3 + Q5.
+     Chassis: C/C2's spec-sheet identity (grid, SEC bars, instruments).
+     Spectacle: Q5's particle hero + Q3's self-assembling UI.
+     Play: N2's stickers, highlight blocks, stamp, and the 100-sun CTA.
+     Spine: every SEC bar ticks PROGRESS toward 100. ── */
+:root{
+  --paper:#FFFFFF; --paper2:#F7F8FA; --ink:#0C0D10; --slate:#555C66; --mist:#9CA2AB;
+  --line:#E6E8EC; --rule:#0C0D10;
+  --g1:#2F6BEC; --g2:#E5258E;
+  --grad:linear-gradient(100deg,var(--g1),var(--g2));
+  --disp:'Schibsted Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  --gut:clamp(20px,4.5vw,60px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);font-size:1.02rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.03em}
+a{color:inherit}
+::selection{background:rgba(47,107,236,.16)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+:focus-visible{outline:2px solid var(--g1);outline-offset:3px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* the visible grid — hairline columns behind everything */
+.gridbg{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px calc(100%/12))}
+main,nav{position:relative;z-index:1}
+
+/* stickers (N2) */
+.stick{display:inline-block;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.06em;
+  background:var(--paper);border:1.5px solid var(--ink);padding:.45em .9em;border-radius:6px;
+  box-shadow:3px 3px 0 var(--ink);transition:transform .2s}
+.stick:hover{transform:rotate(0)!important}
+.stick.g{background:var(--grad);color:#fff;border-color:transparent}
+
+/* section chrome: mono index bar with a progress readout */
+.sec{border-top:2px solid var(--rule);padding:0 var(--gut) clamp(4rem,9vh,6.5rem);position:relative}
+.sec-bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.3rem 1rem;padding:.7rem 0 2.4rem;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.sec-bar b{color:var(--ink);font-weight:500}
+.sec-bar .pg{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:60px;padding-inline:var(--gut)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.25rem;letter-spacing:-.03em;text-decoration:none;display:flex;align-items:baseline;gap:.5rem}
+.brand .v{font-family:var(--mono);font-size:.62rem;color:var(--mist);letter-spacing:.1em}
+.nav-l{display:flex;gap:1.4rem;font-family:var(--mono);font-size:.76rem;letter-spacing:.06em}
+.nav-l a{text-decoration:none;color:var(--slate)}
+.nav-l a:hover{color:var(--ink)}
+.nav-l a i{font-style:normal;color:var(--mist);margin-right:.35em}
+.cta{font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.04em;text-decoration:none;color:#fff;background:var(--ink);padding:.7em 1.3em;border-radius:6px}
+.cta:hover{background:var(--grad)}
+@media(max-width:760px){.nav-l{display:none}}
+
+/* ── hero: the particle stage (Q5) in spec-sheet chrome (C) ── */
+.stage{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage .meta{position:relative;z-index:2;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);
+  padding:calc(60px + 1rem) var(--gut) 0;pointer-events:none} /* clears the sticky nav while pinned */
+.stage .head{position:relative;z-index:2;text-align:center;padding:clamp(1.6rem,4vh,3rem) var(--gut) 0;pointer-events:none}
+.stage .head h1{font-weight:900;font-size:clamp(1.4rem,3vw,2.3rem);letter-spacing:-.035em}
+.stage .sticks{display:flex;gap:.9rem;justify-content:center;margin-top:1.1rem;pointer-events:none}
+.stage .sticks .stick:nth-child(1){transform:rotate(-3deg)}
+.stage .sticks .stick:nth-child(2){transform:rotate(2deg)}
+.stage .sticks .stick:nth-child(3){transform:rotate(-1.5deg)}
+.stage .cap{position:absolute;left:0;right:0;bottom:10vh;z-index:2;text-align:center;pointer-events:none}
+.stage .cap .word-cap{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;color:var(--slate);min-height:1.6em;margin:0}
+.stage .cap .word-cap b{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stage .dots{display:flex;gap:.5rem;justify-content:center;margin-top:1rem}
+.stage .dots i{width:9px;height:9px;border-radius:50%;background:var(--line);transition:background .25s}
+.stage .dots i.on{background:var(--g2)}
+.stage .hint{position:absolute;left:var(--gut);bottom:1.6rem;z-index:2;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.stage .fallback{display:none;flex:1;align-items:center;justify-content:center;position:relative;z-index:2;text-align:center;
+  font-family:var(--disp);font-weight:900;font-size:clamp(3.4rem,14vw,11rem);letter-spacing:-.05em;line-height:1}
+body.no-canvas .stage canvas{display:none}
+body.no-canvas .stage .fallback{display:flex}
+body.no-canvas .stage .hint{display:none}
+
+/* ── SEC.00 why us: declaration (C2) + paste-up highlights (N2) + stamp ── */
+.pos p.big{font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.8rem);letter-spacing:-.03em;line-height:1.22;max-width:32ch;margin:0}
+.pos p.big b{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.pos .hl{display:inline-block;background:var(--grad);color:#fff;padding:.02em .18em;border-radius:.12em;transform:rotate(-1deg)}
+.pos .hl2{display:inline-block;border:2.5px solid var(--ink);padding:.02em .18em;border-radius:.12em;transform:rotate(1.2deg)}
+.stamp{position:absolute;right:clamp(1rem,6vw,5rem);top:3.6rem;transform:rotate(8deg);border:3px solid var(--g2);color:var(--g2);
+  font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.28em;padding:.7em 1.1em;border-radius:6px;opacity:.85}
+@media(max-width:820px){.stamp{position:static;display:inline-block;margin-top:1.4rem;transform:rotate(-2deg)}}
+.spec{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);margin-top:2.4rem}
+.spec .cell{padding:1.2rem 1.4rem;border-right:1px solid var(--rule)}
+.spec .cell:last-child{border-right:0}
+.spec .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+.spec .v{font-weight:600;font-size:.98rem;margin-top:.35rem}
+@media(max-width:820px){.spec{grid-template-columns:1fr}.spec .cell{border-right:0;border-bottom:1px solid var(--rule)}.spec .cell:last-child{border-bottom:0}}
+
+/* ── SEC.01 services: the quadrant instrument (C2) with sticker indexes (N2) ── */
+.quad-wrap{position:relative;padding:1.6rem 3rem 3rem 3.4rem}
+.quad{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule)}
+.quad::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule);opacity:.35}
+.quad::after{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:var(--rule);opacity:.35}
+.ax{position:absolute;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.ax.n{top:-.4rem;left:50%;transform:translate(-50%,-100%)}
+.ax.s{bottom:.4rem;left:50%;transform:translate(-50%,100%)}
+.ax.w{left:.4rem;top:50%;transform:translate(-100%,-50%) rotate(-90deg)}
+.ax.e{right:-.6rem;top:50%;transform:translate(100%,-50%) rotate(90deg)}
+.q-cell{padding:2rem 1.6rem 1.6rem;min-height:200px;position:relative;text-decoration:none;transition:background .2s}
+.q-cell:hover{background:var(--paper2)}
+.q-cell .six{position:absolute;top:-.85rem;left:1.2rem}
+.q-cell:nth-child(1) .six .stick{transform:rotate(-3deg)}
+.q-cell:nth-child(2) .six .stick{transform:rotate(2deg)}
+.q-cell:nth-child(3) .six .stick{transform:rotate(1.5deg)}
+.q-cell:nth-child(4) .six .stick{transform:rotate(-2deg)}
+.q-cell .co{position:absolute;top:.7rem;right:.9rem;font-family:var(--mono);font-size:.6rem;color:var(--mist)}
+.q-cell h3{font-weight:900;font-size:clamp(1.4rem,2.9vw,2.3rem);letter-spacing:-.035em;margin:.2rem 0 .4rem}
+.q-cell:hover h3{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.q-cell .io{font-family:var(--mono);font-size:.7rem;color:var(--mist);line-height:1.9;display:block}
+.q-cell .io b{color:var(--slate);font-weight:500}
+.q-cell .io .o{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.q-cell .dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--grad);bottom:.9rem;right:.9rem}
+@media(max-width:760px){.quad{grid-template-columns:1fr}.quad::before{display:none}.quad-wrap{padding:1rem 0 0 0}.ax{display:none}
+  .q-cell{border-bottom:1px solid var(--rule);min-height:0;margin-top:.4rem}.q-cell:last-child{border-bottom:0}}
+
+/* ── SEC.02 approach: the gauge (C2) ── */
+.gauge-wrap{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;margin-bottom:2.6rem}
+.readout{font-family:var(--disp);font-weight:900;font-size:clamp(3rem,8vw,6.4rem);letter-spacing:-.05em;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;min-width:3.2ch;text-align:right}
+.gauge{position:relative;height:40px;border:1px solid var(--rule)}
+.gauge .fill{position:absolute;inset:0;background:var(--grad);transform-origin:left;transform:scaleX(0);transition:transform 2s cubic-bezier(.65,.05,.36,1) .2s}
+.gauge.on .fill{transform:scaleX(1)}
+.gauge .seg{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(5% - 3px),var(--paper) calc(5% - 3px) 5%)}
+.gauge .lab{position:absolute;top:calc(100% + .5rem);font-family:var(--mono);font-size:.62rem;color:var(--mist)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule)}
+.step{padding:1.3rem 1.4rem;border-right:1px solid var(--rule)}
+.step:last-child{border-right:0}
+.step .n{font-family:var(--mono);font-size:.72rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.step h3{font-size:1.12rem;margin:.4rem 0 .3rem}
+.step p{color:var(--slate);font-size:.88rem;margin:0}
+@media(max-width:820px){.steps{grid-template-columns:1fr 1fr}.step{border-bottom:1px solid var(--rule)}.step:nth-child(3),.step:nth-child(4){border-bottom:0}}
+
+/* ── SEC.03 the build: the assembly stage (Q3) ── */
+.asm{border-top:2px solid var(--rule)}
+.asm .sec-bar{padding:.7rem var(--gut) 0}
+.asm-stage{min-height:100svh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.asm-stage .status{position:absolute;top:calc(60px + 1rem);left:var(--gut);font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
+.asm-stage .status b{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.app{position:relative;width:min(880px,92vw);aspect-ratio:16/10;background:#fff;border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 40px 90px -40px rgba(11,12,15,.4)}
+.part{position:absolute;border-radius:10px}
+.p-chrome{left:0;right:0;top:0;height:8.5%;background:var(--paper2);border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;
+  display:flex;align-items:center;gap:.6rem;padding:0 1.1rem;font-family:var(--mono);font-size:.66rem;color:var(--mist)}
+.p-chrome i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.p-chrome i:nth-child(1){background:#FF5F57}.p-chrome i:nth-child(2){background:#FFBC2E}.p-chrome i:nth-child(3){background:#28C840}
+.p-side{left:0;top:8.5%;bottom:0;width:24%;background:var(--paper2);border-right:1px solid var(--line);border-radius:0 0 0 16px;padding:5% 2.4%}
+.p-side .it{height:11px;border-radius:6px;background:#DFE3EA;margin-bottom:9%}
+.p-side .it.on{background:var(--grad)}
+.p-b1{left:29%;top:16%;width:46%;padding:3% 3.4%;background:var(--paper2);border:1px solid var(--line);font-size:clamp(.6rem,1.4vw,.85rem);color:var(--slate)}
+.p-b2{right:4%;top:39%;width:44%;padding:3% 3.4%;background:var(--grad);color:#fff;font-size:clamp(.6rem,1.4vw,.85rem)}
+.p-b2 small{display:block;font-family:var(--mono);font-size:.72em;opacity:.8;margin-top:.5em}
+.p-input{left:29%;right:4%;bottom:6%;height:9%;background:#fff;border:1.5px solid var(--line);border-radius:999px;
+  display:flex;align-items:center;padding:0 4%;font-family:var(--mono);font-size:clamp(.58rem,1.3vw,.8rem);color:var(--mist)}
+.p-badge{right:-3%;top:-6%;background:var(--ink);color:#fff;font-family:var(--mono);font-weight:700;font-size:clamp(.62rem,1.5vw,.85rem);
+  padding:.7em 1.1em;border-radius:999px;box-shadow:0 14px 34px -14px rgba(11,12,15,.6);z-index:3}
+.p-badge b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ── SEC.04 work: results charted (C2) + illustrative sticker (N2) ── */
+.chart{border:1px solid var(--rule);padding:1.8rem clamp(1.2rem,3vw,2.2rem);position:relative}
+.chart .six{position:absolute;top:-.9rem;right:1.6rem}
+.chart .six .stick{transform:rotate(2deg)}
+.crow{display:grid;grid-template-columns:minmax(150px,240px) 1fr auto;gap:1.4rem;align-items:center;padding:1rem 0;text-decoration:none}
+.crow + .crow{border-top:1px solid var(--line)}
+.crow .t h3{font-weight:700;font-size:clamp(1rem,1.9vw,1.25rem);letter-spacing:-.02em}
+.crow .t .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);display:block;margin-top:.25rem}
+.track{height:30px;border:1px solid var(--rule);position:relative;overflow:hidden}
+.track .bar{position:absolute;inset:0;right:auto;width:var(--w,0%);background:var(--grad);transition:width 1.6s cubic-bezier(.65,.05,.36,1) .15s}
+.crow .m{font-family:var(--disp);font-weight:900;font-size:clamp(1.7rem,3.6vw,2.8rem);letter-spacing:-.04em;min-width:4ch;text-align:right;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.disc{font-family:var(--mono);font-size:.7rem;color:var(--mist);margin-top:1.2rem}
+@media(max-width:700px){.crow{grid-template-columns:1fr auto}.track{grid-column:1/-1}}
+
+/* ── SEC.05 engagement: three configs (C2) ── */
+.files{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.file{border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--paper)}
+.fhead{display:flex;justify-content:space-between;background:var(--paper2);border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:.7rem;padding:.55rem .9rem;color:var(--slate)}
+.fhead .dur{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fbody{font-family:var(--mono);font-size:.74rem;line-height:1.95;padding:1rem 1.1rem;color:var(--slate)}
+.fbody .k{color:var(--g1);font-weight:500}
+.fbody .s{color:var(--g2)}
+.fbody .c{color:var(--mist)}
+.eng-note{font-family:var(--mono);font-size:.72rem;color:var(--mist);margin-top:1.3rem}
+@media(max-width:860px){.files{grid-template-columns:1fr}}
+
+/* ── SEC.06 POV: the log (C2) ── */
+.log .take{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:start;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.log .take:last-of-type{border-bottom:0}
+.badge{font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.1em;padding:.4em .7em;border-radius:5px;margin-top:.5rem}
+.badge.warn{background:#FFF3E0;color:#B45309;border:1px solid #F3C98B}
+.badge.info{background:#E8F1FF;color:#1D4ED8;border:1px solid #BBD3FA}
+.badge.crit{background:#FDE9F1;color:#BE185D;border:1px solid #F5BBD4}
+.log .take p{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,3vw,2.1rem);letter-spacing:-.03em;line-height:1.2;margin:0;max-width:30ch}
+.log .take p b{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* ── SEC.07 personnel: IC pinouts (C2) with hemisphere discs (N2) ── */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.ic{border:2px solid var(--rule);border-radius:10px;position:relative;padding:1.8rem 1.8rem 1.8rem 2.4rem;background:var(--paper);overflow:hidden}
+.ic::before{content:"";position:absolute;left:0;top:10%;bottom:10%;width:10px;
+  background:repeating-linear-gradient(180deg,var(--rule) 0 3px,transparent 3px 14px)}
+.ic .semi{position:absolute;top:-3.4rem;width:11rem;height:11rem;border-radius:50%;background:var(--grad);opacity:.12;pointer-events:none}
+.ic.l .semi{left:-4rem}
+.ic.r .semi{right:-4rem}
+.ic .pn{position:absolute;top:.7rem;right:.9rem;font-family:var(--mono);font-size:.6rem;color:var(--mist)}
+.ic h3{font-weight:900;font-size:clamp(1.6rem,3.2vw,2.4rem);margin:0 0 .15rem;position:relative}
+.ic .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 .8rem;position:relative}
+.ic p{color:var(--slate);font-size:.93rem;margin:0;position:relative}
+.ic .pins{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem;position:relative}
+.ic .pin{font-family:var(--mono);font-size:.62rem;border:1px solid var(--line);border-radius:4px;padding:.3em .6em;color:var(--mist)}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+
+/* ── SEC.08 booking: the 100-sun (N2) on the exec block (C) ── */
+.book{border-top:2px solid var(--rule);background:var(--ink);color:#fff;padding:0 var(--gut) clamp(4rem,9vh,6rem);text-align:center;overflow:hidden} /* clips the orbit ring's rotating box */
+.book .sec-bar{color:rgba(255,255,255,.45);text-align:left}
+.book .sec-bar b{color:#fff}
+.book .mono-line{font-family:var(--mono);font-size:.78rem;color:rgba(255,255,255,.55);margin:1rem 0 2.6rem}
+.book .mono-line b{color:#fff;font-weight:500}
+.book .wrap{position:relative;display:inline-block}
+.book .sun{width:min(520px,84vw);aspect-ratio:1;border-radius:50%;background:var(--grad);margin-inline:auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:2rem;
+  box-shadow:0 30px 90px -30px rgba(229,37,142,.55)}
+.book .sun h2{font-weight:900;font-size:clamp(1.8rem,4.6vw,3.2rem);letter-spacing:-.04em;line-height:1.02;color:#fff;max-width:12ch}
+.book .sun p{color:rgba(255,255,255,.92);font-size:.98rem;max-width:30ch;margin:0}
+.book .sun .cta{background:#fff;color:var(--ink);font-size:.9rem;padding:.9em 1.6em}
+.book .sun .cta:hover{background:var(--ink);color:#fff}
+.book .orbit{position:absolute;inset:-2.2rem;border:1.5px dashed rgba(255,255,255,.35);border-radius:50%;pointer-events:none;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.book .base{margin-top:3.4rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.5);display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.book .base a{color:rgba(255,255,255,.75);text-decoration:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+  .gauge .fill{transform:none}
+  .track .bar{width:var(--w)!important}
+  .book .orbit{animation:none}
+}
+</style>
 </head>
 <body>
+<div class="gridbg" aria-hidden="true"></div>
 
-  <!-- ───────────────────────── NAV ───────────────────────── -->
-  <nav aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="#top" class="nav-brand" aria-label="Pivon home">
-        <svg class="brand-glyph" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="14" cy="14" r="13" fill="#F6F8FB" stroke="#E6EAF0" stroke-width="0.5"/>
-          <path d="M14 7 L9 10 L7 14 L9 18 L14 21" stroke="#22C7F2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="9" cy="10" r="1.5" fill="#2F6BEC"/>
-          <circle cx="7" cy="14" r="1.5" fill="#22C7F2"/>
-          <circle cx="9" cy="18" r="1.5" fill="#2F6BEC"/>
-          <path d="M9 10 L6 12" stroke="#22C7F2" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-          <path d="M7 14 L5 14" stroke="#2F6BEC" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-          <path d="M9 18 L6 20" stroke="#22C7F2" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-          <path d="M14 7 C17 8 21 10 22 14 C21 18 17 20 14 21" stroke="#7A3CEE" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M14 10 C16 11 19 12 19.5 14 C19 16 16 18 14 18" stroke="#E5258E" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
-          <line x1="14" y1="7" x2="14" y2="21" stroke="#E6EAF0" stroke-width="0.75"/>
-          <circle cx="14" cy="14" r="2" fill="white" stroke="#E6EAF0" stroke-width="0.5"/>
-          <circle cx="14" cy="14" r="1" fill="url(#cg)"/>
-          <defs>
-            <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#22C7F2"/>
-              <stop offset="100%" stop-color="#7A3CEE"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        <span class="brand-wordmark">pivon</span>
-      </a>
-
-      <ul class="nav-links" role="list">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#approach">Approach</a></li>
-      </ul>
-
-      <a href="#booking" class="btn btn-primary nav-cta"><span>Book a call</span></a>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <rect y="4" width="22" height="2" rx="1" fill="currentColor"/>
-          <rect y="10" width="22" height="2" rx="1" fill="currentColor"/>
-          <rect y="16" width="22" height="2" rx="1" fill="currentColor"/>
-        </svg>
-      </button>
+<nav>
+  <div class="nav-in">
+    <a href="#" class="brand">pivon <span class="v">v3.0 / AI CONSULTING</span></a>
+    <div class="nav-l">
+      <a href="#services"><i>01</i>Services</a><a href="#approach"><i>02</i>Approach</a><a href="#build"><i>03</i>Build</a><a href="#work"><i>04</i>Work</a><a href="#team"><i>07</i>Team</a>
     </div>
+    <a href="#book" class="cta">BOOK_CALL()</a>
+  </div>
+</nav>
 
-    <!-- mobile slide-down menu -->
-    <div class="nav-menu" id="navMenu" hidden>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#team">Team</a>
-      <a href="#approach">Approach</a>
-      <a href="#booking" class="btn btn-primary"><span>Book a call</span></a>
+<main>
+<header class="stage" id="stage">
+  <canvas id="pc" aria-hidden="true"></canvas>
+  <div class="meta"><span>DOC / PIVON · REV 3.0</span><span>AI &amp; GENERATIVE-AI CONSULTING</span><span>EST. 2026</span></div>
+  <div class="head">
+    <h1>Your company, from <span class="grad">0&nbsp;to&nbsp;100</span> on&nbsp;AI.</h1>
+    <div class="sticks" aria-hidden="true">
+      <span class="stick">two founders</span>
+      <span class="stick g">no slideware</span>
+      <span class="stick">est. 2026</span>
     </div>
-  </nav>
+  </div>
+  <div class="fallback grad" aria-hidden="true">0&nbsp;→&nbsp;100</div>
+  <div class="cap">
+    <p class="word-cap" id="wordCap">first we <b>consult</b> — what's worth building, ranked and costed</p>
+    <div class="dots" id="pdots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+  </div>
+  <span class="hint">scroll to morph · move your cursor through the dots</span>
+</header>
 
-  <span id="top"></span>
+<section class="sec pos reveal">
+  <div class="sec-bar"><span><b>SEC.00</b> — WHY US</span><span><span class="pg">00/100</span> · NEW STUDIO / OLD HANDS</span></div>
+  <p class="big">New studio. Old hands. We <span class="hl">think</span> like consultants, <span class="hl2">draw</span> like designers, and ship like engineers — because between us, we are all three. No logo wall yet, on purpose. We'd rather show you <b>real work on a thirty-minute call</b>.</p>
+  <span class="stamp" aria-hidden="true">NO SLIDEWARE</span>
+  <div class="spec">
+    <div class="cell"><span class="k">Engineering</span><div class="v">Senior software &amp; solutions architecture</div></div>
+    <div class="cell"><span class="k">Business</span><div class="v">AI enablement &amp; innovation leadership</div></div>
+    <div class="cell"><span class="k">Model</span><div class="v">Build · train · hand over — no lock-in</div></div>
+  </div>
+</section>
 
-  <!-- ───────────────────────── 1 · HERO ───────────────────────── -->
-  <header class="hero" aria-label="Hero">
-    <canvas id="neural-canvas" aria-hidden="true"></canvas>
-    <div class="hero-inner">
-
-      <!-- Left: copy (LCP — plain HTML, painted immediately) -->
-      <div class="hero-content">
-        <p class="eyebrow">AI &amp; Generative-AI Consulting</p>
-        <h1 class="hero-h1">Take your company from <span class="grad-text">0&nbsp;to&nbsp;100</span> on&nbsp;AI.</h1>
-        <p class="hero-sub">Pivon finds the use cases worth chasing, builds the solutions that ship, and leaves your team running AI like they always did it — whether you're just starting or already scaling.</p>
-        <div class="hero-actions">
-          <a href="#booking" class="btn btn-primary"><span>Book a discovery call →</span></a>
-          <a href="#services" class="btn btn-ghost">See how we work ↓</a>
-        </div>
-      </div>
-
-      <!-- Right: generative console (enhances on top; final text exists in HTML) -->
-      <div class="console-panel" role="region" aria-label="Interactive demo console">
-        <div class="console-chrome" aria-hidden="true">
-          <div class="chrome-dots">
-            <div class="chrome-dot"></div>
-            <div class="chrome-dot"></div>
-            <div class="chrome-dot"></div>
-          </div>
-          <span class="chrome-label">pivon — console</span>
-        </div>
-
-        <div class="console-body">
-          <div class="prompt-buttons" role="group" aria-label="Sample prompts">
-            <button class="prompt-btn active" data-prompt-index="0" type="button">"we're starting from zero"</button>
-            <button class="prompt-btn" data-prompt-index="1" type="button">"find our best use cases"</button>
-            <button class="prompt-btn" data-prompt-index="2" type="button">"build us a support agent"</button>
-          </div>
-
-          <div class="prompt-input-row" aria-live="polite" aria-atomic="true" aria-label="Current prompt">
-            <span class="prompt-prefix" aria-hidden="true">pivon&gt;</span>
-            <span class="prompt-text" id="promptDisplay"></span>
-            <span class="prompt-cursor" aria-hidden="true"></span>
-          </div>
-
-          <div class="console-output">
-            <div class="generating-bar" id="generatingBar" aria-live="polite" aria-atomic="true">
-              <div class="gen-dots" aria-hidden="true">
-                <div class="gen-dot"></div>
-                <div class="gen-dot"></div>
-                <div class="gen-dot"></div>
-              </div>
-              <span class="gen-label">generating output…</span>
-            </div>
-
-            <div class="output-label" aria-hidden="true">generated output</div>
-
-            <div class="output-headline" id="outputHeadline" aria-live="polite" aria-atomic="true">
-              Take your company from <span class="grad-text">0 to 100</span> on AI.
-            </div>
-
-            <div class="output-chips" id="outputChips" role="list" aria-label="Related services">
-              <span class="chip" role="listitem">0→100 AI Boost</span>
-              <span class="chip" role="listitem">AI Consulting</span>
-              <span class="chip" role="listitem">Use-Case Evaluation</span>
-              <span class="chip" role="listitem">Solution Building</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+<section class="sec reveal" id="services">
+  <div class="sec-bar"><span><b>SEC.01</b> — SERVICES</span><span><span class="pg">15/100</span> · PLOTTED: SCOPE × TIME</span></div>
+  <div class="quad-wrap">
+    <span class="ax n">whole company</span><span class="ax s">one workflow</span>
+    <span class="ax w">weeks</span><span class="ax e">a quarter</span>
+    <div class="quad">
+      <a class="q-cell" href="#book"><span class="six"><span class="stick">S/01</span></span><span class="co">x=.22 y=.84</span><h3>Consulting. The honest kind.</h3>
+        <span class="io">in&nbsp; <b>"where do we even start?"</b><br>out&nbsp; <span class="o">a plan worth stealing</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book"><span class="six"><span class="stick g">S/04</span></span><span class="co">x=.86 y=.91</span><h3>0→100 Program.</h3>
+        <span class="io">in&nbsp; <b>zero AI</b><br>out&nbsp; <span class="o">an AI-native team</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book"><span class="six"><span class="stick">S/02</span></span><span class="co">x=.18 y=.42</span><h3>Design. For real users.</h3>
+        <span class="io">in&nbsp; <b>a tool nobody opens</b><br>out&nbsp; <span class="o">a blueprint people get</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book"><span class="six"><span class="stick">S/03</span></span><span class="co">x=.74 y=.47</span><h3>Solutions. In production.</h3>
+        <span class="io">in&nbsp; <b>a shortlisted use case</b><br>out&nbsp; <span class="o">a system that runs without us</span></span><span class="dot" aria-hidden="true"></span></a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- ───────────────────────── 2 · APPROACH STRIP ───────────────────────── -->
-  <a href="#approach" class="approach-strip" aria-label="Our approach: zero, discover, evaluate, build, one hundred, yours">
-    <div class="strip-inner">
-      <span class="s-num">0</span>
-      <span class="s-sep">—</span>
-      <span class="s-step">Discover</span>
-      <span class="s-arrow">→</span>
-      <span class="s-step">Evaluate</span>
-      <span class="s-arrow">→</span>
-      <span class="s-step">Build</span>
-      <span class="s-sep">—</span>
-      <span class="s-num">100</span>
-      <span class="s-yours">Yours</span>
+<section class="sec reveal" id="approach">
+  <div class="sec-bar"><span><b>SEC.02</b> — APPROACH</span><span><span class="pg">30/100</span> · GAUGE: 0 → 100</span></div>
+  <div class="gauge-wrap">
+    <div class="gauge" id="gauge">
+      <div class="fill"></div><div class="seg" aria-hidden="true"></div>
+      <span class="lab">0</span><span class="lab" style="right:0">100</span>
     </div>
-  </a>
+    <span class="readout"><span id="pct">0</span>%</span>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="n">T+00</span><h3>Discover</h3><p>Your business, data, and constraints.</p></div>
+    <div class="step"><span class="n">T+01</span><h3>Evaluate</h3><p>Use cases ranked and costed.</p></div>
+    <div class="step"><span class="n">T+02</span><h3>Build</h3><p>Design, build, ship.</p></div>
+    <div class="step"><span class="n">T+100</span><h3>Handover</h3><p>We leave. It stays. Your team runs it.</p></div>
+  </div>
+</section>
 
-  <!-- ───────────────────────── 3 · SERVICES ───────────────────────── -->
-  <section class="section" id="services" aria-labelledby="services-h">
-    <header class="sec-head">
-      <span class="eyebrow">What we do</span>
-      <h2 id="services-h">Four ways we move you forward.</h2>
-    </header>
-    <div class="container svc-list">
-      <div class="svc-item reveal">
-        <div class="svc-name"><h3>AI Consulting</h3></div>
-        <div class="svc-meta">
-          <p class="svc-desc">Strategy, roadmaps, and honest answers about where AI pays off.</p>
-          <p class="io">in &nbsp;<b>"where do we even start?"</b><br>out &nbsp;<span class="out">a costed roadmap</span></p>
-        </div>
-      </div>
-      <div class="svc-item reveal">
-        <div class="svc-name"><h3>Use-Case Evaluation</h3></div>
-        <div class="svc-meta">
-          <p class="svc-desc">We rank opportunities by impact and effort, and hand you a costed shortlist.</p>
-          <p class="io">in &nbsp;<b>30 ideas</b><br>out &nbsp;<span class="out">the 5 worth doing</span></p>
-        </div>
-      </div>
-      <div class="svc-item reveal">
-        <div class="svc-name"><h3>Solution Building</h3></div>
-        <div class="svc-meta">
-          <p class="svc-desc">Design, build, and ship the AI solution, wired into your stack.</p>
-          <p class="io">in &nbsp;<b>a shortlisted use case</b><br>out &nbsp;<span class="out">a deployed tool</span></p>
-        </div>
-      </div>
-      <div class="svc-item reveal">
-        <div class="svc-name"><h3>0→100 AI Boost</h3></div>
-        <div class="svc-meta">
-          <p class="svc-desc">Not using AI yet? We stand it up, train your team, and hand over the keys.</p>
-          <p class="io">in &nbsp;<b>zero AI</b><br>out &nbsp;<span class="out">an AI-native team</span></p>
-        </div>
-      </div>
+<section class="asm" id="build">
+  <div class="sec-bar"><span><b>SEC.03</b> — LIVE ASSEMBLY</span><span><span class="pg">55/100</span> · WATCH ONE GET BUILT</span></div>
+  <div class="asm-stage">
+    <span class="status">assembly: <b id="asmPct">0%</b> — support copilot, illustrative build</span>
+    <div class="app" id="app">
+      <div class="part p-chrome" id="pt1"><i></i><i></i><i></i><span style="margin-left:auto">support-copilot — production</span></div>
+      <div class="part p-side" id="pt2"><div class="it on"></div><div class="it"></div><div class="it"></div><div class="it"></div><div class="it" style="width:60%"></div></div>
+      <div class="part p-b1" id="pt3">"Hey — my order #4127 never arrived and I'm leaving Friday…"</div>
+      <div class="part p-b2" id="pt4">Found it: carrier delay, rerouted this morning. New ETA Thursday 10–12. I've emailed the customer the tracking link and flagged the carrier case.<small>resolved autonomously · 1.2s</small></div>
+      <div class="part p-input" id="pt5">agent is watching the queue…</div>
+      <div class="part p-badge" id="pt6">▲ <b>60%</b> resolved without a human</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ───────────────────────── 4 · APPROACH ───────────────────────── -->
-  <section class="section" id="approach" aria-labelledby="approach-h">
-    <header class="sec-head">
-      <span class="eyebrow">How we work</span>
-      <h2 id="approach-h">From zero to AI-native, on a clear track.</h2>
-    </header>
-    <div class="container scale">
-      <div class="ends"><span>Zero</span><span>AI-native · yours</span></div>
-      <div class="rail" aria-hidden="true"></div>
-      <div class="stops">
-        <div class="stop reveal"><div class="num">00</div><h3>Discover</h3><p>We learn your business, data, and constraints.</p></div>
-        <div class="stop reveal"><div class="num">01</div><h3>Evaluate</h3><p>Rank and cost the use cases.</p></div>
-        <div class="stop reveal"><div class="num">02</div><h3>Build</h3><p>Design, build, ship.</p></div>
-        <div class="stop reveal"><div class="num">100</div><h3>Handover</h3><p>Train your team; we leave, it stays.</p></div>
-      </div>
+<section class="sec reveal" id="work">
+  <div class="sec-bar"><span><b>SEC.04</b> — SELECTED WORK</span><span><span class="pg">70/100</span> · RESULTS, CHARTED</span></div>
+  <div class="chart" id="chart">
+    <span class="six" aria-hidden="true"><span class="stick">illustrative</span></span>
+    <a class="crow" href="#"><span class="t"><h3>Support that answers itself</h3><span class="k">CASE/A1 · agent + ticket history · 6 weeks</span></span><span class="track"><span class="bar" data-w="60%"></span></span><span class="m" data-n="60" data-f="60%">0</span></a>
+    <a class="crow" href="#"><span class="t"><h3>The copilot people actually open</h3><span class="k">CASE/B2 · designed for adoption, not demos</span></span><span class="track"><span class="bar" data-w="80%"></span></span><span class="m" data-n="4" data-f="×4">0</span></a>
+    <a class="crow" href="#"><span class="t"><h3>The honest shortlist</h3><span class="k">CASE/C3 · thirty ideas, a quarter of budget saved</span></span><span class="track"><span class="bar" data-w="83%"></span></span><span class="m" data-n="30" data-f="30→5">0</span></a>
+    <a class="crow" href="#"><span class="t"><h3>Zero to running-without-us</h3><span class="k">CASE/D4 · full journey, keys handed over</span></span><span class="track"><span class="bar" data-w="90%"></span></span><span class="m" data-n="90" data-f="90d">0</span></a>
+  </div>
+  <p class="disc">Illustrative engagements — the shape of work we deliver. Bars scaled to each metric.</p>
+</section>
+
+<section class="sec reveal">
+  <div class="sec-bar"><span><b>SEC.05</b> — ENGAGEMENT MODELS</span><span><span class="pg">80/100</span> · THREE CONFIGS</span></div>
+  <div class="files">
+    <div class="file"><div class="fhead"><span>engage/sprint.yaml</span><span class="dur">2 WEEKS</span></div>
+      <div class="fbody"><span class="k">mode:</span> <span class="s">discovery-sprint</span><br><span class="k">out:</span> <span class="s">ranked, costed shortlist</span><br><span class="k">portable:</span> <span class="s">true</span> <span class="c"># any builder — incl. us</span></div></div>
+    <div class="file"><div class="fhead"><span>engage/build.yaml</span><span class="dur">6–10 WEEKS</span></div>
+      <div class="fbody"><span class="k">mode:</span> <span class="s">build-engagement</span><br><span class="k">in:</span> <span class="s">one shortlisted use case</span><br><span class="k">out:</span> <span class="s">production, in your stack</span></div></div>
+    <div class="file"><div class="fhead"><span>engage/program.yaml</span><span class="dur">ONE QUARTER</span></div>
+      <div class="fbody"><span class="k">mode:</span> <span class="s">0-to-100</span><br><span class="k">scope:</span> <span class="s">[infra, tools, training]</span><br><span class="k">exit:</span> <span class="s">AI-native, keys handed over</span></div></div>
+  </div>
+  <p class="eng-note">// every engagement starts with the same 30-minute call</p>
+</section>
+
+<section class="sec log reveal">
+  <div class="sec-bar"><span><b>SEC.06</b> — POV</span><span><span class="pg">85/100</span> · TAIL -3 POV.LOG</span></div>
+  <div class="take"><span class="badge crit">CRIT</span><p>Most AI pilots die in the demo. <b>Ship into a workflow</b> or don't start.</p></div>
+  <div class="take"><span class="badge warn">WARN</span><p>Your data is readier than you think. Waiting for perfect data is how you <b>lose two years</b>.</p></div>
+  <div class="take"><span class="badge info">RULE</span><p>Adoption is the product. <b>Design for the Tuesday user.</b></p></div>
+</section>
+
+<section class="sec reveal" id="team">
+  <div class="sec-bar"><span><b>SEC.07</b> — PERSONNEL</span><span><span class="pg">90/100</span> · TWO ICs / ONE BUS</span></div>
+  <div class="duo">
+    <div class="ic l"><span class="semi" aria-hidden="true"></span><span class="pn">IC · ALX-L</span><h3>Alex</h3><p class="role">Senior Software Engineer &amp; Solutions Architect</p><p>Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p>
+      <div class="pins"><span class="pin">architecture</span><span class="pin">models</span><span class="pin">integrations</span><span class="pin">production</span></div></div>
+    <div class="ic r"><span class="semi" aria-hidden="true"></span><span class="pn">IC · AND-R</span><h3>Andreas</h3><p class="role">Lead, Business Enablement &amp; Innovation (AI)</p><p>Finds where AI creates value and makes it land with real teams and customers.</p>
+      <div class="pins"><span class="pin">value cases</span><span class="pin">enablement</span><span class="pin">adoption</span><span class="pin">customers</span></div></div>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="sec-bar"><span><b>SEC.08</b> — BOOKING</span><span><span class="pg">100/100</span> · DURATION: 30 MIN</span></div>
+  <p class="mono-line">$ pivon book --duration 30m --agenda <b>"the honest version"</b></p>
+  <div class="wrap">
+    <div class="orbit" aria-hidden="true"></div>
+    <div class="sun">
+      <h2>Start the first run.</h2>
+      <p>30 minutes, no slides. Bring the messy version — we'll tell you honestly whether AI fixes it.</p>
+      <a href="mailto:hello@pivon.ai?subject=BOOK_CALL()%20—%2030%20minutes" class="cta">BOOK_CALL() →</a>
     </div>
-  </section>
+  </div>
+  <div class="base">
+    <span>© 2026 PIVON</span>
+    <a href="mailto:hello@pivon.ai">hello@pivon.ai</a>
+    <span>CASES = ILLUSTRATIVE ENGAGEMENTS</span>
+  </div>
+</section>
+</main>
 
-  <!-- ───────────────────────── 5 · WORK ───────────────────────── -->
-  <section class="section" id="work" aria-labelledby="work-h">
-    <header class="sec-head">
-      <span class="eyebrow">Selected work</span>
-      <h2 id="work-h">What good looks like.</h2>
-    </header>
-    <div class="container wk-list">
-      <div class="wk-item reveal">
-        <div class="wk-top"><span class="wk-ctx">Logistics SMB · Customer Ops</span><span class="wk-tag">Illustrative engagement</span></div>
-        <h3>Support that answers itself</h3>
-        <p class="wk-result">A gen-AI support agent <span class="ar">→</span> <b>deflected 60% of tickets in 6 weeks</b></p>
-      </div>
-      <div class="wk-item reveal">
-        <div class="wk-top"><span class="wk-ctx">Regional retailer · Operations</span><span class="wk-tag">Illustrative engagement</span></div>
-        <h3>From spreadsheets to forecasts</h3>
-        <p class="wk-result">Demand-forecasting models <span class="ar">→</span> <b>cut stockouts 30%</b></p>
-      </div>
-      <div class="wk-item reveal">
-        <div class="wk-top"><span class="wk-ctx">Marketing agency · Creative</span><span class="wk-tag">Illustrative engagement</span></div>
-        <h3>A studio that never sleeps</h3>
-        <p class="wk-result">A generative content pipeline <span class="ar">→</span> <b>5×'d output at constant headcount</b></p>
-      </div>
-      <div class="wk-item reveal">
-        <div class="wk-top"><span class="wk-ctx">Manufacturer · 0→100</span><span class="wk-tag">Illustrative engagement</span></div>
-        <h3>Zero to AI-native in 90 days</h3>
-        <p class="wk-result">4 tools shipped <span class="ar">→</span> <b>team self-sufficient, no vendor lock-in</b></p>
-      </div>
-    </div>
-    <p class="wk-disc container">Illustrative scenarios that reflect the kind of work and outcomes Pivon delivers.</p>
-  </section>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small=matchMedia('(max-width:760px)').matches;
 
-  <!-- ───────────────────────── 6 · TEAM ───────────────────────── -->
-  <section class="section" id="team" aria-labelledby="team-h">
-    <header class="sec-head sec-head--center">
-      <span class="eyebrow">The team</span>
-      <h2 id="team-h">Two founders. Two hemispheres.</h2>
-    </header>
-    <div class="container duo">
-      <span class="seam" aria-hidden="true"></span>
-      <div class="half left reveal">
-        <div class="avatar" aria-hidden="true">A</div>
-        <p class="hemi">Left hemisphere · circuits, data, build</p>
-        <h3>Alex</h3>
-        <p class="role">Senior Software Engineer &amp; Solutions Architect</p>
-        <p class="bio">Designs and ships the architecture, models, and integrations that make AI actually run in your stack.</p>
-      </div>
-      <div class="half right reveal">
-        <div class="avatar" aria-hidden="true">A</div>
-        <p class="hemi">Right hemisphere · creative, business</p>
-        <h3>Andreas</h3>
-        <p class="role">Lead, Business Enablement &amp; Innovation (AI)</p>
-        <p class="bio">Deep business understanding — finds where AI creates value and makes it land with real teams and customers.</p>
-      </div>
-    </div>
-  </section>
+  /* counters (C2): 0 → n, then snap to the formatted final value */
+  function count(el,dur){
+    const n=+el.dataset.n,f=el.dataset.f,t0=performance.now();
+    (function tick(now){
+      const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+      el.textContent=Math.round(n*e);
+      if(k<1)requestAnimationFrame(tick); else el.textContent=f;
+    })(t0);
+  }
 
-  <!-- ───────────────────────── 7 · BOOKING ───────────────────────── -->
-  <section class="section" id="booking" aria-labelledby="booking-h">
-    <header class="sec-head sec-head--center">
-      <span class="eyebrow">Let's talk</span>
-      <h2 id="booking-h">Start the first run.</h2>
-      <p class="sec-sub">A 30-minute discovery call — no slides, the honest version. Pick a slot; we confirm by email.</p>
-    </header>
+  if(RM){
+    document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));
+    document.getElementById('gauge').classList.add('on');
+    document.getElementById('pct').textContent='100';
+    document.querySelectorAll('.track .bar').forEach(b=>b.style.setProperty('--w',b.dataset.w));
+    document.querySelectorAll('.crow .m').forEach(m=>m.textContent=m.dataset.f);
+    document.getElementById('asmPct').textContent='100%';
+    document.body.classList.add('no-canvas');
+    return;
+  }
 
-    <div class="bk-card" id="bkCard">
-      <ol class="stepper" id="bkStepper">
-        <li class="step active" data-step="1"><span class="n">1</span>Date</li>
-        <li class="step" data-step="2"><span class="n">2</span>Time</li>
-        <li class="step" data-step="3"><span class="n">3</span>Details</li>
-      </ol>
+  /* reveals + instrument triggers */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target; io.unobserve(el);
+    el.classList.add('in');
+    if(el.id==='approach'){
+      document.getElementById('gauge').classList.add('on');
+      const pct=document.getElementById('pct');
+      pct.dataset.n='100'; pct.dataset.f='100'; count(pct,2000);
+    }
+    if(el.id==='work'){
+      document.querySelectorAll('.track .bar').forEach(b=>b.style.setProperty('--w',b.dataset.w));
+      document.querySelectorAll('.crow .m').forEach(m=>count(m,1500));
+    }
+  }),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-      <!-- Step 1: Date -->
-      <div class="bk-panel" data-panel="1">
-        <div class="cal-head">
-          <button type="button" class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
-          <b id="calLabel">Month</b>
-          <button type="button" class="cal-nav" id="calNext" aria-label="Next month">›</button>
-        </div>
-        <div class="dow" aria-hidden="true"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
-        <div class="cal-grid" id="calGrid" role="group" aria-label="Choose a date for your discovery call"></div>
-        <p class="bk-hint">Weekdays only, within the next few weeks.</p>
-      </div>
+  /* ── the particle hero (Q5), sampling the flagship face ── */
+  const WORDS=['CONSULT','DESIGN','BUILD','0→100'];
+  const CAPS=[
+    'first we <b>consult</b> — what\'s worth building, ranked and costed',
+    'then we <b>design</b> — so real people actually use it',
+    'then we <b>build</b> — shipped into your stack, evaluated',
+    'until you\'re at <b>100</b> — running it without us'
+  ];
+  const cv=document.getElementById('pc'),ctx=cv.getContext('2d');
+  let W,H;
+  function size(){W=cv.width=cv.clientWidth;H=cv.height=cv.clientHeight;}
+  size(); addEventListener('resize',()=>{size();buildTargets();},{passive:true});
 
-      <!-- Step 2: Time -->
-      <div class="bk-panel" data-panel="2" hidden>
-        <span class="chosen" id="chosenDate">— <button type="button" class="link" data-goto="1">change</button></span>
-        <p class="bk-lab">Pick a time — 30-minute slots</p>
-        <div class="slots" id="slotGrid" role="group" aria-label="Choose a time"></div>
-        <div class="bk-foot">
-          <button type="button" class="link" data-goto="1">‹ back</button>
-          <button type="button" class="btn btn-primary" id="toDetails" disabled><span>Continue →</span></button>
-        </div>
-      </div>
+  let targetSets=[],parts=[],cur=0;
+  function sample(word){
+    const oc=document.createElement('canvas'),o=oc.getContext('2d');
+    oc.width=W;oc.height=H;
+    const fs=Math.min(W/(word.length*.62),H*.4);
+    o.font='900 '+fs+'px "Schibsted Grotesk",Archivo,sans-serif';
+    o.textAlign='center';o.textBaseline='middle';
+    o.fillText(word,W/2,H*.56);
+    const d=o.getImageData(0,0,W,H).data,pts=[],step=small?7:6;
+    for(let y=0;y<H;y+=step)for(let x=0;x<W;x+=step)
+      if(d[(y*W+x)*4+3]>128)pts.push({x,y});
+    return pts;
+  }
+  function buildTargets(){
+    targetSets=WORDS.map(sample);
+    const maxN=Math.max(...targetSets.map(t=>t.length));
+    while(parts.length<maxN)parts.push({x:W/2+(parts.length%97-48)*14,y:H/2+(parts.length%89-44)*10,vx:0,vy:0});
+    parts.length=maxN;
+    assign(cur);
+  }
+  function assign(i){
+    const t=targetSets[i];if(!t||!t.length)return;
+    parts.forEach((p,k)=>{
+      if(k<t.length){p.tx=t[k].x;p.ty=t[k].y;p.live=1;}
+      else{p.tx=W/2;p.ty=H*1.4;p.live=0;}
+    });
+  }
+  let mx=-9999,my=-9999;
+  addEventListener('pointermove',e=>{
+    const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;
+  },{passive:true});
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of parts){
+      let ax=(p.tx-p.x)*.075,ay=(p.ty-p.y)*.075;
+      const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
+      if(d2<8100){const d=Math.sqrt(d2)||1,f=(90-d)/90*3.4;ax+=dx/d*f;ay+=dy/d*f;}
+      p.vx=(p.vx+ax)*.82;p.vy=(p.vy+ay)*.82;
+      p.x+=p.vx;p.y+=p.vy;
+      if(!p.live)continue;
+      const k=Math.min(1,Math.max(0,p.x/W));
+      const r=Math.round(47+k*(229-47)),g=Math.round(107+k*(37-107)),b=Math.round(236+k*(142-236));
+      ctx.fillStyle='rgb('+r+','+g+','+b+')';
+      ctx.fillRect(p.x-1.5,p.y-1.5,3,3);
+    }
+    requestAnimationFrame(frame);
+  }
+  const cap=document.getElementById('wordCap'),dots=[...document.querySelectorAll('#pdots i')];
+  function setWord(i){
+    if(i===cur)return;cur=i;assign(i);
+    cap.innerHTML=CAPS[i];
+    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+  }
+  document.fonts.ready.then(()=>{buildTargets();frame();});
 
-      <!-- Step 3: Details -->
-      <div class="bk-panel" data-panel="3" hidden>
-        <span class="chosen" id="chosenSlot">— <button type="button" class="link" data-goto="2">change</button></span>
-        <form class="bk-form" id="bkForm" novalidate>
-          <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Jane Doe">
-          </div>
-          <div class="field">
-            <label for="f-email">Work email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="jane@company.com">
-            <span class="err" id="err-email" hidden>Enter a valid email address.</span>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label for="f-company">Company</label>
-              <input id="f-company" name="company" type="text" autocomplete="organization" placeholder="Company">
-            </div>
-            <div class="field">
-              <label for="f-size">Team size</label>
-              <select id="f-size" name="teamSize">
-                <option value="">Select…</option>
-                <option>1–10</option>
-                <option>11–50</option>
-                <option>51–200</option>
-                <option>200+</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="f-topic">What do you want to talk about?</label>
-            <textarea id="f-topic" name="topic" placeholder="Where you are with AI, and what you're hoping to figure out."></textarea>
-          </div>
-          <div class="bk-foot">
-            <button type="button" class="link" data-goto="2">‹ back</button>
-            <button type="submit" class="btn btn-primary" id="bkSubmit"><span>Book the call →</span></button>
-          </div>
-        </form>
-      </div>
+  if(!window.gsap||!window.ScrollTrigger){document.getElementById('asmPct').textContent='100%';return;}
+  gsap.registerPlugin(ScrollTrigger);
 
-      <!-- Confirmation -->
-      <div class="bk-panel bk-done" data-panel="done" hidden>
-        <div class="done-mark" aria-hidden="true">✓</div>
-        <h3>You're booked — pretend-confirmed.</h3>
-        <p id="doneSummary"></p>
-        <p class="bk-hint">We'll wire this to a real calendar next. For now your details were logged to the console.</p>
-      </div>
-    </div>
-  </section>
+  /* pin the hero, scrub the morph */
+  ScrollTrigger.create({trigger:'#stage',start:'top top',end:'+=2400',pin:true,scrub:true,
+    onUpdate:st=>setWord(Math.min(WORDS.length-1,Math.floor(st.progress*WORDS.length)))});
 
-  <!-- ───────────────────────── 8 · FOOTER ───────────────────────── -->
-  <footer class="footer">
-    <div class="container foot-inner">
-      <div class="foot-brand">
-        <a href="#top" class="nav-brand" aria-label="Pivon home">
-          <svg class="brand-glyph" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <circle cx="14" cy="14" r="13" fill="#F6F8FB" stroke="#E6EAF0" stroke-width="0.5"/>
-            <path d="M14 7 L9 10 L7 14 L9 18 L14 21" stroke="#22C7F2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="9" cy="10" r="1.5" fill="#2F6BEC"/><circle cx="7" cy="14" r="1.5" fill="#22C7F2"/><circle cx="9" cy="18" r="1.5" fill="#2F6BEC"/>
-            <path d="M14 7 C17 8 21 10 22 14 C21 18 17 20 14 21" stroke="#7A3CEE" stroke-width="1.4" stroke-linecap="round"/>
-            <line x1="14" y1="7" x2="14" y2="21" stroke="#E6EAF0" stroke-width="0.75"/>
-            <circle cx="14" cy="14" r="2" fill="white" stroke="#E6EAF0" stroke-width="0.5"/>
-            <circle cx="14" cy="14" r="1" fill="url(#cg2)"/>
-            <defs><linearGradient id="cg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22C7F2"/><stop offset="100%" stop-color="#7A3CEE"/></linearGradient></defs>
-          </svg>
-          <span class="brand-wordmark">pivon</span>
-        </a>
-        <p class="foot-line">From zero to AI-native — the bridge between technical AI and real business outcomes.</p>
-      </div>
-
-      <nav class="foot-nav" aria-label="Footer">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#team">Team</a>
-        <a href="#approach">Approach</a>
-        <a href="#booking">Book a call</a>
-      </nav>
-
-      <div class="foot-contact">
-        <a href="mailto:hello@pivon.ai" class="foot-email">hello@pivon.ai</a>
-        <div class="foot-social">
-          <a href="#" aria-label="Pivon on LinkedIn">LinkedIn</a>
-          <a href="#" aria-label="Pivon on X">X</a>
-        </div>
-      </div>
-    </div>
-    <div class="container foot-base">
-      <span>© 2026 Pivon</span>
-      <span class="foot-disc">Case studies are illustrative scenarios that reflect the kind of work Pivon delivers.</span>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  /* ── the assembly stage (Q3) ── */
+  const pct=document.getElementById('asmPct');
+  ScrollTrigger.matchMedia({
+    '(min-width: 760px)':function(){
+      const scatter=[
+        ['#pt1',{x:-340,y:-220,rotation:-14,opacity:0}],
+        ['#pt2',{x:-420,y:180,rotation:10,opacity:0}],
+        ['#pt3',{x:380,y:-260,rotation:16,opacity:0}],
+        ['#pt4',{x:460,y:240,rotation:-12,opacity:0}],
+        ['#pt5',{y:340,rotation:6,opacity:0}],
+        ['#pt6',{x:200,y:-320,rotation:24,opacity:0,scale:.6}],
+      ];
+      scatter.forEach(([sel,from])=>gsap.set(sel,from));
+      gsap.set('#app',{backgroundColor:'rgba(255,255,255,0)',borderColor:'rgba(230,232,236,0)',boxShadow:'none'});
+      const tl=gsap.timeline({scrollTrigger:{trigger:'.asm-stage',start:'top top',end:'+=2000',pin:true,scrub:.4,
+        onUpdate:st=>{pct.textContent=Math.round(st.progress*100)+'%';}}});
+      tl.to('#app',{backgroundColor:'#ffffff',borderColor:'#E6E8EC',boxShadow:'0 40px 90px -40px rgba(11,12,15,.4)',duration:.6},0)
+        .to('#pt1',{x:0,y:0,rotation:0,opacity:1,duration:1},.1)
+        .to('#pt2',{x:0,y:0,rotation:0,opacity:1,duration:1},.5)
+        .to('#pt3',{x:0,y:0,rotation:0,opacity:1,duration:1},1.0)
+        .to('#pt4',{x:0,y:0,rotation:0,opacity:1,duration:1},1.5)
+        .to('#pt5',{y:0,rotation:0,opacity:1,duration:.9},2.0)
+        .to('#pt6',{x:0,y:0,rotation:0,opacity:1,scale:1,duration:.8,ease:'back.out(2)'},2.6);
+    },
+    '(max-width: 759px)':function(){
+      pct.textContent='100%';
+    }
+  });
+})();
+</script>
 </body>
 </html>

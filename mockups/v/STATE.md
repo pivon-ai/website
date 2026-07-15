@@ -76,6 +76,28 @@ final assembly into coherent `index.html`/`style.css`/`script.js`. Spec of recor
   back / Continue footer. No notes.
 
 ## 🔄🔄 REDESIGN V2 (2026-07-06 evening) — full redesign, hero concept only survivor
+- ✅ F1 SHIPPED (2026-07-15): user made F1 the root index.html (no chooser round needed — direct
+  instruction). Root index.html = copy of f1-flagship.html with production tweaks: real title +
+  meta description, inline SVG favicon (2-stop blue→magenta node colors), brand tag → 'v3.0 /
+  AI CONSULTING', hero meta → 'DOC / PIVON · REV 3.0', sun CTA → mailto:hello@pivon.ai. Old v1
+  style.css/script.js deleted from root (v1 preserved via git + harness copies base-style/
+  base-script/d-body used by v1-site.html). Showcase: F1 → shipped. Real booking wizard still
+  TODO if wanted (sun CTA is mailto for now).
+- R2 FLAGSHIP SYNTHESIS (2026-07-15, user: "one version out of C+N2+Q3+Q5+C2"): f1-flagship.html —
+  ONE candidate fusing the five parents. Chassis = C/C2 (Schibsted 900, fixed 12-col gridbg,
+  SEC.xx mono bars, 2px ink rules, blue #2F6BEC → magenta #E5258E). Spectacle = Q5 particle hero
+  (words CONSULT→DESIGN→BUILD→0→100, pinned scrub, cursor repulsion, sampled in Schibsted,
+  2-stop x-color) + Q3 assembly stage as SEC.03 (sec-bar carries live assembly % readout).
+  Play = N2 (rotated stickers in hero + quadrant indexes + 'illustrative' on chart, hl/hl2
+  highlight blocks in SEC.00, NO-SLIDEWARE stamp, semi-discs in IC team cards, 100-sun CTA on
+  ink w/ orbiting dashed ring). Instruments = C2 (scope×time quadrant [relabeled axes: whole
+  company/one workflow × weeks/a quarter — avoids calling any service 'low impact'], segmented
+  gauge→100, bar-chart work w/ counters, YAML engagement files, CRIT/WARN/RULE pov log, IC
+  pinouts). Signature spine: every SEC bar shows PROGRESS nn/100, booking = 100/100. Services
+  reconciled to 3 practices + 0→100 program (matches particle words). Terminal block dropped
+  (restraint; mono `$ pivon book` line keeps the voice). section.json round 8 = F1 + 5 parents
+  as comparison tabs. Showcase: P round → passed, Q1/2/4 → passed, Q3/Q5 → chosen, N2 → chosen,
+  new 'flagship synthesis' column current. QA'd via chooser in Chrome.
 Direction-mock round 1 (d1/d2/d3 below) was SCRAPPED before decision: user pivoted to a full
 redesign keeping only the hero console CONCEPT. Interview done in-chat. Locked brief:
 **Bold AI studio · light & electric (white, huge ink type) · 2-stop gradient (pair TBD by mocks)
