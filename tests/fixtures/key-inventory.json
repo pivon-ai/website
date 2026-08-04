@@ -466,7 +466,7 @@
   },
   "s01.d2.lead": {
     "section": "s01",
-    "source": "doc",
+    "source": "new",
     "html": false
   },
   "s01.d2.title": {
@@ -526,7 +526,7 @@
   },
   "s01.d3.lead": {
     "section": "s01",
-    "source": "new",
+    "source": "doc",
     "html": false
   },
   "s01.d3.title": {
