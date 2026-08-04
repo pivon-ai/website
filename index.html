@@ -139,6 +139,7 @@ body.no-canvas .stage .hint{display:none}
 .q-cell .io b{color:var(--slate);font-weight:500}
 .q-cell .io .o{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .q-cell .dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--grad);bottom:.9rem;right:.9rem}
+.sec .lead{max-width:60ch;color:var(--slate);margin:0 0 .6rem}
 @media(max-width:760px){.quad{grid-template-columns:1fr}.quad::before{display:none}.quad-wrap{padding:1rem 0 0 0}.ax{display:none}
   .q-cell{border-bottom:1px solid var(--rule);min-height:0;margin-top:.4rem}.q-cell:last-child{border-bottom:0}}
 
@@ -323,19 +324,20 @@ body.no-canvas .stage .hint{display:none}
 </section>
 
 <section class="sec reveal" id="services">
-  <div class="sec-bar"><span><b>SEC.01</b> — SERVICES</span><span><span class="pg">15/100</span> · PLOTTED: SCOPE × TIME</span></div>
+  <div class="sec-bar"><span data-i18n="s01.bar.l"><b>SEC.01</b> — LEISTUNGEN</span><span data-i18n="s01.bar.r"><span class="pg">15/100</span> · GEPLOTTET: SCOPE × ZEIT</span></div>
+  <p class="lead" data-i18n="s01.intro"><b>Ganzheitlich von der Idee bis zum Betrieb.</b> Wir unterstützen Sie mit unseren Leistungen ganzheitlich. Von der Einführung bis zur Entwicklung und Umsetzung von KI-basierten Lösungen.</p>
   <div class="quad-wrap">
-    <span class="ax n">whole company</span><span class="ax s">one workflow</span>
-    <span class="ax w">weeks</span><span class="ax e">a quarter</span>
+    <span class="ax n" data-i18n="s01.ax.n">ganzes Unternehmen</span><span class="ax s" data-i18n="s01.ax.s">ein Workflow</span>
+    <span class="ax w" data-i18n="s01.ax.w">Wochen</span><span class="ax e" data-i18n="s01.ax.e">ein Quartal</span>
     <div class="quad">
-      <a class="q-cell" href="#book"><span class="six"><span class="stick">S/01</span></span><span class="co">x=.22 y=.84</span><h3>Consulting. The honest kind.</h3>
-        <span class="io">in&nbsp; <b>"where do we even start?"</b><br>out&nbsp; <span class="o">a plan worth stealing</span></span><span class="dot" aria-hidden="true"></span></a>
-      <a class="q-cell" href="#book"><span class="six"><span class="stick g">S/04</span></span><span class="co">x=.86 y=.91</span><h3>0→100 Program.</h3>
-        <span class="io">in&nbsp; <b>zero AI</b><br>out&nbsp; <span class="o">an AI-native team</span></span><span class="dot" aria-hidden="true"></span></a>
-      <a class="q-cell" href="#book"><span class="six"><span class="stick">S/02</span></span><span class="co">x=.18 y=.42</span><h3>Design. For real users.</h3>
-        <span class="io">in&nbsp; <b>a tool nobody opens</b><br>out&nbsp; <span class="o">a blueprint people get</span></span><span class="dot" aria-hidden="true"></span></a>
-      <a class="q-cell" href="#book"><span class="six"><span class="stick">S/03</span></span><span class="co">x=.74 y=.47</span><h3>Solutions. In production.</h3>
-        <span class="io">in&nbsp; <b>a shortlisted use case</b><br>out&nbsp; <span class="o">a system that runs without us</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book" data-panel="1"><span class="six"><span class="stick g">S/01</span></span><span class="co">x=.22 y=.84</span><h3 data-i18n="s01.c1.title">Beratung.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c1.in">Strategische KI-Beratung</b><br>out&nbsp; <span class="o" data-i18n="s01.c1.out">von der Potenzialanalyse bis zur Roadmap</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book" data-panel="2"><span class="six"><span class="stick">S/04</span></span><span class="co">x=.86 y=.91</span><h3 data-i18n="s01.c2.title">Startup Creator.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c2.in">Von der Idee zum Venture</b><br>out&nbsp; <span class="o" data-i18n="s01.c2.out">Aufbau KI-basierter Geschäftsmodelle</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book" data-panel="3"><span class="six"><span class="stick">S/02</span></span><span class="co">x=.18 y=.42</span><h3 data-i18n="s01.c3.title">Quickstart KI.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c3.in">Schneller Einstieg</b><br>out&nbsp; <span class="o" data-i18n="s01.c3.out">vom Konzept zum ersten Ergebnis in kürzester Zeit</span></span><span class="dot" aria-hidden="true"></span></a>
+      <a class="q-cell" href="#book" data-panel="4"><span class="six"><span class="stick">S/03</span></span><span class="co">x=.74 y=.47</span><h3 data-i18n="s01.c4.title">Entwicklung.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c4.in">Individuelle Entwicklung von KI-Lösungen</b><br>out&nbsp; <span class="o" data-i18n="s01.c4.out">maßgeschneidert für Sie</span></span><span class="dot" aria-hidden="true"></span></a>
     </div>
   </div>
 </section>
@@ -476,7 +478,26 @@ body.no-canvas .stage .hint{display:none}
     "s00.trait2": "transparent",
     "s00.trait3": "flexibel",
     "s00.trait4": "technologieunabhängig",
-    "s00.trait5": "praxisorientiert"
+    "s00.trait5": "praxisorientiert",
+    "s01.bar.l": "<b>SEC.01</b> — LEISTUNGEN",
+    "s01.bar.r": "<span class=\"pg\">15/100</span> · GEPLOTTET: SCOPE × ZEIT",
+    "s01.intro": "<b>Ganzheitlich von der Idee bis zum Betrieb.</b> Wir unterstützen Sie mit unseren Leistungen ganzheitlich. Von der Einführung bis zur Entwicklung und Umsetzung von KI-basierten Lösungen.",
+    "s01.ax.n": "ganzes Unternehmen",
+    "s01.ax.s": "ein Workflow",
+    "s01.ax.w": "Wochen",
+    "s01.ax.e": "ein Quartal",
+    "s01.c1.title": "Beratung.",
+    "s01.c1.in": "Strategische KI-Beratung",
+    "s01.c1.out": "von der Potenzialanalyse bis zur Roadmap",
+    "s01.c2.title": "Startup Creator.",
+    "s01.c2.in": "Von der Idee zum Venture",
+    "s01.c2.out": "Aufbau KI-basierter Geschäftsmodelle",
+    "s01.c3.title": "Quickstart KI.",
+    "s01.c3.in": "Schneller Einstieg",
+    "s01.c3.out": "vom Konzept zum ersten Ergebnis in kürzester Zeit",
+    "s01.c4.title": "Entwicklung.",
+    "s01.c4.in": "Individuelle Entwicklung von KI-Lösungen",
+    "s01.c4.out": "maßgeschneidert für Sie"
   },
   "en": {
     "nav.cta": "BOOK_CALL()",
@@ -517,7 +538,26 @@ body.no-canvas .stage .hint{display:none}
     "s00.trait2": "transparent",
     "s00.trait3": "flexible",
     "s00.trait4": "vendor-independent",
-    "s00.trait5": "hands-on"
+    "s00.trait5": "hands-on",
+    "s01.bar.l": "<b>SEC.01</b> — SERVICES",
+    "s01.bar.r": "<span class=\"pg\">15/100</span> · PLOTTED: SCOPE × TIME",
+    "s01.intro": "<b>End-to-end, from idea to operations.</b> We support you holistically with our services — from onboarding through to the development and delivery of AI-based solutions.",
+    "s01.ax.n": "whole company",
+    "s01.ax.s": "one workflow",
+    "s01.ax.w": "weeks",
+    "s01.ax.e": "a quarter",
+    "s01.c1.title": "Consulting.",
+    "s01.c1.in": "Strategic AI consulting",
+    "s01.c1.out": "from opportunity assessment to roadmap",
+    "s01.c2.title": "Startup Creator.",
+    "s01.c2.in": "From idea to venture",
+    "s01.c2.out": "building AI-based business models",
+    "s01.c3.title": "AI Quickstart.",
+    "s01.c3.in": "A fast start",
+    "s01.c3.out": "from concept to first result in record time",
+    "s01.c4.title": "Development.",
+    "s01.c4.in": "Custom development of AI solutions",
+    "s01.c4.out": "tailored to you"
   }
 }
 </script>
