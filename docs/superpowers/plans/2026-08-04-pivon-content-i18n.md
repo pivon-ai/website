@@ -76,7 +76,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const html = readFileSync(join(root, 'index.html'), 'utf8');
 
 /** Keys whose values live only in the dictionary (read by JS), never inline in markup. */
-export const JS_OWNED = /^(hero\.word[1-4]|hero\.cap[1-4]|s03\.status)$/;
+export const JS_OWNED = /^(hero\.word[1-4]|hero\.cap[1-4])$/;
 
 export function dict() {
   const m = html.match(
@@ -209,6 +209,7 @@ Then, at the **very top of the existing IIFE** — above the `const RM=` line, s
         desc:'Pivon consults on and delivers AI solutions end to end \u2014 human-centred, transparent, and grounded in practice.'}
   };
   let LANG='de';
+  let onLangChange=null;   /* Task 3 assigns this once the hero is initialised */
   function currentLang(){return LANG;}
   function applyLang(lang){
     if(!I18N[lang])return;
@@ -234,6 +235,7 @@ Then, at the **very top of the existing IIFE** — above the `const RM=` line, s
     const u=new URL(location.href);
     u.searchParams.set('lang',lang);
     history.replaceState(null,'',u);
+    if(onLangChange)onLangChange();
     if(window.ScrollTrigger)ScrollTrigger.refresh();
   }
   (function initLang(){
@@ -243,7 +245,7 @@ Then, at the **very top of the existing IIFE** — above the `const RM=` line, s
     const want=(q==='de'||q==='en')?q:((stored==='de'||stored==='en')?stored:'de');
     document.querySelectorAll('.lang button').forEach(b=>
       b.addEventListener('click',()=>applyLang(b.dataset.lang)));
-    if(want!=='de')applyLang(want); else applyLang('de');
+    applyLang(want);
   })();
 ```
 
@@ -331,7 +333,7 @@ The full key set, by section:
 - **s00** — `s00.bar.l` *(html)*, `s00.bar.r` *(html)*, `s00.big` *(html)*, `s00.stamp`, `s00.spec1.k`, `s00.spec1.v`, `s00.spec2.k`, `s00.spec2.v`, `s00.spec3.k`, `s00.spec3.v`, `s00.trait1`–`s00.trait5`
 - **s01** — `s01.bar.l` *(html)*, `s01.bar.r` *(html)*, `s01.intro` *(html)*, `s01.ax.n`, `s01.ax.s`, `s01.ax.w`, `s01.ax.e`; per cell `n` = 1..4: `s01.c{n}.title`, `s01.c{n}.in`, `s01.c{n}.out`; per panel `n` = 1..4: `s01.d{n}.title`, `s01.d{n}.lead`, `s01.d{n}.cta`, and per block `b` (4 blocks for panel 1, 3 for panels 2–4): `s01.d{n}.b{b}.title`, `s01.d{n}.b{b}.text`, `s01.d{n}.b{b}.keys`
 - **s02** — `s02.bar.l` *(html)*, `s02.bar.r` *(html)*; per step `n` = 1..4: `s02.s{n}.title`, `s02.s{n}.text` *(step 1's is html — it contains the mailto link)*
-- **s03** — `s03.bar.l` *(html)*, `s03.bar.r` *(html)*, `s03.status` *(js-owned)*, `s03.chrome`, `s03.msg`, `s03.reply` *(html)*, `s03.input`, `s03.badge` *(html)*
+- **s03** — `s03.bar.l` *(html)*, `s03.bar.r` *(html)*, `s03.status.pre`, `s03.status.post`, `s03.chrome`, `s03.msg`, `s03.reply` *(html)*, `s03.input`, `s03.badge` *(html)*
 - **s04** — `s04.bar.l` *(html)*, `s04.bar.r` *(html)*, `s04.sticker`, `s04.disc`; per row `n` = 1..4: `s04.r{n}.title`, `s04.r{n}.k`
 - **s05** — `s05.bar.l` *(html)*, `s05.bar.r` *(html)*, `s05.note`; per file `n` = 1..3: `s05.f{n}.name`, `s05.f{n}.dur`, `s05.f{n}.body` *(html)*
 - **s06** — `s06.bar.l` *(html)*, `s06.bar.r` *(html)*, `s06.t1`–`s06.t3` *(html)*
@@ -485,7 +487,9 @@ CSS, appended after the `.stage .head h1` rule:
 
 - [ ] **Step 5: Wire the JS-owned strings**
 
-Replace the hardcoded arrays:
+**Ordering matters here.** `applyLang` runs during `initLang` at the very top of the IIFE, before the hero's `W`, `H`, `cur` and `cap` bindings exist. Reaching them from `applyLang` — even behind a `typeof` guard — throws `ReferenceError`, because `typeof` does not protect against the temporal dead zone of a `let`/`const` that is declared later in the same scope. The engine therefore calls the `onLangChange` hook from Task 1, and Task 3 assigns that hook only once the hero is live.
+
+Replace the hardcoded `const WORDS=[…]` and `const CAPS=[…]` with mutable bindings declared alongside the existing hero state. Move the existing `let cur=0` into this declaration so there is exactly one:
 
 ```js
   let WORDS=[],CAPS=[];
@@ -493,18 +497,25 @@ Replace the hardcoded arrays:
     const t=I18N[currentLang()];
     WORDS=[t['hero.word1'],t['hero.word2'],t['hero.word3'],t['hero.word4']];
     CAPS=[t['hero.cap1'],t['hero.cap2'],t['hero.cap3'],t['hero.cap4']];
-    if(typeof cap!=='undefined'&&cap)cap.innerHTML=CAPS[cur];
+    const c=document.getElementById('wordCap');
+    if(c)c.innerHTML=CAPS[cur];
   }
-  refreshHeroWords();
 ```
 
-`refreshHeroWords` must be declared before `initLang` runs. Inside `applyLang`, after the attribute loop and before `ScrollTrigger.refresh()`:
+`refreshHeroWords` reads `#wordCap` via `getElementById` rather than closing over the later `const cap`, for the same TDZ reason.
+
+Then, inside the existing `document.fonts.ready.then(...)` callback — the point at which the hero is fully initialised — populate the arrays, build the targets, and only then arm the hook:
 
 ```js
-    if(typeof refreshHeroWords==='function'){refreshHeroWords();if(typeof buildTargets==='function')buildTargets();}
+  document.fonts.ready.then(()=>{
+    refreshHeroWords();
+    buildTargets();
+    frame();
+    onLangChange=()=>{refreshHeroWords();buildTargets();};
+  });
 ```
 
-`buildTargets()` re-samples the particle targets for the new words; `assign(cur)` is called from inside it, so the morph picks up the new word without losing scroll position.
+`buildTargets()` re-samples the particle targets for the new words and calls `assign(cur)` internally, so a mid-scroll switch picks up the new word without losing scroll position. Because the hook is armed last, the `applyLang` call during `initLang` is a no-op for the hero — which is correct, since `refreshHeroWords` runs a moment later with the language already resolved.
 
 - [ ] **Step 6: Run the tests**
 
@@ -957,7 +968,13 @@ Expected: FAIL — `de.s03.status missing or empty`.
 
 - [ ] **Step 4: Annotate the markup**
 
-Annotate all four sections' `.sec-bar` spans, the assembly mock strings, the four `.crow` titles and `.k` labels, the disclaimer, the three `.file` blocks, and the three POV takes. `s03.status` is JS-owned: replace the hardcoded status text with a read from the dictionary inside `applyLang`, alongside `refreshHeroWords`.
+Annotate all four sections' `.sec-bar` spans, the assembly mock strings, the four `.crow` titles and `.k` labels, the disclaimer, the three `.file` blocks, and the three POV takes.
+
+**The SEC.03 status line needs care.** It currently reads `assembly: <b id="asmPct">0%</b> — support copilot, illustrative build`, and `#asmPct` is a live counter the ScrollTrigger writes to on every scroll tick. Annotating the whole `.status` span with one `data-i18n` key would make `applyLang` replace its `innerHTML`, destroying the `#asmPct` node that the script captured a reference to — the counter would silently stop updating after the first language switch. Split the text around the counter into two keys instead, so `#asmPct` is never inside a translated element:
+
+```html
+    <span class="status"><span data-i18n="s03.status.pre">Aufbau:</span> <b id="asmPct">0%</b> <span data-i18n="s03.status.post">— Support-Copilot, illustrativer Aufbau</span></span>
+```
 
 - [ ] **Step 5: Run the tests**
 
