@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { dict, assertSection, html } from './helpers.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const docText = readFileSync(join(root, 'content-texte.md'), 'utf8');
 
 test('nav section is complete', () => assertSection(assert, dict(), 'nav'));
 test('hero section is complete', () => assertSection(assert, dict(), 'hero'));
@@ -72,7 +78,13 @@ test('s01 detail panels are complete', () => {
 });
 
 test('Beratung panel carries the doc text verbatim', () => {
-  assert.match(dict().de['s01.d1.lead'], /Dreiklang aus Mensch, Organisation und Technologie/);
+  const d = dict().de;
+  const keys = ['s01.d1.lead', 's01.d1.b1.text', 's01.d1.b2.text', 's01.d1.b3.text', 's01.d1.b4.text'];
+  for (const k of keys) {
+    const value = d[k];
+    assert.ok(value?.trim(), `de.${k} missing`);
+    assert.ok(docText.includes(value), `de.${k} does not appear verbatim in content-texte.md: ${value}`);
+  }
 });
 
 test('panels are collapsed and accessible by default', () => {
