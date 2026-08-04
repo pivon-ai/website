@@ -140,3 +140,19 @@ test('s02 step 1 text carries the doc wording verbatim around the mailto link', 
     'doc no longer contains the Email: label + address line'
   );
 });
+
+for (const s of ['s03', 's04', 's05', 's06']) {
+  test(`${s} section is complete`, () => assertSection(assert, dict(), s));
+}
+
+test('illustrative labelling survives translation', () => {
+  const d = dict();
+  assert.match(d.de['s04.sticker'], /illustrativ/i);
+  assert.match(d.de['s04.disc'], /[Ii]llustrativ/);
+  assert.match(d.en['s04.disc'], /[Ii]llustrative/);
+});
+
+test('code-styled tokens are not translated', () => {
+  const d = dict().de;
+  for (const n of [1, 2, 3]) assert.match(d[`s05.f${n}.body`], /mode:/);
+});
