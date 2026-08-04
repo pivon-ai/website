@@ -146,10 +146,10 @@ body.no-canvas .stage .hint{display:none}
 .q-cell .io .o{font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .q-cell .dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--grad);bottom:.9rem;right:.9rem}
 .sec .lead{max-width:60ch;color:var(--slate);margin:0 0 .6rem}
-@media(max-width:760px){.quad{grid-template-columns:1fr}.quad::before{display:none}.quad-wrap{padding:1rem 0 0 0}.ax{display:none}
+@media(max-width:760px){.quad{grid-template-columns:1fr}.quad::before{display:none}.quad-wrap{padding:1rem 0 0 0}
   .q-cell{border-bottom:1px solid var(--rule);min-height:0;margin-top:.4rem}.q-cell:last-child{border-bottom:0}}
 
-.q-detail{border:1px solid var(--rule);border-top:0;padding:1.8rem clamp(1.2rem,3vw,2.2rem)}
+.q-detail{border:1px solid var(--rule);padding:1.8rem clamp(1.2rem,3vw,2.2rem)}
 .q-detail h3{font-weight:900;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:0 0 .6rem}
 .q-detail .lead{max-width:62ch;color:var(--slate);margin:0 0 1.6rem}
 .q-detail .blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
@@ -253,6 +253,7 @@ body.no-canvas .stage .hint{display:none}
 .ic p{color:var(--slate);font-size:.93rem;margin:0;position:relative}
 .ic .pins{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem;position:relative}
 .ic .pin{font-family:var(--mono);font-size:.62rem;border:1px solid var(--line);border-radius:4px;padding:.3em .6em;color:var(--mist)}
+#team > a.cta{margin-top:1.6rem;display:inline-block}
 @media(max-width:760px){.duo{grid-template-columns:1fr}}
 
 /* ── SEC.08 booking: the 100-sun (N2) on the exec block (C) ── */
@@ -294,7 +295,7 @@ body.no-canvas .stage .hint{display:none}
   <div class="nav-in">
     <a href="#" class="brand">pivon <span class="v" data-i18n="nav.brandv">v3.0 / KI-BERATUNG</span></a>
     <div class="nav-l">
-      <a href="#services"><i>01</i><span data-i18n="nav.01">Leistungen</span></a><a href="#approach"><i>02</i><span data-i18n="nav.02">Vorgehen</span></a><a href="#build"><i>03</i><span data-i18n="nav.03">Live-Aufbau</span></a><a href="#work"><i>04</i><span data-i18n="nav.04">Referenzen</span></a><a href="#team"><i>07</i><span data-i18n="nav.07">Über uns</span></a>
+      <a href="#services"><i>01</i><span data-i18n="nav.01">Leistungen</span></a><a href="#approach"><i>02</i><span data-i18n="nav.02">Vorgehen</span></a><a href="#build"><i>03</i><span data-i18n="nav.03">Live-Aufbau</span></a><a href="#work"><i>04</i><span data-i18n="nav.04">Beispiele</span></a><a href="#team"><i>07</i><span data-i18n="nav.07">Über uns</span></a>
     </div>
     <div class="lang" role="group" aria-label="Sprache / Language">
       <button type="button" data-lang="de" aria-pressed="true">DE</button>
@@ -309,7 +310,7 @@ body.no-canvas .stage .hint{display:none}
   <canvas id="pc" aria-hidden="true"></canvas>
   <div class="meta"><span data-i18n="hero.meta.l">DOK / PIVON · REV 3.0</span><span data-i18n="hero.meta.m">KI-BERATUNG &amp; ENTWICKLUNG</span><span data-i18n="hero.meta.r">SEIT 2026</span></div>
   <div class="head">
-    <h1 data-i18n="hero.h1">KI strategisch denken und pragmatisch umsetzen</h1>
+    <h1 data-i18n="hero.h1">KI strategisch denken und <span class="grad">pragmatisch umsetzen</span></h1>
     <p class="sub" data-i18n="hero.sub">Wir helfen Ihnen Ihre Ideen mit messbarem Erfolg umzusetzen.</p>
     <div class="sticks" aria-hidden="true">
       <span class="stick" data-i18n="hero.stick1">zwei Gründer</span>
@@ -502,7 +503,7 @@ body.no-canvas .stage .hint{display:none}
     <div class="ic r"><span class="semi" aria-hidden="true"></span><span class="pn">IC · AND-R</span><h3>Andreas</h3><p class="role" data-i18n="s07.b.role">Lead, Business Enablement &amp; Innovation (KI)</p><p data-i18n="s07.b.bio">Findet, wo KI Wert schafft, und sorgt dafür, dass er bei echten Teams und Kunden ankommt.</p>
       <div class="pins"><span class="pin" data-i18n="s07.b.pin1">Value Cases</span><span class="pin" data-i18n="s07.b.pin2">Enablement</span><span class="pin" data-i18n="s07.b.pin3">Adoption</span><span class="pin" data-i18n="s07.b.pin4">Kunden</span></div></div>
   </div>
-  <a class="cta" href="#book" data-i18n="s07.cta" style="margin-top:1.6rem;display:inline-block">Kontakt aufnehmen</a>
+  <a class="cta" href="#book" data-i18n="s07.cta">Kontakt aufnehmen</a>
 </section>
 
 <section class="book" id="book">
@@ -518,7 +519,7 @@ body.no-canvas .stage .hint{display:none}
   </div>
   <div class="base">
     <p class="claim" data-i18n="foot.claim">Ihr Partner für digitale Lösungen – KI strategisch denken und pragmatisch umsetzen.</p>
-    <nav class="fnav" aria-label="Footer">
+    <nav class="fnav" aria-label="Fußzeile">
       <a href="#services" data-i18n="foot.nav1">Leistungen</a>
       <a href="#approach" data-i18n="foot.nav2">Vorgehen</a>
       <a href="#anspruch" data-i18n="foot.nav3">Unser Anspruch</a>
@@ -547,13 +548,13 @@ body.no-canvas .stage .hint{display:none}
     "nav.01": "Leistungen",
     "nav.02": "Vorgehen",
     "nav.03": "Live-Aufbau",
-    "nav.04": "Referenzen",
+    "nav.04": "Beispiele",
     "nav.07": "Über uns",
     "nav.brandv": "v3.0 / KI-BERATUNG",
     "hero.meta.l": "DOK / PIVON · REV 3.0",
     "hero.meta.m": "KI-BERATUNG &amp; ENTWICKLUNG",
     "hero.meta.r": "SEIT 2026",
-    "hero.h1": "KI strategisch denken und pragmatisch umsetzen",
+    "hero.h1": "KI strategisch denken und <span class=\"grad\">pragmatisch umsetzen</span>",
     "hero.sub": "Wir helfen Ihnen Ihre Ideen mit messbarem Erfolg umzusetzen.",
     "hero.stick1": "zwei Gründer",
     "hero.stick2": "keine Folien",
@@ -943,7 +944,7 @@ body.no-canvas .stage .hint{display:none}
   let LANG='de';
   let onLangChange=null;   /* Task 3 assigns this once the hero is initialised */
   function currentLang(){return LANG;}
-  function applyLang(lang){
+  function applyLang(lang,fromUser){
     if(!I18N[lang])return;
     LANG=lang;
     const t=I18N[lang];
@@ -964,9 +965,13 @@ body.no-canvas .stage .hint{display:none}
     document.querySelectorAll('.lang button').forEach(b=>
       b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
     try{localStorage.setItem('pivon.lang',lang);}catch(e){}
-    const u=new URL(location.href);
-    u.searchParams.set('lang',lang);
-    history.replaceState(null,'',u);
+    if(fromUser){
+      try{
+        const u=new URL(location.href);
+        u.searchParams.set('lang',lang);
+        history.replaceState(null,'',u);
+      }catch(e){}
+    }
     if(onLangChange)onLangChange();
     if(window.ScrollTrigger)ScrollTrigger.refresh();
   }
@@ -976,7 +981,7 @@ body.no-canvas .stage .hint{display:none}
     try{stored=localStorage.getItem('pivon.lang');}catch(e){}
     const want=(q==='de'||q==='en')?q:((stored==='de'||stored==='en')?stored:'de');
     document.querySelectorAll('.lang button').forEach(b=>
-      b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+      b.addEventListener('click',()=>applyLang(b.dataset.lang,true)));
     applyLang(want);
   })();
   (function checkKeys(){
@@ -986,6 +991,20 @@ body.no-canvas .stage .hint{display:none}
     if(miss.length)console.warn('[i18n] key drift:',miss);
   })();
 
+  /* ── hero words/captions: hoisted above the reduced-motion early return so a
+     reduced-motion visitor who switches language still gets the caption
+     translated (it carries no data-i18n, applyLang never touches it). ── */
+  let WORDS=[],CAPS=[],cur=0;
+  function refreshHeroWords(){
+    const t=I18N[currentLang()];
+    WORDS=[t['hero.word1'],t['hero.word2'],t['hero.word3'],t['hero.word4']];
+    CAPS=[t['hero.cap1'],t['hero.cap2'],t['hero.cap3'],t['hero.cap4']];
+    const c=document.getElementById('wordCap');
+    if(c)c.innerHTML=CAPS[cur];
+  }
+  refreshHeroWords();
+  onLangChange=refreshHeroWords;
+
   /* ── SEC.01 service detail panels ────────────────────────── */
   document.querySelectorAll('.q-cell[data-panel]').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -993,7 +1012,7 @@ body.no-canvas .stage .hint{display:none}
       const open=btn.getAttribute('aria-expanded')==='true';
       document.querySelectorAll('.q-cell[data-panel]').forEach(b=>b.setAttribute('aria-expanded','false'));
       document.querySelectorAll('.q-detail').forEach(p=>p.hidden=true);
-      if(!open){btn.setAttribute('aria-expanded','true');panel.hidden=false;}
+      if(!open){btn.setAttribute('aria-expanded','true');panel.hidden=false;panel.scrollIntoView({block:'nearest'});}
       if(window.ScrollTrigger)ScrollTrigger.refresh();
     });
   });
@@ -1040,14 +1059,6 @@ body.no-canvas .stage .hint{display:none}
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   /* ── the particle hero (Q5), sampling the flagship face ── */
-  let WORDS=[],CAPS=[],cur=0;
-  function refreshHeroWords(){
-    const t=I18N[currentLang()];
-    WORDS=[t['hero.word1'],t['hero.word2'],t['hero.word3'],t['hero.word4']];
-    CAPS=[t['hero.cap1'],t['hero.cap2'],t['hero.cap3'],t['hero.cap4']];
-    const c=document.getElementById('wordCap');
-    if(c)c.innerHTML=CAPS[cur];
-  }
   const cv=document.getElementById('pc'),ctx=cv.getContext('2d');
   let W,H;
   function size(){W=cv.width=cv.clientWidth;H=cv.height=cv.clientHeight;}

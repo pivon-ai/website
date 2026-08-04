@@ -6,6 +6,13 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 export const html = readFileSync(join(root, 'index.html'), 'utf8');
 
+/** `html` with the i18n dictionary <script> block stripped, so assertions against
+ * it only match the rendered markup, not the dictionary source sitting nearby. */
+export const bodyHtml = html.replace(
+  /<script type="application\/json" id="i18n-dict">[\s\S]*?<\/script>/,
+  ''
+);
+
 /** Keys whose values live only in the dictionary (read by JS), never inline in markup. */
 export const JS_OWNED = /^(hero\.word[1-4]|hero\.cap[1-4])$/;
 

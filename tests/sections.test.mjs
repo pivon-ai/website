@@ -10,6 +10,7 @@ const docText = readFileSync(join(root, 'content-texte.md'), 'utf8');
 
 test('nav section is complete', () => assertSection(assert, dict(), 'nav'));
 test('hero section is complete', () => assertSection(assert, dict(), 'hero'));
+test('s01 section is complete', () => assertSection(assert, dict(), 's01'));
 
 test('hero words and captions are read from the dictionary, not hardcoded', () => {
   assert.ok(!/const WORDS=\['CONSULT'/.test(html), 'WORDS is still hardcoded');

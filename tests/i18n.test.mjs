@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { dict, markupKeys, attrKeys, html, JS_OWNED, inventory } from './helpers.mjs';
+import { dict, markupKeys, attrKeys, html, bodyHtml, JS_OWNED, inventory } from './helpers.mjs';
 
 test('dictionary block exists and parses', () => {
   const d = dict();
@@ -46,7 +46,7 @@ test('german is rendered inline as the default', () => {
   for (const k of markupKeys()) {
     if (JS_OWNED.test(k)) continue;
     assert.ok(
-      html.includes(d.de[k]),
+      bodyHtml.includes(d.de[k]),
       `de.${k} is not rendered inline in the markup: ${d.de[k]}`
     );
   }
