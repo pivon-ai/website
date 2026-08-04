@@ -156,3 +156,18 @@ test('code-styled tokens are not translated', () => {
   const d = dict().de;
   for (const n of [1, 2, 3]) assert.match(d[`s05.f${n}.body`], /mode:/);
 });
+
+/* The ScrollTrigger writes into #asmPct on every scroll tick via a reference it
+   captured once. If that node ever sits inside a [data-i18n] element, applyLang's
+   innerHTML assignment replaces it and the counter silently dies on the first
+   language switch. Guard the structure, not just the keys. */
+test('the live assembly counter sits outside every translated element', () => {
+  const status = html.match(/<span class="status">[\s\S]*?<\/span>\s*<\/span>/);
+  assert.ok(status, '.status span not found');
+  const translated = [...status[0].matchAll(/<span data-i18n="[^"]+">([\s\S]*?)<\/span>/g)];
+  assert.equal(translated.length, 2, 'expected the status text split into two keys');
+  for (const t of translated) {
+    assert.ok(!t[1].includes('asmPct'), '#asmPct is nested inside a translated element');
+  }
+  assert.match(status[0], /<b id="asmPct">/, '#asmPct is missing from the status line');
+});
