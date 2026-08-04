@@ -49,7 +49,35 @@ test('s01 cells are plotted in the documented order', () => {
 });
 
 test('the gradient sticker sits on Beratung', () => {
-  const cells = html.split('<a class="q-cell"');
+  const cells = html.split('<button type="button" class="q-cell"');
   assert.match(cells[1], /stick g/, 'cell 1 has no gradient sticker');
   assert.ok(!/stick g/.test(cells[2]), 'cell 2 still has the gradient sticker');
+});
+
+test('s01 detail panels are complete', () => {
+  const d = dict();
+  const blocks = { 1: 4, 2: 3, 3: 3, 4: 3 };
+  for (const [n, count] of Object.entries(blocks)) {
+    for (const part of ['title', 'lead', 'cta']) {
+      assert.ok(d.de[`s01.d${n}.${part}`]?.trim(), `de.s01.d${n}.${part} missing`);
+    }
+    for (let b = 1; b <= count; b++) {
+      for (const part of ['title', 'text', 'keys']) {
+        const k = `s01.d${n}.b${b}.${part}`;
+        assert.ok(d.de[k]?.trim(), `de.${k} missing`);
+        assert.ok(d.en[k]?.trim(), `en.${k} missing`);
+      }
+    }
+  }
+});
+
+test('Beratung panel carries the doc text verbatim', () => {
+  assert.match(dict().de['s01.d1.lead'], /Dreiklang aus Mensch, Organisation und Technologie/);
+});
+
+test('panels are collapsed and accessible by default', () => {
+  const panels = [...html.matchAll(/<div class="q-detail"[^>]*>/g)];
+  assert.equal(panels.length, 4, 'expected four detail panels');
+  for (const p of panels) assert.match(p[0], /hidden/, 'panel is not hidden by default');
+  assert.equal((html.match(/aria-expanded="false"/g) || []).length, 4);
 });

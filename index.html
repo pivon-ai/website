@@ -125,7 +125,8 @@ body.no-canvas .stage .hint{display:none}
 .ax.s{bottom:.4rem;left:50%;transform:translate(-50%,100%)}
 .ax.w{left:.4rem;top:50%;transform:translate(-100%,-50%) rotate(-90deg)}
 .ax.e{right:-.6rem;top:50%;transform:translate(100%,-50%) rotate(90deg)}
-.q-cell{padding:2rem 1.6rem 1.6rem;min-height:200px;position:relative;text-decoration:none;transition:background .2s}
+.q-cell{padding:2rem 1.6rem 1.6rem;min-height:200px;position:relative;text-decoration:none;transition:background .2s;
+  text-align:left;background:none;border:0;font:inherit;color:inherit;cursor:pointer;width:100%}
 .q-cell:hover{background:var(--paper2)}
 .q-cell .six{position:absolute;top:-.85rem;left:1.2rem}
 .q-cell:nth-child(1) .six .stick{transform:rotate(-3deg)}
@@ -142,6 +143,16 @@ body.no-canvas .stage .hint{display:none}
 .sec .lead{max-width:60ch;color:var(--slate);margin:0 0 .6rem}
 @media(max-width:760px){.quad{grid-template-columns:1fr}.quad::before{display:none}.quad-wrap{padding:1rem 0 0 0}.ax{display:none}
   .q-cell{border-bottom:1px solid var(--rule);min-height:0;margin-top:.4rem}.q-cell:last-child{border-bottom:0}}
+
+.q-detail{border:1px solid var(--rule);border-top:0;padding:1.8rem clamp(1.2rem,3vw,2.2rem)}
+.q-detail h3{font-weight:900;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:0 0 .6rem}
+.q-detail .lead{max-width:62ch;color:var(--slate);margin:0 0 1.6rem}
+.q-detail .blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.q-detail .blk h4{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 .5rem}
+.q-detail .blk p{color:var(--slate);font-size:.9rem;margin:0}
+.q-detail .blk .keys{font-family:var(--mono);font-size:.68rem;line-height:1.9;color:var(--mist);margin-top:.6rem;
+  border-top:1px solid var(--line);padding-top:.6rem}
+.q-detail .cta{display:inline-block;margin-top:1.8rem}
 
 /* ── SEC.02 approach: the gauge (C2) ── */
 .gauge-wrap{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;margin-bottom:2.6rem}
@@ -330,15 +341,82 @@ body.no-canvas .stage .hint{display:none}
     <span class="ax n" data-i18n="s01.ax.n">ganzes Unternehmen</span><span class="ax s" data-i18n="s01.ax.s">ein Workflow</span>
     <span class="ax w" data-i18n="s01.ax.w">Wochen</span><span class="ax e" data-i18n="s01.ax.e">ein Quartal</span>
     <div class="quad">
-      <a class="q-cell" href="#book" data-panel="1"><span class="six"><span class="stick g">S/01</span></span><span class="co">x=.22 y=.84</span><h3 data-i18n="s01.c1.title">Beratung.</h3>
-        <span class="io">in&nbsp; <b data-i18n="s01.c1.in">"wo fangen wir überhaupt an?"</b><br>out&nbsp; <span class="o" data-i18n="s01.c1.out">eine Roadmap mit belastbaren Use Cases</span></span><span class="dot" aria-hidden="true"></span></a>
-      <a class="q-cell" href="#book" data-panel="2"><span class="six"><span class="stick">S/04</span></span><span class="co">x=.86 y=.91</span><h3 data-i18n="s01.c2.title">Startup Creator.</h3>
-        <span class="io">in&nbsp; <b data-i18n="s01.c2.in">eine Idee ohne Geschäftsmodell</b><br>out&nbsp; <span class="o" data-i18n="s01.c2.out">ein tragfähiges KI-Venture</span></span><span class="dot" aria-hidden="true"></span></a>
-      <a class="q-cell" href="#book" data-panel="3"><span class="six"><span class="stick">S/02</span></span><span class="co">x=.18 y=.42</span><h3 data-i18n="s01.c3.title">Quickstart KI.</h3>
-        <span class="io">in&nbsp; <b data-i18n="s01.c3.in">ein Team ohne KI-Praxis</b><br>out&nbsp; <span class="o" data-i18n="s01.c3.out">das erste Ergebnis in Wochen</span></span><span class="dot" aria-hidden="true"></span></a>
-      <a class="q-cell" href="#book" data-panel="4"><span class="six"><span class="stick">S/03</span></span><span class="co">x=.74 y=.47</span><h3 data-i18n="s01.c4.title">Entwicklung.</h3>
-        <span class="io">in&nbsp; <b data-i18n="s01.c4.in">ein Use Case auf der Shortlist</b><br>out&nbsp; <span class="o" data-i18n="s01.c4.out">ein System im Produktivbetrieb</span></span><span class="dot" aria-hidden="true"></span></a>
+      <button type="button" class="q-cell" data-panel="1" aria-expanded="false" aria-controls="qd1"><span class="six"><span class="stick g">S/01</span></span><span class="co">x=.22 y=.84</span><h3 data-i18n="s01.c1.title">Beratung.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c1.in">"wo fangen wir überhaupt an?"</b><br>out&nbsp; <span class="o" data-i18n="s01.c1.out">eine Roadmap mit belastbaren Use Cases</span></span><span class="dot" aria-hidden="true"></span></button>
+      <button type="button" class="q-cell" data-panel="2" aria-expanded="false" aria-controls="qd2"><span class="six"><span class="stick">S/04</span></span><span class="co">x=.86 y=.91</span><h3 data-i18n="s01.c2.title">Startup Creator.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c2.in">eine Idee ohne Geschäftsmodell</b><br>out&nbsp; <span class="o" data-i18n="s01.c2.out">ein tragfähiges KI-Venture</span></span><span class="dot" aria-hidden="true"></span></button>
+      <button type="button" class="q-cell" data-panel="3" aria-expanded="false" aria-controls="qd3"><span class="six"><span class="stick">S/02</span></span><span class="co">x=.18 y=.42</span><h3 data-i18n="s01.c3.title">Quickstart KI.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c3.in">ein Team ohne KI-Praxis</b><br>out&nbsp; <span class="o" data-i18n="s01.c3.out">das erste Ergebnis in Wochen</span></span><span class="dot" aria-hidden="true"></span></button>
+      <button type="button" class="q-cell" data-panel="4" aria-expanded="false" aria-controls="qd4"><span class="six"><span class="stick">S/03</span></span><span class="co">x=.74 y=.47</span><h3 data-i18n="s01.c4.title">Entwicklung.</h3>
+        <span class="io">in&nbsp; <b data-i18n="s01.c4.in">ein Use Case auf der Shortlist</b><br>out&nbsp; <span class="o" data-i18n="s01.c4.out">ein System im Produktivbetrieb</span></span><span class="dot" aria-hidden="true"></span></button>
     </div>
+  </div>
+  <div class="q-detail" id="qd1" hidden>
+    <h3 data-i18n="s01.d1.title">Beratung</h3>
+    <p class="lead" data-i18n="s01.d1.lead">Wir verstehen Beratung nicht als einen Monolog, der Ihnen etwas verkaufen will, sondern als einen Dialog, in welchem wir verstehen wollen, wo Sie stehen und wo Sie hin wollen. Nur so können wir Ihnen einen "Ratschlag" geben, der Ihnen hilft Ihre Ziele zu erreichen. Beratung bedeutet für uns den ganzheitlichen Dreiklang aus Mensch, Organisation und Technologie zu betrachten.</p>
+    <div class="blocks">
+      <div class="blk"><h4 data-i18n="s01.d1.b1.title">Ist-Soll Analyse</h4>
+        <p data-i18n="s01.d1.b1.text">"Wie geht es Ihnen?" Eine oft gestellte und nicht ernst gemeinte Frage unter Bekannten. Für uns der Anfang unserer Beziehung. Wenn wir nicht verstehen, wie es Ihnen geht und was Sie schmerzt, können wir Ihnen nicht helfen. Für uns ist die Ist-Soll Analyse der Beginn, um einen umfassenden Einblick in Ihre Welt zu bekommen.</p>
+        <p class="keys" data-i18n="s01.d1.b1.keys">Mindset, Kompetenzen, Governance, Prozesse, Datenbasis, Technologie</p></div>
+      <div class="blk"><h4 data-i18n="s01.d1.b2.title">Use Case</h4>
+        <p data-i18n="s01.d1.b2.text">Alle sprechen über Use Cases und was alles erreicht werden kann. Leider kann der messbare Mehrwert meistens nicht qualifiziert formuliert werden. Ein Use Case ohne Mehrwert wird nicht gebraucht, leider ist die Realität meistens anders. Deswegen helfen wir Ihnen.</p>
+        <p class="keys" data-i18n="s01.d1.b2.keys">Ist-Soll Analyse, Technische Machbarkeit</p></div>
+      <div class="blk"><h4 data-i18n="s01.d1.b3.title">Tech Advisory</h4>
+        <p data-i18n="s01.d1.b3.text">Technologie ist Teil unserer DNA und unserer Passion. Unser umfassendes Wissen über alle Ebenen der Informationstechnologie ermöglicht es uns, für alle Fragestellungen und Probleme eine Lösung zu finden. Lösungen müssen nicht kompliziert sein, sondern sie müssen einen messbaren Mehrwert erzeugen.</p>
+        <p class="keys" data-i18n="s01.d1.b3.keys">Generative Sprachmodelle (LLM), Retriever Augmented Generation (RAG), Technologie Stacks, Software Architektur, Integrationsberatung, Entscheidungsfindung, Tool- und Plattformauswahl</p></div>
+      <div class="blk"><h4 data-i18n="s01.d1.b4.title">Executive Beratung</h4>
+        <p data-i18n="s01.d1.b4.text">Sprache ist so unterschiedlich wie die Menschen und Organisationen selbst. Wir sind sehr sprachbegabt, sprechen unterschiedlichste Dialekte und lernen gerne dazu. Es ist wichtig, die Menschen zu erreichen und vor allem den Verantwortlichen die Möglichkeit zu geben, zu entscheiden. Deswegen haben wir spezielle Informationsparameter.</p>
+        <p class="keys" data-i18n="s01.d1.b4.keys">Quick Wins, Langfristiger ROI, Adoption Rate, Risikobewertung</p></div>
+    </div>
+    <a class="cta" href="#book" data-i18n="s01.d1.cta">Erstgespräch vereinbaren →</a>
+  </div>
+  <div class="q-detail" id="qd2" hidden>
+    <h3 data-i18n="s01.d2.title">Startup Creator</h3>
+    <p class="lead" data-i18n="s01.d2.lead">Aus einer Idee wird kein Unternehmen, weil die Technologie funktioniert, sondern weil jemand dafür zahlt. Wir begleiten den Weg von der Idee zum tragfähigen KI-Geschäftsmodell — technisch und unternehmerisch.</p>
+    <div class="blocks">
+      <div class="blk"><h4 data-i18n="s01.d2.b1.title">Idee &amp; Markt</h4>
+        <p data-i18n="s01.d2.b1.text">Bevor wir über Technologie sprechen, klären wir gemeinsam mit Ihnen das Problem, das Sie lösen wollen, und für wen. Wir ordnen Ihre Idee im Wettbewerbsumfeld ein und schärfen das Wertversprechen, bis es sich in einem Satz erklären lässt. Erst danach entscheiden wir gemeinsam über die Umsetzung.</p>
+        <p class="keys" data-i18n="s01.d2.b1.keys">Problemverständnis, Zielgruppe, Wettbewerb, Wertversprechen</p></div>
+      <div class="blk"><h4 data-i18n="s01.d2.b2.title">Produkt &amp; Prototyp</h4>
+        <p data-i18n="s01.d2.b2.text">Wir bauen zuerst das Minimum, das echtes Nutzerfeedback zu Ihrem Produkt ermöglicht, nicht das Maximum, das am längsten dauert. Die Technologiewahl richtet sich danach, was Sie am schnellsten zu einem belastbaren Ergebnis bringt. So erreichen Sie mit einem Prototyp den Markt, der etwas beweist.</p>
+        <p class="keys" data-i18n="s01.d2.b2.keys">MVP, Nutzerfeedback, Technologiewahl, Time-to-Market</p></div>
+      <div class="blk"><h4 data-i18n="s01.d2.b3.title">Geschäftsmodell</h4>
+        <p data-i18n="s01.d2.b3.text">Eine Idee trägt sich erst, wenn Ihr Erlösmodell und Ihre Kostenstruktur zueinander passen. Wir arbeiten mit Ihnen heraus, wie Ihr Modell skaliert und was es braucht, um finanzierungsreif zu sein. So wird aus der Idee ein Geschäft und kein Prototyp.</p>
+        <p class="keys" data-i18n="s01.d2.b3.keys">Erlösmodell, Kostenstruktur, Skalierung, Finanzierungsreife</p></div>
+    </div>
+    <a class="cta" href="#book" data-i18n="s01.d2.cta">Erstgespräch vereinbaren →</a>
+  </div>
+  <div class="q-detail" id="qd3" hidden>
+    <h3 data-i18n="s01.d3.title">Quickstart KI</h3>
+    <p class="lead" data-i18n="s01.d3.lead">Die Basis allem unseres Handelns ist der Dreiklang aus Mensch, Organisation und Technologie. Dies gilt auch für die Einführung rund um das Thema KI. Wir bieten neben unseren etablierten Standardpaketen auch individuelle und auf Sie zugeschnittene Einführungsveranstaltungen.</p>
+    <div class="blocks">
+      <div class="blk"><h4 data-i18n="s01.d3.b1.title">Mensch</h4>
+        <p data-i18n="s01.d3.b1.text">Wir vermitteln Grundlagenwissen und Prompting so, dass es bei Ihnen im Arbeitsalltag ankommt, nicht nur in der Theorie. Sie lernen, wo KI in Ihrem Arbeitsbereich wirklich hilft, und wo nicht. Genauso wichtig ist der Umgang mit den Grenzen der Technologie.</p>
+        <p class="keys" data-i18n="s01.d3.b1.keys">Grundlagenwissen, Prompting, Anwendungsfälle im Alltag, Umgang mit Grenzen</p></div>
+      <div class="blk"><h4 data-i18n="s01.d3.b2.title">Organisation</h4>
+        <p data-i18n="s01.d3.b2.text">Ohne klare Leitplanken bleibt der Einsatz von KI in Ihrer Organisation dem Zufall überlassen. Wir helfen Ihnen, Rollen, Datenschutz und Freigabeprozesse so festzulegen, dass Ihr Team sicher handeln kann. So wird aus einzelnen Versuchen ein verlässlicher Rahmen.</p>
+        <p class="keys" data-i18n="s01.d3.b2.keys">Leitplanken, Rollen, Datenschutz, Freigabeprozesse</p></div>
+      <div class="blk"><h4 data-i18n="s01.d3.b3.title">Technologie</h4>
+        <p data-i18n="s01.d3.b3.text">Die passenden Werkzeuge hängen von Ihrer bestehenden Landschaft ab, nicht von der aktuellen Marktlage. Wir prüfen Schnittstellen und Datenzugriff, bevor wir Ihnen ein Betriebsmodell empfehlen. So starten Sie mit einer Technologiebasis, die trägt.</p>
+        <p class="keys" data-i18n="s01.d3.b3.keys">Werkzeugauswahl, Schnittstellen, Datenzugriff, Betriebsmodell</p></div>
+    </div>
+    <a class="cta" href="#book" data-i18n="s01.d3.cta">Erstgespräch vereinbaren →</a>
+  </div>
+  <div class="q-detail" id="qd4" hidden>
+    <h3 data-i18n="s01.d4.title">Entwicklung</h3>
+    <p class="lead" data-i18n="s01.d4.lead">Ein Prototyp beeindruckt, ein System trägt. Wir entwickeln KI-Lösungen, die in Ihre bestehende Landschaft passen, im Betrieb messbar bleiben und von Ihrem Team weitergeführt werden können.</p>
+    <div class="blocks">
+      <div class="blk"><h4 data-i18n="s01.d4.b1.title">Architektur &amp; Umsetzung</h4>
+        <p data-i18n="s01.d4.b1.text">Wir planen die Architektur so, dass sie zu Ihrer bestehenden Landschaft passt, statt sie zu ersetzen. Ob Sprachmodell, Retrieval oder klassische Integration entscheidet Ihr Anwendungsfall, nicht der Trend. Datenpipelines bauen wir so, dass sie auch nach unserem Projektende bei Ihnen weiterlaufen.</p>
+        <p class="keys" data-i18n="s01.d4.b1.keys">Software Architektur, LLM &amp; RAG, Integrationen, Datenpipelines</p></div>
+      <div class="blk"><h4 data-i18n="s01.d4.b2.title">Qualität &amp; Betrieb</h4>
+        <p data-i18n="s01.d4.b2.text">Ein System, das niemand überwacht, versagt irgendwann unbemerkt. Wir richten Evaluation und Monitoring so ein, dass Sie Qualität, Kosten und Sicherheit laufend im Blick behalten. So bleibt Ihr Betrieb planbar, auch wenn sich Anforderungen ändern.</p>
+        <p class="keys" data-i18n="s01.d4.b2.keys">Evaluation, Monitoring, Kostenkontrolle, Sicherheit</p></div>
+      <div class="blk"><h4 data-i18n="s01.d4.b3.title">Übergabe</h4>
+        <p data-i18n="s01.d4.b3.text">Am Ende gehört die Lösung Ihnen, nicht uns. Sie erhalten Quellcode, Dokumentation und eine Schulung Ihres Teams, damit es die Lösung eigenständig weiterführen kann. Eine Abhängigkeit von uns entsteht dabei nicht.</p>
+        <p class="keys" data-i18n="s01.d4.b3.keys">Dokumentation, Schulung, Quellcode, kein Lock-in</p></div>
+    </div>
+    <a class="cta" href="#book" data-i18n="s01.d4.cta">Erstgespräch vereinbaren →</a>
   </div>
 </section>
 
@@ -497,7 +575,58 @@ body.no-canvas .stage .hint{display:none}
     "s01.c3.out": "das erste Ergebnis in Wochen",
     "s01.c4.title": "Entwicklung.",
     "s01.c4.in": "ein Use Case auf der Shortlist",
-    "s01.c4.out": "ein System im Produktivbetrieb"
+    "s01.c4.out": "ein System im Produktivbetrieb",
+    "s01.d1.title": "Beratung",
+    "s01.d1.lead": "Wir verstehen Beratung nicht als einen Monolog, der Ihnen etwas verkaufen will, sondern als einen Dialog, in welchem wir verstehen wollen, wo Sie stehen und wo Sie hin wollen. Nur so können wir Ihnen einen \"Ratschlag\" geben, der Ihnen hilft Ihre Ziele zu erreichen. Beratung bedeutet für uns den ganzheitlichen Dreiklang aus Mensch, Organisation und Technologie zu betrachten.",
+    "s01.d1.cta": "Erstgespräch vereinbaren →",
+    "s01.d1.b1.title": "Ist-Soll Analyse",
+    "s01.d1.b1.text": "\"Wie geht es Ihnen?\" Eine oft gestellte und nicht ernst gemeinte Frage unter Bekannten. Für uns der Anfang unserer Beziehung. Wenn wir nicht verstehen, wie es Ihnen geht und was Sie schmerzt, können wir Ihnen nicht helfen. Für uns ist die Ist-Soll Analyse der Beginn, um einen umfassenden Einblick in Ihre Welt zu bekommen.",
+    "s01.d1.b1.keys": "Mindset, Kompetenzen, Governance, Prozesse, Datenbasis, Technologie",
+    "s01.d1.b2.title": "Use Case",
+    "s01.d1.b2.text": "Alle sprechen über Use Cases und was alles erreicht werden kann. Leider kann der messbare Mehrwert meistens nicht qualifiziert formuliert werden. Ein Use Case ohne Mehrwert wird nicht gebraucht, leider ist die Realität meistens anders. Deswegen helfen wir Ihnen.",
+    "s01.d1.b2.keys": "Ist-Soll Analyse, Technische Machbarkeit",
+    "s01.d1.b3.title": "Tech Advisory",
+    "s01.d1.b3.text": "Technologie ist Teil unserer DNA und unserer Passion. Unser umfassendes Wissen über alle Ebenen der Informationstechnologie ermöglicht es uns, für alle Fragestellungen und Probleme eine Lösung zu finden. Lösungen müssen nicht kompliziert sein, sondern sie müssen einen messbaren Mehrwert erzeugen.",
+    "s01.d1.b3.keys": "Generative Sprachmodelle (LLM), Retriever Augmented Generation (RAG), Technologie Stacks, Software Architektur, Integrationsberatung, Entscheidungsfindung, Tool- und Plattformauswahl",
+    "s01.d1.b4.title": "Executive Beratung",
+    "s01.d1.b4.text": "Sprache ist so unterschiedlich wie die Menschen und Organisationen selbst. Wir sind sehr sprachbegabt, sprechen unterschiedlichste Dialekte und lernen gerne dazu. Es ist wichtig, die Menschen zu erreichen und vor allem den Verantwortlichen die Möglichkeit zu geben, zu entscheiden. Deswegen haben wir spezielle Informationsparameter.",
+    "s01.d1.b4.keys": "Quick Wins, Langfristiger ROI, Adoption Rate, Risikobewertung",
+    "s01.d2.title": "Startup Creator",
+    "s01.d2.lead": "Aus einer Idee wird kein Unternehmen, weil die Technologie funktioniert, sondern weil jemand dafür zahlt. Wir begleiten den Weg von der Idee zum tragfähigen KI-Geschäftsmodell — technisch und unternehmerisch.",
+    "s01.d2.cta": "Erstgespräch vereinbaren →",
+    "s01.d2.b1.title": "Idee &amp; Markt",
+    "s01.d2.b1.text": "Bevor wir über Technologie sprechen, klären wir gemeinsam mit Ihnen das Problem, das Sie lösen wollen, und für wen. Wir ordnen Ihre Idee im Wettbewerbsumfeld ein und schärfen das Wertversprechen, bis es sich in einem Satz erklären lässt. Erst danach entscheiden wir gemeinsam über die Umsetzung.",
+    "s01.d2.b1.keys": "Problemverständnis, Zielgruppe, Wettbewerb, Wertversprechen",
+    "s01.d2.b2.title": "Produkt &amp; Prototyp",
+    "s01.d2.b2.text": "Wir bauen zuerst das Minimum, das echtes Nutzerfeedback zu Ihrem Produkt ermöglicht, nicht das Maximum, das am längsten dauert. Die Technologiewahl richtet sich danach, was Sie am schnellsten zu einem belastbaren Ergebnis bringt. So erreichen Sie mit einem Prototyp den Markt, der etwas beweist.",
+    "s01.d2.b2.keys": "MVP, Nutzerfeedback, Technologiewahl, Time-to-Market",
+    "s01.d2.b3.title": "Geschäftsmodell",
+    "s01.d2.b3.text": "Eine Idee trägt sich erst, wenn Ihr Erlösmodell und Ihre Kostenstruktur zueinander passen. Wir arbeiten mit Ihnen heraus, wie Ihr Modell skaliert und was es braucht, um finanzierungsreif zu sein. So wird aus der Idee ein Geschäft und kein Prototyp.",
+    "s01.d2.b3.keys": "Erlösmodell, Kostenstruktur, Skalierung, Finanzierungsreife",
+    "s01.d3.title": "Quickstart KI",
+    "s01.d3.lead": "Die Basis allem unseres Handelns ist der Dreiklang aus Mensch, Organisation und Technologie. Dies gilt auch für die Einführung rund um das Thema KI. Wir bieten neben unseren etablierten Standardpaketen auch individuelle und auf Sie zugeschnittene Einführungsveranstaltungen.",
+    "s01.d3.cta": "Erstgespräch vereinbaren →",
+    "s01.d3.b1.title": "Mensch",
+    "s01.d3.b1.text": "Wir vermitteln Grundlagenwissen und Prompting so, dass es bei Ihnen im Arbeitsalltag ankommt, nicht nur in der Theorie. Sie lernen, wo KI in Ihrem Arbeitsbereich wirklich hilft, und wo nicht. Genauso wichtig ist der Umgang mit den Grenzen der Technologie.",
+    "s01.d3.b1.keys": "Grundlagenwissen, Prompting, Anwendungsfälle im Alltag, Umgang mit Grenzen",
+    "s01.d3.b2.title": "Organisation",
+    "s01.d3.b2.text": "Ohne klare Leitplanken bleibt der Einsatz von KI in Ihrer Organisation dem Zufall überlassen. Wir helfen Ihnen, Rollen, Datenschutz und Freigabeprozesse so festzulegen, dass Ihr Team sicher handeln kann. So wird aus einzelnen Versuchen ein verlässlicher Rahmen.",
+    "s01.d3.b2.keys": "Leitplanken, Rollen, Datenschutz, Freigabeprozesse",
+    "s01.d3.b3.title": "Technologie",
+    "s01.d3.b3.text": "Die passenden Werkzeuge hängen von Ihrer bestehenden Landschaft ab, nicht von der aktuellen Marktlage. Wir prüfen Schnittstellen und Datenzugriff, bevor wir Ihnen ein Betriebsmodell empfehlen. So starten Sie mit einer Technologiebasis, die trägt.",
+    "s01.d3.b3.keys": "Werkzeugauswahl, Schnittstellen, Datenzugriff, Betriebsmodell",
+    "s01.d4.title": "Entwicklung",
+    "s01.d4.lead": "Ein Prototyp beeindruckt, ein System trägt. Wir entwickeln KI-Lösungen, die in Ihre bestehende Landschaft passen, im Betrieb messbar bleiben und von Ihrem Team weitergeführt werden können.",
+    "s01.d4.cta": "Erstgespräch vereinbaren →",
+    "s01.d4.b1.title": "Architektur &amp; Umsetzung",
+    "s01.d4.b1.text": "Wir planen die Architektur so, dass sie zu Ihrer bestehenden Landschaft passt, statt sie zu ersetzen. Ob Sprachmodell, Retrieval oder klassische Integration entscheidet Ihr Anwendungsfall, nicht der Trend. Datenpipelines bauen wir so, dass sie auch nach unserem Projektende bei Ihnen weiterlaufen.",
+    "s01.d4.b1.keys": "Software Architektur, LLM &amp; RAG, Integrationen, Datenpipelines",
+    "s01.d4.b2.title": "Qualität &amp; Betrieb",
+    "s01.d4.b2.text": "Ein System, das niemand überwacht, versagt irgendwann unbemerkt. Wir richten Evaluation und Monitoring so ein, dass Sie Qualität, Kosten und Sicherheit laufend im Blick behalten. So bleibt Ihr Betrieb planbar, auch wenn sich Anforderungen ändern.",
+    "s01.d4.b2.keys": "Evaluation, Monitoring, Kostenkontrolle, Sicherheit",
+    "s01.d4.b3.title": "Übergabe",
+    "s01.d4.b3.text": "Am Ende gehört die Lösung Ihnen, nicht uns. Sie erhalten Quellcode, Dokumentation und eine Schulung Ihres Teams, damit es die Lösung eigenständig weiterführen kann. Eine Abhängigkeit von uns entsteht dabei nicht.",
+    "s01.d4.b3.keys": "Dokumentation, Schulung, Quellcode, kein Lock-in"
   },
   "en": {
     "nav.cta": "BOOK_CALL()",
@@ -557,7 +686,58 @@ body.no-canvas .stage .hint{display:none}
     "s01.c3.out": "first results within weeks",
     "s01.c4.title": "Development.",
     "s01.c4.in": "a shortlisted use case",
-    "s01.c4.out": "a system in production"
+    "s01.c4.out": "a system in production",
+    "s01.d1.title": "Consulting",
+    "s01.d1.lead": "We don't see consulting as a monologue that tries to sell you something, but as a dialogue in which we want to understand where you stand and where you want to go. Only then can we give you \"advice\" that actually helps you reach your goals. For us, consulting means looking at the full triad of people, organisation and technology.",
+    "s01.d1.cta": "Schedule an intro call →",
+    "s01.d1.b1.title": "Current-state analysis",
+    "s01.d1.b1.text": "\"How are you doing?\" A question often asked among acquaintances, rarely meant seriously. For us, it's the start of the relationship. If we don't understand where it hurts, we can't help you. The current-state analysis is where we begin to build a full picture of your world.",
+    "s01.d1.b1.keys": "Mindset, capabilities, governance, processes, data foundation, technology",
+    "s01.d1.b2.title": "Use case",
+    "s01.d1.b2.text": "Everyone talks about use cases and what could be achieved. Unfortunately the measurable value is usually never stated with any rigor. A use case without value isn't worth pursuing, yet that's the reality most of the time. That's where we help you.",
+    "s01.d1.b2.keys": "Current-state analysis, technical feasibility",
+    "s01.d1.b3.title": "Tech advisory",
+    "s01.d1.b3.text": "Technology is part of our DNA and our passion. Our broad knowledge across every layer of information technology lets us find a solution for any question or problem. Solutions don't need to be complicated — they need to create measurable value.",
+    "s01.d1.b3.keys": "Large language models (LLM), retrieval augmented generation (RAG), technology stacks, software architecture, integration advisory, decision support, tool and platform selection",
+    "s01.d1.b4.title": "Executive briefing",
+    "s01.d1.b4.text": "Language is as varied as the people and organisations that speak it. We're comfortable switching registers and always keen to learn a new one. It matters that we reach people, and above all that decision-makers get what they need to decide. That's why we work with a dedicated set of briefing parameters.",
+    "s01.d1.b4.keys": "Quick wins, long-term ROI, adoption rate, risk assessment",
+    "s01.d2.title": "Startup Creator",
+    "s01.d2.lead": "An idea doesn't become a company because the technology works, but because someone pays for it. We accompany the path from idea to a viable AI business model — both technically and commercially.",
+    "s01.d2.cta": "Schedule an intro call →",
+    "s01.d2.b1.title": "Idea &amp; market",
+    "s01.d2.b1.text": "Before we talk technology, we work with you to clarify the problem you're solving and for whom. We place your idea within the competitive landscape and sharpen the value proposition until it fits in one sentence. Only then do we decide together on implementation.",
+    "s01.d2.b1.keys": "Problem understanding, target audience, competition, value proposition",
+    "s01.d2.b2.title": "Product &amp; prototype",
+    "s01.d2.b2.text": "We build the minimum that gets you real user feedback first, not the maximum that takes the longest. The choice of technology follows whatever gets you to a solid result fastest. That way you reach the market with a prototype that proves something.",
+    "s01.d2.b2.keys": "MVP, user feedback, technology choice, time to market",
+    "s01.d2.b3.title": "Business model",
+    "s01.d2.b3.text": "An idea only holds up once your revenue model and cost structure fit together. We work out with you how your model scales and what it takes to become investment-ready. That's how an idea turns into a business instead of staying a prototype.",
+    "s01.d2.b3.keys": "Revenue model, cost structure, scaling, investment readiness",
+    "s01.d3.title": "AI Quickstart",
+    "s01.d3.lead": "Everything we do is grounded in the triad of people, organisation and technology. That also holds for onboarding around the topic of AI. Alongside our established standard packages, we also offer individual onboarding sessions tailored to you.",
+    "s01.d3.cta": "Schedule an intro call →",
+    "s01.d3.b1.title": "People",
+    "s01.d3.b1.text": "We teach fundamentals and prompting so they land in your everyday work, not just in theory. You learn where AI genuinely helps in your own area, and where it doesn't. Just as important is understanding the technology's limits.",
+    "s01.d3.b1.keys": "Fundamentals, prompting, everyday use cases, handling limitations",
+    "s01.d3.b2.title": "Organisation",
+    "s01.d3.b2.text": "Without clear guardrails, AI use in your organisation is left to chance. We help you define roles, data protection and approval processes so your team can act safely. That turns isolated experiments into a reliable framework.",
+    "s01.d3.b2.keys": "Guardrails, roles, data protection, approval processes",
+    "s01.d3.b3.title": "Technology",
+    "s01.d3.b3.text": "The right tools depend on your existing landscape, not the current market hype. We check interfaces and data access before we recommend an operating model. That way you start on a technology foundation that holds.",
+    "s01.d3.b3.keys": "Tool selection, interfaces, data access, operating model",
+    "s01.d4.title": "Development",
+    "s01.d4.lead": "A prototype impresses, a system carries the load. We build AI solutions that fit into your existing landscape, stay measurable in operation, and can be carried forward by your own team.",
+    "s01.d4.cta": "Schedule an intro call →",
+    "s01.d4.b1.title": "Architecture &amp; delivery",
+    "s01.d4.b1.text": "We design the architecture to fit your existing landscape rather than replace it. Whether it's a language model, retrieval or a classic integration is decided by your use case, not by the trend. We build data pipelines that keep running after our project ends.",
+    "s01.d4.b1.keys": "Software architecture, LLM &amp; RAG, integrations, data pipelines",
+    "s01.d4.b2.title": "Quality &amp; operations",
+    "s01.d4.b2.text": "A system nobody watches eventually fails unnoticed. We set up evaluation and monitoring so you keep quality, cost and security in view at all times. That keeps operations predictable even as requirements change.",
+    "s01.d4.b2.keys": "Evaluation, monitoring, cost control, security",
+    "s01.d4.b3.title": "Handover",
+    "s01.d4.b3.text": "In the end the solution belongs to you, not to us. You receive source code, documentation and training for your team so it can carry the solution forward on its own. No dependency on us remains.",
+    "s01.d4.b3.keys": "Documentation, training, source code, no lock-in"
   }
 }
 </script>
@@ -616,6 +796,18 @@ body.no-canvas .stage .hint{display:none}
                 ...en.filter(k=>!(k in I18N.de)).map(k=>'de:'+k)];
     if(miss.length)console.warn('[i18n] key drift:',miss);
   })();
+
+  /* ── SEC.01 service detail panels ────────────────────────── */
+  document.querySelectorAll('.q-cell[data-panel]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id='qd'+btn.dataset.panel,panel=document.getElementById(id);
+      const open=btn.getAttribute('aria-expanded')==='true';
+      document.querySelectorAll('.q-cell[data-panel]').forEach(b=>b.setAttribute('aria-expanded','false'));
+      document.querySelectorAll('.q-detail').forEach(p=>p.hidden=true);
+      if(!open){btn.setAttribute('aria-expanded','true');panel.hidden=false;}
+      if(window.ScrollTrigger)ScrollTrigger.refresh();
+    });
+  });
 
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const small=matchMedia('(max-width:760px)').matches;
