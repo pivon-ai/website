@@ -266,8 +266,12 @@ body.no-canvas .stage .hint{display:none}
 .book .sun .cta:hover{background:var(--ink);color:#fff}
 .book .orbit{position:absolute;inset:-2.2rem;border:1.5px dashed rgba(255,255,255,.35);border-radius:50%;pointer-events:none;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.book .base{margin-top:3.4rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:rgba(255,255,255,.5);display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.book .base{margin-top:3.4rem;display:flex;flex-direction:column;align-items:center;gap:1.1rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:rgba(255,255,255,.5)}
+.book .base .claim{font-family:var(--body);font-size:.9rem;letter-spacing:0;color:rgba(255,255,255,.7);max-width:52ch;margin:0}
+.book .base .fnav,.book .base .frow{display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center}
 .book .base a{color:rgba(255,255,255,.75);text-decoration:none}
+.book .base a:hover{color:#fff}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
@@ -497,20 +501,34 @@ body.no-canvas .stage .hint{display:none}
 </section>
 
 <section class="book" id="book">
-  <div class="sec-bar"><span><b>SEC.08</b> — BOOKING</span><span><span class="pg">100/100</span> · DURATION: 30 MIN</span></div>
-  <p class="mono-line">$ pivon book --duration 30m --agenda <b>"the honest version"</b></p>
+  <div class="sec-bar"><span data-i18n="s08.bar.l"><b>SEC.08</b> — KONTAKT</span><span data-i18n="s08.bar.r"><span class="pg">100/100</span> · DAUER: 30 MIN</span></div>
+  <p class="mono-line" data-i18n="s08.mono">$ pivon book --duration 30m --agenda <b>"die ehrliche Version"</b></p>
   <div class="wrap">
     <div class="orbit" aria-hidden="true"></div>
     <div class="sun">
-      <h2>Start the first run.</h2>
-      <p>30 minutes, no slides. Bring the messy version — we'll tell you honestly whether AI fixes it.</p>
-      <a href="mailto:kontakt@pivon.ai?subject=BOOK_CALL()%20—%2030%20minutes" class="cta">BOOK_CALL() →</a>
+      <h2 data-i18n="s08.h2">Lassen Sie uns sprechen</h2>
+      <p data-i18n="s08.p">Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.</p>
+      <a href="mailto:kontakt@pivon.ai?subject=Erstgespr%C3%A4ch%20%E2%80%94%2030%20Minuten" class="cta" data-i18n="s08.cta" data-i18n-attr="href:s08.cta.subject">ERSTGESPRÄCH() →</a>
     </div>
   </div>
   <div class="base">
-    <span>© 2026 PIVON</span>
-    <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>
-    <span>CASES = ILLUSTRATIVE ENGAGEMENTS</span>
+    <p class="claim" data-i18n="foot.claim">Ihr Partner für digitale Lösungen – KI strategisch denken und pragmatisch umsetzen.</p>
+    <nav class="fnav" aria-label="Footer">
+      <a href="#services" data-i18n="foot.nav1">Leistungen</a>
+      <a href="#approach" data-i18n="foot.nav2">Vorgehen</a>
+      <a href="#anspruch" data-i18n="foot.nav3">Unser Anspruch</a>
+      <a href="#team" data-i18n="foot.nav4">Über uns</a>
+      <a href="#book" data-i18n="foot.nav5">Kontakt</a>
+    </nav>
+    <div class="frow">
+      <a href="mailto:kontakt@pivon.ai" data-i18n="foot.mail">kontakt@pivon.ai</a>
+      <a href="impressum.html" data-i18n="foot.impressum">Impressum</a>
+      <a href="datenschutz.html" data-i18n="foot.datenschutz">Datenschutz</a>
+    </div>
+    <div class="frow">
+      <span data-i18n="foot.copy">© 2026 pivon. Alle Rechte vorbehalten.</span>
+      <span data-i18n="foot.disc">FALLBEISPIELE = ILLUSTRATIVE PROJEKTE</span>
+    </div>
   </div>
 </section>
 </main>
@@ -692,7 +710,25 @@ body.no-canvas .stage .hint{display:none}
     "s07.b.pin2": "Enablement",
     "s07.b.pin3": "Adoption",
     "s07.b.pin4": "Kunden",
-    "s07.cta": "Kontakt aufnehmen"
+    "s07.cta": "Kontakt aufnehmen",
+    "s08.bar.l": "<b>SEC.08</b> — KONTAKT",
+    "s08.bar.r": "<span class=\"pg\">100/100</span> · DAUER: 30 MIN",
+    "s08.mono": "$ pivon book --duration 30m --agenda <b>\"die ehrliche Version\"</b>",
+    "s08.h2": "Lassen Sie uns sprechen",
+    "s08.p": "Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.",
+    "s08.cta": "ERSTGESPRÄCH() →",
+    "s08.cta.subject": "mailto:kontakt@pivon.ai?subject=Erstgespr%C3%A4ch%20%E2%80%94%2030%20Minuten",
+    "foot.claim": "Ihr Partner für digitale Lösungen – KI strategisch denken und pragmatisch umsetzen.",
+    "foot.nav1": "Leistungen",
+    "foot.nav2": "Vorgehen",
+    "foot.nav3": "Unser Anspruch",
+    "foot.nav4": "Über uns",
+    "foot.nav5": "Kontakt",
+    "foot.mail": "kontakt@pivon.ai",
+    "foot.impressum": "Impressum",
+    "foot.datenschutz": "Datenschutz",
+    "foot.copy": "© 2026 pivon. Alle Rechte vorbehalten.",
+    "foot.disc": "FALLBEISPIELE = ILLUSTRATIVE PROJEKTE"
   },
   "en": {
     "nav.cta": "BOOK_CALL()",
@@ -867,7 +903,25 @@ body.no-canvas .stage .hint{display:none}
     "s07.b.pin2": "enablement",
     "s07.b.pin3": "adoption",
     "s07.b.pin4": "customers",
-    "s07.cta": "Get in touch"
+    "s07.cta": "Get in touch",
+    "s08.bar.l": "<b>SEC.08</b> — BOOKING",
+    "s08.bar.r": "<span class=\"pg\">100/100</span> · DURATION: 30 MIN",
+    "s08.mono": "$ pivon book --duration 30m --agenda <b>\"the honest version\"</b>",
+    "s08.h2": "Let's talk.",
+    "s08.p": "Contact us — simple, non-binding and fast — for an initial conversation.",
+    "s08.cta": "BOOK_CALL() →",
+    "s08.cta.subject": "mailto:kontakt@pivon.ai?subject=BOOK_CALL()%20%E2%80%94%2030%20minutes",
+    "foot.claim": "Your partner for digital solutions — thinking AI strategically, delivering it pragmatically.",
+    "foot.nav1": "Services",
+    "foot.nav2": "Approach",
+    "foot.nav3": "What We Stand For",
+    "foot.nav4": "Team",
+    "foot.nav5": "Contact",
+    "foot.mail": "kontakt@pivon.ai",
+    "foot.impressum": "Imprint",
+    "foot.datenschutz": "Privacy Policy",
+    "foot.copy": "© 2026 pivon. All rights reserved.",
+    "foot.disc": "CASES = ILLUSTRATIVE ENGAGEMENTS"
   }
 }
 </script>

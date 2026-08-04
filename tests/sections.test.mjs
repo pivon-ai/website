@@ -194,3 +194,39 @@ test('the live assembly counter sits outside every translated element', () => {
   }
   assert.match(status[0], /<b id="asmPct">/, '#asmPct is missing from the status line');
 });
+
+test('s08 section is complete', () => assertSection(assert, dict(), 's08'));
+test('footer is complete', () => assertSection(assert, dict(), 'foot'));
+
+test('footer links the legal pages and the anspruch anchor', () => {
+  assert.match(html, /href="impressum\.html"/);
+  assert.match(html, /href="datenschutz\.html"/);
+  assert.match(html, /href="#anspruch"/);
+});
+
+test('the booking CTA subject line is translatable', () => {
+  assert.match(html, /data-i18n-attr="href:s08\.cta\.subject"/);
+  assert.match(dict().de['s08.cta.subject'], /^mailto:kontakt@pivon\.ai\?subject=/);
+});
+
+test('s08 title and description carry the doc text verbatim', () => {
+  const d = dict().de;
+  for (const k of ['s08.h2', 's08.p']) {
+    const value = d[k];
+    assert.ok(value?.trim(), `de.${k} missing`);
+    assert.ok(docText.includes(value), `de.${k} does not appear verbatim in content-texte.md: ${value}`);
+  }
+});
+
+test('footer claim, nav labels, and legal labels carry the doc text verbatim', () => {
+  const d = dict().de;
+  const keys = [
+    'foot.claim', 'foot.nav1', 'foot.nav2', 'foot.nav3', 'foot.nav4', 'foot.nav5',
+    'foot.mail', 'foot.impressum', 'foot.datenschutz'
+  ];
+  for (const k of keys) {
+    const value = d[k];
+    assert.ok(value?.trim(), `de.${k} missing`);
+    assert.ok(docText.includes(value), `de.${k} does not appear verbatim in content-texte.md: ${value}`);
+  }
+});
