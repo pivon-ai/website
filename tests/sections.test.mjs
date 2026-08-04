@@ -79,7 +79,13 @@ test('s01 detail panels are complete', () => {
 
 test('Beratung panel carries the doc text verbatim', () => {
   const d = dict().de;
-  const keys = ['s01.d1.lead', 's01.d1.b1.text', 's01.d1.b2.text', 's01.d1.b3.text', 's01.d1.b4.text'];
+  const keys = [
+    's01.d1.lead',
+    's01.d1.b1.text', 's01.d1.b1.keys',
+    's01.d1.b2.text', 's01.d1.b2.keys',
+    's01.d1.b3.text', 's01.d1.b3.keys',
+    's01.d1.b4.text', 's01.d1.b4.keys'
+  ];
   for (const k of keys) {
     const value = d[k];
     assert.ok(value?.trim(), `de.${k} missing`);
