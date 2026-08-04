@@ -30,3 +30,21 @@ export function attrKeys() {
   }
   return out;
 }
+
+export function inventory() {
+  return JSON.parse(
+    readFileSync(join(root, 'tests/fixtures/key-inventory.json'), 'utf8')
+  );
+}
+
+/** Assert every inventory key for one section is present, non-empty, in both languages. */
+export function assertSection(assert, d, section) {
+  const keys = Object.entries(inventory())
+    .filter(([, meta]) => meta.section === section)
+    .map(([k]) => k);
+  assert.ok(keys.length > 0, `inventory has no keys for section ${section}`);
+  for (const k of keys) {
+    assert.ok(k in d.de && d.de[k].trim(), `de.${k} missing or empty`);
+    assert.ok(k in d.en && d.en[k].trim(), `en.${k} missing or empty`);
+  }
+}

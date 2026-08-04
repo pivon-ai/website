@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { dict, markupKeys, attrKeys, html, JS_OWNED } from './helpers.mjs';
+import { dict, markupKeys, attrKeys, html, JS_OWNED, inventory } from './helpers.mjs';
 
 test('dictionary block exists and parses', () => {
   const d = dict();
@@ -63,4 +63,21 @@ test('contact address is kontakt@pivon.ai only', () => {
 
 test('phone number is not published', () => {
   assert.ok(!/\+49\s*151/.test(html), 'phone number present');
+});
+
+test('inventory keys are unique and well-formed', () => {
+  const inv = inventory();
+  for (const [k, meta] of Object.entries(inv)) {
+    assert.match(k, /^[a-z0-9]+(\.[a-z0-9]+)+$/, `bad key name: ${k}`);
+    assert.ok(['doc', 'trans', 'new'].includes(meta.source), `bad source on ${k}`);
+    assert.equal(typeof meta.html, 'boolean', `bad html flag on ${k}`);
+    assert.ok(meta.section, `missing section on ${k}`);
+  }
+});
+
+test('the dictionary introduces no key outside the inventory', () => {
+  const inv = inventory();
+  for (const k of Object.keys(dict().de)) {
+    assert.ok(k in inv, `${k} is in the dictionary but not the inventory`);
+  }
 });

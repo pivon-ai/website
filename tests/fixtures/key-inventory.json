@@ -1,0 +1,957 @@
+{
+  "foot.claim": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.copy": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.datenschutz": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.disc": {
+    "section": "foot",
+    "source": "trans",
+    "html": false
+  },
+  "foot.impressum": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.mail": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.nav1": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.nav2": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.nav3": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.nav4": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "foot.nav5": {
+    "section": "foot",
+    "source": "doc",
+    "html": false
+  },
+  "hero.cap1": {
+    "section": "hero",
+    "source": "new",
+    "html": true
+  },
+  "hero.cap2": {
+    "section": "hero",
+    "source": "new",
+    "html": true
+  },
+  "hero.cap3": {
+    "section": "hero",
+    "source": "new",
+    "html": true
+  },
+  "hero.cap4": {
+    "section": "hero",
+    "source": "new",
+    "html": true
+  },
+  "hero.h1": {
+    "section": "hero",
+    "source": "doc",
+    "html": true
+  },
+  "hero.hint": {
+    "section": "hero",
+    "source": "trans",
+    "html": false
+  },
+  "hero.meta.l": {
+    "section": "hero",
+    "source": "trans",
+    "html": false
+  },
+  "hero.meta.m": {
+    "section": "hero",
+    "source": "doc",
+    "html": false
+  },
+  "hero.meta.r": {
+    "section": "hero",
+    "source": "trans",
+    "html": false
+  },
+  "hero.stick1": {
+    "section": "hero",
+    "source": "trans",
+    "html": false
+  },
+  "hero.stick2": {
+    "section": "hero",
+    "source": "trans",
+    "html": false
+  },
+  "hero.stick3": {
+    "section": "hero",
+    "source": "trans",
+    "html": false
+  },
+  "hero.sub": {
+    "section": "hero",
+    "source": "doc",
+    "html": false
+  },
+  "hero.word1": {
+    "section": "hero",
+    "source": "new",
+    "html": false
+  },
+  "hero.word2": {
+    "section": "hero",
+    "source": "new",
+    "html": false
+  },
+  "hero.word3": {
+    "section": "hero",
+    "source": "new",
+    "html": false
+  },
+  "hero.word4": {
+    "section": "hero",
+    "source": "new",
+    "html": false
+  },
+  "nav.01": {
+    "section": "nav",
+    "source": "doc",
+    "html": false
+  },
+  "nav.02": {
+    "section": "nav",
+    "source": "doc",
+    "html": false
+  },
+  "nav.03": {
+    "section": "nav",
+    "source": "new",
+    "html": false
+  },
+  "nav.04": {
+    "section": "nav",
+    "source": "new",
+    "html": false
+  },
+  "nav.07": {
+    "section": "nav",
+    "source": "doc",
+    "html": false
+  },
+  "nav.brandv": {
+    "section": "nav",
+    "source": "trans",
+    "html": false
+  },
+  "nav.cta": {
+    "section": "nav",
+    "source": "trans",
+    "html": false
+  },
+  "s00.bar.l": {
+    "section": "s00",
+    "source": "trans",
+    "html": true
+  },
+  "s00.bar.r": {
+    "section": "s00",
+    "source": "trans",
+    "html": true
+  },
+  "s00.big": {
+    "section": "s00",
+    "source": "doc",
+    "html": true
+  },
+  "s00.spec1.k": {
+    "section": "s00",
+    "source": "new",
+    "html": false
+  },
+  "s00.spec1.v": {
+    "section": "s00",
+    "source": "new",
+    "html": false
+  },
+  "s00.spec2.k": {
+    "section": "s00",
+    "source": "new",
+    "html": false
+  },
+  "s00.spec2.v": {
+    "section": "s00",
+    "source": "new",
+    "html": false
+  },
+  "s00.spec3.k": {
+    "section": "s00",
+    "source": "new",
+    "html": false
+  },
+  "s00.spec3.v": {
+    "section": "s00",
+    "source": "new",
+    "html": false
+  },
+  "s00.stamp": {
+    "section": "s00",
+    "source": "trans",
+    "html": false
+  },
+  "s00.trait1": {
+    "section": "s00",
+    "source": "doc",
+    "html": false
+  },
+  "s00.trait2": {
+    "section": "s00",
+    "source": "doc",
+    "html": false
+  },
+  "s00.trait3": {
+    "section": "s00",
+    "source": "doc",
+    "html": false
+  },
+  "s00.trait4": {
+    "section": "s00",
+    "source": "doc",
+    "html": false
+  },
+  "s00.trait5": {
+    "section": "s00",
+    "source": "doc",
+    "html": false
+  },
+  "s01.ax.e": {
+    "section": "s01",
+    "source": "trans",
+    "html": false
+  },
+  "s01.ax.n": {
+    "section": "s01",
+    "source": "trans",
+    "html": false
+  },
+  "s01.ax.s": {
+    "section": "s01",
+    "source": "trans",
+    "html": false
+  },
+  "s01.ax.w": {
+    "section": "s01",
+    "source": "trans",
+    "html": false
+  },
+  "s01.bar.l": {
+    "section": "s01",
+    "source": "trans",
+    "html": true
+  },
+  "s01.bar.r": {
+    "section": "s01",
+    "source": "trans",
+    "html": true
+  },
+  "s01.c1.in": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c1.out": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c1.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c2.in": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c2.out": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c2.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c3.in": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c3.out": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c3.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c4.in": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c4.out": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.c4.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b1.keys": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b1.text": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b1.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b2.keys": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b2.text": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b2.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b3.keys": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b3.text": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b3.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b4.keys": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b4.text": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.b4.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.cta": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.lead": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d1.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d2.b1.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b1.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b1.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b2.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b2.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b2.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b3.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b3.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.b3.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d2.cta": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d2.lead": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d2.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d3.b1.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b1.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b1.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b2.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b2.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b2.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b3.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b3.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.b3.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.cta": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d3.lead": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d3.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d4.b1.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b1.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b1.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b2.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b2.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b2.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b3.keys": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b3.text": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.b3.title": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.cta": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.d4.lead": {
+    "section": "s01",
+    "source": "new",
+    "html": false
+  },
+  "s01.d4.title": {
+    "section": "s01",
+    "source": "doc",
+    "html": false
+  },
+  "s01.intro": {
+    "section": "s01",
+    "source": "doc",
+    "html": true
+  },
+  "s02.bar.l": {
+    "section": "s02",
+    "source": "trans",
+    "html": true
+  },
+  "s02.bar.r": {
+    "section": "s02",
+    "source": "trans",
+    "html": true
+  },
+  "s02.s1.text": {
+    "section": "s02",
+    "source": "doc",
+    "html": true
+  },
+  "s02.s1.title": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s02.s2.text": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s02.s2.title": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s02.s3.text": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s02.s3.title": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s02.s4.text": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s02.s4.title": {
+    "section": "s02",
+    "source": "doc",
+    "html": false
+  },
+  "s03.badge": {
+    "section": "s03",
+    "source": "trans",
+    "html": true
+  },
+  "s03.bar.l": {
+    "section": "s03",
+    "source": "trans",
+    "html": true
+  },
+  "s03.bar.r": {
+    "section": "s03",
+    "source": "trans",
+    "html": true
+  },
+  "s03.chrome": {
+    "section": "s03",
+    "source": "trans",
+    "html": false
+  },
+  "s03.input": {
+    "section": "s03",
+    "source": "trans",
+    "html": false
+  },
+  "s03.msg": {
+    "section": "s03",
+    "source": "trans",
+    "html": false
+  },
+  "s03.reply": {
+    "section": "s03",
+    "source": "trans",
+    "html": true
+  },
+  "s03.status.post": {
+    "section": "s03",
+    "source": "trans",
+    "html": false
+  },
+  "s03.status.pre": {
+    "section": "s03",
+    "source": "trans",
+    "html": false
+  },
+  "s04.bar.l": {
+    "section": "s04",
+    "source": "trans",
+    "html": true
+  },
+  "s04.bar.r": {
+    "section": "s04",
+    "source": "trans",
+    "html": true
+  },
+  "s04.disc": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r1.k": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r1.title": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r2.k": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r2.title": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r3.k": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r3.title": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r4.k": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.r4.title": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s04.sticker": {
+    "section": "s04",
+    "source": "trans",
+    "html": false
+  },
+  "s05.bar.l": {
+    "section": "s05",
+    "source": "trans",
+    "html": true
+  },
+  "s05.bar.r": {
+    "section": "s05",
+    "source": "trans",
+    "html": true
+  },
+  "s05.f1.body": {
+    "section": "s05",
+    "source": "trans",
+    "html": true
+  },
+  "s05.f1.dur": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s05.f1.name": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s05.f2.body": {
+    "section": "s05",
+    "source": "trans",
+    "html": true
+  },
+  "s05.f2.dur": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s05.f2.name": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s05.f3.body": {
+    "section": "s05",
+    "source": "trans",
+    "html": true
+  },
+  "s05.f3.dur": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s05.f3.name": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s05.note": {
+    "section": "s05",
+    "source": "trans",
+    "html": false
+  },
+  "s06.bar.l": {
+    "section": "s06",
+    "source": "trans",
+    "html": true
+  },
+  "s06.bar.r": {
+    "section": "s06",
+    "source": "trans",
+    "html": true
+  },
+  "s06.t1": {
+    "section": "s06",
+    "source": "trans",
+    "html": true
+  },
+  "s06.t2": {
+    "section": "s06",
+    "source": "trans",
+    "html": true
+  },
+  "s06.t3": {
+    "section": "s06",
+    "source": "trans",
+    "html": true
+  },
+  "s07.a.bio": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.a.pin1": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.a.pin2": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.a.pin3": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.a.pin4": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.a.role": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.b.bio": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.b.pin1": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.b.pin2": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.b.pin3": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.b.pin4": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.b.role": {
+    "section": "s07",
+    "source": "trans",
+    "html": false
+  },
+  "s07.bar.l": {
+    "section": "s07",
+    "source": "trans",
+    "html": true
+  },
+  "s07.bar.r": {
+    "section": "s07",
+    "source": "trans",
+    "html": true
+  },
+  "s07.cta": {
+    "section": "s07",
+    "source": "doc",
+    "html": false
+  },
+  "s07.lead": {
+    "section": "s07",
+    "source": "doc",
+    "html": false
+  },
+  "s08.bar.l": {
+    "section": "s08",
+    "source": "trans",
+    "html": true
+  },
+  "s08.bar.r": {
+    "section": "s08",
+    "source": "trans",
+    "html": true
+  },
+  "s08.cta": {
+    "section": "s08",
+    "source": "trans",
+    "html": false
+  },
+  "s08.cta.subject": {
+    "section": "s08",
+    "source": "trans",
+    "html": false
+  },
+  "s08.h2": {
+    "section": "s08",
+    "source": "doc",
+    "html": false
+  },
+  "s08.mono": {
+    "section": "s08",
+    "source": "trans",
+    "html": true
+  },
+  "s08.p": {
+    "section": "s08",
+    "source": "doc",
+    "html": false
+  }
+}
