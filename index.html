@@ -111,6 +111,9 @@ body.no-canvas .stage .hint{display:none}
 .spec .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist)}
 .spec .v{font-weight:600;font-size:.98rem;margin-top:.35rem}
 @media(max-width:820px){.spec{grid-template-columns:1fr}.spec .cell{border-right:0;border-bottom:1px solid var(--rule)}.spec .cell:last-child{border-bottom:0}}
+.pos .traits{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.pos .traits .stick:nth-child(odd){transform:rotate(-1.5deg)}
+.pos .traits .stick:nth-child(even){transform:rotate(1.5deg)}
 
 /* ── SEC.01 services: the quadrant instrument (C2) with sticker indexes (N2) ── */
 .quad-wrap{position:relative;padding:1.6rem 3rem 3rem 3.4rem}
@@ -301,14 +304,21 @@ body.no-canvas .stage .hint{display:none}
   <span class="hint" data-i18n="hero.hint">scrollen zum Morphen · Cursor durch die Punkte bewegen</span>
 </header>
 
-<section class="sec pos reveal">
-  <div class="sec-bar"><span><b>SEC.00</b> — WHY US</span><span><span class="pg">00/100</span> · NEW STUDIO / OLD HANDS</span></div>
-  <p class="big">New studio. Old hands. We <span class="hl">think</span> like consultants, <span class="hl2">draw</span> like designers, and ship like engineers — because between us, we are all three. No logo wall yet, on purpose. We'd rather show you <b>real work on a thirty-minute call</b>.</p>
-  <span class="stamp" aria-hidden="true">NO SLIDEWARE</span>
+<section class="sec pos reveal" id="anspruch">
+  <div class="sec-bar"><span data-i18n="s00.bar.l"><b>SEC.00</b> — UNSER ANSPRUCH</span><span data-i18n="s00.bar.r"><span class="pg">00/100</span> · MENSCH · ORGANISATION · TECHNOLOGIE</span></div>
+  <p class="big" data-i18n="s00.big">Die Basis unseres Handelns ist die gesamtheitliche Betrachtung von <span class="hl">Mensch</span>, <span class="hl2">Organisation</span> und <b>Technologie</b>. Unsere Erfahrung ist das Ergebnis aus Erfolgen und Misserfolgen gleichermaßen. Sie ist unser Kompass, mit welchem wir Sie sicher durch die Herausforderungen der Zeit navigieren. Wir sind...</p>
+  <span class="stamp" aria-hidden="true" data-i18n="s00.stamp">KEINE FOLIEN</span>
   <div class="spec">
-    <div class="cell"><span class="k">Engineering</span><div class="v">Senior software &amp; solutions architecture</div></div>
-    <div class="cell"><span class="k">Business</span><div class="v">AI enablement &amp; innovation leadership</div></div>
-    <div class="cell"><span class="k">Model</span><div class="v">Build · train · hand over — no lock-in</div></div>
+    <div class="cell"><span class="k" data-i18n="s00.spec1.k">Mensch</span><div class="v" data-i18n="s00.spec1.v">Kompetenzen, Mindset und Akzeptanz: KI wirkt erst, wenn Menschen sie nutzen.</div></div>
+    <div class="cell"><span class="k" data-i18n="s00.spec2.k">Organisation</span><div class="v" data-i18n="s00.spec2.v">Prozesse, Governance und Datenbasis: der Rahmen, in dem KI tragfähig wird.</div></div>
+    <div class="cell"><span class="k" data-i18n="s00.spec3.k">Technologie</span><div class="v" data-i18n="s00.spec3.v">Architektur, Modelle und Integration: ohne Bindung an einen Anbieter.</div></div>
+  </div>
+  <div class="traits">
+    <span class="stick" data-i18n="s00.trait1">menschenzentriert</span>
+    <span class="stick" data-i18n="s00.trait2">transparent</span>
+    <span class="stick g" data-i18n="s00.trait3">flexibel</span>
+    <span class="stick" data-i18n="s00.trait4">technologieunabhängig</span>
+    <span class="stick" data-i18n="s00.trait5">praxisorientiert</span>
   </div>
 </section>
 
@@ -451,7 +461,22 @@ body.no-canvas .stage .hint{display:none}
     "hero.cap1": "zuerst <b>denken</b> — wo Sie stehen, und was sich wirklich lohnt",
     "hero.cap2": "dann <b>planen</b> — Use Cases bewertet, priorisiert und kalkuliert",
     "hero.cap3": "dann <b>bauen</b> — in Ihren Stack integriert und im Betrieb bewährt",
-    "hero.cap4": "bis Sie bei <b>100</b> sind — und ohne uns weitermachen"
+    "hero.cap4": "bis Sie bei <b>100</b> sind — und ohne uns weitermachen",
+    "s00.bar.l": "<b>SEC.00</b> — UNSER ANSPRUCH",
+    "s00.bar.r": "<span class=\"pg\">00/100</span> · MENSCH · ORGANISATION · TECHNOLOGIE",
+    "s00.big": "Die Basis unseres Handelns ist die gesamtheitliche Betrachtung von <span class=\"hl\">Mensch</span>, <span class=\"hl2\">Organisation</span> und <b>Technologie</b>. Unsere Erfahrung ist das Ergebnis aus Erfolgen und Misserfolgen gleichermaßen. Sie ist unser Kompass, mit welchem wir Sie sicher durch die Herausforderungen der Zeit navigieren. Wir sind...",
+    "s00.stamp": "KEINE FOLIEN",
+    "s00.spec1.k": "Mensch",
+    "s00.spec1.v": "Kompetenzen, Mindset und Akzeptanz: KI wirkt erst, wenn Menschen sie nutzen.",
+    "s00.spec2.k": "Organisation",
+    "s00.spec2.v": "Prozesse, Governance und Datenbasis: der Rahmen, in dem KI tragfähig wird.",
+    "s00.spec3.k": "Technologie",
+    "s00.spec3.v": "Architektur, Modelle und Integration: ohne Bindung an einen Anbieter.",
+    "s00.trait1": "menschenzentriert",
+    "s00.trait2": "transparent",
+    "s00.trait3": "flexibel",
+    "s00.trait4": "technologieunabhängig",
+    "s00.trait5": "praxisorientiert"
   },
   "en": {
     "nav.cta": "BOOK_CALL()",
@@ -477,7 +502,22 @@ body.no-canvas .stage .hint{display:none}
     "hero.cap1": "first we <b>consult</b> — what's worth building, ranked and costed",
     "hero.cap2": "then we <b>design</b> — so real people actually use it",
     "hero.cap3": "then we <b>build</b> — shipped into your stack, evaluated",
-    "hero.cap4": "until you're at <b>100</b> — running it without us"
+    "hero.cap4": "until you're at <b>100</b> — running it without us",
+    "s00.bar.l": "<b>SEC.00</b> — WHY US",
+    "s00.bar.r": "<span class=\"pg\">00/100</span> · PEOPLE · ORGANISATION · TECHNOLOGY",
+    "s00.big": "Our approach rests on a holistic view of <span class=\"hl\">people</span>, <span class=\"hl2\">organisation</span> and <b>technology</b>. Our experience is the result of successes and failures alike. It's our compass, guiding you safely through the challenges of the times. We are...",
+    "s00.stamp": "NO SLIDEWARE",
+    "s00.spec1.k": "People",
+    "s00.spec1.v": "Skills, mindset and buy-in: AI only works once people actually use it.",
+    "s00.spec2.k": "Organisation",
+    "s00.spec2.v": "Processes, governance and data foundation: the frame that makes AI viable.",
+    "s00.spec3.k": "Technology",
+    "s00.spec3.v": "Architecture, models and integration: without vendor lock-in.",
+    "s00.trait1": "human-centred",
+    "s00.trait2": "transparent",
+    "s00.trait3": "flexible",
+    "s00.trait4": "vendor-independent",
+    "s00.trait5": "hands-on"
   }
 }
 </script>

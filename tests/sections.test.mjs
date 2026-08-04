@@ -13,3 +13,18 @@ test('hero words and captions are read from the dictionary, not hardcoded', () =
 test('hero headline is the german one from content-texte.md', () => {
   assert.match(dict().de['hero.h1'], /KI strategisch denken/);
 });
+
+test('s00 section is complete', () => assertSection(assert, dict(), 's00'));
+
+test('s00 carries all five traits from content-texte.md', () => {
+  const d = dict().de;
+  const traits = [1, 2, 3, 4, 5].map((n) => d[`s00.trait${n}`]);
+  assert.deepEqual(traits, [
+    'menschenzentriert', 'transparent', 'flexibel',
+    'technologieunabhängig', 'praxisorientiert'
+  ]);
+});
+
+test('s00 has an anchor id for the footer nav', () => {
+  assert.match(html, /<section class="sec pos reveal" id="anspruch">/);
+});
