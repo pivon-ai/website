@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pivon — AI &amp; Generative-AI Consulting</title>
-<meta name="description" content="Pivon is an AI & generative-AI consulting studio. We find the use cases worth chasing, build the solutions that ship, and take your company from 0 to 100 on AI.">
+<title>pivon | KI strategisch denken, pragmatisch umsetzen</title>
+<meta name="description" content="pivon berät und begleitet Sie ganzheitlich bei der Einführung und Entwicklung von KI-Lösungen – menschenzentriert, transparent und praxisorientiert.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232F6BEC'/%3E%3Cstop offset='1' stop-color='%23E5258E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='14' cy='14' r='13' fill='%23fff' stroke='%23E6EAF0'/%3E%3Cline x1='14' y1='6' x2='14' y2='22' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='9' cy='11' r='1.6' fill='%232F6BEC'/%3E%3Ccircle cx='8' cy='16' r='1.6' fill='%235A4BEA'/%3E%3Ccircle cx='19' cy='12' r='1.6' fill='%23A836C4'/%3E%3Ccircle cx='19' cy='17' r='1.6' fill='%23E5258E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,6 +64,11 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-f
 .nav-l a i{font-style:normal;color:var(--mist);margin-right:.35em}
 .cta{font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.04em;text-decoration:none;color:#fff;background:var(--ink);padding:.7em 1.3em;border-radius:6px}
 .cta:hover{background:var(--grad)}
+.lang{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-left:auto;margin-right:1rem}
+.lang button{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;background:transparent;color:var(--mist);
+  border:0;padding:.45em .7em;cursor:pointer;line-height:1}
+.lang button[aria-pressed="true"]{background:var(--grad);color:#fff}
+@media(max-width:760px){.lang{margin-left:0}}
 @media(max-width:760px){.nav-l{display:none}}
 
 /* ── hero: the particle stage (Q5) in spec-sheet chrome (C) ── */
@@ -266,7 +271,11 @@ body.no-canvas .stage .hint{display:none}
     <div class="nav-l">
       <a href="#services"><i>01</i>Services</a><a href="#approach"><i>02</i>Approach</a><a href="#build"><i>03</i>Build</a><a href="#work"><i>04</i>Work</a><a href="#team"><i>07</i>Team</a>
     </div>
-    <a href="#book" class="cta">BOOK_CALL()</a>
+    <div class="lang" role="group" aria-label="Sprache / Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a href="#book" class="cta" data-i18n="nav.cta">ERSTGESPRÄCH()</a>
   </div>
 </nav>
 
@@ -401,12 +410,12 @@ body.no-canvas .stage .hint{display:none}
     <div class="sun">
       <h2>Start the first run.</h2>
       <p>30 minutes, no slides. Bring the messy version — we'll tell you honestly whether AI fixes it.</p>
-      <a href="mailto:hello@pivon.ai?subject=BOOK_CALL()%20—%2030%20minutes" class="cta">BOOK_CALL() →</a>
+      <a href="mailto:kontakt@pivon.ai?subject=BOOK_CALL()%20—%2030%20minutes" class="cta">BOOK_CALL() →</a>
     </div>
   </div>
   <div class="base">
     <span>© 2026 PIVON</span>
-    <a href="mailto:hello@pivon.ai">hello@pivon.ai</a>
+    <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>
     <span>CASES = ILLUSTRATIVE ENGAGEMENTS</span>
   </div>
 </section>
@@ -414,8 +423,68 @@ body.no-canvas .stage .hint{display:none}
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script type="application/json" id="i18n-dict">
+{
+  "de": { "nav.cta": "ERSTGESPRÄCH()" },
+  "en": { "nav.cta": "BOOK_CALL()" }
+}
+</script>
 <script>
 (function(){
+  /* ── i18n ─────────────────────────────────────────────── */
+  const I18N=JSON.parse(document.getElementById('i18n-dict').textContent);
+  const DOC={
+    de:{title:'pivon | KI strategisch denken, pragmatisch umsetzen',
+        desc:'pivon berät und begleitet Sie ganzheitlich bei der Einführung und Entwicklung von KI-Lösungen – menschenzentriert, transparent und praxisorientiert.'},
+    en:{title:'Pivon | Think AI strategically, ship it pragmatically',
+        desc:'Pivon consults on and delivers AI solutions end to end — human-centred, transparent, and grounded in practice.'}
+  };
+  let LANG='de';
+  let onLangChange=null;   /* Task 3 assigns this once the hero is initialised */
+  function currentLang(){return LANG;}
+  function applyLang(lang){
+    if(!I18N[lang])return;
+    LANG=lang;
+    const t=I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const v=t[el.dataset.i18n];
+      if(v!=null)el.innerHTML=v;
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el=>{
+      el.dataset.i18nAttr.split(';').filter(Boolean).forEach(pair=>{
+        const [attr,key]=pair.split(':');
+        if(t[key]!=null)el.setAttribute(attr,t[key]);
+      });
+    });
+    document.documentElement.lang=lang;
+    document.title=DOC[lang].title;
+    const md=document.querySelector('meta[name="description"]');
+    if(md)md.setAttribute('content',DOC[lang].desc);
+    document.querySelectorAll('.lang button').forEach(b=>
+      b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+    try{localStorage.setItem('pivon.lang',lang);}catch(e){}
+    const u=new URL(location.href);
+    u.searchParams.set('lang',lang);
+    history.replaceState(null,'',u);
+    if(onLangChange)onLangChange();
+    if(window.ScrollTrigger)ScrollTrigger.refresh();
+  }
+  (function initLang(){
+    const q=new URL(location.href).searchParams.get('lang');
+    let stored=null;
+    try{stored=localStorage.getItem('pivon.lang');}catch(e){}
+    const want=(q==='de'||q==='en')?q:((stored==='de'||stored==='en')?stored:'de');
+    document.querySelectorAll('.lang button').forEach(b=>
+      b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+    applyLang(want);
+  })();
+  (function checkKeys(){
+    const de=Object.keys(I18N.de),en=Object.keys(I18N.en);
+    const miss=[...de.filter(k=>!(k in I18N.en)).map(k=>'en:'+k),
+                ...en.filter(k=>!(k in I18N.de)).map(k=>'de:'+k)];
+    if(miss.length)console.warn('[i18n] key drift:',miss);
+  })();
+
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const small=matchMedia('(max-width:760px)').matches;
 
