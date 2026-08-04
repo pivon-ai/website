@@ -99,3 +99,44 @@ test('panels are collapsed and accessible by default', () => {
   for (const p of panels) assert.match(p[0], /hidden/, 'panel is not hidden by default');
   assert.equal((html.match(/aria-expanded="false"/g) || []).length, 4);
 });
+
+test('s02 section is complete', () => assertSection(assert, dict(), 's02'));
+
+test('s02 uses the four Vorgehen steps from the doc', () => {
+  const d = dict().de;
+  assert.deepEqual(
+    [1, 2, 3, 4].map((n) => d[`s02.s${n}.title`]),
+    ['Kontakt', 'Auftragsklärung', 'Umsetzung', 'Übergabe']
+  );
+});
+
+test('step 1 links the contact address and no phone number', () => {
+  const t = dict().de['s02.s1.text'];
+  assert.match(t, /mailto:kontakt@pivon\.ai/);
+  assert.ok(!/151/.test(t), 'phone number leaked into step 1');
+});
+
+test('s02 step texts carry the doc text verbatim', () => {
+  const d = dict().de;
+  for (const k of ['s02.s2.text', 's02.s3.text', 's02.s4.text']) {
+    const value = d[k];
+    assert.ok(value?.trim(), `de.${k} missing`);
+    assert.ok(docText.includes(value), `de.${k} does not appear verbatim in content-texte.md: ${value}`);
+  }
+});
+
+test('s02 step 1 text carries the doc wording verbatim around the mailto link', () => {
+  const s1 = dict().de['s02.s1.text'];
+  assert.match(
+    s1,
+    /<a href="mailto:kontakt@pivon\.ai">kontakt@pivon\.ai<\/a>$/,
+    's02.s1.text does not end with the mailto anchor'
+  );
+  const sentence = 'Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.';
+  assert.ok(s1.includes(sentence), 's02.s1.text is missing the doc sentence');
+  assert.ok(docText.includes(sentence), 'sentence not found verbatim in content-texte.md');
+  assert.ok(
+    docText.includes('Email: kontakt@pivon.ai'),
+    'doc no longer contains the Email: label + address line'
+  );
+});
