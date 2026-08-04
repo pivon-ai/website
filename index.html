@@ -606,6 +606,7 @@ body.no-canvas .stage .hint{display:none}
     return pts;
   }
   function buildTargets(){
+    if(!WORDS.length)return;   /* fonts.ready has not populated WORDS yet */
     targetSets=WORDS.map(sample);
     const maxN=Math.max(...targetSets.map(t=>t.length));
     while(parts.length<maxN)parts.push({x:W/2+(parts.length%97-48)*14,y:H/2+(parts.length%89-44)*10,vx:0,vy:0});
