@@ -642,7 +642,7 @@ body.no-canvas .stage .hint{display:none}
   }
   const cap=document.getElementById('wordCap'),dots=[...document.querySelectorAll('#pdots i')];
   function setWord(i){
-    if(i===cur)return;cur=i;assign(i);
+    if(!WORDS.length||i<0||i===cur)return;cur=i;assign(i);
     cap.innerHTML=CAPS[i];
     dots.forEach((d,k)=>d.classList.toggle('on',k===i));
   }
