@@ -28,7 +28,7 @@ Two, both flagged deliberately:
 - Design tokens, layout, instruments and animations are untouched except the seven additive elements in spec §4.
 - Every new element respects the existing `@media (prefers-reduced-motion:reduce)` block.
 - Key naming: `nav.*`, `hero.*`, `s00.*`–`s08.*`, `foot.*`. Lowercase, dot-separated.
-- Test command is always `npm test` (which runs `node --test tests/`). Run it from `C:/DEV/pivon.ai/website`.
+- Test command is always `npm test` (which runs `node --test "tests/**/*.test.mjs"`). Run it from `C:/DEV/pivon.ai/website`. Do **not** use `node --test tests/` — passing a bare directory misbehaves on Node 24 / Windows and reports a spurious failure.
 
 ---
 
@@ -57,7 +57,7 @@ Proves the whole mechanism end-to-end with a single key before any copy exists.
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test \"tests/**/*.test.mjs\""
   }
 }
 ```
