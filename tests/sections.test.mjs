@@ -157,6 +157,29 @@ test('code-styled tokens are not translated', () => {
   for (const n of [1, 2, 3]) assert.match(d[`s05.f${n}.body`], /mode:/);
 });
 
+test('s07 section is complete', () => assertSection(assert, dict(), 's07'));
+
+test('s07 does not claim team info is still coming', () => {
+  assert.ok(!/folgen in K/i.test(dict().de['s07.lead']));
+  assert.match(dict().de['s07.lead'], /persönlichen Gespräch/);
+});
+
+test('s07 lead and cta carry the doc text verbatim', () => {
+  const d = dict().de;
+  assert.ok(d['s07.cta']?.trim(), 'de.s07.cta missing');
+  assert.ok(docText.includes(d['s07.cta']), `de.s07.cta does not appear verbatim in content-texte.md: ${d['s07.cta']}`);
+
+  const lead = d['s07.lead'];
+  assert.ok(lead?.trim(), 'de.s07.lead missing');
+  // The doc's sentence is a continuation ("… direkt – wir lernen …"), so on the page,
+  // where it stands alone, only its first letter is capitalised to open the sentence.
+  const leadAsInDoc = lead.charAt(0).toLowerCase() + lead.slice(1);
+  assert.ok(
+    docText.includes(leadAsInDoc),
+    `de.s07.lead does not appear verbatim (case-adjusted) in content-texte.md: ${lead}`
+  );
+});
+
 /* The ScrollTrigger writes into #asmPct on every scroll tick via a reference it
    captured once. If that node ever sits inside a [data-i18n] element, applyLang's
    innerHTML assignment replaces it and the counter silently dies on the first
