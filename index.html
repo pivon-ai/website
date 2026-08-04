@@ -64,12 +64,17 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-f
 .nav-l a i{font-style:normal;color:var(--mist);margin-right:.35em}
 .cta{font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.04em;text-decoration:none;color:#fff;background:var(--ink);padding:.7em 1.3em;border-radius:6px}
 .cta:hover{background:var(--grad)}
-.lang{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-left:auto;margin-right:1rem}
+.lang{display:flex;flex:0 0 auto;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-left:auto;margin-right:1rem}
 .lang button{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;background:transparent;color:var(--mist);
   border:0;padding:.45em .7em;cursor:pointer;line-height:1}
 .lang button[aria-pressed="true"]{background:var(--grad);color:#fff}
 @media(max-width:760px){.lang{margin-left:0}}
-@media(max-width:760px){.nav-l{display:none}}
+/* the language toggle costs ~70px of nav width, and german nav labels are longer;
+   below 900px the links no longer fit beside brand + toggle + CTA */
+@media(max-width:900px){.nav-l{display:none}}
+/* the rotated axis labels sit outside the quadrant box, so below 900px they bleed
+   past the viewport once the gutter shrinks — the design already drops them on mobile */
+@media(max-width:900px){.ax{display:none}}
 
 /* ── hero: the particle stage (Q5) in spec-sheet chrome (C) ── */
 .stage{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
@@ -124,7 +129,7 @@ body.no-canvas .stage .hint{display:none}
 .ax.n{top:-.4rem;left:50%;transform:translate(-50%,-100%)}
 .ax.s{bottom:.4rem;left:50%;transform:translate(-50%,100%)}
 .ax.w{left:.4rem;top:50%;transform:translate(-100%,-50%) rotate(-90deg)}
-.ax.e{right:-.6rem;top:50%;transform:translate(100%,-50%) rotate(90deg)}
+.ax.e{right:0;top:50%;transform:translate(100%,-50%) rotate(90deg)}
 .q-cell{padding:2rem 1.6rem 1.6rem;min-height:200px;position:relative;text-decoration:none;transition:background .2s;
   text-align:left;background:none;border:0;font:inherit;color:inherit;cursor:pointer;width:100%}
 .q-cell:hover{background:var(--paper2)}
