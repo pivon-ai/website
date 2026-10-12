@@ -1,0 +1,29 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "hideElements": ".pv-card__io-k",
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox",
+        "--disable-dev-shm-usage"
+      ]
+    }
+  },
+  "urls": [
+    "http://localhost:3000/",
+    "http://localhost:3000/leistungen/beratung.html",
+    "http://localhost:3000/leistungen/quickstart-ki.html",
+    "http://localhost:3000/leistungen/entwicklung.html",
+    "http://localhost:3000/leistungen/startup-creator.html",
+    "http://localhost:3000/impressum.html",
+    "http://localhost:3000/datenschutz.html",
+    "http://localhost:3000/en/",
+    "http://localhost:3000/en/services/consulting.html",
+    "http://localhost:3000/en/services/startup-creator.html",
+    "http://localhost:3000/en/services/development.html",
+    "http://localhost:3000/en/services/quickstart-ai.html",
+    "http://localhost:3000/en/legal-notice.html",
+    "http://localhost:3000/en/privacy.html"
+  ]
+}

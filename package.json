@@ -1,8 +1,23 @@
 {
   "name": "pivon-website",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "description": "Statische Website fuer pivon.ai",
   "scripts": {
-    "test": "node --test \"tests/**/*.test.mjs\""
+    "serve": "serve . -l 3000",
+    "test": "vitest run",
+    "test:html": "html-validate index.html impressum.html datenschutz.html leistungen/*.html en/*.html en/services/*.html",
+    "test:a11y": "pa11y-ci",
+    "test:links": "linkinator http://localhost:3000/ --recurse --skip \"^(?!http://localhost:3000)\"",
+    "logo": "node scripts/prepare-logo.mjs"
+  },
+  "devDependencies": {
+    "html-validate": "^9.5.5",
+    "linkinator": "^6.1.2",
+    "pa11y-ci": "^3.1.0",
+    "pngjs": "^7.0.0",
+    "serve": "^14.2.4",
+    "vitest": "^3.2.4"
   }
 }

@@ -1,0 +1,123 @@
+/* ============================================================
+   pivon.ai – Seitenspezifische Abweichungen
+   Derzeit ausschliesslich die Leistungs-Unterseiten.
+   ============================================================ */
+
+/* Einleitungsabsatz unter der Seitenueberschrift – linksbuendig auf dem Raster */
+.pv-intro {
+  max-width: var(--measure);
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+}
+
+/* Themenblock: eckige Box mit Ueberschrift, Text und Stichwort-Pins */
+.pv-topic {
+  max-width: 880px;
+  padding: 32px 36px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.pv-topic__title {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.pv-topic__text {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+/* Stichwortlisten als eckige Pins (Stil der Team-Boxen). Die Box ist immer
+   weiss, deshalb braucht es keine Umkehrung auf abgesetzter Flaeche mehr. */
+.pv-topic__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pv-topic__list li {
+  padding: 4px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-str);
+}
+
+@media (max-width: 640px) {
+  .pv-topic {
+    padding: 24px 20px;
+  }
+}
+
+/* ============================================================
+   Rechtsseiten: Impressum, Datenschutz
+   ============================================================ */
+
+/* Reine Textseiten. Die Spalte bleibt auf Lesebreite, damit lange
+   Rechtstexte nicht ueber die volle Containerbreite laufen. */
+.pv-legal {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+.pv-legal h2 {
+  margin-top: var(--space-7);
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+}
+
+.pv-legal h2:first-child {
+  margin-top: 0;
+}
+
+.pv-legal p,
+.pv-legal ul {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.pv-legal ul {
+  padding-left: var(--space-5);
+  list-style: disc;
+}
+
+.pv-legal li {
+  margin-top: var(--space-2);
+}
+
+.pv-legal a {
+  color: var(--color-action);
+}
+
+.pv-legal strong {
+  color: var(--color-text);
+}
+
+/* ---- Entwurfshinweis ----
+   Nur solange Platzhalter in den Rechtsseiten stehen. Mit der letzten
+   ausgefuellten Angabe entfaellt der Kasten im HTML und diese Regel hier.
+   Deshalb bewusst auffaellig: Er soll nicht versehentlich online gehen. */
+.pv-draft {
+  margin-bottom: var(--space-7);
+  padding: var(--space-5);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-alt);
+}
+
+.pv-draft__title {
+  margin-top: 0;
+  font-weight: 700;
+  color: var(--color-error);
+}
+
+.pv-draft p + p {
+  margin-top: var(--space-3);
+}
+
+.pv-draft code {
+  padding: 1px 5px;
+  font-size: 0.875em;
+  background: var(--color-surface-mut);
+  border-radius: var(--radius-sm);
+}

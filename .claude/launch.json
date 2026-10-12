@@ -2,22 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "static-demo",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5500"],
-      "port": 5500
-    },
-    {
-      "name": "dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "name": "pivon",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", ".", "-l", "3000", "--no-clipboard"],
       "port": 3000
-    },
-    {
-      "name": "pivonbuilder-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "C:/DEV/pivon.ai/PivonBuilder"],
-      "port": 5173
     }
   ]
 }

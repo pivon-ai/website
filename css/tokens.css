@@ -1,0 +1,189 @@
+/* ============================================================
+   pivon.ai – Design-Tokens
+   Einziger Ort fuer Farbwerte. Nirgendwo sonst stehen Hex-Codes.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* JetBrains Mono – Labels, Menü, Buttons, Meta. Selbst gehostet (SIL OFL),
+   Quelle: @fontsource/jetbrains-mono 5.3.0. Gleiche unicode-range wie Inter. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin-ext-400.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin-ext-700.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* ---- Struktur ---- */
+  --color-ink: #16293F;
+  --color-text: #1E2A38;
+  --color-text-muted: #4A5A6D;
+  --color-text-meta: #5B6B7D;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F7F9FC;
+  --color-surface-mut: #EEF2F7;
+  /* Rahmen eine Stufe dunkler als das Linienraster (Mockup F/K) */
+  --color-border: #D3DBE5;
+  --color-border-str: #C4CED9;
+
+  /* ---- Linienraster ---- */
+  --color-grid: #EDF1F6;
+  --color-grid-on-ink: rgba(255, 255, 255, 0.07);
+
+  /* ---- In/Out-Zeilen der Leistungskarten ----
+     Texte in den dunklen Geschwistern der Buehnen-Akzente (Cyan -> Petrol,
+     Magenta -> Beere): gleiche Farbfamilie, auf Weiss lesbar (AA).
+     Eigene Namen wie bei den Zustandsfarben: "in" ist nicht "Technologie".
+     Die Labels "in"/"out" bleiben auf Kundenwunsch hellgrau und damit unter
+     AA; pa11y nimmt genau diese Klasse aus (.pa11yci.json). */
+  --color-io-label: #9CA2AB;
+  --color-io-in: #086B84;
+  --color-io-out: #B01058;
+
+  /* ---- Aktion: ausschliesslich fuer Interaktives und Struktur ---- */
+  --color-action: #1A5FD0;
+  --color-action-hover: #134AA8;
+  --color-action-soft: #E4EEFD;
+
+  /* ---- Dreiklang: ausschliesslich im Abschnitt "Unser Anspruch" ---- */
+  --color-mensch: #D81B74;
+  --color-mensch-text: #B01058;
+  --color-mensch-bg: #FDF4F8;
+  --color-mensch-brd: #EBC3D6;
+
+  --color-orga: #7A3BE0;
+  --color-orga-text: #6428C8;
+  --color-orga-bg: #F8F4FE;
+  --color-orga-brd: #D6C6F3;
+
+  --color-tech: #0EA5C9;
+  --color-tech-text: #086B84;
+  --color-tech-bg: #F0FAFD;
+  --color-tech-brd: #BCE0EC;
+
+  /* ---- Zustandsfarben ----
+     Eigene Namen, obwohl die Werte denen des Dreiklangs gleichen.
+     Ein Fehlerzustand ist nicht „Mensch" und ein Erfolgszustand nicht
+     „Technologie" - wuerden sie dieselben Tokens benutzen, wuerde eine
+     spaetere Markenaenderung still die Zustandsfarben mitverschieben. */
+  --color-error: #B01058;
+  --color-success-bg: #F0FAFD;
+  --color-success-brd: #D4EEF6;
+
+  /* ---- Auf dunklem Grund ---- */
+  --color-on-ink: #FFFFFF;
+  --color-on-ink-muted: #B6C6D8;
+  --color-on-ink-soft: #9FB3C9;
+  --color-on-ink-faint: #8099B4;
+  /* Trennlinie auf dunklem Grund. Bisher stand hier der Logo-Verlauf;
+     er bleibt der Verbindungslinie der Vorgehensschritte vorbehalten. */
+  --color-border-on-ink: rgba(255, 255, 255, 0.16);
+
+  --color-accent-cyan-on-ink: #5CD7F7;
+  --color-accent-magenta-on-ink: #FF72B0;
+
+  /* ---- Logo-Verlauf: nur Vorgehen-Linie und Footer-Linie ---- */
+  --gradient-logo: linear-gradient(
+    100deg,
+    #12B6F3 0%,
+    #2563EB 38%,
+    #7A3BE0 66%,
+    #E8197E 100%
+  );
+
+  /* ---- Verlauf wie auf pivon.ai: Sprachschalter (aktive Sprache) und
+     Fortschrittsbalken unter Vorgehen. Weiß darauf erreicht am Magenta-Ende
+     nur ca. 4,2:1 – vom Kunden so gewünscht (Mockup M). ---- */
+  --gradient-akzent: linear-gradient(100deg, #2F6BEC, #E5258E);
+
+  /* ---- Typografie ---- */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --measure: 68ch;
+
+  /* ---- Raster ---- */
+  --container: 1400px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --section-y: clamp(56px, 8vw, 96px);
+  --header-h: 68px;
+
+  /* ---- Form ---- */
+  /* Eckig: alle Radien 0 (Redesign nach Mockup K) */
+  --radius-sm: 0;
+  --radius: 0;
+  --radius-lg: 0;
+  --radius-pill: 0;
+
+  /* Keine Schatten: Flaechen grenzen sich nur ueber 1px-Rahmen ab */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+
+  --transition: 0.2s ease;
+}

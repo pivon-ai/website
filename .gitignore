@@ -1,13 +1,5 @@
-# Visual brainstorming companion (mockups, server state)
-.superpowers/
-
-# OS / editor
-.DS_Store
-*.log
-
-# Node (if tooling is added later)
 node_modules/
-dist/
-
-# Local Claude Code settings
-.claude/settings.local.json
+.superpowers/
+.DS_Store
+Thumbs.db
+*.log

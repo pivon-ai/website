@@ -1,0 +1,1426 @@
+/* pivon.ai – Komponenten mit pv-Praefix. */
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+.pv-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pv-header--scrolled {
+  border-bottom-color: var(--color-border-str);
+}
+
+.pv-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: var(--header-h);
+}
+
+.pv-header__logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.pv-header__logo img {
+  height: 38px;
+  width: auto;
+}
+
+.pv-nav {
+  margin-left: auto;
+}
+
+.pv-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.pv-nav__link {
+  display: inline-block;
+  padding-block: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.90625rem;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.pv-nav__num {
+  margin-right: 2px;
+  color: var(--color-text-meta);
+}
+
+/* Immer nur EINE Linie: Hover und aktiver Punkt nutzen dieselbe Rahmenlinie.
+   Ein Text-Unterstrich beim Hover kam nach dem Klick (aktiv + Hover) als
+   zweite Linie dazu. Der aktive Punkt bleibt auch beim Hover blau. */
+.pv-nav__link:not(.pv-nav__link--active):hover {
+  color: var(--color-ink);
+}
+
+.pv-nav .pv-nav__link:not(.pv-nav__link--active):hover {
+  border-bottom-color: var(--color-ink);
+}
+
+/* ---- Mobilmenue: natives details, funktioniert ohne JavaScript ---- */
+
+/* Sprachschalter DE/EN wie auf pivon.ai, eckig (Mockup M). Desktop rechts
+   neben dem Menü, mobil links vom Menü-Knopf. */
+.pv-lang {
+  display: flex;
+  flex: 0 0 auto;
+  border: 1px solid var(--color-border);
+}
+
+.pv-lang__link {
+  padding: 0.5em 0.75em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.pv-lang__link + .pv-lang__link {
+  border-left: 1px solid var(--color-border);
+}
+
+.pv-lang__link:hover {
+  color: var(--color-ink);
+}
+
+.pv-lang__link[aria-current="true"] {
+  background: var(--gradient-akzent);
+  color: var(--color-on-ink);
+}
+
+.pv-mobile-nav {
+  display: none;
+  margin-left: auto;
+}
+
+.pv-mobile-nav__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.pv-mobile-nav__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.pv-mobile-nav__bar {
+  display: block;
+  height: 2px;
+  background: var(--color-ink);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.pv-mobile-nav[open] .pv-mobile-nav__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.pv-mobile-nav[open] .pv-mobile-nav__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.pv-mobile-nav[open] .pv-mobile-nav__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.pv-mobile-nav__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pv-mobile-nav__panel ul {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-5);
+}
+
+.pv-mobile-nav__panel .pv-nav__link {
+  display: block;
+  padding: var(--space-3) 0;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pv-mobile-nav__panel .pv-btn {
+  width: 100%;
+}
+
+/* ---- Untermenü "Leistungen": öffnet bei Hover und Tastaturfokus ----
+   Reines CSS, läuft ohne JavaScript. :focus-within hält es offen, solange
+   der Tastaturfokus auf "Leistungen" oder einem der Unterpunkte liegt. */
+.pv-nav__item--sub {
+  position: relative;
+}
+
+/* eckiger Pfeil als Hinweis aufs Aufklappen; content '' = kein Vorlesetext */
+.pv-nav .pv-nav__item--sub > .pv-nav__link::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  vertical-align: 3px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.pv-nav .pv-nav__sub {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -16px;
+  z-index: 110;
+  min-width: 220px;
+  padding: var(--space-2) 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.pv-nav__item--sub:hover .pv-nav__sub,
+.pv-nav__item--sub:focus-within .pv-nav__sub {
+  display: block;
+}
+
+/* Unterpunkte: eine Linie links – Hover dunkel, aktuelle Seite blau */
+.pv-nav__sublink {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
+  border-left: 2px solid transparent;
+}
+
+.pv-nav__sublink:not([aria-current='page']):hover {
+  color: var(--color-ink);
+  border-left-color: var(--color-ink);
+}
+
+.pv-nav__sublink[aria-current='page'] {
+  color: var(--color-action);
+  border-left-color: var(--color-action);
+}
+
+/* Mobil: Unterpunkte immer sichtbar, eingerückt, Tippfläche 44 px */
+.pv-mobile-nav__panel .pv-nav__sub {
+  margin: 0;
+  padding-left: var(--space-4);
+}
+
+.pv-mobile-nav__panel .pv-nav__sublink {
+  padding: 12px 0 12px var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Umbruchpunkt gekoppelt an js/nav.js (min-width: 901px) */
+@media (max-width: 900px) {
+  .pv-nav {
+    display: none;
+  }
+
+  .pv-mobile-nav {
+    display: block;
+  }
+
+  .pv-lang {
+    margin-left: auto;
+  }
+
+  .pv-lang + .pv-mobile-nav {
+    margin-left: 0;
+  }
+
+  .pv-header__inner {
+    position: relative;
+  }
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.pv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition),
+    color var(--transition);
+}
+
+.pv-btn--primary {
+  background: var(--color-action);
+  color: var(--color-on-ink);
+}
+
+.pv-btn--primary:hover {
+  background: var(--color-action-hover);
+  color: var(--color-on-ink);
+}
+
+.pv-btn--ghost {
+  background: transparent;
+  border-color: var(--color-border-str);
+  color: var(--color-text);
+}
+
+.pv-btn--ghost:hover {
+  border-color: var(--color-action);
+  color: var(--color-action);
+}
+
+.pv-btn--on-ink {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--color-on-ink);
+}
+
+.pv-btn--on-ink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-on-ink);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+.pv-footer {
+  background: var(--color-ink);
+  color: var(--color-on-ink-soft);
+  padding-block: var(--space-7) var(--space-5);
+}
+
+.pv-footer a {
+  color: var(--color-on-ink-soft);
+  text-decoration: none;
+}
+
+.pv-footer a:hover {
+  color: var(--color-on-ink);
+  text-decoration: underline;
+}
+
+.pv-footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: var(--space-7);
+}
+
+.pv-footer__brand img {
+  height: 32px;
+  width: auto;
+}
+
+.pv-footer__claim {
+  margin-top: var(--space-4);
+  max-width: 34ch;
+  font-size: 0.875rem;
+}
+
+.pv-footer__head {
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-on-ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+.pv-footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+}
+
+/* Logo-Verlauf: Footer-Linie (die zweite Verwendung, die Vorgehen-Linie,
+   entfaellt mit dem Redesign) */
+.pv-footer__rule {
+  height: 2px;
+  margin-block: var(--space-6) var(--space-4);
+  background: var(--gradient-logo);
+}
+
+.pv-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-on-ink-faint);
+}
+
+.pv-footer__legal {
+  display: flex;
+  gap: var(--space-4);
+}
+
+@media (max-width: 900px) {
+  .pv-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pv-footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .pv-footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Berührungsziele: Auf Touch-Breiten bekommen die Footer-Links eine
+     Klickfläche von mindestens 44 px Höhe. Auf dem Desktop bleiben sie
+     kompakt — dort wird mit der Maus gezielt, nicht mit dem Daumen. */
+  .pv-footer__col ul a,
+  .pv-footer__legal a {
+    display: inline-block;
+    padding-block: 11px;
+  }
+
+  .pv-footer__col ul {
+    gap: 0;
+  }
+
+  .pv-footer__bottom {
+    gap: var(--space-2);
+  }
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+
+.pv-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: min(70vh, 600px);
+  padding-block: clamp(56px, 9vw, 120px);
+  color: var(--color-on-ink);
+  background:
+    linear-gradient(to right, var(--color-grid-on-ink) 1px, transparent 1px) 0 0 / calc(100% / 6) 100%,
+    var(--color-ink);
+}
+
+/* Ein weicher Lichtschein aus den Logofarben, oben rechts */
+.pv-hero::before {
+  content: '';
+  position: absolute;
+  right: -180px;
+  top: -200px;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(122, 59, 224, 0.45), rgba(232, 25, 126, 0.15) 45%, transparent 70%);
+}
+
+.pv-hero__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.pv-hero__title {
+  max-width: 19ch;
+  margin-top: 28px;
+  color: var(--color-on-ink);
+}
+
+.pv-hero__accent--cyan {
+  color: var(--color-accent-cyan-on-ink);
+}
+
+.pv-hero__accent--magenta {
+  color: var(--color-accent-magenta-on-ink);
+}
+
+.pv-hero__lead {
+  max-width: 46ch;
+  margin-top: 24px;
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);
+  color: var(--color-on-ink-muted);
+}
+
+/* ============================================================
+   Netz-Animation (js/net.js) – Dekoration hinter Bühne und Seitenkopf
+   ============================================================ */
+
+.pv-net {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* links ausblenden, damit die Ueberschrift frei steht */
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.6) 35%, #000 60%);
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.6) 35%, #000 60%);
+}
+
+/* Knowledge Graph (js/kg.js) hält selbst Abstand zum Text – keine Ausblendung */
+.pv-kg {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+@media print {
+  .pv-net {
+    display: none;
+  }
+
+  /* Raster aus (Spec 7): das Raster steckt in der background-Kurzschreibweise */
+  .pv-hero,
+  .pv-pagehead {
+    background: var(--color-ink);
+  }
+}
+
+/* ============================================================
+   Badge und Chips
+   ============================================================ */
+
+.pv-badge {
+  display: inline-block;
+  padding: 7px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-ink-muted);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.pv-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-7);
+  font-size: 0.8125rem;
+}
+
+.pv-chips li {
+  padding: 5px 13px;
+  border-radius: var(--radius-pill);
+}
+
+.pv-chips--neutral {
+  justify-content: flex-start;
+}
+
+.pv-chips--neutral li {
+  padding: 7px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-str);
+}
+
+/* ============================================================
+   Leistungskarten
+   ============================================================ */
+
+/* Vier Spalten erst, wenn die In/Out-Zeilen lesbar ohne Umbruch passen
+   (laengste Zeile 42 Zeichen inkl. Label). Darunter zwei, mobil eine. */
+.pv-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (min-width: 1360px) {
+  .pv-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .pv-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Subgrid: Titel | Text | In/Out | Link liegen ueber alle Karten einer Reihe
+   auf denselben Zeilen - die gestrichelten Linien stehen auf einer Hoehe. */
+.pv-cards > li,
+.pv-related > li {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 12px;
+}
+
+/* Die Karte ist kein Link, sondern enthaelt einen: Verlinkt ist allein die
+   Ueberschrift, deren ::after die ganze Karte abdeckt. So bleibt der
+   Linkname der sichtbare Titel (WCAG 2.5.3 "Label in Name"). */
+.pv-card {
+  position: relative;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 12px;
+  padding: 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  container-type: inline-size;
+  transition: border-color var(--transition);
+}
+
+.pv-card:hover,
+.pv-card:focus-within {
+  border-color: var(--color-ink);
+}
+
+.pv-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pv-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* Der Fokusring gehoert um die Karte, nicht um die Ueberschrift */
+.pv-card__link:focus-visible {
+  outline: none;
+}
+
+.pv-card__link:focus-visible::after {
+  outline: 3px solid var(--color-action);
+  outline-offset: 2px;
+}
+
+.pv-card__title {
+  font-size: 1.375rem;
+  letter-spacing: -0.01em;
+}
+
+.pv-card__text {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+/* In/Out: Texte in Petrol/Beere (AA), nur die Labels bleiben hellgrau und
+   sind von pa11y ausgenommen. Schrift skaliert mit der Kartenbreite, damit nichts umbricht:
+   100cqi / 25.6 = Breite fuer 42 Monospace-Zeichen a 0,6 em. */
+.pv-card__io {
+  display: grid;
+  grid-template-columns: 4ch 1fr;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-border);
+  font-family: var(--font-mono);
+  font-size: clamp(9.5px, calc(100cqi / 25.6), 11.5px);
+  line-height: 1.75;
+  white-space: nowrap;
+}
+
+.pv-card__io br {
+  display: none;
+}
+
+.pv-card__io-k {
+  color: var(--color-io-label);
+}
+
+.pv-card__io-in {
+  font-weight: 500;
+  color: var(--color-io-in);
+}
+
+.pv-card__io-out {
+  font-weight: 500;
+  color: var(--color-io-out);
+}
+
+.pv-card__more {
+  align-self: end;
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-action);
+}
+
+.pv-card__more::after {
+  content: ' →';
+}
+
+/* ============================================================
+   Vorgehensschritte
+   ============================================================ */
+
+/* Fuenf Schritte in der vollen Containerbreite; die Boxen einer Reihe
+   wachsen gemeinsam in die Hoehe. Nummern per Zaehler: ein eingefuegter
+   Schritt nummeriert die folgenden selbst um. */
+.pv-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+  list-style: none;
+  counter-reset: schritt;
+}
+
+.pv-steps__item {
+  counter-increment: schritt;
+  padding: 28px 22px 32px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pv-steps__num {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 2.75rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--color-action);
+}
+
+.pv-steps__num::before {
+  content: counter(schritt, decimal-leading-zero);
+}
+
+.pv-steps__tag {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-meta);
+}
+
+.pv-steps__title {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+.pv-steps__text {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.pv-steps__contact {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 1279px) {
+  .pv-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .pv-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .pv-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fortschrittsbalken direkt unter den Boxen (js/gauge.js, Mockup M).
+   Ohne Skript bleibt er verborgen (hidden im HTML). */
+.pv-gauge {
+  --p: 0;                                  /* Füllstand 0…1, per Skript */
+  position: relative;
+  height: 23px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-top: 0;                           /* teilt sich die Linie mit den Boxen */
+  background: var(--color-surface-mut);    /* leere Segmente hellgrau */
+}
+
+.pv-gauge[hidden] {
+  display: none;
+}
+
+.pv-gauge__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-akzent);      /* über die volle Breite, die Füllung deckt auf */
+  clip-path: inset(0 calc((1 - var(--p)) * 100%) 0 0);
+  transition: clip-path 0.6s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+/* Segmente: Anzahl --n per Skript (40, sonst 20); Boxgrenzen liegen auf Segmentgrenzen */
+.pv-gauge__seg {
+  --n: 40;
+  --gap: 2px;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg,
+    transparent 0 calc(100% / var(--n) - var(--gap)),
+    var(--color-surface) calc(100% / var(--n) - var(--gap)) calc(100% / var(--n)));
+}
+
+/* Prozentzahl im letzten gefüllten Segment, mittig, nie umbrochen */
+.pv-gauge__wert {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-on-ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: left 0.6s cubic-bezier(0.65, 0.05, 0.36, 1), opacity 0.2s;
+}
+
+.pv-gauge.is-aktiv .pv-gauge__wert {
+  opacity: 1;
+}
+
+.pv-steps__item {
+  transition: background-color 0.2s;
+}
+
+.pv-steps__item.is-hover {
+  background: var(--color-surface-alt);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-gauge__fill,
+  .pv-gauge__wert {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Dreiklang – die einzige farbige Komponente der Seite
+   ============================================================ */
+
+.pv-triad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.pv-triad__item {
+  padding: 28px;
+  border: 1px solid;
+}
+
+.pv-triad__tag {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-ink);
+}
+
+.pv-triad__title {
+  margin-bottom: 10px;
+  font-size: 1.375rem;
+}
+
+.pv-triad__text {
+  color: var(--color-text-muted);
+}
+
+.pv-triad__item--mensch {
+  background: var(--color-mensch-bg);
+  border-color: var(--color-mensch-brd);
+}
+
+.pv-triad__item--mensch .pv-triad__tag {
+  background: var(--color-mensch);
+}
+
+.pv-triad__item--orga {
+  background: var(--color-orga-bg);
+  border-color: var(--color-orga-brd);
+}
+
+.pv-triad__item--orga .pv-triad__tag {
+  background: var(--color-orga);
+}
+
+.pv-triad__item--tech {
+  background: var(--color-tech-bg);
+  border-color: var(--color-tech-brd);
+}
+
+.pv-triad__item--tech .pv-triad__tag {
+  background: var(--color-tech-text);
+}
+
+@media (max-width: 900px) {
+  .pv-triad {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Team-Boxen "Über uns" – IC-Chip wie auf pivon.ai, eckig umgesetzt
+   ============================================================ */
+
+.pv-team {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 36px;
+}
+
+.pv-ic {
+  position: relative;
+  padding: 32px 32px 28px 36px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+/* Pin-Striche, die links aus dem Chip ragen */
+.pv-ic::before {
+  content: '';
+  position: absolute;
+  left: -11px;
+  top: 20px;
+  bottom: 20px;
+  width: 10px;
+  background: repeating-linear-gradient(to bottom, var(--color-border) 0 1px, transparent 1px 10px);
+}
+
+/* Kopfzeile: Foto (bzw. Platzhalter) links, Name und Rolle rechts */
+.pv-ic__kopf {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+/* Platzhalter fuer das Profilfoto: eckig, mit Initialen. Spaeter durch
+   <img class="pv-ic__foto"> ersetzen - object-fit haelt das Format. */
+.pv-ic__foto {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 176px;
+  height: 176px;
+  object-fit: cover;
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-meta);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+}
+
+/* Auf schmalen Bildschirmen passt das 176-px-Feld nicht neben den Namen */
+@media (max-width: 480px) {
+  .pv-ic__foto {
+    width: 112px;
+    height: 112px;
+    font-size: 1.25rem;
+  }
+}
+
+.pv-ic__name {
+  font-size: clamp(1.5rem, 1.1rem + 1vw, 1.875rem);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+.pv-ic__role {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-meta);
+}
+
+.pv-ic__bio {
+  max-width: 52ch;
+  color: var(--color-text-muted);
+}
+
+.pv-ic__pins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pv-ic__pins li {
+  padding: 4px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-str);
+}
+
+@media (max-width: 760px) {
+  .pv-team {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   CTA-Banner
+   ============================================================ */
+
+.pv-center {
+  text-align: center;
+}
+
+.pv-cta {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  padding-block: var(--section-y);
+}
+
+/* Weicher Lichtschein im Logo-Verlauf hinter dem Text */
+.pv-cta::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 640px;
+  height: 640px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--gradient-logo);
+  opacity: 0.25;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.pv-cta__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 640px;
+}
+
+.pv-cta__title {
+  color: var(--color-on-ink);
+  font-size: clamp(1.875rem, 1rem + 3vw, 3rem);
+}
+
+.pv-cta__text {
+  margin: 18px auto 32px;
+  max-width: 40ch;
+  font-size: 1.125rem;
+  color: var(--color-on-ink-muted);
+}
+
+/* ============================================================
+   Kontakt und Formular
+   ============================================================ */
+
+.pv-contact {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: start;
+}
+
+.pv-contact__row {
+  padding-block: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pv-contact__label {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-meta);
+}
+
+.pv-contact__row a {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.pv-contact__row a:hover {
+  text-decoration: underline;
+}
+
+.pv-form {
+  padding: 32px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.pv-form__field {
+  margin-bottom: var(--space-4);
+}
+
+.pv-form__label {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pv-form__input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-str);
+  transition: border-color var(--transition);
+}
+
+.pv-form__input:focus {
+  outline: 2px solid var(--color-action);
+  outline-offset: 2px;
+  border-color: var(--color-action);
+}
+
+.pv-form__input:focus-visible {
+  outline: 2px solid var(--color-action);
+}
+
+.pv-form__textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.pv-form__error {
+  margin-top: var(--space-1);
+  font-size: 0.8125rem;
+  color: var(--color-error);
+  min-height: 1.2em;
+}
+
+.pv-form__field--invalid .pv-form__input {
+  border-color: var(--color-error);
+}
+
+.pv-form__field--check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-3);
+  align-items: start;
+}
+
+.pv-form__check {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--color-action);
+}
+
+.pv-form__checklabel {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.pv-form__field--check .pv-form__error {
+  grid-column: 1 / -1;
+}
+
+/* Honeypot: fuer Menschen und Screenreader unsichtbar, fuer Bots sichtbar. */
+.pv-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.pv-form__submit {
+  width: 100%;
+}
+
+.pv-form__status:empty {
+  display: none;
+}
+
+.pv-form__status {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+}
+
+.pv-form__status--info {
+  background: var(--color-action-soft);
+  border: 1px solid var(--color-border-str);
+}
+
+.pv-form__status--info p {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.pv-form__status--ok {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-brd);
+}
+
+.pv-form__mailto {
+  margin-top: var(--space-4);
+}
+
+.pv-form__notice {
+  padding: var(--space-4);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 900px) {
+  .pv-contact {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* ============================================================
+   Scrollspy und Einblendungen
+   ============================================================ */
+
+/* ---- Scrollspy-Zustand ---- */
+.pv-nav__link--active {
+  color: var(--color-action);
+  border-bottom-color: var(--color-action);
+}
+
+/* ---- Einblendungen ----
+   Der versteckte Ausgangszustand gilt NUR, wenn Skripte laufen koennen.
+   Faellt reveal.js aus oder kennt der Browser die Abfrage nicht, bleibt
+   der Inhalt schlicht sichtbar - das ist die richtige Fehlerrichtung. */
+/* .pv-js setzt reveal.js als allererste Anweisung. Nur unterhalb dieses
+   Merkmals wird etwas versteckt - laeuft das Skript nicht, bleibt der Inhalt
+   sichtbar. Das ist die richtige Fehlerrichtung: Eine ausgefallene Animation
+   darf keinen Text verschlucken.
+
+   Nicht (scripting: enabled) verwenden. Die Abfrage sagt nur, ob Skripte
+   erlaubt sind, nicht ob dieses Skript laeuft. Ueber file:// trifft beides
+   auseinander, und auf dem Server tut es das bei jedem Ladefehler. */
+.pv-js .pv-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.pv-js .pv-reveal--in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gleiche Spezifitaet wie die Versteck-Regel und spaeter notiert, damit diese
+   Regel gewinnt. Mit blossem .pv-reveal wuerde sie verlieren. */
+@media (prefers-reduced-motion: reduce) {
+  .pv-js .pv-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Gedruckt wird die ganze Seite auf einmal - der IntersectionObserver hat
+   fuer alles ausserhalb des Bildausschnitts nie ausgeloest. Ohne diese Regel
+   fehlten im Ausdruck 1281 von 3288 Zeichen: die Leistungskarten, das
+   Vorgehen, der Anspruch, "Ueber uns" und die Kontaktueberschrift. Gemessen,
+   bevor die Regel kam. */
+@media print {
+  .pv-js .pv-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Brotkrumen
+   ============================================================ */
+
+.pv-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pv-breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-on-ink-soft);
+}
+
+.pv-breadcrumb li + li::before {
+  content: '/';
+  color: var(--color-on-ink-faint);
+}
+
+.pv-breadcrumb a {
+  color: var(--color-on-ink-soft);
+  text-decoration: none;
+}
+
+.pv-breadcrumb a:hover {
+  color: var(--color-on-ink);
+  text-decoration: underline;
+}
+
+.pv-breadcrumb [aria-current='page'] {
+  color: var(--color-on-ink);
+}
+
+/* ============================================================
+   Seitenkopf der Unterseiten
+   ============================================================ */
+
+.pv-pagehead {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  min-height: 360px;
+  padding-block: var(--space-7) var(--space-8);
+  color: var(--color-on-ink);
+  background:
+    linear-gradient(to right, var(--color-grid-on-ink) 1px, transparent 1px) 0 0 / calc(100% / 6) 100%,
+    var(--color-ink);
+}
+
+.pv-pagehead::before {
+  content: '';
+  position: absolute;
+  right: -160px;
+  top: -260px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(122, 59, 224, 0.4), rgba(232, 25, 126, 0.12) 45%, transparent 70%);
+}
+
+.pv-pagehead > .pv-container {
+  position: relative;
+  z-index: 2;
+}
+
+.pv-pagehead__title {
+  /* wie die Bühne der Startseite: schmal halten, rechts steht der Knowledge Graph */
+  max-width: 19ch;
+  margin-top: var(--space-5);
+  color: var(--color-on-ink);
+  font-size: clamp(2.125rem, 1.2rem + 3.6vw, 3.5rem);
+}
+
+/* Leistungsseiten: lange Überschrift neben dem Knowledge Graph, etwas kleiner */
+.pv-pagehead--leistung .pv-pagehead__title {
+  font-size: clamp(1.875rem, 1.1rem + 2.8vw, 2.875rem);
+}
+
+.pv-pagehead__lead {
+  margin-top: var(--space-3);
+  max-width: 52ch;
+  font-size: 1.125rem;
+  color: var(--color-on-ink-muted);
+}
+
+/* 12 Rasterspalten ab 900 px. Muss NACH .pv-hero und .pv-pagehead stehen:
+   deren background-Kurzschreibweise setzt background-size sonst zurueck. */
+@media (min-width: 900px) {
+  .pv-hero,
+  .pv-pagehead {
+    background-size: calc(100% / 12) 100%, auto;
+  }
+}
+
+/* ============================================================
+   Querverweis auf die anderen Leistungen
+   ============================================================ */
+
+.pv-related {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .pv-related {
+    grid-template-columns: 1fr;
+  }
+}

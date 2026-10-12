@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pivon | Think AI strategically, deliver it pragmatically</title>
+  <meta name="description" content="pivon advises and supports you holistically in introducing and developing AI solutions – people-centred, transparent and practical.">
+  <meta name="theme-color" content="#16293F">
+  <link rel="alternate" hreflang="de" href="https://pivon.ai/">
+  <link rel="alternate" hreflang="en" href="https://pivon.ai/en/">
+  <link rel="alternate" hreflang="x-default" href="https://pivon.ai/">
+
+  <link rel="icon" href="../images/favicon.ico" sizes="32x32">
+  <link rel="icon" href="../images/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+  <link rel="preload" href="../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="../css/tokens.css?v=4">
+  <link rel="stylesheet" href="../css/base.css?v=3">
+  <link rel="stylesheet" href="../css/components.css?v=14">
+  <link rel="stylesheet" href="../css/pages.css?v=2">
+
+  <!-- Klassisches Skript, absichtlich ohne type="module" und ohne defer:
+       Es muss laufen, bevor der Body gezeichnet wird. Begruendung in der
+       Datei selbst. -->
+  <script src="../js/reveal.js?v=2"></script>
+</head>
+<body>
+  <a href="#inhalt" class="pv-skip-link">Skip to content</a>
+
+  <header class="pv-header" id="pv-header">
+    <div class="pv-container pv-header__inner">
+      <a class="pv-header__logo" href="index.html" aria-label="pivon, to the home page">
+        <img src="../images/logo.png" srcset="../images/logo.png 1x, ../images/logo@2x.png 2x"
+             alt="pivon" height="36" width="220">
+      </a>
+
+      <nav class="pv-nav" aria-label="Main navigation">
+        <ul class="pv-nav__list">
+          <li class="pv-nav__item--sub">
+            <a class="pv-nav__link" href="#leistungen"><span class="pv-nav__num">01</span> Services</a>
+            <ul class="pv-nav__sub">
+              <li><a class="pv-nav__sublink" href="services/consulting.html">Consulting</a></li>
+              <li><a class="pv-nav__sublink" href="services/startup-creator.html">Startup Creator</a></li>
+              <li><a class="pv-nav__sublink" href="services/development.html">Development</a></li>
+              <li><a class="pv-nav__sublink" href="services/quickstart-ai.html">Quickstart AI</a></li>
+            </ul>
+          </li>
+          <li><a class="pv-nav__link" href="#vorgehen"><span class="pv-nav__num">02</span> Approach</a></li>
+          <li><a class="pv-nav__link" href="#anspruch"><span class="pv-nav__num">03</span> Principles</a></li>
+          <li><a class="pv-nav__link" href="#ueber-uns"><span class="pv-nav__num">04</span> About us</a></li>
+          <li><a class="pv-nav__link" href="#kontakt"><span class="pv-nav__num">05</span> Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="pv-lang" role="group" aria-label="Sprache / Language">
+        <a class="pv-lang__link" href="../index.html" lang="de" hreflang="de">DE</a>
+        <a class="pv-lang__link" href="index.html" lang="en" hreflang="en" aria-current="true">EN</a>
+      </div>
+      <details class="pv-mobile-nav" id="pv-mobile-nav">
+        <summary class="pv-mobile-nav__toggle" aria-label="Open and close menu">
+          <span class="pv-mobile-nav__bar"></span>
+          <span class="pv-mobile-nav__bar"></span>
+          <span class="pv-mobile-nav__bar"></span>
+        </summary>
+        <nav class="pv-mobile-nav__panel" aria-label="Main navigation mobile">
+          <ul>
+            <li class="pv-nav__item--sub">
+              <a class="pv-nav__link" href="#leistungen"><span class="pv-nav__num">01</span> Services</a>
+              <ul class="pv-nav__sub">
+                <li><a class="pv-nav__sublink" href="services/consulting.html">Consulting</a></li>
+                <li><a class="pv-nav__sublink" href="services/startup-creator.html">Startup Creator</a></li>
+                <li><a class="pv-nav__sublink" href="services/development.html">Development</a></li>
+                <li><a class="pv-nav__sublink" href="services/quickstart-ai.html">Quickstart AI</a></li>
+              </ul>
+            </li>
+            <li><a class="pv-nav__link" href="#vorgehen"><span class="pv-nav__num">02</span> Approach</a></li>
+            <li><a class="pv-nav__link" href="#anspruch"><span class="pv-nav__num">03</span> Principles</a></li>
+            <li><a class="pv-nav__link" href="#ueber-uns"><span class="pv-nav__num">04</span> About us</a></li>
+            <li><a class="pv-nav__link" href="#kontakt"><span class="pv-nav__num">05</span> Contact</a></li>
+          </ul>
+          <a class="pv-btn pv-btn--primary" href="#kontakt">Book an initial call</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="inhalt">
+
+    <section class="pv-hero">
+      <canvas class="pv-net pv-kg" aria-hidden="true"></canvas>
+      <div class="pv-container pv-hero__inner">
+        <p class="pv-badge">AI consulting &amp; development</p>
+        <h1 class="pv-hero__title" data-kg-grenze="pragmatically:6">
+          Think AI <span class="pv-hero__accent pv-hero__accent--cyan">strategically</span>,
+          <span class="pv-hero__accent pv-hero__accent--magenta">deliver pragmatically</span>
+        </h1>
+        <p class="pv-hero__lead">We help you turn your ideas into measurable success.</p>
+      </div>
+    </section>
+
+    <section class="pv-section" id="leistungen" aria-labelledby="leistungen-titel">
+      <div class="pv-container">
+        <div class="pv-section__head pv-reveal">
+          <span class="pv-section__label">01 — Services</span>
+          <h2 id="leistungen-titel">From idea to added value.</h2>
+          <p class="pv-section__lead">Our services support you holistically across the entire life cycle of your ideas, with our expertise focused on AI.</p>
+        </div>
+
+        <ul class="pv-cards pv-reveal">
+          <li>
+            <div class="pv-card">
+              <h3 class="pv-card__title"><a class="pv-card__link" href="services/consulting.html">Consulting.</a></h3>
+              <p class="pv-card__text">Our consulting covers every level, from potential analysis and strategic advice through to a finished roadmap.</p>
+              <p class="pv-card__io"><span class="pv-card__io-k">in</span> <span class="pv-card__io-in">“where do we even start?”</span><br><span class="pv-card__io-k">out</span> <span class="pv-card__io-out">a roadmap with robust use cases</span></p>
+              <span class="pv-card__more" aria-hidden="true">Learn more</span>
+            </div>
+          </li>
+          <li>
+            <div class="pv-card">
+              <h3 class="pv-card__title"><a class="pv-card__link" href="services/startup-creator.html">Startup Creator.</a></h3>
+              <p class="pv-card__text">You have an idea or a vision for a digital business model but lack the investment and resources? Then you have come to the right place.</p>
+              <p class="pv-card__io"><span class="pv-card__io-k">in</span> <span class="pv-card__io-in">a vision or an idea</span><br><span class="pv-card__io-k">out</span> <span class="pv-card__io-out">a finished digital solution</span></p>
+              <span class="pv-card__more" aria-hidden="true">Learn more</span>
+            </div>
+          </li>
+          <li>
+            <div class="pv-card">
+              <h3 class="pv-card__title"><a class="pv-card__link" href="services/development.html">Development.</a></h3>
+              <p class="pv-card__text">Drawing on years of expertise, we also develop tailor-made software solutions for you, with a focus on scalability, stability and security.</p>
+              <p class="pv-card__io"><span class="pv-card__io-k">in</span> <span class="pv-card__io-in">a shortlisted use case</span><br><span class="pv-card__io-k">out</span> <span class="pv-card__io-out">a system in production</span></p>
+              <span class="pv-card__more" aria-hidden="true">Learn more</span>
+            </div>
+          </li>
+          <li>
+            <div class="pv-card">
+              <h3 class="pv-card__title"><a class="pv-card__link" href="services/quickstart-ai.html">Quickstart AI.</a></h3>
+              <p class="pv-card__text">A fast start – from concept to first results in the shortest possible time.</p>
+              <p class="pv-card__io"><span class="pv-card__io-k">in</span> <span class="pv-card__io-in">a team without AI experience</span><br><span class="pv-card__io-k">out</span> <span class="pv-card__io-out">first results within weeks</span></p>
+              <span class="pv-card__more" aria-hidden="true">Learn more</span>
+            </div>
+          </li>
+</ul>
+      </div>
+    </section>
+
+    <section class="pv-section pv-section--alt" id="vorgehen" aria-labelledby="vorgehen-titel">
+      <div class="pv-container">
+        <div class="pv-section__head pv-reveal">
+          <span class="pv-section__label">02 — Approach</span>
+          <h2 id="vorgehen-titel">Five clear steps to your goal.</h2>
+          <p class="pv-section__lead">Experience has taught us that methods have to fit the people and their needs. Nor should you cling dogmatically to a procedure once you notice that the circumstances have changed. That is why we reflect regularly and adapt the way we work, even while a project is under way. Even so, our five steps to the goal have proven themselves. Success needs structure – just not a rigid one.</p>
+        </div>
+
+        <ol class="pv-steps">
+          <li class="pv-steps__item">
+            <span class="pv-steps__num" aria-hidden="true"></span>
+            <span class="pv-steps__tag" aria-hidden="true">Step</span>
+            <h3 class="pv-steps__title">Contact</h3>
+            <p class="pv-steps__text">Everything starts with getting in touch! Contact us – simply, quickly and without obligation – for an initial call.</p>
+            <p class="pv-steps__contact">
+              <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a><br>
+              <a href="tel:+4915199999788">+49&nbsp;151&nbsp;99&nbsp;99&nbsp;788</a>
+            </p>
+          </li>
+          <li class="pv-steps__item">
+            <span class="pv-steps__num" aria-hidden="true"></span>
+            <span class="pv-steps__tag" aria-hidden="true">Step</span>
+            <h3 class="pv-steps__title">Clarifying the brief</h3>
+            <p class="pv-steps__text">Clarifying the brief sounds formal. For us, it above all means understanding in dialogue what you need – or what you might need. For us, this step is complete once you confirm that we have understood you correctly.</p>
+          </li>
+          <li class="pv-steps__item">
+            <span class="pv-steps__num" aria-hidden="true"></span>
+            <span class="pv-steps__tag" aria-hidden="true">Step</span>
+            <h3 class="pv-steps__title">Concept</h3>
+            <p class="pv-steps__text">Once your needs are clear, we create a content concept and a robust roadmap. You know the path to the solution, how much effort it will take, what it will cost and how you can contribute yourself.</p>
+          </li>
+          <li class="pv-steps__item">
+            <span class="pv-steps__num" aria-hidden="true"></span>
+            <span class="pv-steps__tag" aria-hidden="true">Step</span>
+            <h3 class="pv-steps__title">Implementation</h3>
+            <p class="pv-steps__text">We see implementation as the point or phase in which we bring your needs and requirements to life. It is a time of intensive collaboration and learning together.</p>
+          </li>
+          <li class="pv-steps__item">
+            <span class="pv-steps__num" aria-hidden="true"></span>
+            <span class="pv-steps__tag" aria-hidden="true">Step</span>
+            <h3 class="pv-steps__title">Completion</h3>
+            <p class="pv-steps__text">For us, completion means making sure that you can either apply and implement our work yourself or use it in operation. And we are still there for you at any time!</p>
+          </li>
+        </ol>
+        <div class="pv-gauge" aria-hidden="true" hidden>
+          <div class="pv-gauge__fill"></div>
+          <div class="pv-gauge__seg"></div>
+          <span class="pv-gauge__wert">0%</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="pv-section" id="anspruch" aria-labelledby="anspruch-titel">
+      <div class="pv-container">
+        <div class="pv-section__head pv-reveal">
+          <span class="pv-section__label">03 — Our principles</span>
+          <h2 id="anspruch-titel">People, organisation and technology in harmony.</h2>
+          <p class="pv-section__lead">Everything we do is based on looking at people, organisation and technology as a whole. That is the only way to create acceptance for change. Our principles are the result of successes and failures alike. They are our compass for guiding you safely through the challenges of our time.</p>
+        </div>
+
+        <ul class="pv-triad">
+          <li class="pv-triad__item pv-triad__item--mensch">
+            <span class="pv-triad__tag">People</span>
+            <h3 class="pv-triad__title">Responsibility stays with people.</h3>
+            <p class="pv-triad__text">Technologies are tools that support people and will never replace them. We see technology as an opportunity and a chance for change. People remain at the centre of decisions.</p>
+          </li>
+          <li class="pv-triad__item pv-triad__item--orga">
+            <span class="pv-triad__tag">Organisation</span>
+            <h3 class="pv-triad__title">Organisations carry the change.</h3>
+            <p class="pv-triad__text">Organisations have to change and adapt as times change. Compliance, governance and skills have to evolve and create a safe framework.</p>
+          </li>
+          <li class="pv-triad__item pv-triad__item--tech">
+            <span class="pv-triad__tag">Technology</span>
+            <h3 class="pv-triad__title">Measurable value instead of complexity.</h3>
+            <p class="pv-triad__text">Technologies have to create measurable value without adding unnecessary complexity. Nor may they lead to a dependency that leaves you unable to act.</p>
+          </li>
+        </ul>
+
+        <ul class="pv-chips pv-chips--neutral">
+          <li>people-centred</li>
+          <li>transparent</li>
+          <li>flexible</li>
+          <li>technology-agnostic</li>
+          <li>practical</li>
+          <li>sustainable</li>
+          <li>future-oriented</li>
+          <li>innovative</li>
+          <li>responsible</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pv-section pv-section--alt" id="ueber-uns" aria-labelledby="ueber-uns-titel">
+      <div class="pv-container">
+        <div class="pv-section__head pv-reveal">
+          <span class="pv-section__label">04 — About us</span>
+          <h2 id="ueber-uns-titel">Who we are.</h2>
+          <p class="pv-section__lead">Pivon was founded in 2026 by Alexander Quadt and Andreas Steiert. We share many years of working together on AI-powered software solutions and on building development teams. Our passion is to use our experience and expertise to help people and organisations create lasting value.</p>
+        </div>
+        <ul class="pv-team">
+          <li class="pv-ic pv-ic--l">
+            <div class="pv-ic__kopf">
+              <!-- Platzhalter: durch <img class="pv-ic__foto" src="../…" alt=""> ersetzen -->
+              <span class="pv-ic__foto" aria-hidden="true">AQ</span>
+              <div>
+                <h3 class="pv-ic__name">Alexander Quadt</h3>
+                <p class="pv-ic__role">Co-Founder &amp; Technology Lead</p>
+              </div>
+            </div>
+            <p class="pv-ic__bio">Alex is a proven expert in software development, especially in AI-powered software solutions. He has implemented numerous highly scalable, fail-safe platforms and designed the architecture behind them. His skills cover architecture, modelling, integrations and the operation of software solutions, with a particular focus on scalability, security, cost and user experience.</p>
+            <ul class="pv-ic__pins"><li>Architecture</li><li>Models</li><li>Integrations</li><li>Operations</li><li>Scalability</li><li>Security</li></ul>
+          </li>
+          <li class="pv-ic pv-ic--r">
+            <div class="pv-ic__kopf">
+              <img class="pv-ic__foto" src="../images/andreas-steiert-176.jpg" srcset="../images/andreas-steiert-176.jpg 1x, ../images/andreas-steiert-352.jpg 2x" width="176" height="176" alt="" loading="lazy">
+              <div>
+                <h3 class="pv-ic__name">Andreas Steiert</h3>
+                <p class="pv-ic__role">Co-Founder &amp; Business Lead</p>
+              </div>
+            </div>
+            <p class="pv-ic__bio">Andreas has more than 20 years of expertise across a wide range of information technology. He has several years of experience in developing software solutions and setting up operational processes. Roles as a project manager, as an external consultant for large corporations and in leadership positions round off his profile. In his most recent role, he built up and led the central department providing internal AI services.</p>
+            <ul class="pv-ic__pins"><li>Customers</li><li>Enablement</li><li>Adoption</li><li>Value cases</li><li>Strategy</li><li>Processes</li></ul>
+          </li>
+        </ul>
+        <p>
+          <a class="pv-btn pv-btn--primary" href="#kontakt">Get in touch</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="pv-cta" aria-labelledby="cta-titel">
+      <div class="pv-container pv-cta__inner">
+        <h2 id="cta-titel" class="pv-cta__title">Ready for the next step?</h2>
+      </div>
+    </section>
+
+    <section class="pv-section" id="kontakt" aria-labelledby="kontakt-titel">
+      <div class="pv-container">
+        <div class="pv-contact">
+          <div class="pv-contact__side">
+            <div class="pv-section__head pv-reveal">
+              <span class="pv-section__label">05 — Contact</span>
+              <h2 id="kontakt-titel">Let’s talk.</h2>
+              <p class="pv-section__lead">Get in touch – simply, quickly and without obligation – for an initial call.</p>
+            </div>
+            <p class="pv-contact__row">
+              <span class="pv-contact__label">Email</span>
+              <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>
+            </p>
+            <p class="pv-contact__row">
+              <span class="pv-contact__label">Mobile</span>
+              <a href="tel:+4915199999788">+49&nbsp;151&nbsp;99&nbsp;99&nbsp;788</a>
+            </p>
+          </div>
+
+          <p class="pv-form__notice" id="pv-form-notice">The contact form requires JavaScript. Feel free to write to us directly at <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a> or call: <a href="tel:+4915199999788">+49&nbsp;151&nbsp;99&nbsp;99&nbsp;788</a>.</p>
+
+          <form class="pv-form" id="pv-contact-form" novalidate hidden>
+            <div class="pv-form__field">
+              <label class="pv-form__label" for="pv-name">Name</label>
+              <input class="pv-form__input" type="text" id="pv-name" name="name"
+                     autocomplete="name" required aria-describedby="pv-name-error">
+              <p class="pv-form__error" id="pv-name-error"></p>
+            </div>
+
+            <div class="pv-form__field">
+              <label class="pv-form__label" for="pv-email">Email</label>
+              <input class="pv-form__input" type="email" id="pv-email" name="email"
+                     autocomplete="email" required aria-describedby="pv-email-error">
+              <p class="pv-form__error" id="pv-email-error"></p>
+            </div>
+
+            <div class="pv-form__field">
+              <label class="pv-form__label" for="pv-message">Message</label>
+              <textarea class="pv-form__input pv-form__textarea" id="pv-message" name="message"
+                        rows="5" required aria-describedby="pv-message-error"
+                        placeholder="How can we help you?"></textarea>
+              <p class="pv-form__error" id="pv-message-error"></p>
+            </div>
+
+            <div class="pv-form__field pv-form__field--check">
+              <input class="pv-form__check" type="checkbox" id="pv-privacy" name="privacy"
+                     required aria-describedby="pv-privacy-error">
+              <label class="pv-form__checklabel" for="pv-privacy">I have read and accept the <a href="privacy.html">privacy policy</a>.</label>
+              <p class="pv-form__error" id="pv-privacy-error"></p>
+            </div>
+
+            <div class="pv-form__honeypot" aria-hidden="true">
+              <label for="pv-website">Please leave this field empty</label>
+              <input type="text" id="pv-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button class="pv-btn pv-btn--primary pv-form__submit" type="submit">Send message</button>
+
+            <div class="pv-form__status" id="pv-form-status" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pv-footer">
+    <div class="pv-container">
+      <div class="pv-footer__grid">
+        <div class="pv-footer__brand">
+          <img src="../images/logo-invers.png"
+               srcset="../images/logo-invers.png 1x, ../images/logo-invers@2x.png 2x"
+               alt="pivon" height="32" width="196">
+          <p class="pv-footer__claim">Your partner for digital solutions – think AI strategically, deliver it pragmatically.</p>
+        </div>
+
+        <nav class="pv-footer__col" aria-label="Footer navigation">
+          <h2 class="pv-footer__head">Navigation</h2>
+          <ul>
+            <li><a href="#leistungen">Services</a></li>
+            <li><a href="#vorgehen">Approach</a></li>
+            <li><a href="#anspruch">Our principles</a></li>
+            <li><a href="#ueber-uns">About us</a></li>
+            <li><a href="#kontakt">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="pv-footer__col">
+          <h2 class="pv-footer__head">Contact</h2>
+          <ul>
+            <li><a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a></li>
+            <li><a href="tel:+4915199999788">+49&nbsp;151&nbsp;99&nbsp;99&nbsp;788</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pv-footer__rule"></div>
+
+      <div class="pv-footer__bottom">
+        <p>© 2026 pivon. All rights reserved.</p>
+        <ul class="pv-footer__legal">
+          <li><a href="legal-notice.html">Legal notice</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/scrollspy.js?v=3" defer></script>
+  <script src="../js/nav.js?v=3" defer></script>
+  <script src="../js/net-graph.js?v=4" defer></script>
+  <script src="../js/kg-graph.js?v=7" defer></script>
+  <script src="../js/kg.js?v=8" defer></script>
+  <script src="../js/gauge.js?v=1" defer></script>
+  <script src="../js/contact-validation.js?v=4" defer></script>
+  <script src="../js/contact-form.js?v=4" defer></script>
+</body>
+</html>
