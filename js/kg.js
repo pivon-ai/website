@@ -265,8 +265,11 @@
     function schleife(now) { schritt(); zeichnen((now - t0) / 1000); raf = requestAnimationFrame(schleife) }
 
     // Ein Ort für die Entscheidung: Intersection, Tab-Wechsel und Start
+    // Mobil blendet das CSS den Graph aus (display: none) – dann weder rechnen noch zeichnen
+    const sichtbar = () => cv.offsetWidth > 0
+
     function pruefen() {
-      const soll = sollLaufen({ imBild, tabVerborgen: document.hidden, reduziert, bereit: punkte.length > 0 })
+      const soll = sollLaufen({ imBild: imBild && sichtbar(), tabVerborgen: document.hidden, reduziert, bereit: punkte.length > 0 })
       if (soll && !laeuft) { laeuft = true; raf = requestAnimationFrame(schleife) }
       if (!soll && laeuft) { laeuft = false; cancelAnimationFrame(raf) }
     }
@@ -291,8 +294,9 @@
     window.addEventListener('resize', () => {
       clearTimeout(warte)
       warte = setTimeout(() => {
-        if (!mussNeuAufbauen({ b: B, h: H }, { b: flaeche.clientWidth, h: flaeche.clientHeight })) return
-        aufbauen(); zeichnen((performance.now() - t0) / 1000)
+        if (!sichtbar()) { pruefen(); return }
+        if (punkte.length && !mussNeuAufbauen({ b: B, h: H }, { b: flaeche.clientWidth, h: flaeche.clientHeight })) return
+        aufbauen(); zeichnen((performance.now() - t0) / 1000); pruefen()
       }, 150)
     }, { passive: true })
 
@@ -304,6 +308,6 @@
     document.addEventListener('visibilitychange', pruefen)
 
     // Die Schrift muss geladen sein, bevor Beschriftungen gemessen und gezeichnet werden
-    document.fonts.ready.then(() => { aufbauen(); zeichnen(0); pruefen() })
+    document.fonts.ready.then(() => { if (sichtbar()) { aufbauen(); zeichnen(0) } pruefen() })
   }
 })()

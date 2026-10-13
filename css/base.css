@@ -216,3 +216,8 @@ body::before {
     display: none;
   }
 }
+
+/* hidden gilt immer, auch wenn eine Komponente display setzt (z. B. ausgeblendete Leistung) */
+[hidden] {
+  display: none !important;
+}

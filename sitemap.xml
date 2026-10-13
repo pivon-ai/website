@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://pivon.ai/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/leistungen/beratung.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/leistungen/beratung.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/services/consulting.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/leistungen/beratung.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/en/services/consulting.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/leistungen/beratung.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/services/consulting.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/leistungen/beratung.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/leistungen/startup-creator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/leistungen/startup-creator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/services/startup-creator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/leistungen/startup-creator.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/en/services/startup-creator.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/leistungen/startup-creator.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/services/startup-creator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/leistungen/startup-creator.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/leistungen/entwicklung.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/leistungen/entwicklung.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/services/development.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/leistungen/entwicklung.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/en/services/development.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/leistungen/entwicklung.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/services/development.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/leistungen/entwicklung.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/impressum.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/en/legal-notice.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/impressum.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/datenschutz.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/datenschutz.html"/>
+  </url>
+  <url>
+    <loc>https://pivon.ai/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pivon.ai/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pivon.ai/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pivon.ai/datenschutz.html"/>
+  </url>
+</urlset>

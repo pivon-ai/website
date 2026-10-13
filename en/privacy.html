@@ -17,8 +17,8 @@
   <link rel="preload" href="../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="../css/tokens.css?v=4">
-  <link rel="stylesheet" href="../css/base.css?v=3">
-  <link rel="stylesheet" href="../css/components.css?v=14">
+  <link rel="stylesheet" href="../css/base.css?v=4">
+  <link rel="stylesheet" href="../css/components.css?v=17">
   <link rel="stylesheet" href="../css/pages.css?v=2">
 
   <!-- Klassisches Skript, absichtlich ohne type="module" und ohne defer:
@@ -44,7 +44,8 @@
               <li><a class="pv-nav__sublink" href="services/consulting.html">Consulting</a></li>
               <li><a class="pv-nav__sublink" href="services/startup-creator.html">Startup Creator</a></li>
               <li><a class="pv-nav__sublink" href="services/development.html">Development</a></li>
-              <li><a class="pv-nav__sublink" href="services/quickstart-ai.html">Quickstart AI</a></li>
+              <!-- Quickstart KI vorübergehend ausgeblendet: zum Wiedereinblenden "hidden" entfernen -->
+              <li hidden><a class="pv-nav__sublink" href="services/quickstart-ai.html">Quickstart AI</a></li>
             </ul>
           </li>
           <li><a class="pv-nav__link" href="index.html#vorgehen"><span class="pv-nav__num">02</span> Approach</a></li>
@@ -72,7 +73,8 @@
                 <li><a class="pv-nav__sublink" href="services/consulting.html">Consulting</a></li>
                 <li><a class="pv-nav__sublink" href="services/startup-creator.html">Startup Creator</a></li>
                 <li><a class="pv-nav__sublink" href="services/development.html">Development</a></li>
-                <li><a class="pv-nav__sublink" href="services/quickstart-ai.html">Quickstart AI</a></li>
+                <!-- Quickstart KI vorübergehend ausgeblendet: zum Wiedereinblenden "hidden" entfernen -->
+                <li hidden><a class="pv-nav__sublink" href="services/quickstart-ai.html">Quickstart AI</a></li>
               </ul>
             </li>
             <li><a class="pv-nav__link" href="index.html#vorgehen"><span class="pv-nav__num">02</span> Approach</a></li>
@@ -106,13 +108,13 @@
         <div class="pv-legal">
           <div class="pv-draft" role="note">
             <p class="pv-draft__title">This page is not yet complete.</p>
-            <p>The sections “Controller” and “Hosting” contain entries in square brackets that must be replaced. The rest of the text describes the measured behaviour of this website. The policy should still be reviewed: it is based on technical findings, not written by a legal adviser. This box must then be removed, together with the <code>.pv-draft</code> rule in <code>css/pages.css</code>.</p>
+            <p>The sections “Controller” and “Hosting” contain entries in square brackets that must be replaced or checked. The rest of the text describes the measured behaviour of this website. The policy should still be reviewed: it is based on technical findings, not written by a legal adviser. This box must then be removed, together with the <code>.pv-draft</code> rule in <code>css/pages.css</code>.</p>
           </div>
 
           <p class="pv-legal__lang">This is a courtesy translation. Only the German version is legally binding: <a href="../datenschutz.html" hreflang="de" lang="de">Datenschutzerklärung</a>.</p>
 
           <h2>1. Overview</h2>
-          <p>This website is deliberately lean. It sets <strong>no cookies</strong>, embeds <strong>no third-party services</strong> and uses <strong>no analytics or tracking tools</strong>. When you open a page, only files from our own server are loaded — not a single request goes to a third-party address.</p>
+          <p>This website is deliberately lean. It sets <strong>no cookies</strong>, embeds <strong>no third-party services</strong> and uses <strong>no analytics or tracking tools</strong>. When you open a page, only files from the server hosting this website are loaded (see section 3) — no request goes to any other provider.</p>
           <p>We therefore process personal data in only two cases: in the server log files that are technically generated when a page is requested, and when you choose to write to us or call us.</p>
 
           <h2>2. Controller</h2>
@@ -128,8 +130,13 @@
 
           <h2>3. Hosting and server log files</h2>
           <p>This website is hosted by:</p>
-          <p>[Name and full address of the hosting provider]</p>
-          <p>On our behalf, the provider processes the data that is technically generated when the website is accessed. For this purpose, we have concluded a data processing agreement with the provider pursuant to Article 28 GDPR. [If no such agreement exists, it must be concluded before publication — and this bracketed note removed.]</p>
+          <p>
+            Vercel Inc.<br>
+            440 N Barranca Ave #4133<br>
+            Covina, CA 91723, USA
+          </p>
+          <p>Vercel delivers the pages via a worldwide network of servers; your request is usually answered by a server near you. On our behalf, the provider processes the data that is technically generated when the website is accessed. For this purpose, we have concluded a data processing agreement with the provider pursuant to Article 28 GDPR (Vercel’s Data Processing Addendum). [Check that the DPA is in place in the Vercel account and remove this bracketed note.]</p>
+          <p>Data may be transferred to the USA in the process. Vercel Inc. is certified under the EU-US Data Privacy Framework; the transfer is therefore covered by an adequacy decision of the European Commission pursuant to Article 45 GDPR. In addition, the data processing agreement contains the European Commission’s standard contractual clauses pursuant to Article 46 GDPR. [Check the certification at dataprivacyframework.gov before publication and remove this bracketed note.]</p>
           <p>When a page is requested, the server automatically stores information in so-called log files. Which information this is and how long it is kept is determined by the hosting provider. Typically, this includes:</p>
           <ul>
             <li>the address requested and the time of the request</li>
@@ -139,7 +146,7 @@
             <li>IP address</li>
           </ul>
           <p>We do not combine this data with other sources and do not analyse it on a personal basis. The legal basis is Article 6(1)(f) GDPR. Our legitimate interest lies in the technically error-free operation and security of the website.</p>
-          <p>[Ask the hosting provider how long log files are stored and enter it here.]</p>
+          <p>[Check how long log files are stored for the Vercel plan in use and enter it here.]</p>
 
           <h2>4. Contact form</h2>
           <p>The contact form on the home page <strong>does not transmit any data to our server</strong>. It checks your entries for completeness in the browser and then opens your own email program with a prepared message. Only when you press send there does the message leave your device — in the same way as any other email you write.</p>
@@ -155,8 +162,8 @@
           <ul>
             <li><strong>No cookies.</strong> The website sets none, neither its own nor third-party ones.</li>
             <li><strong>No browser storage.</strong> Neither local storage nor session storage nor a browser database is written to.</li>
-            <li><strong>No external connections.</strong> When you open a page, all requests go to our own server. There are no embedded maps, videos, social media buttons or font services.</li>
-            <li><strong>Fonts are hosted locally.</strong> The fonts used are delivered by our own server. Your IP address is not transmitted to any font provider.</li>
+            <li><strong>No external connections.</strong> When you open a page, all requests go to our hosting provider’s server. There are no embedded maps, videos, social media buttons or font services.</li>
+            <li><strong>Fonts are hosted with the site.</strong> The fonts used are delivered together with the website. Your IP address is not transmitted to any font provider.</li>
             <li><strong>No audience measurement.</strong> We use no analytics tools and create no usage profiles.</li>
           </ul>
           <p>This is why this website does not need a consent banner. Should anything change, we will update this policy first.</p>

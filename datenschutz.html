@@ -17,8 +17,8 @@
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/tokens.css?v=4">
-  <link rel="stylesheet" href="css/base.css?v=3">
-  <link rel="stylesheet" href="css/components.css?v=14">
+  <link rel="stylesheet" href="css/base.css?v=4">
+  <link rel="stylesheet" href="css/components.css?v=17">
   <link rel="stylesheet" href="css/pages.css?v=2">
 
   <!-- Klassisches Skript, absichtlich ohne type="module" und ohne defer:
@@ -44,7 +44,8 @@
               <li><a class="pv-nav__sublink" href="leistungen/beratung.html">Beratung</a></li>
               <li><a class="pv-nav__sublink" href="leistungen/startup-creator.html">Startup Creator</a></li>
               <li><a class="pv-nav__sublink" href="leistungen/entwicklung.html">Entwicklung</a></li>
-              <li><a class="pv-nav__sublink" href="leistungen/quickstart-ki.html">Quickstart KI</a></li>
+              <!-- Quickstart KI vorübergehend ausgeblendet: zum Wiedereinblenden "hidden" entfernen -->
+              <li hidden><a class="pv-nav__sublink" href="leistungen/quickstart-ki.html">Quickstart KI</a></li>
             </ul>
           </li>
           <li><a class="pv-nav__link" href="index.html#vorgehen"><span class="pv-nav__num">02</span> Vorgehen</a></li>
@@ -73,7 +74,8 @@
                 <li><a class="pv-nav__sublink" href="leistungen/beratung.html">Beratung</a></li>
                 <li><a class="pv-nav__sublink" href="leistungen/startup-creator.html">Startup Creator</a></li>
                 <li><a class="pv-nav__sublink" href="leistungen/entwicklung.html">Entwicklung</a></li>
-                <li><a class="pv-nav__sublink" href="leistungen/quickstart-ki.html">Quickstart KI</a></li>
+                <!-- Quickstart KI vorübergehend ausgeblendet: zum Wiedereinblenden "hidden" entfernen -->
+                <li hidden><a class="pv-nav__sublink" href="leistungen/quickstart-ki.html">Quickstart KI</a></li>
               </ul>
             </li>
             <li><a class="pv-nav__link" href="index.html#vorgehen"><span class="pv-nav__num">02</span> Vorgehen</a></li>
@@ -107,11 +109,11 @@
         <div class="pv-legal">
           <div class="pv-draft" role="note">
             <p class="pv-draft__title">Diese Seite ist noch nicht vollständig.</p>
-            <p>Die Abschnitte „Verantwortliche Stelle“ und „Hosting“ enthalten Angaben in eckigen Klammern, die ersetzt werden müssen. Der übrige Text beschreibt nachgemessenes Verhalten dieser Website. Geprüft gehört die Erklärung trotzdem: Sie ist nach technischem Befund verfasst, nicht von einer Rechtsberatung. Danach ist dieser Kasten zu entfernen, samt der Regel <code>.pv-draft</code> in <code>css/pages.css</code>.</p>
+            <p>Die Abschnitte „Verantwortliche Stelle“ und „Hosting“ enthalten Angaben in eckigen Klammern, die ersetzt oder geprüft werden müssen. Der übrige Text beschreibt nachgemessenes Verhalten dieser Website. Geprüft gehört die Erklärung trotzdem: Sie ist nach technischem Befund verfasst, nicht von einer Rechtsberatung. Danach ist dieser Kasten zu entfernen, samt der Regel <code>.pv-draft</code> in <code>css/pages.css</code>.</p>
           </div>
 
           <h2>1. Überblick</h2>
-          <p>Diese Website ist bewusst sparsam gebaut. Sie setzt <strong>keine Cookies</strong>, bindet <strong>keine Dienste Dritter</strong> ein und verwendet <strong>keine Analyse- oder Trackingwerkzeuge</strong>. Beim Aufruf einer Seite werden ausschließlich Dateien von unserem eigenen Server geladen — kein einziger Abruf geht an eine fremde Adresse.</p>
+          <p>Diese Website ist bewusst sparsam gebaut. Sie setzt <strong>keine Cookies</strong>, bindet <strong>keine Dienste Dritter</strong> ein und verwendet <strong>keine Analyse- oder Trackingwerkzeuge</strong>. Beim Aufruf einer Seite werden ausschließlich Dateien von dem Server geladen, auf dem diese Website liegt (siehe Abschnitt 3) — kein Abruf geht an einen weiteren Anbieter.</p>
           <p>Personenbezogene Daten verarbeiten wir deshalb nur in zwei Fällen: in den Protokolldateien des Servers, die beim Abruf technisch anfallen, und dann, wenn Sie uns von sich aus schreiben oder anrufen.</p>
 
           <h2>2. Verantwortliche Stelle</h2>
@@ -127,8 +129,13 @@
 
           <h2>3. Hosting und Server-Protokolldateien</h2>
           <p>Diese Website wird gehostet bei:</p>
-          <p>[Name und vollständige Anschrift des Hosting-Anbieters]</p>
-          <p>Der Anbieter verarbeitet in unserem Auftrag die Daten, die beim Aufruf der Website technisch anfallen. Dazu haben wir mit ihm einen Vertrag über Auftragsverarbeitung nach Artikel 28 DSGVO geschlossen. [Besteht kein solcher Vertrag, ist er vor der Veröffentlichung zu schließen — und dieser Klammerhinweis zu entfernen.]</p>
+          <p>
+            Vercel Inc.<br>
+            440 N Barranca Ave #4133<br>
+            Covina, CA 91723, USA
+          </p>
+          <p>Vercel liefert die Seiten über ein weltweites Netz von Servern aus; Ihre Anfrage beantwortet in der Regel ein Server in Ihrer Nähe. Der Anbieter verarbeitet in unserem Auftrag die Daten, die beim Aufruf der Website technisch anfallen. Dazu haben wir mit ihm einen Vertrag über Auftragsverarbeitung nach Artikel 28 DSGVO geschlossen (Data Processing Addendum von Vercel). [Abschluss des DPA im Vercel-Konto prüfen und diesen Klammerhinweis entfernen.]</p>
+          <p>Dabei können Daten in die USA übermittelt werden. Vercel Inc. ist nach dem EU-US Data Privacy Framework zertifiziert; für die Übermittlung liegt damit ein Angemessenheitsbeschluss der EU-Kommission nach Artikel 45 DSGVO vor. Ergänzend enthält der Vertrag über Auftragsverarbeitung die Standardvertragsklauseln der EU-Kommission nach Artikel 46 DSGVO. [Zertifizierung vor der Veröffentlichung unter dataprivacyframework.gov prüfen und diesen Klammerhinweis entfernen.]</p>
           <p>Der Server speichert beim Abruf automatisch Angaben in sogenannten Protokolldateien. Welche das sind und wie lange sie aufbewahrt werden, bestimmt der Hosting-Anbieter. Üblich sind:</p>
           <ul>
             <li>aufgerufene Adresse und Zeitpunkt des Abrufs</li>
@@ -138,7 +145,7 @@
             <li>IP-Adresse</li>
           </ul>
           <p>Diese Daten führen wir nicht mit anderen Quellen zusammen und werten sie nicht personenbezogen aus. Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe f DSGVO. Unser berechtigtes Interesse liegt im technisch fehlerfreien Betrieb und in der Sicherheit der Website.</p>
-          <p>[Speicherdauer der Protokolldateien beim Hosting-Anbieter erfragen und hier eintragen.]</p>
+          <p>[Speicherdauer der Protokolldateien für den gebuchten Vercel-Tarif prüfen und hier eintragen.]</p>
 
           <h2>4. Kontaktformular</h2>
           <p>Das Kontaktformular auf der Startseite <strong>überträgt keine Daten an unseren Server</strong>. Es prüft Ihre Eingaben im Browser auf Vollständigkeit und öffnet anschließend Ihr eigenes E-Mail-Programm mit einer vorbereiteten Nachricht. Erst wenn Sie dort auf Senden drücken, verlässt die Nachricht Ihr Gerät — auf demselben Weg wie jede andere E-Mail, die Sie schreiben.</p>
@@ -154,8 +161,8 @@
           <ul>
             <li><strong>Keine Cookies.</strong> Die Website setzt keine, weder eigene noch fremde.</li>
             <li><strong>Kein Speicher im Browser.</strong> Weder <span lang="en">Local Storage</span> noch <span lang="en">Session Storage</span> noch eine Datenbank im Browser werden beschrieben.</li>
-            <li><strong>Keine Verbindungen nach außen.</strong> Beim Aufruf einer Seite gehen sämtliche Abrufe an unseren eigenen Server. Es gibt keine eingebundenen Karten, Videos, Schaltflächen sozialer Netzwerke oder Schriftdienste.</li>
-            <li><strong>Schriftarten liegen lokal.</strong> Die verwendete Schrift liefert unser eigener Server. Ihre IP-Adresse wird an keinen Schriftanbieter übermittelt.</li>
+            <li><strong>Keine Verbindungen nach außen.</strong> Beim Aufruf einer Seite gehen sämtliche Abrufe an den Server unseres Hosting-Anbieters. Es gibt keine eingebundenen Karten, Videos, Schaltflächen sozialer Netzwerke oder Schriftdienste.</li>
+            <li><strong>Schriftarten liegen bei uns.</strong> Die verwendete Schrift wird zusammen mit der Website ausgeliefert. Ihre IP-Adresse wird an keinen Schriftanbieter übermittelt.</li>
             <li><strong>Keine Reichweitenmessung.</strong> Wir setzen keine Analysewerkzeuge ein und erstellen keine Nutzungsprofile.</li>
           </ul>
           <p>Deshalb benötigt diese Website auch keinen Einwilligungsbanner. Sollte sich daran etwas ändern, ändern wir zuerst diese Erklärung.</p>

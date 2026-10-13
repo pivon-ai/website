@@ -100,7 +100,7 @@ describe('Task 3: Netz', () => {
   it('Startseite: Knowledge Graph statt Netz in der Bühne', () => {
     const html = lies('index.html')
     expect(html).toMatch(/<section class="pv-hero">\s*<canvas class="pv-net pv-kg" aria-hidden="true"><\/canvas>/)
-    expect(html).toContain('<script src="js/kg.js?v=8" defer></script>')
+    expect(html).toContain('<script src="js/kg.js?v=9" defer></script>')
     expect(html).not.toContain('js/net.js')
   })
   for (const p of SEITEN.slice(1)) {
@@ -109,7 +109,7 @@ describe('Task 3: Netz', () => {
       if (p.startsWith('leistungen/')) {
         // Leistungsseiten: Knowledge Graph wie auf der Startseite
         expect(html).toMatch(/<div class="pv-pagehead pv-pagehead--leistung">\s*<canvas class="pv-net pv-kg" data-kg-fokus="[a-z-]+" aria-hidden="true"><\/canvas>/)
-        expect(html).toContain('<script src="../js/kg.js?v=8" defer></script>')
+        expect(html).toContain('<script src="../js/kg.js?v=9" defer></script>')
       } else {
         expect(html).toMatch(/<div class="pv-pagehead">\s*<canvas class="pv-net" aria-hidden="true"><\/canvas>/)
         expect(html).toContain('<script src="js/net.js?v=3" defer></script>')
@@ -578,9 +578,9 @@ describe('Fortschrittsbalken unter Vorgehen', () => {
       expect(lies(p)).toMatch(/<script src="(\.\.\/)?js\/gauge\.js\?v=\d+" defer><\/script>/)
     })
   }
-  it('CSS: 23 px hoch, teilt die Linie mit den Boxen, Zahl nie umbrochen', () => {
+  it('CSS: 16 px hoch, teilt die Linie mit den Boxen, Zahl nie umbrochen', () => {
     const c = css('components')
-    expect(c).toMatch(/\.pv-gauge\s*\{[^}]*height:\s*23px[^}]*border-top:\s*0/s)
+    expect(c).toMatch(/\.pv-gauge\s*\{[^}]*height:\s*16px[^}]*border-top:\s*0/s)
     expect(c).toMatch(/\.pv-gauge__wert\s*\{[^}]*white-space:\s*nowrap/s)
     expect(c).toMatch(/\.pv-gauge__seg\s*\{[^}]*--n:\s*40/s)
   })
@@ -603,5 +603,75 @@ describe('Leistungsseiten: Graph sagt pro Leistung etwas aus', () => {
   it('Startseite ohne Teilnetz: zeigt das ganze Bild', () => {
     expect(lies('index.html')).not.toContain('data-kg-fokus')
     expect(lies('en/index.html')).not.toContain('data-kg-fokus')
+  })
+})
+
+describe('Hosting bei Vercel und Sitemap', () => {
+  it('Datenschutz DE/EN nennt Vercel als Hosting-Anbieter, kein Platzhalter mehr für den Namen', () => {
+    for (const p of ['datenschutz.html', 'en/privacy.html']) {
+      const h = lies(p)
+      expect(h, p).toContain('Vercel Inc.<br>')
+      expect(h, p).toMatch(/Data Privacy Framework/)
+      expect(h, p).not.toMatch(/\[Name (und vollständige Anschrift des Hosting-Anbieters|and full address of the hosting provider)\]/)
+      expect(h, p).not.toMatch(/(unserem eigenen|our own) server/i)
+    }
+  })
+  it('sitemap.xml: alle sichtbaren Seiten mit Sprachpaar (ohne ausgeblendetes Quickstart), robots.txt verweist darauf', () => {
+    const s = lies('sitemap.xml')
+    const locs = alle(s, /<loc>https:\/\/pivon\.ai\/([^<]*)<\/loc>/g).map((m) => m[1] || 'index.html')
+    const erwartet = Object.entries(PAARE).flat().map((p) => p.replace(/^en\/index\.html$/, 'en/'))
+      .filter((p) => !/quickstart/.test(p))
+    expect(locs.sort()).toEqual(erwartet.sort())
+    expect(s.match(/hreflang="en"/g)).toHaveLength(12)
+    expect(lies('robots.txt')).toContain('Sitemap: https://pivon.ai/sitemap.xml')
+  })
+})
+
+describe('Quickstart KI ausgeblendet, nicht gelöscht', () => {
+  const ALLE = Object.entries(PAARE).flat()
+  const KOMMENTAR = '<!-- Quickstart KI vorübergehend ausgeblendet: zum Wiedereinblenden "hidden" entfernen -->'
+  for (const p of ALLE) {
+    it(`${p}: Menüeinträge (Desktop + mobil) tragen hidden, mit Hinweis`, () => {
+      const h = lies(p)
+      const eintraege = alle(h, /<li( hidden)?><a class="pv-nav__sublink" href="[^"]*quickstart-(?:ki|ai)\.html"/g)
+      expect(eintraege).toHaveLength(2)
+      for (const e of eintraege) expect(e[1]).toBe(' hidden')
+      expect(h.split(KOMMENTAR).length - 1).toBeGreaterThanOrEqual(2)
+    })
+    it(`${p}: Quickstart-Karten (falls vorhanden) tragen hidden`, () => {
+      const karten = alle(lies(p), /<li( hidden)?>\s*<div class="pv-card">\s*<h3 class="pv-card__title"><a class="pv-card__link" href="[^"]*quickstart-(?:ki|ai)\.html">/g)
+      for (const k of karten) expect(k[1]).toBe(' hidden')
+    })
+  }
+  it('Startseiten DE/EN: drei sichtbare Leistungskarten, Quickstart-Karte bleibt im HTML', () => {
+    for (const p of ['index.html', 'en/index.html']) {
+      const h = lies(p)
+      expect(alle(h, /<li>\s*<div class="pv-card">/g), p).toHaveLength(3)
+      expect(alle(h, /<li hidden>\s*<div class="pv-card">/g), p).toHaveLength(1)
+    }
+  })
+  it('Seiten und Inhalte von Quickstart bestehen weiter', () => {
+    expect(existsSync('leistungen/quickstart-ki.html')).toBe(true)
+    expect(existsSync('en/services/quickstart-ai.html')).toBe(true)
+  })
+  it('CSS: hidden schlägt display, Raster mit ausgeblendeter Leistung 3 bzw. 2 Spalten über die volle Breite', () => {
+    expect(css('base')).toMatch(/\[hidden\]\s*\{\s*display:\s*none !important/)
+    const c = css('components')
+    expect(c).toMatch(/\.pv-cards:has\(> li\[hidden\]\)\s*\{\s*grid-template-columns:\s*repeat\(3, 1fr\)/)
+    expect(c).toMatch(/\.pv-related:has\(> li\[hidden\]\)\s*\{\s*grid-template-columns:\s*repeat\(2, 1fr\)/)
+  })
+})
+
+describe('Mobil: kein Knowledge Graph', () => {
+  it('CSS blendet den Graph unter 760 px aus und nimmt Bühne/Seitenkopf die Mindesthöhe', () => {
+    const c = css('components')
+    expect(c).toMatch(/@media \(max-width: 759px\)\s*\{\s*\.pv-kg\s*\{\s*display:\s*none/s)
+    expect(c).toMatch(/\.pv-hero:has\(> \.pv-kg\),\s*\.pv-pagehead:has\(> \.pv-kg\)\s*\{\s*min-height:\s*0/s)
+  })
+  it('kg.js rechnet und animiert nicht, solange der Graph ausgeblendet ist', () => {
+    const js = lies('js/kg.js')
+    expect(js).toContain('const sichtbar = () => cv.offsetWidth > 0')
+    expect(js).toContain('imBild: imBild && sichtbar()')
+    expect(js).toContain('if (sichtbar()) { aufbauen(); zeichnen(0) }')
   })
 })

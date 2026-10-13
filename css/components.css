@@ -509,6 +509,20 @@
   mask-image: none;
 }
 
+/* Mobil (unter 760 px, wo kg.js in die schmale Darstellung schalten würde):
+   kein Knowledge Graph, und Bühne bzw. Seitenkopf ohne Mindesthöhe, damit
+   keine leere dunkle Fläche stehen bleibt */
+@media (max-width: 759px) {
+  .pv-kg {
+    display: none;
+  }
+
+  .pv-hero:has(> .pv-kg),
+  .pv-pagehead:has(> .pv-kg) {
+    min-height: 0;
+  }
+}
+
 @media print {
   .pv-net {
     display: none;
@@ -580,6 +594,18 @@
   }
 }
 
+/* Eine Leistung ausgeblendet (li hidden, derzeit Quickstart KI): drei Karten
+   über dieselbe Gesamtbreite, ab 900 px nebeneinander wie die Querverweise */
+@media (min-width: 900px) {
+  .pv-cards:has(> li[hidden]) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pv-related:has(> li[hidden]) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 640px) {
   .pv-cards {
     grid-template-columns: 1fr;
@@ -608,7 +634,6 @@
   padding: 22px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  container-type: inline-size;
   transition: border-color var(--transition);
 }
 
@@ -650,17 +675,24 @@
 
 /* In/Out: Texte in Petrol/Beere (AA), nur die Labels bleiben hellgrau und
    sind von pa11y ausgenommen. Schrift skaliert mit der Kartenbreite, damit nichts umbricht:
-   100cqi / 25.6 = Breite fuer 42 Monospace-Zeichen a 0,6 em. */
+   100cqi / 25.6 = Breite fuer 42 Monospace-Zeichen a 0,6 em.
+   Der Container sitzt hier und NICHT an .pv-card: container-type an der Karte
+   schaltet deren Subgrid ab, dann stehen die gestrichelten Linien versetzt. */
 .pv-card__io {
   display: grid;
-  grid-template-columns: 4ch 1fr;
+  grid-template-columns: max-content 1fr;
+  column-gap: 0.5rem;
   margin-top: 8px;
   padding-top: 12px;
   border-top: 1px dashed var(--color-border);
   font-family: var(--font-mono);
+  white-space: nowrap;
+  container-type: inline-size;
+}
+
+.pv-card__io > * {
   font-size: clamp(9.5px, calc(100cqi / 25.6), 11.5px);
   line-height: 1.75;
-  white-space: nowrap;
 }
 
 .pv-card__io br {
@@ -782,7 +814,7 @@
 .pv-gauge {
   --p: 0;                                  /* Füllstand 0…1, per Skript */
   position: relative;
-  height: 23px;
+  height: 16px;                            /* bewusst flach: ergänzt die Boxen, dominiert nicht */
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-top: 0;                           /* teilt sich die Linie mit den Boxen */
