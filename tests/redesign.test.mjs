@@ -100,7 +100,7 @@ describe('Task 3: Netz', () => {
   it('Startseite: Knowledge Graph statt Netz in der Bühne', () => {
     const html = lies('index.html')
     expect(html).toMatch(/<section class="pv-hero">\s*<canvas class="pv-net pv-kg" aria-hidden="true"><\/canvas>/)
-    expect(html).toContain('<script src="js/kg.js?v=9" defer></script>')
+    expect(html).toContain('<script src="js/kg.js?v=10" defer></script>')
     expect(html).not.toContain('js/net.js')
   })
   for (const p of SEITEN.slice(1)) {
@@ -109,7 +109,7 @@ describe('Task 3: Netz', () => {
       if (p.startsWith('leistungen/')) {
         // Leistungsseiten: Knowledge Graph wie auf der Startseite
         expect(html).toMatch(/<div class="pv-pagehead pv-pagehead--leistung">\s*<canvas class="pv-net pv-kg" data-kg-fokus="[a-z-]+" aria-hidden="true"><\/canvas>/)
-        expect(html).toContain('<script src="../js/kg.js?v=9" defer></script>')
+        expect(html).toContain('<script src="../js/kg.js?v=10" defer></script>')
       } else {
         expect(html).toMatch(/<div class="pv-pagehead">\s*<canvas class="pv-net" aria-hidden="true"><\/canvas>/)
         expect(html).toContain('<script src="js/net.js?v=3" defer></script>')
@@ -466,7 +466,7 @@ describe('Leistungsseiten: Knowledge Graph, Überschrift in der Bühne, Kickoff'
   it('Seitenkopf-Überschrift schmal wie auf der Startseite, Platz für den Graph', () => {
     expect(css('components')).toMatch(/\.pv-pagehead__title\s*\{[^}]*max-width:\s*19ch/s)
   })
-  it('kg.js findet den Graph in Bühne und Seitenkopf, 20 px Rand im Seitenkopf', () => {
+  it('kg.js findet den Graph in Bühne und Seitenkopf, eigener Rand im Seitenkopf', () => {
     const js = lies('js/kg.js')
     expect(js).toContain(".pv-pagehead canvas.pv-kg")
     expect(js).toContain('REGELN.randUnterseite')
@@ -673,5 +673,11 @@ describe('Mobil: kein Knowledge Graph', () => {
     expect(js).toContain('const sichtbar = () => cv.offsetWidth > 0')
     expect(js).toContain('imBild: imBild && sichtbar()')
     expect(js).toContain('if (sichtbar()) { aufbauen(); zeichnen(0) }')
+  })
+})
+
+describe('Bühne der Leistungsseiten (Mockup N)', () => {
+  it('ab 760 px: Text vertikal mittig, Bühne 440 px', () => {
+    expect(css('components')).toMatch(/@media \(min-width: 760px\)\s*\{\s*\.pv-pagehead--leistung\s*\{\s*align-items:\s*center;\s*min-height:\s*440px/s)
   })
 })

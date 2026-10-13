@@ -83,7 +83,7 @@
   // Vom Kunden festgelegt: Mindestabstand zum Text; Rand zur Bühne oben, unten und rechts (Desktop).
   // "randUnterseite" = Rand oben und unten im Seitenkopf der Leistungsseiten (rechts bleibt "rand").
   // "atmen" = Reserve für die leichte Bewegung der Knoten (±5 px) beim Zeichnen.
-  const REGELN = Object.freeze({ abstand: 20, atmen: 6, rand: 40, randUnterseite: 20, mobilAbstand: 10 })
+  const REGELN = Object.freeze({ abstand: 20, atmen: 6, rand: 40, randUnterseite: 40, mobilAbstand: 10 })
 
   const INDEX = new Map(KNOTEN.map((k, i) => [k.name, i]))
   const KANTEN_INDEX = KANTEN.map((k) => ({ a: INDEX.get(k.von), b: INDEX.get(k.nach) }))

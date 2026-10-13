@@ -23,7 +23,7 @@
 
   if (ctx) {
     const flaeche = cv.parentElement
-    // Seitenkopf der Leistungsseiten: niedriger, daher nur 20 px Rand oben und unten
+    // Seitenkopf der Leistungsseiten: eigener Rand oben und unten (REGELN.randUnterseite)
     const rand = flaeche.classList.contains('pv-pagehead') ? REGELN.randUnterseite : REGELN.rand
     // Leistungsseiten: das Teilnetz der Leistung steht vorn, der Rest tritt zurück
     const fokusNamen = FOKUS[cv.dataset.kgFokus] || null

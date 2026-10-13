@@ -61,10 +61,10 @@ describe('Daten des Knowledge Graph', () => {
     expect(KANTEN.filter((k) => k.immer).map((k) => k.beziehung))
       .toEqual(['erzeugt', 'trägt', 'plant', 'speist', 'automatisiert', 'wird zu'])
   })
-  it('Regeln: 20 px zum Text, 40 px Rand zur Bühne, 20 px im Seitenkopf der Leistungsseiten', () => {
+  it('Regeln: 20 px zum Text, 40 px Rand zur Bühne, auch im Seitenkopf der Leistungsseiten', () => {
     expect(REGELN.abstand).toBe(20)
     expect(REGELN.rand).toBe(40)
-    expect(REGELN.randUnterseite).toBe(20)
+    expect(REGELN.randUnterseite).toBe(40)
   })
 })
 
@@ -176,14 +176,13 @@ describe('platziere – Beschriftungen halten Abstand zum Text', () => {
   })
 })
 
-// Gemessene Geometrie des Seitenkopfs der Beratungsseite (1440 px breit):
-// Brotkrumen, zweizeilige Überschrift, Unterzeile. Kein "s"-Grenzfall.
+// Gemessene Geometrie des Seitenkopfs der Beratungsseite (1440 px breit, Mockup N):
+// Bühne 440 px, Brotkrumen und zweizeilige Überschrift vertikal mittig.
 const UNTERSEITE = {
-  breite: 1425, hoehe: 362, schmal: false, rand: 20,
+  breite: 1425, hoehe: 440, schmal: false, rand: REGELN.randUnterseite,
   text: [
-    { l: 36.5, t: 50, r: 115.7, b: 66 }, { l: 139.6, t: 50, r: 218.8, b: 66 }, { l: 242.8, t: 50, r: 306.1, b: 66 },
-    { l: 36.5, t: 91.4, r: 441.9, b: 159.4 }, { l: 36.5, t: 157.5, r: 580.9, b: 225.5 },
-    { l: 36.5, t: 240.5, r: 512.9, b: 261.5 }, { l: 36.5, t: 271.1, r: 154.4, b: 292.1 }
+    { l: 36.5, t: 145.5, r: 115.7, b: 161.5 }, { l: 139.6, t: 145.5, r: 218.8, b: 161.5 }, { l: 242.8, t: 145.5, r: 306.1, b: 161.5 },
+    { l: 36.5, t: 186.9, r: 369.5, b: 242.9 }, { l: 36.5, t: 241.2, r: 483.7, b: 297.2 }
   ],
   grenze: null,
   labelBreiten: BREITEN
@@ -192,9 +191,9 @@ const UNTERSEITE = {
 describe('berechneLayout – Seitenkopf der Leistungsseiten', () => {
   for (const seed of [1, 2, 3]) {
     const { punkte } = berechneLayout(UNTERSEITE, zufallMit(seed))
-    it(`Startwert ${seed}: oben und unten genau 20 px Rand`, () => {
-      expect(Math.min(...punkte.map((p) => p.y - 9))).toBeCloseTo(20, 1)
-      expect(UNTERSEITE.hoehe - Math.max(...punkte.map((p) => p.y + 9))).toBeCloseTo(20, 1)
+    it(`Startwert ${seed}: oben und unten genau 40 px Rand`, () => {
+      expect(Math.min(...punkte.map((p) => p.y - 9))).toBeCloseTo(40, 1)
+      expect(UNTERSEITE.hoehe - Math.max(...punkte.map((p) => p.y + 9))).toBeCloseTo(40, 1)
     })
     it(`Startwert ${seed}: kein Knoten und keine Kante näher als 20 px am Text`, () => {
       const zone = erweitert(UNTERSEITE.text, REGELN.abstand)
@@ -242,14 +241,14 @@ describe('Teilnetz je Leistung (data-kg-fokus)', () => {
       }
       expect([...erreicht].sort()).toEqual([...liste].sort())
     })
-    it(`${name}: Layout hält Text-Abstand und 20 px Rand ein`, () => {
+    it(`${name}: Layout hält Text-Abstand und 40 px Rand ein`, () => {
       const { punkte } = berechneLayout({ ...UNTERSEITE, fokus: liste }, zufallMit(11))
       const zone = erweitert(UNTERSEITE.text, REGELN.abstand)
       punkte.forEach((p, i) => {
         for (const h of zone) expect(ueberlappt(box(p, BREITEN[i]), h), KNOTEN[i].name).toBe(false)
       })
-      expect(Math.min(...punkte.map((p) => p.y - 9))).toBeCloseTo(20, 1)
-      expect(UNTERSEITE.hoehe - Math.max(...punkte.map((p) => p.y + 9))).toBeCloseTo(20, 1)
+      expect(Math.min(...punkte.map((p) => p.y - 9))).toBeCloseTo(40, 1)
+      expect(UNTERSEITE.hoehe - Math.max(...punkte.map((p) => p.y + 9))).toBeCloseTo(40, 1)
     })
   }
 })

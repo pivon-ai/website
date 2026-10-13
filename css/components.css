@@ -1420,6 +1420,16 @@
   font-size: clamp(2.125rem, 1.2rem + 3.6vw, 3.5rem);
 }
 
+/* Leistungsseiten (Mockup N): Brotkrumen und Überschrift vertikal mittig,
+   Bühne 440 px, damit der Graph 40 px Rand oben und unten hat */
+@media (min-width: 760px) {
+  .pv-pagehead--leistung {
+    align-items: center;
+    min-height: 440px;
+    padding-block: var(--space-7);
+  }
+}
+
 /* Leistungsseiten: lange Überschrift neben dem Knowledge Graph, etwas kleiner */
 .pv-pagehead--leistung .pv-pagehead__title {
   font-size: clamp(1.875rem, 1.1rem + 2.8vw, 2.875rem);
