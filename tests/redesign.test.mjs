@@ -747,3 +747,23 @@ describe('Startup Creator: Ergebnis je Ablauf-Schritt ("out")', () => {
     expect(c).toMatch(/\.sc-prozess__out\s*\{[^}]*border-top:\s*1px dashed var\(--color-border\)/s)
   })
 })
+
+describe('Startup Creator: Betrag der Registrierungsgebühr', () => {
+  it('max. 2,25rem (36 px)', () => {
+    expect(css('pages')).toMatch(/\.sc-vorab__betrag\s*\{[^}]*font-size:\s*clamp\(1\.75rem, 1\.4rem \+ 1\.2vw, 2\.25rem\)/s)
+  })
+})
+
+describe('Leistungsseiten: Einleitung mit Label (Mockup Q, Variante A)', () => {
+  for (const p of SEITEN.filter((x) => x.startsWith('leistungen/')).concat(['en/services/consulting.html', 'en/services/startup-creator.html', 'en/services/development.html', 'en/services/quickstart-ai.html'])) {
+    it(`${p}: Label über dem Einleitungstext`, () => {
+      const label = p.startsWith('en/') ? 'What it’s about' : 'Worum es geht'
+      const kompakt = lies(p).replace(/\s+/g, ' ')
+      expect(kompakt).toMatch(/aria-label="(Einleitung|Introduction)"> <div class="pv-container"> <span class="pv-section__label">[^<]+<\/span> <div class="pv-intro">/)
+      expect(kompakt).toContain(`<span class="pv-section__label">${label}</span> <div class="pv-intro">`)
+    })
+  }
+  it('CSS: Vorspann größer und dunkler', () => {
+    expect(css('pages')).toMatch(/\.pv-intro\s*\{[^}]*font-size:\s*clamp\(1\.1875rem, 1rem \+ 0\.6vw, 1\.375rem\)[^}]*color:\s*var\(--color-ink\)/s)
+  })
+})
