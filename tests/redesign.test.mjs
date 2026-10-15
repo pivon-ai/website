@@ -829,3 +829,23 @@ describe('Entwicklung neu (Mockup S)', () => {
     })
   }
 })
+
+describe('Footer-Claim', () => {
+  it('alle Seiten: „Ihr Partner für KI-Lösungen.“ bzw. „Your partner for AI solutions.“', () => {
+    for (const [de, en] of Object.entries(PAARE)) {
+      expect(lies(de), de).toContain('<p class="pv-footer__claim">Ihr Partner für KI-Lösungen.</p>')
+      expect(lies(en), en).toContain('<p class="pv-footer__claim">Your partner for AI solutions.</p>')
+    }
+  })
+})
+
+describe('Mobilnummer +49 151 62809266', () => {
+  it('alle Seiten nutzen die neue Nummer, die alte kommt nicht mehr vor', () => {
+    for (const p of Object.entries(PAARE).flat()) {
+      const h = lies(p)
+      expect(h, p).not.toMatch(/99999788|99&nbsp;99&nbsp;788/)
+      if (h.includes('tel:')) expect(h, p).toContain('<a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>')
+    }
+    expect(lies('js/contact-validation.js')).toContain("const KONTAKT_TEL = '+49 151 62809266'")
+  })
+})

@@ -12,7 +12,7 @@
   // Geschuetzte Leerzeichen (U+00A0): Dieser Wert landet per JavaScript in
   // sichtbarem Text, wo die Rufnummer sonst mitten im Umbruch zerreissen kann.
   // html-validate prueft nur statisches Markup und kann das hier nicht sehen.
-  const KONTAKT_TEL = '+49 151 99 99 788'
+  const KONTAKT_TEL = '+49 151 62809266'
 
   const GRENZEN = {
     name: { min: 2, max: 100 },

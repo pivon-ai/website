@@ -89,7 +89,7 @@ Die Basis allem unseres Handelns ist der Dreiklang aus Mensch, Organisation und 
 Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.
 
 Email: kontakt@pivon.ai
-Mobil: +49 151 99 99 788
+Mobil: +49 151 62809266
 
 ### 2. Auftragsklärung
 Auftragsklärung bedeutet für uns im Dialog zu verstehen, was Ihr Bedürfnis ist, oder was Ihr Bedürfnis sein könnte.
@@ -131,7 +131,7 @@ Ausführliche Informationen zu unserem Team folgen in Kürze. Schreiben Sie uns 
 **Beschreibung:** Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.
 
 **E-Mail:** kontakt@pivon.ai
-**Mobil:** +49 151 99 99 788
+**Mobil:** +49 151 62809266
 
 **Formularfelder:** Name, E-Mail, Nachricht (Platzhalter: "Wie können wir Ihnen helfen?")
 
@@ -145,7 +145,7 @@ Ausführliche Informationen zu unserem Team folgen in Kürze. Schreiben Sie uns 
 
 **Navigation:** Leistungen, Vorgehen, Unser Anspruch, Über uns, Kontakt
 
-**Kontakt:** kontakt@pivon.ai, +49 151 99 99 788
+**Kontakt:** kontakt@pivon.ai, +49 151 62809266
 
 **Rechtliches:** Impressum, Datenschutz
 
