@@ -440,10 +440,10 @@ describe('Vorgehen: Beschreibungstext unter der Überschrift', () => {
 
 describe('Leistungsseiten: Knowledge Graph, Überschrift in der Bühne, Kickoff', () => {
   const UEBERSCHRIFT = {
-    'leistungen/beratung.html': 'Beratung ist ein Dialog, kein Monolog',
+    'leistungen/beratung.html': 'Wir beraten nicht, sondern wir begleiten Sie.',
     'leistungen/quickstart-ki.html': 'Der Dreiklang gilt auch beim Einstieg',
-    'leistungen/entwicklung.html': 'Vom Prototyp zur verlässlichen Lösung',
-    'leistungen/startup-creator.html': 'Eine Vision ist der Anfang vom Erfolg'
+    'leistungen/entwicklung.html': 'Entwicklung heißt für uns Aufgaben zu lösen.',
+    'leistungen/startup-creator.html': 'Eine Vision ist der Anfang vom Erfolg.'
   }
   for (const [p, titel] of Object.entries(UEBERSCHRIFT)) {
     it(`${p}: bisherige Section-Überschrift ist die h1 im Seitenkopf`, () => {
