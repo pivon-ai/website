@@ -849,3 +849,12 @@ describe('Mobilnummer +49 151 62809266', () => {
     expect(lies('js/contact-validation.js')).toContain("const KONTAKT_TEL = '+49 151 62809266'")
   })
 })
+
+describe('Über uns ohne Button', () => {
+  it('kein „Kontakt aufnehmen“ / „Get in touch“ unter den Team-Boxen', () => {
+    for (const p of ['index.html', 'en/index.html']) {
+      const ueber = lies(p).match(/<section[^>]*id="ueber-uns"[\s\S]*?<\/section>/)[0]
+      expect(ueber, p).not.toContain('pv-btn')
+    }
+  })
+})
