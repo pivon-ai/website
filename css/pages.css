@@ -417,3 +417,24 @@
     grid-row: auto;
   }
 }
+
+/* Beratung (Mockup R): Pins und Link in den Bausteinen, Fragen zweispaltig */
+.sc-modell__box .pv-topic__list,
+.sc-modell__link {
+  margin-top: 16px;
+}
+
+.sc-modell__link .pv-card__more {
+  text-decoration: none;
+}
+
+.sc-vorab__fragen--zweispaltig {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+}
+
+@media (max-width: 900px) {
+  .sc-vorab__fragen--zweispaltig {
+    grid-template-columns: 1fr;
+  }
+}

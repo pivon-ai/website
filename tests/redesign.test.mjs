@@ -252,8 +252,8 @@ describe('Task 8: Unterseiten', () => {
     expect(p).toMatch(/\.pv-topic__list li\s*\{[^}]*font-family:\s*var\(--font-mono\)/s)
     expect(p).not.toMatch(/text-align:\s*center/)
   })
-  it('jede Leistungsseite (außer Startup Creator, siehe Mockup P) hat Themenblöcke mit Stichwortlisten', () => {
-    for (const s of SEITEN.slice(1, 5).filter((x) => !x.includes('startup-creator'))) {
+  it('Entwicklung und Quickstart KI haben Themenblöcke mit Stichwortlisten (Startup Creator und Beratung: eigener Aufbau)', () => {
+    for (const s of SEITEN.slice(1, 5).filter((x) => !x.includes('startup-creator') && !x.includes('beratung'))) {
       expect(alle(lies(s), /class="pv-topic pv-reveal"/g).length, s).toBeGreaterThanOrEqual(3)
     }
   })
@@ -451,8 +451,8 @@ describe('Leistungsseiten: Knowledge Graph, Überschrift in der Bühne, Kickoff'
       expect(html).not.toContain('einleitung-titel')
       expect(html.match(/<h1[ >]/g)).toHaveLength(1)
     })
-    // Startup Creator hat seit Mockup P einen eigenen Aufbau (Modell, Ablauf, Vorab)
-    it.skipIf(p.includes('startup-creator'))(`${p}: Kickoff ist die zweite Section, Hintergründe wechseln weiter ab`, () => {
+    // Startup Creator (Mockup P) und Beratung (Mockup R) haben einen eigenen Aufbau (Modell, Ablauf, Vorab)
+    it.skipIf(p.includes('startup-creator') || p.includes('beratung'))(`${p}: Kickoff ist die zweite Section, Hintergründe wechseln weiter ab`, () => {
       const html = lies(p)
       const sections = alle(html.match(/<main[\s\S]*?<\/main>/)[0], /<section class="([^"]+)"([^>]*)>/g)
         .map((m) => ({ alt: m[1].includes('pv-section--alt'), cta: m[1].includes('pv-cta'), attr: m[2] }))
@@ -766,4 +766,25 @@ describe('Leistungsseiten: Einleitung mit Label (Mockup Q, Variante A)', () => {
   it('CSS: Vorspann größer und dunkler', () => {
     expect(css('pages')).toMatch(/\.pv-intro\s*\{[^}]*font-size:\s*clamp\(1\.1875rem, 1rem \+ 0\.6vw, 1\.375rem\)[^}]*color:\s*var\(--color-ink\)/s)
   })
+})
+
+describe('Beratung neu (Mockup R)', () => {
+  for (const p of ['leistungen/beratung.html', 'en/services/consulting.html']) {
+    it(`${p}: Einleitung, Modell, Ablauf, Vorab, Weitere – Hintergründe wechseln ab`, () => {
+      const main = lies(p).match(/<main[\s\S]*?<\/main>/)[0]
+      const sections = alle(main, /<section class="pv-section( pv-section--alt)?"([^>]*)>/g).map((m) => ({ alt: !!m[1], attr: m[2] }))
+      expect(sections.map((x) => (x.attr.match(/labelledby="([^"]+)"/) || [, 'einleitung'])[1]))
+        .toEqual(['einleitung', 'modell-titel', 'ablauf-titel', 'vorab-titel', 'weitere-titel'])
+      sections.forEach((x, i) => expect(x.alt, `Section ${i + 1}`).toBe(i % 2 === 1))
+    })
+    it(`${p}: fünf Schritte mit out, Phase 2 als drei Bausteine, Fragen zweispaltig`, () => {
+      const h = lies(p)
+      expect(alle(h, /<span class="sc-prozess__nr" aria-hidden="true">(\d\d)<\/span>/g).map((m) => m[1])).toEqual(['01', '02', '03', '04', '05'])
+      expect(alle(h, /<p class="sc-prozess__out">/g)).toHaveLength(5)
+      expect(alle(h, /<li class="sc-modell__box[^"]*">/g)).toHaveLength(6)
+      expect(h).toContain('<ul class="sc-vorab__fragen sc-vorab__fragen--zweispaltig">')
+      expect(h).not.toContain('mr-')
+      expect(h).not.toContain('kickoff-titel')
+    })
+  }
 })
