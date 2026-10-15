@@ -252,8 +252,8 @@ describe('Task 8: Unterseiten', () => {
     expect(p).toMatch(/\.pv-topic__list li\s*\{[^}]*font-family:\s*var\(--font-mono\)/s)
     expect(p).not.toMatch(/text-align:\s*center/)
   })
-  it('jede Leistungsseite hat Themenblöcke mit Stichwortlisten', () => {
-    for (const s of SEITEN.slice(1, 5)) {
+  it('jede Leistungsseite (außer Startup Creator, siehe Mockup P) hat Themenblöcke mit Stichwortlisten', () => {
+    for (const s of SEITEN.slice(1, 5).filter((x) => !x.includes('startup-creator'))) {
       expect(alle(lies(s), /class="pv-topic pv-reveal"/g).length, s).toBeGreaterThanOrEqual(3)
     }
   })
@@ -266,11 +266,11 @@ describe('Abschluss-Review', () => {
 })
 
 describe('Überschriften etwas kleiner (Kundenwunsch nach Vergleich)', () => {
-  it('Section-Überschriften 28–42 px', () => {
-    expect(css('base')).toMatch(/\nh2 \{[^}]*font-size:\s*clamp\(1\.75rem, 1rem \+ 2\.4vw, 2\.625rem\)/s)
+  it('Section-Überschriften 24–34 px (2026-10-15 nochmals zurückgenommen)', () => {
+    expect(css('base')).toMatch(/\nh2 \{[^}]*font-size:\s*clamp\(1\.5rem, 1rem \+ 1\.6vw, 2\.125rem\)/s)
   })
-  it('CTA-Überschrift 30–48 px', () => {
-    expect(css('components')).toMatch(/\.pv-cta__title\s*\{[^}]*font-size:\s*clamp\(1\.875rem, 1rem \+ 3vw, 3rem\)/s)
+  it('CTA-Überschrift 26–40 px', () => {
+    expect(css('components')).toMatch(/\.pv-cta__title\s*\{[^}]*font-size:\s*clamp\(1\.625rem, 1rem \+ 2vw, 2\.5rem\)/s)
   })
 })
 
@@ -451,7 +451,8 @@ describe('Leistungsseiten: Knowledge Graph, Überschrift in der Bühne, Kickoff'
       expect(html).not.toContain('einleitung-titel')
       expect(html.match(/<h1[ >]/g)).toHaveLength(1)
     })
-    it(`${p}: Kickoff ist die zweite Section, Hintergründe wechseln weiter ab`, () => {
+    // Startup Creator hat seit Mockup P einen eigenen Aufbau (Modell, Ablauf, Vorab)
+    it.skipIf(p.includes('startup-creator'))(`${p}: Kickoff ist die zweite Section, Hintergründe wechseln weiter ab`, () => {
       const html = lies(p)
       const sections = alle(html.match(/<main[\s\S]*?<\/main>/)[0], /<section class="([^"]+)"([^>]*)>/g)
         .map((m) => ({ alt: m[1].includes('pv-section--alt'), cta: m[1].includes('pv-cta'), attr: m[2] }))
@@ -679,5 +680,56 @@ describe('Mobil: kein Knowledge Graph', () => {
 describe('Bühne der Leistungsseiten (Mockup N)', () => {
   it('ab 760 px: Text vertikal mittig, Bühne 440 px', () => {
     expect(css('components')).toMatch(/@media \(min-width: 760px\)\s*\{\s*\.pv-pagehead--leistung\s*\{\s*align-items:\s*center;\s*min-height:\s*440px/s)
+  })
+})
+
+describe('Bühne der Leistungsseiten: Text etwas über der Mitte', () => {
+  it('oben weniger Innenabstand als unten (32 / 96 px)', () => {
+    expect(css('components')).toMatch(/\.pv-pagehead--leistung\s*\{[^}]*padding-block:\s*var\(--space-6\) var\(--space-9\)/s)
+  })
+})
+
+describe('Startup Creator neu (Mockup P)', () => {
+  for (const p of ['leistungen/startup-creator.html', 'en/services/startup-creator.html']) {
+    it(`${p}: Einleitung, Modell, Ablauf, Vorab, Weitere – Hintergründe wechseln ab`, () => {
+      const main = lies(p).match(/<main[\s\S]*?<\/main>/)[0]
+      const sections = alle(main, /<section class="pv-section( pv-section--alt)?"([^>]*)>/g).map((m) => ({ alt: !!m[1], attr: m[2] }))
+      expect(sections.map((x) => (x.attr.match(/labelledby="([^"]+)"/) || [, 'einleitung'])[1]))
+        .toEqual(['einleitung', 'modell-titel', 'ablauf-titel', 'vorab-titel', 'weitere-titel'])
+      sections.forEach((x, i) => expect(x.alt, `Section ${i + 1}`).toBe(i % 2 === 1))
+    })
+    it(`${p}: Modell mit drei Boxen, die gemeinsame hervorgehoben`, () => {
+      const h = lies(p)
+      expect(alle(h, /<li class="sc-modell__box[^"]*">/g)).toHaveLength(3)
+      expect(h).toContain('<li class="sc-modell__box sc-modell__box--gemeinsam">')
+      expect(h).toMatch(/<!-- PLATZHALTER: Höhe\/Art der Beteiligung festlegen -->/)
+    })
+    it(`${p}: Phase 1 mit genau fünf Schritten (ohne Registrierung), Schritt 2 mit Wiederholung`, () => {
+      const h = lies(p)
+      const nr = alle(h, /<span class="sc-prozess__nr" aria-hidden="true">(\d\d)<\/span>/g).map((m) => m[1])
+      expect(nr).toEqual(['01', '02', '03', '04', '05'])
+      expect(alle(h, /class="sc-prozess__schleife"/g)).toHaveLength(1)
+      expect(h).not.toContain('sc-prozess__schritt--vorab')
+    })
+    it(`${p}: Phase 2 als Zeitachse mit Meilenstein, keine weiteren Schritt-Boxen`, () => {
+      const h = lies(p)
+      expect(h).toMatch(/<p class="sc-phase sc-phase--zwei"><span class="sc-phase__nr">Phase 2<\/span>/)
+      expect(h).toContain('<div class="sc-zeit__balken"></div>')
+      expect(h).toContain('<span class="sc-zeit__meilenstein"></span>')
+    })
+  }
+  it('CSS: fünf Spalten, zwölf Monatssegmente im Akzentverlauf', () => {
+    const c = css('pages')
+    expect(c).toMatch(/\.sc-prozess\s*\{[^}]*grid-template-columns:\s*repeat\(5, 1fr\)/s)
+    expect(c).toMatch(/\.sc-zeit__balken\s*\{[^}]*calc\(100% \/ 12 - 2px\)[^}]*var\(--gradient-akzent\)/s)
+  })
+})
+
+describe('Überschriften zurückgenommen (ganze Website)', () => {
+  it('h2 max. 2,125rem, CTA max. 2,5rem, Themen-Titel max. 1,75rem', () => {
+    expect(css('base')).toMatch(/h2\s*\{\s*font-size:\s*clamp\(1\.5rem, 1rem \+ 1\.6vw, 2\.125rem\)/)
+    expect(css('components')).toMatch(/\.pv-cta__title\s*\{[^}]*font-size:\s*clamp\(1\.625rem, 1rem \+ 2vw, 2\.5rem\)/s)
+    expect(css('pages')).toMatch(/\.pv-topic__title\s*\{\s*font-size:\s*clamp\(1\.375rem, 1\.1rem \+ 0\.8vw, 1\.75rem\)/)
+    expect(css('pages')).not.toContain('main:has(> .pv-pagehead--leistung)')
   })
 })

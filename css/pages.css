@@ -19,7 +19,7 @@
 }
 
 .pv-topic__title {
-  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem);
 }
 
 .pv-topic__text {
@@ -120,4 +120,252 @@
   font-size: 0.875em;
   background: var(--color-surface-mut);
   border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   Startup Creator: Modell, Ablauf in zwei Phasen, Vorab (Mockup P)
+   ============================================================ */
+
+/* Modell: Sie / Wir / Gemeinsam */
+.sc-modell {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+}
+
+.sc-modell__box,
+.sc-vorab__box {
+  padding: 28px 26px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.sc-modell__box--gemeinsam {
+  border-color: var(--color-ink);
+}
+
+.sc-modell__tag,
+.sc-prozess__phase {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-meta);
+}
+
+.sc-modell__titel {
+  margin-top: 10px;
+  font-size: 1.25rem;
+}
+
+.sc-modell__liste {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  list-style: none;
+}
+
+.sc-modell__liste li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.sc-modell__liste li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background: var(--color-action);
+}
+
+/* Phase 1: fünf Schritte der Entwicklung */
+.sc-phase {
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.sc-phase__nr {
+  margin-right: 8px;
+  color: var(--color-action);
+}
+
+.sc-phase--zwei {
+  margin-top: 56px;
+}
+
+.sc-prozess {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+}
+
+.sc-prozess__schritt {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 20px 28px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sc-prozess__nr {
+  font-size: 2.25rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--color-action);
+}
+
+.sc-prozess__schritt .sc-prozess__phase {
+  margin-top: 18px;
+}
+
+.sc-prozess__titel {
+  margin-top: 6px;
+  font-size: 1.125rem;
+}
+
+.sc-prozess__text {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.sc-prozess__schleife {
+  margin-top: auto;
+  padding-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-action);
+}
+
+/* Phase 2: Betrieb als Zeitraum (12 Monate), Entscheidung als Meilenstein */
+.sc-zeit__achse {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 14px;
+}
+
+.sc-zeit__start,
+.sc-zeit__monate {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--color-text-meta);
+}
+
+.sc-zeit__balken {
+  height: 16px;
+  border: 1px solid var(--color-border);
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0 calc(100% / 12 - 2px),
+      var(--color-surface) calc(100% / 12 - 2px) calc(100% / 12)),
+    var(--gradient-akzent);
+}
+
+.sc-zeit__meilenstein {
+  width: 14px;
+  height: 14px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-ink);
+  transform: rotate(45deg);
+}
+
+.sc-zeit__monate {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.sc-zeit__texte {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-top: 18px;
+}
+
+.sc-zeit__entscheidung {
+  text-align: right;
+}
+
+/* Vor dem Kickoff: Betrag und Fragen */
+.sc-vorab {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.sc-vorab__betrag {
+  margin-top: 10px;
+  font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.sc-vorab__fragen {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  list-style: none;
+  counter-reset: frage;
+}
+
+.sc-vorab__fragen li {
+  position: relative;
+  padding-left: 34px;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  counter-increment: frage;
+}
+
+.sc-vorab__fragen li::before {
+  content: counter(frage, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-action);
+}
+
+@media (max-width: 900px) {
+  .sc-modell,
+  .sc-vorab,
+  .sc-prozess,
+  .sc-zeit__texte {
+    grid-template-columns: 1fr;
+  }
+
+  .sc-zeit__texte {
+    gap: 16px;
+  }
+
+  .sc-zeit__entscheidung {
+    text-align: left;
+  }
 }

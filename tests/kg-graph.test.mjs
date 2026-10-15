@@ -177,12 +177,12 @@ describe('platziere – Beschriftungen halten Abstand zum Text', () => {
 })
 
 // Gemessene Geometrie des Seitenkopfs der Beratungsseite (1440 px breit, Mockup N):
-// Bühne 440 px, Brotkrumen und zweizeilige Überschrift vertikal mittig.
+// Bühne 440 px, Brotkrumen und zweizeilige Überschrift etwas über der Mitte.
 const UNTERSEITE = {
   breite: 1425, hoehe: 440, schmal: false, rand: REGELN.randUnterseite,
   text: [
-    { l: 36.5, t: 145.5, r: 115.7, b: 161.5 }, { l: 139.6, t: 145.5, r: 218.8, b: 161.5 }, { l: 242.8, t: 145.5, r: 306.1, b: 161.5 },
-    { l: 36.5, t: 186.9, r: 369.5, b: 242.9 }, { l: 36.5, t: 241.2, r: 483.7, b: 297.2 }
+    { l: 36.5, t: 113.5, r: 115.7, b: 129.5 }, { l: 139.6, t: 113.5, r: 218.8, b: 129.5 }, { l: 242.8, t: 113.5, r: 306.1, b: 129.5 },
+    { l: 36.5, t: 154.9, r: 369.5, b: 210.9 }, { l: 36.5, t: 209.2, r: 483.7, b: 265.2 }
   ],
   grenze: null,
   labelBreiten: BREITEN

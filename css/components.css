@@ -1099,7 +1099,7 @@
 
 .pv-cta__title {
   color: var(--color-on-ink);
-  font-size: clamp(1.875rem, 1rem + 3vw, 3rem);
+  font-size: clamp(1.625rem, 1rem + 2vw, 2.5rem);
 }
 
 .pv-cta__text {
@@ -1426,7 +1426,8 @@
   .pv-pagehead--leistung {
     align-items: center;
     min-height: 440px;
-    padding-block: var(--space-7);
+    /* oben weniger als unten: Textblock sitzt etwas über der Mitte (ca. 30 px) */
+    padding-block: var(--space-6) var(--space-9);
   }
 }
 
