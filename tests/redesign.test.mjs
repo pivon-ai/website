@@ -403,14 +403,15 @@ describe('Menü: Leistungen klappt auf', () => {
 
 describe('Über uns: Foto Andreas, Felder doppelt so groß', () => {
   const ueber = () => lies('index.html').match(/<section[^>]*id="ueber-uns"[\s\S]*?<\/section>/)[0]
-  it('Andreas mit Foto (1x/2x), Alexander weiter mit Platzhalter', () => {
+  it('Andreas und Alexander mit Foto (1x/2x), kein Platzhalter mehr', () => {
     const [, alex, andreas] = ueber().split(/<li class="pv-ic pv-ic--[lr]">/)
     expect(andreas).toMatch(/<img class="pv-ic__foto" src="images\/andreas-steiert-176\.jpg" srcset="images\/andreas-steiert-176\.jpg 1x, images\/andreas-steiert-352\.jpg 2x" width="176" height="176" alt="" loading="lazy">/)
-    expect(alex).toContain('<span class="pv-ic__foto" aria-hidden="true">AQ</span>')
+    expect(alex).toMatch(/<img class="pv-ic__foto" src="images\/alexander-quadt-176\.jpg" srcset="images\/alexander-quadt-176\.jpg 1x, images\/alexander-quadt-352\.jpg 2x" width="176" height="176" alt="" loading="lazy">/)
+    expect(ueber()).not.toContain('AQ</span>')
+    expect(lies('en/index.html')).toContain('src="../images/alexander-quadt-176.jpg"')
   })
   it('Fotodateien klein und vorhanden', () => {
-    for (const g of [176, 352]) {
-      const f = `images/andreas-steiert-${g}.jpg`
+    for (const f of [176, 352].flatMap((g) => [`images/andreas-steiert-${g}.jpg`, `images/alexander-quadt-${g}.jpg`])) {
       expect(existsSync(f), f).toBe(true)
       expect(readFileSync(f).length, f).toBeLessThan(40000)
     }

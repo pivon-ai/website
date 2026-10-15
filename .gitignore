@@ -3,3 +3,6 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Original-Profilfotos nur lokal; die Website nutzt die verkleinerten Fassungen
+images/Profilfoto-*
