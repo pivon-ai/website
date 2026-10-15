@@ -442,7 +442,7 @@ describe('Leistungsseiten: Knowledge Graph, Überschrift in der Bühne, Kickoff'
     'leistungen/beratung.html': 'Beratung ist ein Dialog, kein Monolog',
     'leistungen/quickstart-ki.html': 'Der Dreiklang gilt auch beim Einstieg',
     'leistungen/entwicklung.html': 'Vom Prototyp zur verlässlichen Lösung',
-    'leistungen/startup-creator.html': 'Eine gute Idee ist der Anfang, nicht das Geschäft'
+    'leistungen/startup-creator.html': 'Eine Vision ist der Anfang vom Erfolg'
   }
   for (const [p, titel] of Object.entries(UEBERSCHRIFT)) {
     it(`${p}: bisherige Section-Überschrift ist die h1 im Seitenkopf`, () => {
@@ -731,5 +731,19 @@ describe('Überschriften zurückgenommen (ganze Website)', () => {
     expect(css('components')).toMatch(/\.pv-cta__title\s*\{[^}]*font-size:\s*clamp\(1\.625rem, 1rem \+ 2vw, 2\.5rem\)/s)
     expect(css('pages')).toMatch(/\.pv-topic__title\s*\{\s*font-size:\s*clamp\(1\.375rem, 1\.1rem \+ 0\.8vw, 1\.75rem\)/)
     expect(css('pages')).not.toContain('main:has(> .pv-pagehead--leistung)')
+  })
+})
+
+describe('Startup Creator: Ergebnis je Ablauf-Schritt ("out")', () => {
+  for (const p of ['leistungen/startup-creator.html', 'en/services/startup-creator.html']) {
+    it(`${p}: jede der fünf Boxen hat eine out-Zeile`, () => {
+      const h = lies(p)
+      expect(alle(h, /<p class="sc-prozess__out"><span class="pv-card__io-k">out<\/span> <span class="sc-prozess__out-text">[^<]+<\/span><\/p>/g)).toHaveLength(5)
+    })
+  }
+  it('CSS: Subgrid, damit die gestrichelten Linien auf einer Höhe stehen', () => {
+    const c = css('pages')
+    expect(c).toMatch(/\.sc-prozess__schritt\s*\{[^}]*grid-row:\s*span 6;[^}]*grid-template-rows:\s*subgrid/s)
+    expect(c).toMatch(/\.sc-prozess__out\s*\{[^}]*border-top:\s*1px dashed var\(--color-border\)/s)
   })
 })

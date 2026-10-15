@@ -369,3 +369,47 @@
     text-align: left;
   }
 }
+
+/* Ablauf: Ergebnis je Schritt ("out" wie in den Leistungskarten der
+   Startseite). Subgrid, damit die gestrichelten Linien auf einer Höhe stehen:
+   Nummer | Schritt | Titel | Text | Wiederholung (nur Schritt 2) | out */
+.sc-prozess__schritt {
+  display: grid;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
+}
+
+.sc-prozess__nr { grid-row: 1; }
+.sc-prozess__schritt .sc-prozess__phase { grid-row: 2; }
+.sc-prozess__titel { grid-row: 3; }
+.sc-prozess__schritt .sc-prozess__text { grid-row: 4; }
+.sc-prozess__schleife { grid-row: 5; margin-top: 0; padding-top: 12px; }
+
+.sc-prozess__out {
+  grid-row: 6;
+  align-self: start;      /* oben ausrichten: Linie auf einer Höhe, auch bei mehrzeiligem Text */
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.sc-prozess__out-text {
+  font-weight: 500;
+  color: var(--color-io-out);
+}
+
+@media (max-width: 900px) {
+  .sc-prozess__schritt {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .sc-prozess__schritt > * {
+    grid-row: auto;
+  }
+}
