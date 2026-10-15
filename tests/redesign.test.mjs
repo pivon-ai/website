@@ -768,13 +768,13 @@ describe('Leistungsseiten: Einleitung mit Label (Mockup Q, Variante A)', () => {
   })
 })
 
-describe('Beratung neu (Mockup R)', () => {
+describe('Beratung neu (Mockup R, Roadmap + eigene Section Beratungspakete)', () => {
   for (const p of ['leistungen/beratung.html', 'en/services/consulting.html']) {
-    it(`${p}: Einleitung, Modell, Ablauf, Vorab, Weitere – Hintergründe wechseln ab`, () => {
+    it(`${p}: Einleitung, Modell, Roadmap, Pakete, Vorab, Weitere – Hintergründe wechseln ab`, () => {
       const main = lies(p).match(/<main[\s\S]*?<\/main>/)[0]
       const sections = alle(main, /<section class="pv-section( pv-section--alt)?"([^>]*)>/g).map((m) => ({ alt: !!m[1], attr: m[2] }))
       expect(sections.map((x) => (x.attr.match(/labelledby="([^"]+)"/) || [, 'einleitung'])[1]))
-        .toEqual(['einleitung', 'modell-titel', 'ablauf-titel', 'vorab-titel', 'weitere-titel'])
+        .toEqual(['einleitung', 'modell-titel', 'ablauf-titel', 'pakete-titel', 'vorab-titel', 'weitere-titel'])
       sections.forEach((x, i) => expect(x.alt, `Section ${i + 1}`).toBe(i % 2 === 1))
     })
     it(`${p}: fünf Schritte mit out, Phase 2 als drei Bausteine, Fragen zweispaltig`, () => {
@@ -787,4 +787,16 @@ describe('Beratung neu (Mockup R)', () => {
       expect(h).not.toContain('kickoff-titel')
     })
   }
+})
+
+describe('Beratung: „Die Roadmap“ und Beratungspakete', () => {
+  it('DE/EN: Label Roadmap, kein Phasen-Label mehr, Pakete-Section mit drei Paketen', () => {
+    for (const [p, roadmap, paket] of [['leistungen/beratung.html', 'Die Roadmap', 'Paket'], ['en/services/consulting.html', 'The roadmap', 'Package']]) {
+      const h = lies(p)
+      expect(h, p).toContain(`<span class="pv-section__label">${roadmap}</span>`)
+      expect(h, p).not.toContain('sc-phase')
+      const pakete = h.match(/aria-labelledby="pakete-titel">[\s\S]*?<\/section>/)[0]
+      expect(alle(pakete, new RegExp(`<span class="sc-modell__tag">${paket}</span>`, 'g'))).toHaveLength(3)
+    }
+  })
 })
