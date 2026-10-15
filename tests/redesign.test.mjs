@@ -197,7 +197,7 @@ describe('Task 6: Vorgehen und Anspruch', () => {
     const v = html().match(/<section[^>]*id="vorgehen"[\s\S]*?<\/section>/)[0]
     const titel = alle(v, /<h3 class="pv-steps__title">([^<]+)<\/h3>/g).map((m) => m[1])
     expect(titel).toEqual(['Kontakt', 'Auftragsklärung', 'Konzeption', 'Umsetzung', 'Abschluss'])
-    expect(v).toContain('In fünf klaren Schritten zum Ziel.')
+    expect(v).toContain('In fünf klaren Schritten zum Ziel<')
     // Nummern kommen aus dem CSS-Zähler, nicht aus dem HTML
     expect(alle(v, /<span class="pv-steps__num" aria-hidden="true"><\/span>/g)).toHaveLength(5)
   })
@@ -233,7 +233,7 @@ describe('Task 7: Über uns, CTA, Kontakt', () => {
       expect(b).not.toContain('pv-ic__corner')
     }
     for (const b of boxen) expect(alle(b, /<li>[^<]+<\/li>/g)).toHaveLength(6)
-    expect(u).toContain('<h2 id="ueber-uns-titel">Wer wir sind.</h2>')
+    expect(u).toContain('<h2 id="ueber-uns-titel">Wer wir sind</h2>')
   })
   it('Formular-Kennungen unverändert', () => {
     for (const id of ['pv-contact-form', 'pv-form-notice', 'pv-form-status', 'pv-name', 'pv-email', 'pv-message', 'pv-privacy', 'pv-website']) {
@@ -363,7 +363,7 @@ describe('Menü: immer nur eine Linie', () => {
 describe('Leistungen: Reihenfolge der Karten', () => {
   it('Beratung, Startup Creator, Entwicklung, Quickstart KI', () => {
     const titel = alle(lies('index.html'), /<h3 class="pv-card__title"><a class="pv-card__link" href="[^"]+">([^<]+)<\/a><\/h3>/g).map((m) => m[1])
-    expect(titel).toEqual(['Beratung.', 'Startup Creator.', 'Entwicklung.', 'Quickstart KI.'])
+    expect(titel).toEqual(['Beratung', 'Startup Creator', 'Entwicklung', 'Quickstart KI'])
   })
 })
 
@@ -440,10 +440,10 @@ describe('Vorgehen: Beschreibungstext unter der Überschrift', () => {
 
 describe('Leistungsseiten: Knowledge Graph, Überschrift in der Bühne, Kickoff', () => {
   const UEBERSCHRIFT = {
-    'leistungen/beratung.html': 'Wir beraten nicht, sondern wir begleiten Sie.',
+    'leistungen/beratung.html': 'Wir beraten nicht, sondern wir begleiten Sie',
     'leistungen/quickstart-ki.html': 'Der Dreiklang gilt auch beim Einstieg',
-    'leistungen/entwicklung.html': 'Entwicklung heißt für uns, Aufgaben zu lösen.',
-    'leistungen/startup-creator.html': 'Eine Vision ist der Anfang vom Erfolg.'
+    'leistungen/entwicklung.html': 'Entwicklung heißt für uns, Aufgaben zu lösen',
+    'leistungen/startup-creator.html': 'Eine Vision ist der Anfang vom Erfolg'
   }
   for (const [p, titel] of Object.entries(UEBERSCHRIFT)) {
     it(`${p}: bisherige Section-Überschrift ist die h1 im Seitenkopf`, () => {
@@ -855,6 +855,17 @@ describe('Über uns ohne Button', () => {
     for (const p of ['index.html', 'en/index.html']) {
       const ueber = lies(p).match(/<section[^>]*id="ueber-uns"[\s\S]*?<\/section>/)[0]
       expect(ueber, p).not.toContain('pv-btn')
+    }
+  })
+})
+
+describe('Überschriften ohne Schlusspunkt', () => {
+  it('keine h1–h3 endet mit einem Punkt (Fragezeichen bleiben erlaubt)', () => {
+    for (const p of Object.entries(PAARE).flat()) {
+      for (const m of alle(lies(p), /<h([1-3])\b[^>]*>([\s\S]*?)<\/h\1>/g)) {
+        const text = m[2].replace(/<[^>]+>/g, '').trim()
+        expect(text.endsWith('.'), `${p}: „${text}“`).toBe(false)
+      }
     }
   })
 })
