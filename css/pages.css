@@ -145,9 +145,6 @@
   border: 1px solid var(--color-border);
 }
 
-.sc-modell__box--gemeinsam {
-  border-color: var(--color-ink);
-}
 
 .sc-modell__tag,
 .sc-prozess__phase {

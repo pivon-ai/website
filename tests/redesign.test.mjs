@@ -698,10 +698,10 @@ describe('Startup Creator neu (Mockup P)', () => {
         .toEqual(['einleitung', 'modell-titel', 'ablauf-titel', 'vorab-titel', 'weitere-titel'])
       sections.forEach((x, i) => expect(x.alt, `Section ${i + 1}`).toBe(i % 2 === 1))
     })
-    it(`${p}: Modell mit drei Boxen, die gemeinsame hervorgehoben`, () => {
+    it(`${p}: Modell mit drei gleichen Boxen`, () => {
       const h = lies(p)
       expect(alle(h, /<li class="sc-modell__box[^"]*">/g)).toHaveLength(3)
-      expect(h).toContain('<li class="sc-modell__box sc-modell__box--gemeinsam">')
+      expect(h).not.toContain('sc-modell__box--gemeinsam')
       expect(h).toMatch(/<!-- PLATZHALTER: Höhe\/Art der Beteiligung festlegen -->/)
     })
     it(`${p}: Phase 1 mit genau fünf Schritten (ohne Registrierung), Schritt 2 mit Wiederholung`, () => {
@@ -798,5 +798,12 @@ describe('Beratung: „Die Roadmap“ und Beratungspakete', () => {
       const pakete = h.match(/aria-labelledby="pakete-titel">[\s\S]*?<\/section>/)[0]
       expect(alle(pakete, new RegExp(`<span class="sc-modell__tag">${paket}</span>`, 'g'))).toHaveLength(3)
     }
+  })
+})
+
+describe('Beratung: Modell-Boxen einheitlich', () => {
+  it('keine hervorgehobene Gemeinsam-Box (gleiche Rahmenfarbe wie die anderen)', () => {
+    for (const p of ['leistungen/beratung.html', 'en/services/consulting.html', 'leistungen/startup-creator.html', 'en/services/startup-creator.html']) expect(lies(p), p).not.toContain('sc-modell__box--gemeinsam')
+    expect(css('pages')).not.toContain('sc-modell__box--gemeinsam')
   })
 })
