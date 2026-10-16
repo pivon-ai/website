@@ -883,3 +883,13 @@ describe('Datenschutz fertig', () => {
     expect(lies('impressum.html')).toContain('pv-draft')
   })
 })
+
+describe('Startup Creator: Registrierungsgebühr fällig mit der Freigabe', () => {
+  it('Schritt 3 nennt Vertrag und Gebühr, Abschnitt nicht mehr „Vor dem Pitch“, Fälligkeit unter dem Betrag', () => {
+    const de = lies('leistungen/startup-creator.html'), en = lies('en/services/startup-creator.html')
+    expect(de).toContain('die Registrierungsgebühr wird fällig.')
+    expect(de).toContain('<p class="sc-vorab__hinweis">fällig mit der Freigabe · Schritt 3</p>')
+    expect(en).toContain('<p class="sc-vorab__hinweis">due on approval · step 3</p>')
+    for (const h of [de, en]) expect(h).not.toMatch(/Vor dem Pitch|Before the pitch/)
+  })
+})

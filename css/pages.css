@@ -435,3 +435,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Startup Creator: Fälligkeit unter dem Betrag der Registrierungsgebühr */
+.sc-vorab__hinweis {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-meta);
+}
