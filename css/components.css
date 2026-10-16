@@ -1420,7 +1420,7 @@
   font-size: clamp(2.125rem, 1.2rem + 3.6vw, 3.5rem);
 }
 
-/* Leistungsseiten (Mockup N): Brotkrumen und Überschrift vertikal mittig,
+/* Leistungsseiten und Rechtsseiten (Mockup N): Brotkrumen und Überschrift vertikal mittig,
    Bühne 440 px, damit der Graph 40 px Rand oben und unten hat */
 @media (min-width: 760px) {
   .pv-pagehead--leistung {

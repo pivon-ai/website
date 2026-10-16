@@ -106,14 +106,16 @@ describe('Task 3: Netz', () => {
   for (const p of SEITEN.slice(1)) {
     it(`${p}: Canvas im Seitenkopf, Skript eingebunden`, () => {
       const html = lies(p)
+      const pre = p.startsWith('leistungen/') ? '../' : ''
+      // alle Unterseiten: Knowledge Graph in der Bühne der Leistungsseiten;
+      // Leistungsseiten mit Teilnetz, Rechtsseiten mit dem ganzen Graph
       if (p.startsWith('leistungen/')) {
-        // Leistungsseiten: Knowledge Graph wie auf der Startseite
         expect(html).toMatch(/<div class="pv-pagehead pv-pagehead--leistung">\s*<canvas class="pv-net pv-kg" data-kg-fokus="[a-z-]+" aria-hidden="true"><\/canvas>/)
-        expect(html).toContain('<script src="../js/kg.js?v=10" defer></script>')
       } else {
-        expect(html).toMatch(/<div class="pv-pagehead">\s*<canvas class="pv-net" aria-hidden="true"><\/canvas>/)
-        expect(html).toContain('<script src="js/net.js?v=3" defer></script>')
+        expect(html).toMatch(/<div class="pv-pagehead pv-pagehead--leistung">\s*<canvas class="pv-net pv-kg" aria-hidden="true"><\/canvas>/)
       }
+      expect(html).toContain(`<script src="${pre}js/kg.js?v=10" defer></script>`)
+      expect(html).not.toContain('js/net.js')
     })
   }
   it('Canvas nimmt keinen Platz ein und ist im Druck aus', () => {
@@ -300,18 +302,19 @@ describe('Knowledge Graph auf der Bühne (Übernahme Mockup L)', () => {
     expect(c).toMatch(/\.pv-hero\s*\{[^}]*min-height:\s*min\(70vh, 600px\)/s)
     expect(c).toMatch(/\.pv-kg\s*\{[^}]*mask-image:\s*none/s)
   })
-  it('Impressum und Datenschutz behalten das Netz', () => {
+  it('Impressum und Datenschutz: Bühne wie die Leistungsseiten, alte Netz-Animation entfernt', () => {
     for (const p of SEITEN.filter((x) => !x.startsWith('leistungen/') && x !== 'index.html')) {
-      expect(lies(p), p).toContain('js/net.js')
-      expect(lies(p), p).not.toContain('pv-kg')
+      expect(lies(p), p).toContain('pv-kg')
+      expect(lies(p), p).not.toContain('js/net.js')
     }
+    expect(existsSync('js/net.js')).toBe(false)
   })
 })
 
 describe('Netz und Knowledge Graph laufen auch ohne Server (file://)', () => {
   // Chrome blockiert ES-Module über file:// (CORS). Klassische Skripte mit
   // defer laufen dort und behalten die Reihenfolge: erst Logik, dann Zeichnung.
-  const DATEIEN = ['js/net-graph.js', 'js/net.js', 'js/kg-graph.js', 'js/kg.js',
+  const DATEIEN = ['js/net-graph.js', 'js/kg-graph.js', 'js/kg.js',
     'js/scrollspy.js', 'js/nav.js', 'js/contact-validation.js', 'js/contact-form.js']
   it('keine Seite lädt mehr ein ES-Modul', () => {
     for (const p of SEITEN) expect(lies(p), p).not.toMatch(/<script[^>]*type="module"/)
@@ -333,7 +336,7 @@ describe('Netz und Knowledge Graph laufen auch ohne Server (file://)', () => {
     it(`${p}: Netz bzw. Graph als klassische Skripte`, () => {
       const html = lies(p)
       const pre = p.startsWith('leistungen/') ? '../' : ''
-      const zeichnung = p.startsWith('leistungen/') ? [`${pre}js/kg-graph.js`, `${pre}js/kg.js`] : [`${pre}js/net.js`]
+      const zeichnung = [`${pre}js/kg-graph.js`, `${pre}js/kg.js`]
       // alle defer-Skripte in Reihenfolge, Versionsparameter abgeschnitten
       const tags = alle(html, /<script src="([^"?]+)\?v=\d+" defer><\/script>/g).map((m) => m[1])
       expect(tags).toEqual([`${pre}js/scrollspy.js`, `${pre}js/nav.js`, `${pre}js/net-graph.js`, ...zeichnung])
