@@ -237,12 +237,11 @@ describe('Task 7: Über uns, CTA, Kontakt', () => {
     for (const b of boxen) expect(alle(b, /<li>[^<]+<\/li>/g)).toHaveLength(6)
     expect(u).toContain('<h2 id="ueber-uns-titel">Wer wir sind</h2>')
   })
-  it('Kontakt ohne Formular: drei Wege, Erstgespräch zuerst', () => {
+  it('Kontakt ohne Formular: drei gleiche Boxen', () => {
     for (const p of ['index.html', 'en/index.html']) {
       const k = lies(p).split('id="kontakt"')[1].split('</section>')[0]
       expect(k, p).not.toMatch(/<form|pv-form/)
-      const wege = alle(k, /<div class="pv-weg( pv-weg--haupt)?">/g)
-      expect(wege.map((m) => !!m[1]), p).toEqual([true, false, false])
+      expect(alle(k, /<div class="pv-weg">/g), p).toHaveLength(3)
       expect(k, p).toContain('href="mailto:kontakt@pivon.ai?subject=')
       expect(k, p).toContain('<a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>')
       expect(k, p).toContain('<a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>')
