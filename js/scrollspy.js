@@ -1,6 +1,6 @@
 /**
  * Auswahlregel des Scrollspys. Bewusst ohne DOM-Zugriff, damit sie
- * ohne Browser testbar ist - dasselbe Muster wie bei contact-validation.js.
+ * ohne Browser testbar ist.
  */
 // Klassisches Skript (kein ES-Modul): Chrome blockiert Module beim Öffnen
 // direkt aus dem Ordner (file://, CORS). Laden mit defer, Reihenfolge beachten.

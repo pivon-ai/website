@@ -237,13 +237,27 @@ describe('Task 7: Über uns, CTA, Kontakt', () => {
     for (const b of boxen) expect(alle(b, /<li>[^<]+<\/li>/g)).toHaveLength(6)
     expect(u).toContain('<h2 id="ueber-uns-titel">Wer wir sind</h2>')
   })
-  it('Formular-Kennungen unverändert', () => {
-    for (const id of ['pv-contact-form', 'pv-form-notice', 'pv-form-status', 'pv-name', 'pv-email', 'pv-message', 'pv-privacy', 'pv-website']) {
-      expect(html(), id).toContain(`id="${id}"`)
+  it('Kontakt ohne Formular: drei Wege, Erstgespräch zuerst', () => {
+    for (const p of ['index.html', 'en/index.html']) {
+      const k = lies(p).split('id="kontakt"')[1].split('</section>')[0]
+      expect(k, p).not.toMatch(/<form|pv-form/)
+      const wege = alle(k, /<div class="pv-weg( pv-weg--haupt)?">/g)
+      expect(wege.map((m) => !!m[1]), p).toEqual([true, false, false])
+      expect(k, p).toContain('href="mailto:kontakt@pivon.ai?subject=')
+      expect(k, p).toContain('<a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>')
+      expect(k, p).toContain('<a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>')
+      // Kopieren-Knöpfe starten ausgeblendet, js/copy.js blendet sie ein
+      const knoepfe = alle(k, /<button class="pv-copy" type="button" data-copy="([^"]+)" data-copy-done="[^"]+" hidden>/g)
+      expect(knoepfe.map((m) => m[1]), p).toEqual(['kontakt@pivon.ai', '+49 151 62809266'])
     }
   })
-  it('Kontaktkopf steht in der linken Spalte', () => {
-    expect(html()).toMatch(/<div class="pv-contact__side">\s*<div class="pv-section__head pv-reveal">/)
+  it('kein Formular-Backend mehr', () => {
+    for (const d of ['api/kontakt.js', 'vercel.json', 'js/contact-form.js', 'js/contact-validation.js']) {
+      expect(existsSync(d), d).toBe(false)
+    }
+    for (const p of ['datenschutz.html', 'en/privacy.html']) {
+      expect(lies(p), p).not.toMatch(/Kontaktformular|contact form/i)
+    }
   })
 })
 
@@ -315,13 +329,13 @@ describe('Netz und Knowledge Graph laufen auch ohne Server (file://)', () => {
   // Chrome blockiert ES-Module über file:// (CORS). Klassische Skripte mit
   // defer laufen dort und behalten die Reihenfolge: erst Logik, dann Zeichnung.
   const DATEIEN = ['js/net-graph.js', 'js/kg-graph.js', 'js/kg.js',
-    'js/scrollspy.js', 'js/nav.js', 'js/contact-validation.js', 'js/contact-form.js']
+    'js/scrollspy.js', 'js/nav.js', 'js/copy.js']
   it('keine Seite lädt mehr ein ES-Modul', () => {
     for (const p of SEITEN) expect(lies(p), p).not.toMatch(/<script[^>]*type="module"/)
   })
   it('Startseite: alle Skripte klassisch mit defer, Logik vor Anbindung', () => {
     const tags = alle(lies('index.html'), /<script src="js\/([a-z-]+)\.js\?v=\d+" defer><\/script>/g).map((m) => m[1])
-    expect(tags).toEqual(['scrollspy', 'nav', 'net-graph', 'kg-graph', 'kg', 'gauge', 'contact-validation', 'contact-form'])
+    expect(tags).toEqual(['scrollspy', 'nav', 'net-graph', 'kg-graph', 'kg', 'gauge', 'copy'])
   })
   it('keine import/export-Anweisungen in den Skripten', () => {
     for (const d of DATEIEN) expect(lies(d), d).not.toMatch(/^\s*(import|export)\s/m)
@@ -849,7 +863,6 @@ describe('Mobilnummer +49 151 62809266', () => {
       expect(h, p).not.toMatch(/99999788|99&nbsp;99&nbsp;788/)
       if (h.includes('tel:')) expect(h, p).toContain('<a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>')
     }
-    expect(lies('js/contact-validation.js')).toContain("const KONTAKT_TEL = '+49 151 62809266'")
   })
 })
 

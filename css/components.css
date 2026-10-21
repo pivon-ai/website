@@ -1110,24 +1110,40 @@
 }
 
 /* ============================================================
-   Kontakt und Formular
+   Kontakt: drei Wege (Erstgespräch, E-Mail, Telefon)
    ============================================================ */
 
-.pv-contact {
+.pv-wege {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: clamp(32px, 6vw, 80px);
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-7);
 }
 
-.pv-contact__row {
-  padding-block: 18px;
-  border-bottom: 1px solid var(--color-border);
+.pv-weg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
 }
 
-.pv-contact__label {
-  display: block;
-  margin-bottom: 4px;
+/* Hauptweg: dunkler Rahmen, Verlaufslinie oben */
+.pv-weg--haupt {
+  position: relative;
+  border-color: var(--color-ink);
+}
+
+.pv-weg--haupt::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 3px;
+  background: var(--gradient-akzent);
+}
+
+.pv-weg__label {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
@@ -1135,149 +1151,76 @@
   color: var(--color-text-meta);
 }
 
-.pv-contact__row a {
-  font-size: 1.5rem;
+.pv-weg__wert {
+  font-size: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+.pv-weg__wert a {
+  color: inherit;
   text-decoration: none;
 }
 
-.pv-contact__row a:hover {
+.pv-weg__wert a:hover {
   text-decoration: underline;
 }
 
-.pv-form {
-  padding: 32px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-}
-
-.pv-form__field {
-  margin-bottom: var(--space-4);
-}
-
-.pv-form__label {
-  display: block;
-  margin-bottom: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.71875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.pv-form__input {
-  width: 100%;
-  padding: 12px 14px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-str);
-  transition: border-color var(--transition);
-}
-
-.pv-form__input:focus {
-  outline: 2px solid var(--color-action);
-  outline-offset: 2px;
-  border-color: var(--color-action);
-}
-
-.pv-form__input:focus-visible {
-  outline: 2px solid var(--color-action);
-}
-
-.pv-form__textarea {
-  resize: vertical;
-  min-height: 7rem;
-}
-
-.pv-form__error {
-  margin-top: var(--space-1);
-  font-size: 0.8125rem;
-  color: var(--color-error);
-  min-height: 1.2em;
-}
-
-.pv-form__field--invalid .pv-form__input {
-  border-color: var(--color-error);
-}
-
-.pv-form__field--check {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: var(--space-3);
-  align-items: start;
-}
-
-.pv-form__check {
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  accent-color: var(--color-action);
-}
-
-.pv-form__checklabel {
-  font-size: 0.875rem;
+.pv-weg__text {
+  flex: 1;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   color: var(--color-text-muted);
 }
 
-.pv-form__field--check .pv-form__error {
-  grid-column: 1 / -1;
+.pv-weg__aktion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
 }
 
-/* Honeypot: fuer Menschen und Screenreader unsichtbar, fuer Bots sichtbar. */
-.pv-form__honeypot {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+.pv-weg__icon {
+  margin-right: 8px;
+  vertical-align: -3px;
 }
 
-.pv-form__submit {
-  width: 100%;
+/* Kopieren-Knopf, erscheint nur mit Zwischenablage (js/copy.js) */
+.pv-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 10px;
+  font: 500 0.75rem/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border-str);
+  cursor: pointer;
 }
 
-.pv-form__status:empty {
+.pv-copy[hidden] {
   display: none;
 }
 
-.pv-form__status {
-  margin-top: var(--space-4);
-  padding: var(--space-4);
-  border-radius: var(--radius);
-  font-size: 0.9375rem;
+.pv-copy:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
-.pv-form__status--info {
-  background: var(--color-action-soft);
-  border: 1px solid var(--color-border-str);
-}
-
-.pv-form__status--info p {
-  margin-top: var(--space-2);
-  color: var(--color-text-muted);
-}
-
-.pv-form__status--ok {
-  background: var(--color-success-bg);
-  border: 1px solid var(--color-success-brd);
-}
-
-.pv-form__mailto {
-  margin-top: var(--space-4);
-}
-
-.pv-form__notice {
-  padding: var(--space-4);
-  background: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  font-size: 0.9375rem;
+.pv-copy[data-kopiert] {
+  color: var(--color-tech-text);
+  border-color: var(--color-tech-brd);
+  background: var(--color-tech-bg);
 }
 
 @media (max-width: 900px) {
-  .pv-contact {
+  .pv-wege {
     grid-template-columns: 1fr;
-    gap: var(--space-5);
   }
 }
 

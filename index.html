@@ -18,7 +18,7 @@
 
   <link rel="stylesheet" href="css/tokens.css?v=4">
   <link rel="stylesheet" href="css/base.css?v=5">
-  <link rel="stylesheet" href="css/components.css?v=21">
+  <link rel="stylesheet" href="css/components.css?v=22">
   <link rel="stylesheet" href="css/pages.css?v=12">
 
   <!-- Klassisches Skript, absichtlich ohne type="module" und ohne defer:
@@ -283,64 +283,30 @@
 
     <section class="pv-section" id="kontakt" aria-labelledby="kontakt-titel">
       <div class="pv-container">
-        <div class="pv-contact">
-          <div class="pv-contact__side">
-            <div class="pv-section__head pv-reveal">
-              <span class="pv-section__label">05 — Kontakt</span>
-              <h2 id="kontakt-titel">Lassen Sie uns sprechen</h2>
-              <p class="pv-section__lead">Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.</p>
-            </div>
-            <p class="pv-contact__row">
-              <span class="pv-contact__label">E-Mail</span>
-              <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>
-            </p>
-            <p class="pv-contact__row">
-              <span class="pv-contact__label">Mobil</span>
-              <a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>
-            </p>
+        <div class="pv-section__head pv-reveal">
+          <span class="pv-section__label">05 — Kontakt</span>
+          <h2 id="kontakt-titel">Lassen Sie uns sprechen</h2>
+          <p class="pv-section__lead">Kontaktieren Sie uns einfach, unverbindlich und schnell für ein Erstgespräch.</p>
+        </div>
+        <div class="pv-wege">
+          <div class="pv-weg pv-weg--haupt">
+            <span class="pv-weg__label">Erstgespräch</span>
+            <p class="pv-weg__wert">30 Minuten, kostenlos</p>
+            <p class="pv-weg__text">Nennen Sie uns kurz Ihr Thema und einen Wunschtermin. Wir rufen Sie an oder treffen uns online.</p>
+            <div class="pv-weg__aktion"><a class="pv-btn pv-btn--primary" href="mailto:kontakt@pivon.ai?subject=Erstgespr%C3%A4ch"><svg class="pv-weg__icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="12" height="11"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg> Termin anfragen</a></div>
           </div>
-
-          <p class="pv-form__notice" id="pv-form-notice">Das Kontaktformular benötigt JavaScript. Schreiben Sie uns gerne direkt an <a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a> oder rufen Sie an: <a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>.</p>
-
-          <form class="pv-form" id="pv-contact-form" novalidate hidden>
-            <div class="pv-form__field">
-              <label class="pv-form__label" for="pv-name">Name</label>
-              <input class="pv-form__input" type="text" id="pv-name" name="name"
-                     autocomplete="name" required aria-describedby="pv-name-error">
-              <p class="pv-form__error" id="pv-name-error"></p>
-            </div>
-
-            <div class="pv-form__field">
-              <label class="pv-form__label" for="pv-email">E-Mail</label>
-              <input class="pv-form__input" type="email" id="pv-email" name="email"
-                     autocomplete="email" required aria-describedby="pv-email-error">
-              <p class="pv-form__error" id="pv-email-error"></p>
-            </div>
-
-            <div class="pv-form__field">
-              <label class="pv-form__label" for="pv-message">Nachricht</label>
-              <textarea class="pv-form__input pv-form__textarea" id="pv-message" name="message"
-                        rows="5" required aria-describedby="pv-message-error"
-                        placeholder="Wie können wir Ihnen helfen?"></textarea>
-              <p class="pv-form__error" id="pv-message-error"></p>
-            </div>
-
-            <div class="pv-form__field pv-form__field--check">
-              <input class="pv-form__check" type="checkbox" id="pv-privacy" name="privacy"
-                     required aria-describedby="pv-privacy-error">
-              <label class="pv-form__checklabel" for="pv-privacy">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und stimme zu.</label>
-              <p class="pv-form__error" id="pv-privacy-error"></p>
-            </div>
-
-            <div class="pv-form__honeypot" aria-hidden="true">
-              <label for="pv-website">Dieses Feld bitte leer lassen</label>
-              <input type="text" id="pv-website" name="website" tabindex="-1" autocomplete="off">
-            </div>
-
-            <button class="pv-btn pv-btn--primary pv-form__submit" type="submit">Nachricht senden</button>
-
-            <div class="pv-form__status" id="pv-form-status" role="status"></div>
-          </form>
+          <div class="pv-weg">
+            <span class="pv-weg__label">E-Mail</span>
+            <p class="pv-weg__wert"><a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a></p>
+            <p class="pv-weg__text">Schreiben Sie uns kurz, worum es geht. Wir antworten in der Regel innerhalb eines Werktags.</p>
+            <div class="pv-weg__aktion"><button class="pv-copy" type="button" data-copy="kontakt@pivon.ai" data-copy-done="Kopiert" hidden><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5"/><path d="M10.5 5V2.5H2.5v8H5"/></svg><span class="pv-copy__text" aria-live="polite">Kopieren</span><span class="pv-visually-hidden"> E-Mail-Adresse</span></button></div>
+          </div>
+          <div class="pv-weg">
+            <span class="pv-weg__label">Mobil</span>
+            <p class="pv-weg__wert"><a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a></p>
+            <p class="pv-weg__text">Lieber direkt sprechen? Rufen Sie uns an. Wenn Sie uns nicht erreichen, rufen wir zurück.</p>
+            <div class="pv-weg__aktion"><button class="pv-copy" type="button" data-copy="+49 151 62809266" data-copy-done="Kopiert" hidden><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5"/><path d="M10.5 5V2.5H2.5v8H5"/></svg><span class="pv-copy__text" aria-live="polite">Kopieren</span><span class="pv-visually-hidden"> Telefonnummer</span></button></div>
+          </div>
         </div>
       </div>
     </section>
@@ -395,7 +361,6 @@
   <script src="js/kg-graph.js?v=8" defer></script>
   <script src="js/kg.js?v=10" defer></script>
   <script src="js/gauge.js?v=1" defer></script>
-  <script src="js/contact-validation.js?v=5" defer></script>
-  <script src="js/contact-form.js?v=4" defer></script>
+  <script src="js/copy.js?v=1" defer></script>
 </body>
 </html>
