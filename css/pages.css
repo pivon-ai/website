@@ -97,35 +97,6 @@
   color: var(--color-text);
 }
 
-/* ---- Entwurfshinweis ----
-   Nur solange Platzhalter in den Rechtsseiten stehen. Mit der letzten
-   ausgefuellten Angabe entfaellt der Kasten im HTML und diese Regel hier.
-   Deshalb bewusst auffaellig: Er soll nicht versehentlich online gehen. */
-.pv-draft {
-  margin-bottom: var(--space-7);
-  padding: var(--space-5);
-  border: 2px solid var(--color-error);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface-alt);
-}
-
-.pv-draft__title {
-  margin-top: 0;
-  font-weight: 700;
-  color: var(--color-error);
-}
-
-.pv-draft p + p {
-  margin-top: var(--space-3);
-}
-
-.pv-draft code {
-  padding: 1px 5px;
-  font-size: 0.875em;
-  background: var(--color-surface-mut);
-  border-radius: var(--radius-sm);
-}
-
 /* ============================================================
    Startup Creator: Modell, Ablauf in zwei Phasen, Vorab (Mockup P)
    ============================================================ */

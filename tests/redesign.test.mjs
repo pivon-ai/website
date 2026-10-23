@@ -886,13 +886,15 @@ describe('Überschriften ohne Schlusspunkt', () => {
 })
 
 describe('Datenschutz fertig', () => {
-  it('DE/EN: keine eckigen Klammern und kein Hinweiskasten mehr; Impressum behält Kasten bis zur USt-IdNr.', () => {
-    for (const p of ['datenschutz.html', 'en/privacy.html']) {
+  it('DE/EN: Datenschutz und Impressum ohne eckige Klammern und Hinweiskasten', () => {
+    for (const p of ['datenschutz.html', 'en/privacy.html', 'impressum.html', 'en/legal-notice.html']) {
       const main = lies(p).match(/<main[\s\S]*?<\/main>/)[0]
       expect(main, p).not.toMatch(/\[[^\]]+\]/)
       expect(main, p).not.toContain('pv-draft')
     }
-    expect(lies('impressum.html')).toContain('pv-draft')
+    expect(lies('impressum.html')).toContain('DE465082312')
+    expect(lies('en/legal-notice.html')).toContain('DE465082312')
+    expect(lies('css/pages.css')).not.toContain('pv-draft')
   })
 })
 
