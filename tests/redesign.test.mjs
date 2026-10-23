@@ -242,7 +242,7 @@ describe('Task 7: Über uns, CTA, Kontakt', () => {
       const k = lies(p).split('id="kontakt"')[1].split('</section>')[0]
       expect(k, p).not.toMatch(/<form|pv-form/)
       expect(alle(k, /<div class="pv-weg">/g), p).toHaveLength(3)
-      expect(k, p).toContain('href="mailto:kontakt@pivon.ai?subject=')
+      expect(k, p).toContain('href="https://bookings.cloud.microsoft/book/Pivon1@pivon.ai/" target="_blank" rel="noopener"')
       expect(k, p).toContain('<a href="mailto:kontakt@pivon.ai">kontakt@pivon.ai</a>')
       expect(k, p).toContain('<a href="tel:+4915162809266">+49&nbsp;151&nbsp;62809266</a>')
       // Kopieren-Knöpfe starten ausgeblendet, js/copy.js blendet sie ein
